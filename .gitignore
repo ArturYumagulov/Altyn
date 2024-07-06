@@ -412,3 +412,9 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,django,macos
 
 .idea
+
+static/img
+static/fonts
+static/video
+static/js/jquery
+static/js/front
