@@ -1,0 +1,278 @@
+body.lock {
+	overflow: hidden;
+}
+
+
+.popup {
+	position: fixed;
+	z-index: 3;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	top: 0;
+	left: 0;
+	opacity: 0;
+	visibility: hidden;
+	overflow-y: auto;
+	overflow-x: hidden;
+	transition: all 0.8s ease 0s;
+}
+
+.popup.open {
+	opacity: 1;
+	visibility: visible;
+}
+
+.popup.open .popup__content {
+	transform: translate(0, 0);
+	opacity: 1;
+}
+
+.popup__body {
+	min-height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 30px 10px;
+}
+
+.popup__content {
+	position: relative;
+	z-index: 1000;
+	box-shadow: 10px 15px 150px 0px rgba(0, 0, 0, 0.2);
+	background: var(--color-background);
+	width: 1006px;
+	margin: 0 auto;
+	padding: 0 52px 50px;
+	transition: all 0.8s ease 0s;
+	opacity: 0;
+	transform: translate(0, -100%);
+}
+
+/* popup авторизация */
+
+.form-book label {
+	text-align: start;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.popup-logo {
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	/* margin-inline: auto; */
+}
+
+.popup-logo a {
+	display: inline-block;
+}
+
+.popup-title {
+	margin: 45px 0 21px;
+	font-family: var(--second-family);
+	font-weight: 400;
+	font-size: 32px;
+	border-bottom: 1px solid var(--color-title);
+	padding-bottom: 19px;
+}
+
+.popup__close {
+	position: absolute;
+	top: 15px;
+	right: 25px;
+	padding: 0;
+	width: 15px;
+	height: 15px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 17px;
+	transition: all ease 0.8s;
+}
+
+.popup__close:before {
+	content: url(/img/icons/close.svg);
+	position: absolute;
+}
+
+.popup__content h5 {
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+}
+
+.form-book__input {
+	background: inherit;
+	padding: 15px;
+	border: 2px solid #d49e3c;
+	border-radius: 100px;
+	max-width: 906px;
+	min-height: 51px;
+	width: 100%;
+	margin: 10px 0 20px;
+}
+
+.content .form-book__input {
+	margin: 10px 0;
+}
+
+.form-btn {
+	margin-top: 13px;
+	border-radius: 100px;
+	width: 906px;
+	height: 51px;
+	background: var(--color-yellow);
+	color: inherit;
+	font-size: 32px;
+	font-size: calc(19px + 12 * (100vw / 1728));
+	line-height: 39px;
+	width: 100%;
+}
+
+.form-btn:hover {
+	border: 2px solid var(--color-title);
+}
+
+.registration-btns {
+	font-size: 20px;
+	line-height: 24px;
+	text-align: center;
+	align-items: center;
+	display: inline-grid;
+}
+
+.registration {
+	margin-top: 16px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.registration a {
+	font-size: 16px;
+}
+
+.registration a:hover {
+	color: var(--color-yellow);
+}
+
+
+.tabs-registration ._active {
+	background: var(--color-yellow);
+	color: inherit;
+}
+
+.content {
+	display: none;
+}
+
+.content._active {
+	display: block;
+	margin-top: 28px;
+}
+
+.content[data-content="show"] {
+	margin-top: 12px;
+}
+
+.content[data-content="promote"] {
+	margin-top: 12px;
+}
+
+.tabs-registration {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.registration-btn {
+	cursor: help;
+	padding: 15px 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid var(--color-yellow);
+	border-radius: 100px;
+	z-index: 2;
+	white-space: nowrap;
+	font-size: 20px;
+	line-height: 24px;
+}
+
+.registration-btn:hover {
+	border: 2px solid var(--color-title);
+	color: var(--color-yellow);
+}
+
+.registration-btn:hover._active {
+	color: inherit;
+}
+
+.thank-text {
+	max-width: 460px;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: center;
+	margin: 100px auto 94px;
+}
+
+.thank-btn {
+	display: block;
+	margin-inline: auto;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: center;
+	max-width: 221px;
+}
+
+.tooltip-btn {
+	position: relative;
+}
+
+.tooltip {
+	visibility: hidden;
+	position: absolute;
+	bottom: 127%;
+	left: 50%;
+	transform: translateX(-50%);
+	background: var(--color-title);
+	color: var(--color-text);
+	display: flex;
+	align-items: center;
+	border-radius: 10px;
+	width: 184px;
+	height: 71px;
+	z-index: 1;
+}
+
+.tooltip::before {
+	content: '';
+	border: 12px solid transparent;
+	border-top: 12px solid rgb(255, 255, 255);
+	position: relative;
+	left: 43%;
+	top: 43px;
+	z-index: 10;
+}
+
+.tooltip-btn:hover .tooltip {
+	visibility: visible;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+
+	@media (max-width: 945px) {
+		.registration-btn {
+			margin-bottom: 25px;
+		}
+
+		.registration-btn:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

@@ -1,0 +1,383 @@
+/* background-position: 50% calc(100% - 10px) */
+@font-face {
+	font-family: "Montserrat";
+	font-display: swap;
+	src: url("../fonts/Montserrat-Light.woff") format("woff"), url("../fonts/Montserrat-Light.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Montserrat";
+	font-display: swap;
+	src: url("../fonts/Montserrat-Regular.woff") format("woff"), url("../fonts/Montserrat-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Montserrat";
+	font-display: swap;
+	src: url("../fonts/Montserrat-Medium.woff") format("woff"), url("../fonts/Montserrat-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Montserrat";
+	font-display: swap;
+	src: url("../fonts/Montserrat-SemiBold.woff") format("woff"), url("../fonts/Montserrat-SemiBold.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Gotham";
+	font-display: swap;
+	src: url("../fonts/Gotham-Light.woff") format("woff"), url("../fonts/Gotham-Light.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Gotham";
+	font-display: swap;
+	src: url("../fonts/Gotham-Medium.woff") format("woff"), url("../fonts/Gotham-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Gotham";
+	font-display: swap;
+	src: url("../fonts/Gotham-Black.woff") format("woff"), url("../fonts/Gotham-Black.woff2") format("woff2");
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Gotham";
+	font-display: swap;
+	src: url("../fonts/Gotham-Book.woff") format("woff"), url("../fonts/Gotham-Book.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Oceanic";
+	font-display: swap;
+	src: url("../fonts/Oceanic-Light.woff") format("woff"), url("../fonts/Oceanic-Light.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Oceanic";
+	font-display: swap;
+	src: url("../fonts/Oceanic-Regular.woff") format("woff"), url("../fonts/Oceanic-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Oceanic";
+	font-display: swap;
+	src: url("../fonts/Oceanic-Medium.woff") format("woff"), url("../fonts/Oceanic-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Oceanic";
+	font-display: swap;
+	src: url("../fonts/Oceanic-Bold.woff") format("woff"), url("../fonts/Oceanic-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+}
+
+:root {
+	--font-family: "Oceanic", sans-serif;
+	--second-family: "Montserrat", sans-serif;
+	--third-family: "Gotham", sans-serif;
+	--color-yellow: #d49e3d;
+	--color-background: #1A1A1A;
+	--color-title: #ebebeb;
+	--color-text: #000000;
+	--color-dots: #7E7E7E;
+}
+
+* {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+
+/**
+  Нормализация блочной модели
+ */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/**
+	 Убираем внутренние отступы слева тегам списков,
+	 у которых есть атрибут class
+	*/
+:where(ul, ol):where([class]) {
+	padding-left: 0;
+}
+
+/**
+	 Убираем внешние отступы body и двум другим тегам,
+	 у которых есть атрибут class
+	*/
+body,
+:where(blockquote, figure):where([class]) {
+	margin: 0;
+
+}
+
+html,
+body {
+	height: 100%;
+}
+
+/**
+	 Убираем внешние отступы вертикали нужным тегам,
+	 у которых есть атрибут class
+	*/
+:where(h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	ul,
+	ol,
+	dl):where([class]) {
+	margin-block: 0;
+}
+
+:where(dd[class]) {
+	margin-left: 0;
+}
+
+:where(fieldset[class]) {
+	margin-left: 0;
+	padding: 0;
+	border: none;
+}
+
+/**
+	 Убираем стандартный маркер маркированному списку,
+	 у которого есть атрибут class
+	*/
+:where(ul[class]) {
+	list-style: none;
+
+}
+
+/**
+	 Обнуляем вертикальные внешние отступы параграфа,
+	 объявляем локальную переменную для внешнего отступа вниз,
+	 чтобы избежать взаимодействие с более сложным селектором
+	*/
+p {
+	--paragraphMarginBottom: 24px;
+
+	margin-block: 0;
+}
+
+/**
+	 Внешний отступ вниз для параграфа без атрибута class,
+	 который расположен не последним среди своих соседних элементов
+	*/
+p:where(:not([class]):not(:last-child)) {
+	margin-bottom: var(--paragraphMarginBottom);
+}
+
+
+/**
+	 Упрощаем работу с изображениями
+	*/
+img {
+	display: block;
+	max-width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/**
+	 Наследуем свойства шрифт для полей ввода
+	*/
+input,
+textarea,
+select,
+button {
+	font: inherit;
+	color: inherit;
+}
+
+
+button {
+	cursor: pointer;
+	background-color: inherit;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+/*
+	 Плавный скролл
+	*/
+html,
+:has(:target) {
+	scroll-behavior: smooth;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+body {
+	background-color: var(--color-background);
+	color: var(--color-title);
+	font-family: "Montserrat", sans-serif;
+	font-weight: 400;
+
+}
+
+
+::-webkit-scrollbar {
+	width: 0;
+	background: transparent;
+	display: none;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+/*
+	 Приводим к единому цвету svg-элементы
+	*/
+svg *[fill] {
+	fill: #d49e3c;
+}
+
+svg *[stroke] {
+	stroke: currentColor
+}
+
+/**
+	 Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+	*/
+svg * {
+	transition-property: fill, stroke;
+}
+
+/**
+	 Удаляем все анимации и переходы для людей,
+	 которые предпочитают их не использовать
+	*/
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+aside,
+nav,
+footer,
+header,
+section {
+	display: block;
+}
+
+ul,
+li,
+ol {
+	list-style: none;
+}
+
+body._lock {
+	overflow: hidden;
+}
+
+a {
+	color: var(--color-title);
+	text-decoration: none;
+}
+
+
+.wrapper {
+	width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+main.main {
+	flex: 1 1 auto;
+	margin-top: 104px;
+}
+
+.container {
+	max-width: 1728px;
+	min-width: 320px;
+	padding: 0px 40px;
+	margin-inline: auto;
+}
+
+.title {
+	font-family: var(--font-family);
+	font-weight: 400;
+	font-size: calc(47px + 14 * (100vw / 1728));
+	color: var(--color-title);
+	text-transform: uppercase;
+}
+
+.morelink {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	padding: 13px 22px;
+	display: flex;
+	align-items: center;
+	background: var(--color-yellow);
+	font-family: var(--font-family);
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 19px;
+	color: var(--color-title);
+}
+
+.morelink:hover {
+	background: #916c2b;
+}
+
+.btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* display: inline-block; */
+	border: 2px solid;
+	border-radius: 100px;
+	font-size: 20px;
+	line-height: 24px;
+	text-transform: uppercase;
+	z-index: 2;
+	white-space: nowrap;
+}
+
+.btn:hover {
+	color: var(--color-yellow);
+	outline: 1px solid var(--color-yellow);
+}

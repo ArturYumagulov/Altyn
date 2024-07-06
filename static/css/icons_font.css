@@ -1,0 +1,103 @@
+@font-face {
+  font-family: 'icons';
+  src: url('../fonts/icons.eot?bsna4');
+  src: url('../fonts/icons.eot?bsna4#iefix') format('embedded-opentype'),
+    url('../fonts/icons.ttf?bsna4') format('truetype'),
+    url('../fonts/icons.woff?bsna4') format('woff'),
+    url('../fonts/icons.svg?bsna4#icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="_icon-"]::before,
+[class*=" _icon-"]::before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+._icon-bi_geo-alt:before {
+  content: "\e902";
+}
+
+._icon-program:before {
+  content: "\e903";
+}
+
+._icon-look:before {
+  content: "\e904";
+}
+
+._icon-card:before {
+  content: "\e905";
+}
+
+._icon-award:before {
+  content: "\e906";
+}
+
+._icon-entrance:before {
+  content: "\e907";
+}
+
+._icon-telegram-white:before {
+  content: "\e908";
+}
+
+._icon-vk-white:before {
+  content: "\e909";
+}
+
+._icon-vk-black:before {
+  content: "\e90a";
+}
+
+._icon-telegram-black:before {
+  content: "\e90b";
+}
+
+._icon-whatsApp:before {
+  content: "\e90c";
+}
+
+._icon-mail-outline:before {
+  content: "\e90d";
+}
+
+._icon-web-solid:before {
+  content: "\e90e";
+}
+
+._icon-youtube:before {
+  content: "\e90f";
+}
+
+._icon-mdi_phone:before {
+  content: "\e910";
+}
+
+._icon-quotes-bottom:before {
+  content: "\e911";
+}
+
+._icon-quotes-top:before {
+  content: "\e912";
+}
+
+._icon-derection-right:before {
+  content: "\e913";
+}
+
+._icon-ring-arrow:before {
+  content: "\e914";
+}

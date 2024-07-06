@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}АЛТЫН ТЭЛИНКЭ{% endblock %}</title>
+	<link rel="icon" href="{% static 'favicon.ico' %}">
+	<link rel="stylesheet" href="{% static 'css/icons_font.css' %}">
+	<link rel="stylesheet" href="{% static 'css/popup.css' %}">
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'css/header.css' %}">
+	<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+	<div class="wrapper">
+		<header id="header" class="header  _lp header--fixed js-header">
+			<div class="header__wrapper">
+				<div class="header__container container">
+					<div class="header__body">
+						<div class="header__main">
+							<a href="/"><img src="{% static '/img/logo.png' %}" class="header__logo" alt="Логотип" /></a>
+							<div class="header__menu menu">
+								<nav class="menu__body ">
+									<ul class="menu__list">
+										<li class="menu__item">
+											<a href="{% url 'about' %}" class="menu__link _icon-bi_geo-alt">О КИНОПРЕМИИ</a>
+											<span class="_icon-derection-right">
+											</span>
+											<ul class="menu__sub-item">
+												<li class="menu__item-submenu">
+													<a href="news.html" class="menu__sub-link">НОВОСТИ</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="media.html" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="media.html" class="menu__sub-link">Медиа</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li class="menu__item ">
+											<a href="experts.html" class="menu__link _icon-bi_geo-alt">ЭКСПЕРТЫ</a>
+											<span class="_icon-derection-right">
+											</span>
+											<ul class="menu__sub-item">
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li class="menu__item">
+											<a href="massMedia.html" class="menu__link _icon-bi_geo-alt">СМИ О НАС</a>
+											<span class="_icon-derection-right">
+											</span>
+											<ul class="menu__sub-item">
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li class="menu__item">
+											<a href="contact.html" class="menu__link _icon-bi_geo-alt">КОНТАКТЫ</a>
+											<span class="_icon-derection-right">
+											</span>
+											<ul class="menu__sub-item">
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li class="menu__item">
+											<a href="media.html" class="menu__link _icon-bi_geo-alt">МЕДИА</a>
+											<span class="_icon-derection-right">
+											</span>
+											<ul class="menu__sub-item">
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu__item-submenu">
+													<a href="#" class="menu__sub-link">Lorem ipsum</a>
+													<span class="_icon-derection-right"></span>
+													<ul>
+														<li>
+															<a href="" class="menu__sub-link"></a>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+							</div>
+							<button type="button" class="icon-menu">
+								<span></span>
+								<span></span>
+								<span></span>
+							</button>
+						</div>
+						<div class="header__right">
+							<div class="header-apply">
+								<a href="#" class="header-apply__vote btn">
+									Голосовать
+								</a>
+								<a href="#" class="header-apply__application btn">
+									Подать заявку
+								</a>
+							</div>
+							<ul class="header-list">
+								<li class="header-list__social">
+									<a class="_icon-vk-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
+									</a>
+								</li>
+								<li class="header-list__social">
+									<a class="_icon-telegram-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
+									</a>
+								</li>
+							</ul>
+							<div class="admin">
+								<a href="#popup" class="_icon-entrance popup-link"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- header -->
+
+        {% block content %}
+            		<main class="main">
+			<!-- bonus -->
+			<section id="bonus" class="bonus">
+				<svg width="296" height="816" viewBox="0 0 296 816" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<g filter="url(#filter0_f_212_5075)">
+						<ellipse cx="-94.2825" cy="385.472" rx="183" ry="235" transform="rotate(19.4179 -94.2825 385.472)"
+							fill="url(#paint0_linear_212_5075)" fill-opacity="0.7" />
+					</g>
+					<defs>
+						<filter id="filter0_f_212_5075" x="-483.779" y="-44.417" width="778.994" height="859.779"
+							filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+							<feFlood flood-opacity="0" result="BackgroundImageFix" />
+							<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+							<feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_212_5075" />
+						</filter>
+						<linearGradient id="paint0_linear_212_5075" x1="335.718" y1="665.418" x2="-416.516" y2="317.42"
+							gradientUnits="userSpaceOnUse">
+							<stop stop-color="#D49E3C" />
+							<stop offset="0.379697" stop-color="#D49E3C" />
+							<stop offset="1" stop-color="#D9D9D9" stop-opacity="0" />
+						</linearGradient>
+					</defs>
+				</svg>
+				<div class="container bonus-plate">
+					<article>
+						<h1 class="bonus-title">
+							<span>Золотая</span> тарелка
+						</h1>
+						<p class="bonus-text">
+							Межрегиональная премия
+							в области кинематографии
+						</p>
+						<a href="#" class="bonus-btn btn">
+							ПОДРОБНЕЕ
+						</a>
+					</article>
+					<img src="img/bonus-plate.png" alt="">
+				</div>
+			</section>
+			<!-- bonus -->
+
+			<!-- news -->
+			<section id="news" class="news ">
+				<div class="container">
+					<h2 class="section-title title">НОВОСТИ</h2>
+					<div class="news-content">
+						<div class="news-workshop">
+							<img src="img/img_1.png" alt="">
+							<h4>
+								Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
+							</h4>
+							<p>
+								Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
+							</p>
+						</div>
+						<div class="slider">
+							<div class="slider_item">
+								<img src="img/img_2.png" alt="">
+								<p class="slider_item--text">
+									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
+								</p>
+							</div>
+							<div class="slider_item">
+								<img src="img/img_2.png" alt="">
+								<p class="slider_item--text">
+									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
+								</p>
+							</div>
+							<div class="slider_item">
+								<img src="img/img_2.png" alt="">
+								<p class="slider_item--text">
+									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
+								</p>
+							</div>
+							<div class="slider_item">
+								<img src="img/img_2.png" alt="">
+								<p class="slider_item--text">
+									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
+								</p>
+							</div>
+							<div class="slider_item">
+								<img src="img/img_2.png" alt="">
+								<p class="slider_item--text">
+									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
+								</p>
+							</div>
+							<div class="slider_item">
+								<img src="img/img_2.png" alt="">
+								<p class="slider_item--text">
+									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- news -->
+
+			<!-- pitching -->
+			<section id="pitching" class="pitching">
+				<div class="container">
+					<h2 class="pitching-title title">ПИТЧИНГ 2024</h2>
+					<div class="pitching-content">
+						<a href="#" class="pitching-btn btn">
+							ЗАПИСАТЬСЯ НА ПИТЧИНГ
+						</a>
+					</div>
+				</div>
+			</section>
+			<!-- pitching -->
+
+			<!-- media -->
+			<section id="media" class="media">
+				<div class="container">
+					<h2 class="media-title title">МЕДИА</h2>
+					<div class="media-content">
+						<img src="img/media-img.png" alt="">
+						<article>
+							<h4>Церемония награждения</h4>
+							<ul>
+								<li><svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<circle cx="3.5" cy="3.5" r="3.5" fill="#D49E3C" />
+									</svg>24.02.2024</li>
+								<li># МЕДИА</li>
+							</ul>
+							<p>Церемония награждения Лауреатов зрительского голосования - 2022 в рамках 2 Межрегиональной кинопремии“
+								Золотая тарелка “</p>
+						</article>
+					</div>
+					<div class="media-img">
+						<div class="media-img_block">
+							<img src="img/img_1.png" alt="">
+							<h3>Время кино у озера Кабан</h3>
+							<p>Открытие сезона уличных кинопоказов цикла “Время кино у озера Кабан” в рамках кинопремии “Золотая
+								тарелка” </p>
+							<a href="#" class="media-btn btn">
+								#ВРЕМЯКИНО
+							</a>
+						</div>
+						<div class="media-img_block">
+							<img src="img/img_1.png" alt="">
+							<h3>Время кино у озера Кабан</h3>
+							<p>Открытие сезона уличных кинопоказов цикла “Время кино у озера Кабан” в рамках кинопремии “Золотая
+								тарелка” </p>
+							<a href="#" class="media-btn btn">
+								#ВРЕМЯКИНО
+							</a>
+						</div>
+						<div class="media-img_block">
+							<img src="img/img_1.png" alt="">
+							<h3>Время кино у озера Кабан</h3>
+							<p>Открытие сезона уличных кинопоказов цикла “Время кино у озера Кабан” в рамках кинопремии “Золотая
+								тарелка” </p>
+							<a href="#" class="media-btn btn">
+								#ВРЕМЯКИНО
+							</a>
+						</div>
+						<div class="media-img_block">
+							<img src="img/img_1.png" alt="">
+							<h3>Время кино у озера Кабан</h3>
+							<p>Открытие сезона уличных кинопоказов цикла “Время кино у озера Кабан” в рамках кинопремии “Золотая
+								тарелка” </p>
+							<a href="#" class="media-btn btn">
+								#ВРЕМЯКИНО
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- media -->
+
+			<!-- regulations -->
+			<section id="regulations" class="regulations">
+				<div class="regulations-block">
+					<a href="#" class="regulations-btn btn">
+						РЕГЛАМЕНТ
+					</a>
+					<a href="#" class="regulations-btn btn">
+						КАТАЛОГИ
+					</a>
+					<a href="#" class="regulations-btn btn">
+						ПОДАТЬ ЗАЯВКУ
+					</a>
+					<a href="#" class="regulations-btn btn">
+						ГОЛОСОВАТЬ
+					</a>
+				</div>
+			</section>
+			<!-- regulations -->
+
+			<!-- partners -->
+			<section id="partners" class="partners">
+				<div class="partners-block container">
+					<h2 class="partners-title title">ПАРТНЕРЫ</h2>
+					<div class="partners-block__img">
+						<img src="img/partners.png" alt="">
+					</div>
+				</div>
+			</section>
+			<!-- partners -->
+		</main>
+
+
+        {% endblock %}
+
+		<!-- main -->
+
+		<!-- footer -->
+		<footer id="footer" class="footer">
+			<div class="container footer-content">
+				<div class="footer-support">
+					<a href="https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/" class="footer-fond">
+						<img src="img/ПФКИ_Лого.png" alt="">
+					</a>
+					<a href="/" class="footer-logo">
+						<img src="img/footer-logo.png" alt="">
+					</a>
+					<p>Подписывайтесь на нас</p>
+				</div>
+				<div class="footer-content__menu footer-menu">
+					<div class="footer-menu">
+						<div class="filmaward">
+							<h4>О КИНОПРЕМИИ</h4>
+							<ul>
+								<li>
+									<a href="the-project.html">О ПРОЕКТЕ</a>
+								</li>
+								<li>
+									<a href="experts.html">ЭКСПЕРТЫ</a>
+								</li>
+								<li>
+									<a href="massMedia.html">СМИ О НАС</a>
+								</li>
+								<li>
+									<a href="#">АРХИВ</a>
+								</li>
+								<li>
+									<a href="#">МЕДИА</a>
+								</li>
+								<li>
+									<a href="contact.html">КОНТАКТЫ</a>
+								</li>
+								<li>
+									<a href="#">ПОРТРЕТ РЕГИОНА</a>
+								</li>
+							</ul>
+						</div>
+						<div class="regions">
+							<h4>ПОРТРЕТ РЕГИОНА</h4>
+							<ul>
+								<li>
+									<a href="/">ГЛАВНАЯ</a>
+								</li>
+								<li>
+									<a href="#">СПЕЦИАЛИСТЫ</a>
+								</li>
+								<li>
+									<a href="#">ЛОКАЦИИ</a>
+								</li>
+								<li>
+									<a href="#">МЕРОПРИЯТИЯ</a>
+								</li>
+								<li>
+									<a href="#">ПРОИЗВОДСТВО</a>
+								</li>
+								<li>
+									<a href="#">ТОЧКИ КИНОПОКАЗОВ</a>
+								</li>
+								<li>
+									<a href="contact.html">КОНТАКТЫ</a>
+								</li>
+							</ul>
+						</div>
+						<div class="movie">
+							<h4>СМОТРЕТЬ КИНО</h4>
+							<ul>
+								<li>
+									<a href="/">ГЛАВНАЯ</a>
+								</li>
+								<li>
+									<a href="#">ПОДАТЬ ЗАЯВКУ</a>
+								</li>
+								<li>
+									<a href="#">ГОЛОСОВАНИЕ</a>
+								</li>
+								<li>
+									<a href="contact.html">КОНТАКТЫ</a>
+								</li>
+							</ul>
+						</div>
+						<div class="application">
+							<h4>ПОРТРЕТ РЕГИОНА</h4>
+						</div>
+					</div>
+					<div class="footer-link">
+						<ul class="footer-list">
+							<li class="footer-list__social">
+								<a class="_icon-vk-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
+								</a>
+							</li>
+							<li class="footer-list__social">
+								<a class=" _icon-telegram-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- footer -->
+
+
+
+		<!-- popup-authorization -->
+		<div id="popup" class="popup popup-authorization">
+			<div class="popup__body">
+				<div class="popup__content">
+					<form action="index.html" id="" class="form-book " novalidate="novalidate">
+						<a href="/" class="popup-logo"><img src="{% static '/img/logo.png' %}" alt="Логотип"></a>
+						<a class="popup__close close-popup" href="#header"></a>
+						<h3 class="popup-title">ВОЙТИ</h3>
+						<label for="E-mail">E-mail или номер телефона
+							<input type="email" class="form-book__input" name="email" autocomplete="off">
+						</label>
+						<label for="password">Пароль
+							<input type="password" class="form-book__input" name="password" autocomplete="current-password">
+						</label>
+						<button class="form-btn">ВОЙТИ</button>
+						<div class="registration">
+							<div class="registration-admin">
+								<a href="#popup-registration" class="popup-link">Регистрация</a>
+							</div>
+							<div class="regulations-password">
+								<a href="" class="">
+									Забыли пароль?
+								</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- popup-registration -->
+		<div id="popup-registration" class="popup popup-registration">
+			<div class="popup__body">
+				<div class="popup__content">
+					<form action="" id="" class="form-book " novalidate="novalidate">
+						<a href="/" class="popup-logo"><img src="{% static '/img/logo.png' %}" alt="Логотип"></a>
+						<a class="popup__close close-popup" title="" href="#header"></a>
+						<h3 class="popup-title">Регистрация</h3>
+						<h5>Роль</h5>
+						<div id="tabs" class="tabs-registration">
+							<div class="registration-btn tooltip-btn _active" data-btn="look">
+								Смотрю кино<span class="tooltip">Lorem ipsum</span>
+							</div>
+							<div class="registration-btn tooltip-btn" data-btn="take">Снимаю
+								кино<span class="tooltip">Lorem ipsum</span>
+							</div>
+							<div class="registration-btn tooltip-btn" data-btn="show">
+								Показываю кино<span class="tooltip">Lorem ipsum</span>
+							</div>
+							<div class="registration-btn tooltip-btn" data-btn="promote">
+								Продвигаю кино<span class="tooltip">Lorem ipsum</span>
+							</div>
+						</div>
+						<div id="contents">
+							<div class="content _active" data-content="look">
+								<label for="E-mail">E-mail
+									<input type="email" class="form-book__input" name="email" autocomplete="off">
+								</label>
+								<label for="tel">Номер телефона
+									<input type="tel" class="form-book__input" name="tel" autocomplete="off">
+								</label>
+								<label for="password">Пароль
+									<input type="password" class="form-book__input" name="password" autocomplete="current-password">
+								</label>
+								<label for="repeat-password">Повторить пароль
+									<input type="repeat-password" class="form-book__input" name="repeat-password"
+										autocomplete="current-password">
+								</label>
+								<div class="form-btn registration-btns">
+									<!-- #popup-thank проверял -->
+									<a href="#popup-thank" class="popup-link">Зарегистрироваться</a>
+								</div>
+							</div>
+							<div class="content" data-content="take">
+								<label for="E-mail">E-mail
+									<input type="email" class="form-book__input" name="email" autocomplete="off">
+								</label>
+								<label for="tel">Номер телефона
+									<input type="tel" class="form-book__input" name="tel" autocomplete="off">
+								</label>
+								<label for="password">Пароль
+									<input type="password" class="form-book__input" name="password" autocomplete="current-password">
+								</label>
+								<label for="repeat-password">Повторить пароль
+									<input type="repeat-password" class="form-book__input" name="repeat-password"
+										autocomplete="current-password">
+								</label>
+								<div class="form-btn registration-btns">
+									<!-- #popup-thank проверял -->
+									<a href="#popup-thank" class="popup-link">Зарегистрироваться</a>
+								</div>
+							</div>
+							<div class="content " data-content="show">
+								<label for="lastName">Фамилия
+									<input type="text" class="form-book__input" name="lastName" />
+								</label>
+								<label for="firstName">Имя
+									<input type="text" class="form-book__input" name="firstName" />
+								</label>
+								<label for="Surname">Отчество
+									<input type="text" class="form-book__input" name="Surname" />
+								</label>
+								<label for="E-mail">E-mail
+									<input type="email" class="form-book__input" name="email" autocomplete="off">
+								</label>
+								<label for="tel">Номер телефона
+									<input type="tel" class="form-book__input" name="tel" autocomplete="off">
+								</label>
+								<label for="CompanyName">Наименование компании
+									<input type="text" class="form-book__input" name="CompanyName" />
+								</label>
+								<label for="Surname">Сайт
+									<input type="text" name="homepage" class="form-book__input"
+										pattern="^(?=[^_]+$)([\wа-яА-ЯёЁ]([\wа-яА-ЯёЁ-]*[\wа-яА-ЯёЁ])*\.)+(?=[^\d]+$)[\wа-яА-ЯёЁ]{2,63}$"
+										required><br>
+								</label>
+								<label for="password">Пароль
+									<input type="password" class="form-book__input" name="password" autocomplete="current-password">
+								</label>
+								<label for="repeat-password">Повторить пароль
+									<input type="repeat-password" class="form-book__input" name="repeat-password"
+										autocomplete="current-password">
+								</label>
+								<div class="form-btn registration-btns">
+									<!-- #popup-thank проверял -->
+									<a href="#popup-thank" class="popup-link">Зарегистрироваться</a>
+								</div>
+							</div>
+							<div class="content" data-content="promote">
+								<label for="lastName">Фамилия
+									<input type="text" class="form-book__input" name="lastName" />
+								</label>
+								<label for="firstName">Имя
+									<input type="text" class="form-book__input" name="firstName" />
+								</label>
+								<label for="Surname">Отчество
+									<input type="text" class="form-book__input" name="Surname" />
+								</label>
+								<label for="E-mail">E-mail
+									<input type="email" class="form-book__input" name="email" autocomplete="off">
+								</label>
+								<label for="tel">Номер телефона
+									<input type="tel" class="form-book__input" name="tel" autocomplete="off">
+								</label>
+								<label for="SiteName">Наименование площадки
+									<input type="text" class="form-book__input" name="SiteName" />
+								</label>
+								<label for="Surname">Сайт
+									<input type="text" name="homepage" class="form-book__input"
+										pattern="^(?=[^_]+$)([\wа-яА-ЯёЁ]([\wа-яА-ЯёЁ-]*[\wа-яА-ЯёЁ])*\.)+(?=[^\d]+$)[\wа-яА-ЯёЁ]{2,63}$"
+										required><br>
+								</label>
+								<label for="password">Пароль
+									<input type="password" class="form-book__input" name="password" autocomplete="current-password">
+								</label>
+								<label for="repeat-password">Повторить пароль
+									<input type="repeat-password" class="form-book__input" name="repeat-password"
+										autocomplete="current-password">
+								</label>
+								<div class="form-btn registration-btns">
+									<!-- #popup-thank проверял -->
+									<a href="#popup-thank" class="popup-link">Зарегистрироваться</a>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- popup-thank -->
+		<div id="popup-thank" class="popup popup-thank">
+			<div class="popup__body">
+				<div class="popup__content">
+					<form action="index.html" id="" class="form-book " novalidate="novalidate">
+						<a href="/" class="popup-logo"><img src="/img/logo.png" alt="Логотип"></a>
+						<a class="popup__close close-popup" title="" href="#header"></a>
+						<p class="thank-text">Lorem ipsum dolor sit amet consectetur. Molestie nisl dolor consectetur nec sapien
+							molestie posuere. Est lacus lorem dui urna ac. Aliquam nunc sit eleifend ultricies vitae vitae platea
+							imperdiet. Sodales suspendisse enim imperdiet iaculis.</p>
+
+						<button class="form-btn thank-btn">ok</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- wrapper -->
+	</div>
+	<script src="{% static 'js/jquery/jquery-3.7.1.min.js' %}" crossorigin="anonymous"></script>
+	<script src="{% static 'js/slick.min.js' %}"></script>
+	<script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
