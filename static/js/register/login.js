@@ -1,13 +1,13 @@
 let login_form = document.getElementById('login_form')
-let popup_login = document.getElementById('popup')
 let button = document.querySelector('#login_form .form-btn')
+console.log(window.location.href)
 
 
 async function LoadData(username, password) {
     const [user] = await Promise.all([
-        fetch("http://127.0.0.1:8000/users/login/", {
+        fetch(login_path, {
             method: 'POST',
-            // headers: {"X-CSRFToken": csrf},
+            headers: {"X-CSRFToken": csrf},
             body: JSON.stringify({
                 "email": username,
                 "password": password
@@ -44,16 +44,20 @@ login_form.addEventListener('submit', (e)=>{
     let thank_text = document.querySelector('#popup-thank .thank-text')
     let email_input = document.getElementById('email-input')
     let password_input = document.getElementById('password-input')
+    let thanks_btn = document.querySelector('.thank-btn')
+
     lenValid(email_input)
     lenValid(password_input)
 
     LoadData(email_input.value, password_input.value).then((data)=> {
-        if (data.result === 'ok') {
+        if (data.result === 'login') {
             popup_thank.classList.add('open')
-            thank_text.innerHTML = `Здравствуйте, Вы успешно авторизовались!`
+            thank_text.innerHTML = `Здравствуйте, ${data.user}. Вы успешно авторизовались!`
+            thanks_btn.innerHTML = 'Закрыть'
+            thanks_btn.setAttribute('href', window.location.pathname)
         } else if (data.result === 'no_active') {
             popup_thank.classList.add('open')
-            thank_text.innerHTML = 'Здравствуйте, Ваша учетная запись еще не активированна'
+            thank_text.innerHTML = `Здравствуйте, ${data.user}. Ваша учетная запись еще не активированна`
         }
         else {
             console.log('error')

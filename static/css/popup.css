@@ -219,7 +219,7 @@ body.lock {
 	display: block;
 	margin-inline: auto;
 	font-size: 16px;
-	line-height: 20px;
+	/*line-height: 20px;*/
 	text-align: center;
 	max-width: 221px;
 }
@@ -281,4 +281,11 @@ body.lock {
 .form-book__input.is-invalid {
 	margin-bottom: 0;
 	border-color: #de0b0b;
+}
+
+.user svg{
+	width: 45px;
+	font-size: 40px;
+	height: auto;
+	margin-left: 12px;
 }
