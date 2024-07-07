@@ -93,11 +93,6 @@ body.lock {
 	transition: all ease 0.8s;
 }
 
-.popup__close:before {
-	content: url(/img/icons/close.svg);
-	position: absolute;
-}
-
 .popup__content h5 {
 	margin-bottom: 8px;
 	font-size: 16px;
@@ -275,4 +270,15 @@ body.lock {
 			margin-bottom: 0;
 		}
 	}
+}
+
+.alert {
+	color: #de0b0b;
+	text-align: center;
+	display: none;
+}
+
+.form-book__input.is-invalid {
+	margin-bottom: 0;
+	border-color: #de0b0b;
 }

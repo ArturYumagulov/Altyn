@@ -1,0 +1,33 @@
+{% load static %}
+<!-- popup-authorization -->
+		<div id="popup" class="popup popup-authorization">
+			<div class="popup__body">
+				<div class="popup__content">
+					<form id="login_form" class="form-book " novalidate="novalidate">
+						<a href="/" class="popup-logo">
+                            <img src="{% static '/img/logo.png' %}" alt="Логотип"></a>
+						<a class="popup__close close-popup" href="#header"></a>
+						<h3 class="popup-title">ВОЙТИ</h3>
+						<label for="E-mail">E-mail или номер телефона
+							<input id="email-input" type="text" class="form-book__input" name="email" autocomplete="off" required>
+						</label>
+                        <p class="alert" id="email-input-feedback">Это поле не может быть пустым</p>
+						<label for="password">Пароль
+							<input id="password-input" type="password" class="form-book__input" name="password" autocomplete="current-password" required>
+						</label>
+                        <p class="alert" id="password-input-feedback">Это поле не может быть пустым</p>
+						<button class="form-btn">ВОЙТИ</button>
+						<div class="registration">
+							<div class="registration-admin">
+								<a href="#popup-registration" class="popup-link">Регистрация</a>
+							</div>
+							<div class="regulations-password">
+								<a href="" class="">
+									Забыли пароль?
+								</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>

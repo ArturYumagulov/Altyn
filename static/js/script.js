@@ -336,13 +336,13 @@ $('#stop').click(function () {
 	player.stopVideo()
 })
 
-// библиотека lightGallery для страницы media-subpage
-lightGallery(document.getElementById('mediasubpage-img'), {
-	animateThumb: false,
-	zoomFromOrigin: false,
-	allowMediaOverlap: true,
-	toggleThumb: true,
-	thumbnail: true,
-
-});
+// // библиотека lightGallery для страницы media-subpage
+// lightGallery(document.getElementById('mediasubpage-img'), {
+// 	animateThumb: false,
+// 	zoomFromOrigin: false,
+// 	allowMediaOverlap: true,
+// 	toggleThumb: true,
+// 	thumbnail: true,
+//
+// });
 

@@ -38,7 +38,7 @@ class Roles(models.Model):
         verbose_name_plural = "Роли"
 
 
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     MALES = [
         ("M", "Мужской"),
@@ -47,7 +47,7 @@ class CustomUser(AbstractBaseUser):
 
     username = models.CharField('Логин', max_length=255, unique=True)
     phone = models.CharField(verbose_name="Номер телефона", max_length=30, null=True, blank=True, unique=True)
-    email = models.EmailField(_('email address'), null=True, blank=True, unique=True)
+    email = models.EmailField(_('email address'), unique=True)
     avatar = models.ImageField(upload_to="users/avatars/", verbose_name="Аватар", blank=True, null=True)
     first_name = models.CharField(verbose_name="Имя", max_length=100, blank=True, null=True)
     last_name = models.CharField(verbose_name="Фамилия", max_length=100, blank=True, null=True)
@@ -72,7 +72,7 @@ class CustomUser(AbstractBaseUser):
 
     is_staff = models.BooleanField(default=False, verbose_name="Сотрудник")
     is_active = models.BooleanField(default=True, verbose_name="Активирован")
-    is_superuser = models.BooleanField(default=True, verbose_name="Суперпользователь")
+    is_superuser = models.BooleanField(default=False, verbose_name="Суперпользователь")
     is_looking = models.BooleanField(default=True, verbose_name="Смотрит")
     is_shooting = models.BooleanField(default=False, verbose_name="Снимает")
     is_show = models.BooleanField(default=False, verbose_name="Показывает")
@@ -85,7 +85,7 @@ class CustomUser(AbstractBaseUser):
     REQUIRED_FIELDS = ['email', 'phone']
 
     def __str__(self):
-        return self.email
+        return self.username
 
     class Meta:
         verbose_name = "Пользователь"
