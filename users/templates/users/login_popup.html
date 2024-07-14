@@ -1,6 +1,7 @@
 {% load static %}
+{% url 'login' as login_url  %}
 <!-- popup-authorization -->
-		<div id="popup" class="popup popup-authorization">
+		<div id="popup" class="popup popup-authorization {% if request.path == login_url%}open{% endif %}">
 			<div class="popup__body">
 				<div class="popup__content">
 					<form id="login_form" class="form-book " novalidate="novalidate">

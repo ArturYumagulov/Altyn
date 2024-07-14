@@ -1,6 +1,6 @@
 let login_form = document.getElementById('login_form')
 let button = document.querySelector('#login_form .form-btn')
-console.log(window.location.href)
+console.log(window.location.pathname)
 
 
 async function LoadData(username, password) {
@@ -45,6 +45,7 @@ login_form.addEventListener('submit', (e)=>{
     let email_input = document.getElementById('email-input')
     let password_input = document.getElementById('password-input')
     let thanks_btn = document.querySelector('.thank-btn')
+    let reg_popup = document.getElementById('popup-registration')
 
     lenValid(email_input)
     lenValid(password_input)
@@ -61,6 +62,18 @@ login_form.addEventListener('submit', (e)=>{
         }
         else {
             console.log('error')
+            popup_thank.classList.add('open')
+            thank_text.innerHTML = 'Проверьте правильность логина и пароля. Если вы забыли пароль, <a href="/reset/" style="color: #d49e3d">восстановить</a>'
+            thanks_btn.innerHTML = 'Зарегистрироваться'
+            thanks_btn.classList.add('popup-link')
+            thanks_btn.addEventListener('click', ()=> {
+                console.log('click')
+                popup_thank.classList.remove('open')
+                reg_popup.classList.add('open')
+
+            })
         }
     })
 })
+
+console.log(window.location.pathname)
