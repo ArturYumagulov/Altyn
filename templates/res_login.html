@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Регистрация</title>
+	<link rel="icon" href="{% static 'favicon.ico' %}">
+	<link rel="stylesheet" href="{% static 'css/icons_font.css' %}">
+	<link rel="stylesheet" href="{% static 'css/popup.css' %}">
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'css/header.css' %}">
+	<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        .popup__close:before {
+            content: url({% static 'img/icons/close.svg' %});
+            position: absolute;
+        }
+    </style>
+
+
+    <script defer src="{% static 'js/register/res_login.js'%}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            CreateApp(document.getElementById('todo-app'));
+        });
+    </script>
+</head>
+{#<body>#}
+{#<div class="container" id="todo-app">#}
+{##}
+{#</div>#}
+{#</body>#}
+
+<body>
+	<div class="wrapper">
+		<header id="header" class="header  _lp header--fixed js-header">
+			<div class="header__wrapper">
+				<div class="header__container container">
+					<div class="header__body">
+						<div class="header__main">
+							<a href="/"><img src="{% static '/img/logo.png' %}" class="header__logo" alt="Логотип" /></a>
+						</div>
+{##}
+{#                                <div class="admin">#}
+{#                                    <a href="#popup" class="_icon-entrance popup-link"></a>#}
+{#                                </div>#}
+						</div>
+					</div>
+				</div>
+{#			</div>#}
+		</header>
+		<!-- header -->
+
+		<!-- main -->
+
+		<!-- footer -->
+		<!-- footer -->
+
+
+    <div id="popup" class="popup popup-authorization open">
+			<div class="popup__body">
+				<div class="popup__content">
+					<form id="login_form" class="form-book " novalidate="novalidate">
+						<a href="/" class="popup-logo">
+                            <img src="{% static '/img/logo.png' %}" alt="Логотип"></a>
+						<a class="popup__close close-popup" href="#header"></a>
+						<h3 class="popup-title">ВОЙТИ</h3>
+						<label for="E-mail">E-mail или номер телефона
+							<input id="email-input" type="text" class="form-book__input" name="email" autocomplete="off" required>
+						</label>
+                        <p class="alert" id="email-input-feedback">Это поле не может быть пустым</p>
+						<label for="password">Пароль
+							<input id="password-input" type="password" class="form-book__input" name="password" autocomplete="current-password" required>
+						</label>
+                        <p class="alert" id="password-input-feedback">Это поле не может быть пустым</p>
+						<button class="form-btn">ВОЙТИ</button>
+						<div class="registration">
+							<div class="registration-admin">
+								<a href="#popup-registration" class="popup-link">Регистрация</a>
+							</div>
+							<div class="regulations-password">
+								<a href="" class="">
+									Забыли пароль?
+								</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+        {% include 'users/registration_popup.html' %}
+        {% include 'users/thanks_popup.html' %}
+		<!-- wrapper -->
+	</div>
+    <script>
+        let login_path = "{% url 'login' %}"
+        let main_page = "{% url 'main' %}"
+        let csrf = "{{ csrf_token }}"
+    </script>
+	<script src="{% static 'js/jquery/jquery-3.7.1.min.js' %}" crossorigin="anonymous"></script>
+	<script src="{% static 'js/front/slick.min.js' %}"></script>
+	<script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/register/login.js' %}"></script>
+</body>
+
+</html>

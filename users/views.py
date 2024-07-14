@@ -23,8 +23,8 @@ def json_login_required(view_func):
 
 
 def user_login_json(request):
-    # email = json.loads(request.body).get('email')
-    # password = json.loads(request.body).get('password')
+    email = json.loads(request.body).get('email')
+    password = json.loads(request.body).get('password')
     if request.method == 'POST':
         user = authenticate(username=email, password=password)
         if user is not None:
@@ -58,7 +58,6 @@ def user_login(request):
     return render(request, 'base.html', {'form': form})
 
 
-
 def user_logout(request):
     logout(request)
     return JsonResponse({'result': 'logout'})
@@ -67,3 +66,7 @@ def user_logout(request):
 @json_login_required
 def index(request):
     return JsonResponse({'content': True}, safe=False)
+
+
+def res_login(request):
+    return render(request, 'res_login.html')
