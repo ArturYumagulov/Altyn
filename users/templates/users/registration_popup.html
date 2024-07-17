@@ -3,8 +3,10 @@
 		<div id="popup-registration" class="popup popup-registration">
 			<div class="popup__body">
 				<div class="popup__content">
-					<form action="" id="" class="form-book " novalidate="novalidate">
-						<a href="/" class="popup-logo"><img src="{% static '/img/logo.png' %}" alt="Логотип"></a>
+{#					<form action="{% url 'register' %}" method="post" id="register_form" class="form-book " novalidate="novalidate">#}
+						<a href="/" class="popup-logo"><img src="
+{#                        {% static '/img/logo.png' %}#}
+                        " alt="Логотип"></a>
 						<a class="popup__close close-popup" title="" href="#header"></a>
 						<h3 class="popup-title">Регистрация</h3>
 						<h5>Роль</h5>
@@ -23,7 +25,9 @@
 							</div>
 						</div>
 						<div id="contents">
+
 							<div class="content _active" data-content="look">
+                                <form action="{% url 'register' %}" method="post" id="look-form">
 								<label for="E-mail">E-mail
 									<input type="email" class="form-book__input" name="email" autocomplete="off">
 								</label>
@@ -34,13 +38,15 @@
 									<input type="password" class="form-book__input" name="password" autocomplete="current-password">
 								</label>
 								<label for="repeat-password">Повторить пароль
-									<input type="repeat-password" class="form-book__input" name="repeat-password"
+									<input type="password" class="form-book__input" name="repeat-password"
 										autocomplete="current-password">
 								</label>
 								<div class="form-btn registration-btns">
 									<!-- #popup-thank проверял -->
-									<a href="#popup-thank" class="popup-link">Зарегистрироваться</a>
+									<button class="register-btn" id="look-btn" data-type="look" type="submit">Зарегистрироваться</button>
+
 								</div>
+                                </form>
 							</div>
 							<div class="content" data-content="take">
 								<label for="E-mail">E-mail
@@ -58,7 +64,7 @@
 								</label>
 								<div class="form-btn registration-btns">
 									<!-- #popup-thank проверял -->
-									<a href="#popup-thank" class="popup-link">Зарегистрироваться</a>
+									<a class="register-btn">Зарегистрироваться</a>
 								</div>
 							</div>
 							<div class="content " data-content="show">
@@ -94,7 +100,7 @@
 								</label>
 								<div class="form-btn registration-btns">
 									<!-- #popup-thank проверял -->
-									<a href="#popup-thank" class="popup-link">Зарегистрироваться</a>
+									<a class="register-btn">Зарегистрироваться</a>
 								</div>
 							</div>
 							<div class="content" data-content="promote">
@@ -130,11 +136,11 @@
 								</label>
 								<div class="form-btn registration-btns">
 									<!-- #popup-thank проверял -->
-									<a href="#popup-thank" class="popup-link">Зарегистрироваться</a>
+									<a class="register-btn">Зарегистрироваться</a>
 								</div>
 							</div>
 						</div>
-					</form>
+{#					</form>#}
 				</div>
 			</div>
 		</div>

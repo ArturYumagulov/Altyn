@@ -23,11 +23,7 @@
 
 
     <script defer src="{% static 'js/register/res_login.js'%}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            CreateApp(document.getElementById('todo-app'));
-        });
-    </script>
+    <script defer src="{% static 'js/register/register.js' %}"></script>
 </head>
 {#<body>#}
 {#<div class="container" id="todo-app">#}
@@ -42,7 +38,9 @@
 				<div class="header__container container">
 					<div class="header__body">
 						<div class="header__main">
-							<a href="/"><img src="{% static '/img/logo.png' %}" class="header__logo" alt="Логотип" /></a>
+							<a href="/"><img src="
+                            {% static '/img/logo.png' %}
+                            " class="header__logo" alt="Логотип" /></a>
 						</div>
 {##}
 {#                                <div class="admin">#}
@@ -66,8 +64,9 @@
 				<div class="popup__content">
 					<form id="login_form" class="form-book " novalidate="novalidate">
 						<a href="/" class="popup-logo">
-                            <img src="{% static '/img/logo.png' %}" alt="Логотип"></a>
-						<a class="popup__close close-popup" href="#header"></a>
+                            <img src="
+                            {% static '/img/logo.png' %}
+                            " alt="Логотип"></a>
 						<h3 class="popup-title">ВОЙТИ</h3>
 						<label for="E-mail">E-mail или номер телефона
 							<input id="email-input" type="text" class="form-book__input" name="email" autocomplete="off" required>
@@ -105,8 +104,8 @@
     </script>
 	<script src="{% static 'js/jquery/jquery-3.7.1.min.js' %}" crossorigin="anonymous"></script>
 	<script src="{% static 'js/front/slick.min.js' %}"></script>
-	<script src="{% static 'js/script.js' %}"></script>
-    <script src="{% static 'js/register/login.js' %}"></script>
+	<script src="{% static 'js/register/res_script.js' %}"></script>
+{#    <script src="{% static 'js/register/login.js' %}"></script>#}
 </body>
 
 </html>
