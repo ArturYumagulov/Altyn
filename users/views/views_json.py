@@ -51,9 +51,10 @@ def valid_data(request):
     """Валидация данных при регистрации"""
     if request.method == "POST":
         data = json.loads(request.body)
+        print(data)
         if data.get('type') == 'email':
             try:
-                User.objects.get(email=data.get('value'))
+                print(User.objects.get(email=data.get('value')))
                 return JsonResponse({'result': True, 'text': "Данный email уже зарегистрирован"}, safe=False)
             except User.DoesNotExist:
                 return JsonResponse({'result': False}, safe=False)

@@ -81,24 +81,73 @@ function get_form_input(form) {
 
 let look_form = document.getElementById('look-form')
 let look_btn = document.getElementById('look-btn')
+
+const emailInput = look_form.querySelector('input[name="email"]')
+
+
+emailInput.addEventListener('blur', () => {
+    const email = emailInput.value.trim()
+    fetch('/users/valid-data/', {
+        method: 'POST',
+        headers: {
+            "X-CSRFToken": csrf,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'type': 'email', 'value': email})
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            if (data.result) {
+                emailInput.classList.add('is-invalid')
+                emailInput.parentElement.children[1].style.display = 'block';
+                emailInput.parentElement.children[1].innerHTML = data.text;
+            } else {
+                console.log('false ')
+                emailInput.classList.remove('is-invalid')
+                emailInput.parentElement.children[1].style.display = 'none';
+                emailInput.parentElement.children[1].innerHTML = '';
+            }
+        }).catch(error => {
+        console.error('Error', error);
+    })
+})
+
 look_form.addEventListener('submit', (e) => {
 
     e.preventDefault()
-    get_form_input(look_form)
+    const emailInput = look_form.querySelector('input[name="email"]')
+    console.log(emailInput)
+    const email = emailInput.value.trim()
+    let isValid = true;
 
-    if (get_form_input(look_form)) {
-        console.log(true)
+    if (email === '') {
+        emailInput.classList.add('is-invalid')
+        emailInput.parentElement.children[1].style.display = 'block';
+        emailInput.parentElement.children[1].innerHTML = 'Это поле не может быть пустым';
+        isValid = false;
     }
 
-    // let response = register_fetch({
-    //     'email': email.val{}ue,
-    //     'phone': phone.value,
-    //     'password1': password1.value,
-    //  if    'password2': password2.value,
-    //     'type': 'is_looking'
+    if (!EMAIL.test(email)) {
+        emailInput.classList.add('is-invalid')
+        emailInput.parentElement.children[1].style.display = 'block';
+        emailInput.parentElement.children[1].innerHTML = 'Reg';
+        isValid = false;
+    }
+
+    // fetch('/users/valid-data/', {
+    //     method: 'POST',
+    //     headers: {
+    //         "X-CSRFToken": csrf,
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({'type': 'email', 'value': email})
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     console.log(data)
+    // }).catch(error => {
+    //     console.error('Error', error);
     // })
 
-    // register_data.then((res) => res.json().then((result)=> {
-    //     console.log(result)
-    // }))
 })
