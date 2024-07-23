@@ -1,10 +1,13 @@
 import json
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
 from users.decorators.decorators import json_login_required
+from users.services import create_look_user
+
+User = get_user_model()
 
 
 def user_login(request):
@@ -33,7 +36,30 @@ def user_logout(request):
 
 
 def user_register(request):
+    """Регистрация"""
+
     if request.method == "POST":
-        return JsonResponse(request.body)
-    else:
-        return JsonResponse({'result': 'error'})
+        data = json.loads(request.body)
+        if data.get('type') == 'is_looking' or data.get('type') == 'is_shooting':
+            create_look_user(data)
+            return JsonResponse({'result': True}, safe=False)
+
+    return JsonResponse({'result': 'error'}, safe=False)
+
+
+def valid_data(request):
+    """Валидация данных при регистрации"""
+    if request.method == "POST":
+        data = json.loads(request.body)
+        if data.get('type') == 'email':
+            try:
+                User.objects.get(email=data.get('value'))
+                return JsonResponse({'result': True, 'text': "Данный email уже зарегистрирован"}, safe=False)
+            except User.DoesNotExist:
+                return JsonResponse({'result': False}, safe=False)
+
+        return JsonResponse({'result': False}, safe=False)
+    return JsonResponse({'result': False}, safe=False)
+
+
+

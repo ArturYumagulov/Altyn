@@ -6,6 +6,7 @@ urlpatterns = [
     path('login/', views_json.user_login, name='login'),
     path('logout/', views_json.user_logout, name='logout'),
     path('register/', views_json.user_register, name='register'),
+    path('valid-data/', views_json.valid_data, name='users_valid_data'),
 
     # --------------------------------------------------
     path('res-login-page/', views_http.res_login_page, name='res_login_page'),

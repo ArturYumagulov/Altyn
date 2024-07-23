@@ -44,9 +44,11 @@ function validData(item_id) {
 function lenValid(element) {
 
     if (element.value.length === 0) {
-        invalidData(element.id)
+        invalidData(element.id);
+        return false;
     } else {
-        validData(element.id)
+        validData(element.id);
+        return true;
     }
 }
 
@@ -64,39 +66,42 @@ login_form.addEventListener('submit', (e)=>{
     lenValid(email_input)
     lenValid(password_input)
 
-    LoadData(email_input.value, password_input.value).then((data)=> {
-        if (data.result === 'login') {
-            popup_thank.classList.add('open')
-            thank_text.innerHTML = `Здравствуйте, ${data.user}. Вы успешно авторизовались!`
-            thanks_btn.innerHTML = 'Вернуться'
-            console.log(window.location.search)
+    if (lenValid(email_input) || lenValid(password_input)) {
 
-            if (window.location.search.length > 0) {
-                let clean_url = window.location.search.slice(1).split('&')
-                clean_url.forEach((param) => {
-                    if (param.split('=')[0] === 'next') {
-                        thanks_btn.setAttribute('href', param.split('=')[1])
-                    }
-                })}
+        LoadData(email_input.value, password_input.value).then((data)=> {
+            if (data.result === 'login') {
+                popup_thank.classList.add('open')
+                thank_text.innerHTML = `Здравствуйте, ${data.user}. Вы успешно авторизовались!`
+                thanks_btn.innerHTML = 'Вернуться'
+                console.log(window.location.search)
 
-        } else if (data.result === 'no_active') {
-            popup_thank.classList.add('open')
-            thank_text.innerHTML = `Здравствуйте, ${data.user}. Ваша учетная запись еще не активированна`
-        }
-        else {
-            console.log('error')
-            popup_thank.classList.add('open')
-            thank_text.innerHTML = 'Проверьте правильность логина и пароля. Если вы забыли пароль, <a href="/reset/" style="color: #d49e3d">восстановить</a>'
-            thanks_btn.innerHTML = 'Зарегистрироваться'
-            thanks_btn.classList.add('popup-link')
-            thanks_btn.addEventListener('click', ()=> {
-                console.log('click')
-                popup_thank.classList.remove('open')
-                reg_popup.classList.add('open')
+                if (window.location.search.length > 0) {
+                    let clean_url = window.location.search.slice(1).split('&')
+                    clean_url.forEach((param) => {
+                        if (param.split('=')[0] === 'next') {
+                            thanks_btn.setAttribute('href', param.split('=')[1])
+                        }
+                    })}
 
-            })
-        }
-    })
+            } else if (data.result === 'no_active') {
+                popup_thank.classList.add('open')
+                thank_text.innerHTML = `Здравствуйте, ${data.user}. Ваша учетная запись еще не активированна`
+            }
+            else {
+                console.log('error')
+                popup_thank.classList.add('open')
+                thank_text.innerHTML = 'Проверьте правильность логина и пароля. Если вы забыли пароль, <a href="/reset/" style="color: #d49e3d">восстановить</a>'
+                thanks_btn.innerHTML = 'Зарегистрироваться'
+                thanks_btn.classList.add('popup-link')
+                thanks_btn.addEventListener('click', ()=> {
+                    console.log('click')
+                    popup_thank.classList.remove('open')
+                    reg_popup.classList.add('open')
+
+                })
+            }
+        })
+    }
 })
 
 // get_next_page(window.location.search)

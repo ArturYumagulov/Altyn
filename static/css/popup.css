@@ -132,6 +132,10 @@ body.lock {
 	border: 2px solid var(--color-title);
 }
 
+.register-btn {
+	margin: 5px;
+}
+
 .registration-btns {
 	font-size: 20px;
 	line-height: 24px;
@@ -281,6 +285,9 @@ body.lock {
 .form-book__input.is-invalid {
 	margin-bottom: 0;
 	border-color: #de0b0b;
+}
+.form-book__input.is-invalid::placeholder {
+	color: #de0b0b;
 }
 
 .user svg{

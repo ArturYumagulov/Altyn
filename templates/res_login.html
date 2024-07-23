@@ -39,7 +39,7 @@
 					<div class="header__body">
 						<div class="header__main">
 							<a href="/"><img src="
-                            {% static '/img/logo.png' %}
+{#                            {% static '/img/logo.png' %}#}
                             " class="header__logo" alt="Логотип" /></a>
 						</div>
 {##}
@@ -65,13 +65,13 @@
 					<form id="login_form" class="form-book " novalidate="novalidate">
 						<a href="/" class="popup-logo">
                             <img src="
-                            {% static '/img/logo.png' %}
+{#                            {% static '/img/logo.png' %}#}
                             " alt="Логотип"></a>
 						<h3 class="popup-title">ВОЙТИ</h3>
 						<label for="E-mail">E-mail или номер телефона
 							<input id="email-input" type="text" class="form-book__input" name="email" autocomplete="off" required>
+                            <p class="alert" id="email-input-feedback">Это поле не может быть пустым</p>
 						</label>
-                        <p class="alert" id="email-input-feedback">Это поле не может быть пустым</p>
 						<label for="password">Пароль
 							<input id="password-input" type="password" class="form-book__input" name="password" autocomplete="current-password" required>
 						</label>

@@ -38,6 +38,7 @@ function lenValid(element) {
 
 
 login_form.addEventListener('submit', (e)=>{
+
     e.preventDefault()
 
     let popup_thank = document.getElementById('popup-thank')

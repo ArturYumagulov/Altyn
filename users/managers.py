@@ -8,32 +8,36 @@ class CustomUserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, username=None, email=None, phone=None, password=None, **extra_fields):
-        if not username:
-            if not email and not phone:
-                raise ValueError('The given email/phone must be set')
-        if email:
-            self.normalize_email(email)
-            if not username:
-                username = email
 
-            user = self.model(email=email, username=username, **extra_fields)
+        # if not username:
+        #     if not email and not phone:
+        #         raise ValueError('The given email/phone must be set')
 
-        if phone:
-            if not username:
-                username = phone
+        # if email:
+        #     self.normalize_email(email)
+        #     if not username:
+        #         username = email
+        #
+        #     user = self.model(email=email, username=username, **extra_fields)
+        #
+        # if phone:
+        #     if not username:
+        #         username = phone
+        #
+        #     user = self.model(email=email, phone=phone, **extra_fields)
 
-            user = self.model(email=email, phone=phone, **extra_fields)
+        # if extra_fields.get('is_superuser'):
+        #     user = self.model(username=username, **extra_fields)
 
-        if extra_fields.get('is_superuser'):
-            user = self.model(username=username, **extra_fields)
+        user = self.model(username=username, phone=phone, **extra_fields)
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_user(self, username, email,  password=None, **extra_fields):
+    def create_user(self, username, email, phone, password=None, **extra_fields):
         extra_fields.setdefault('is_superuser', False)
-        return self._create_user(username=username, email=email, password=password, **extra_fields)
+        return self._create_user(username=username, phone=phone, email=email, password=password, **extra_fields)
 
     def create_superuser(self, username, email, phone, password, **extra_fields):
 
