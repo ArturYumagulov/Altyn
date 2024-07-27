@@ -39,6 +39,7 @@ def user_register(request):
     """Регистрация"""
 
     if request.method == "POST":
+        print(request.body)
         data = json.loads(request.body)
         if data.get('type') == 'is_looking' or data.get('type') == 'is_shooting':
             create_look_user(data)

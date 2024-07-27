@@ -1,5 +1,7 @@
 const EMAIL = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/g;
 
+let VALID = false;
+
 function register_fetch(data) {
     return fetch('/users/register/', {
         method: 'POST',
@@ -18,10 +20,12 @@ function valid_fetch_response(data) {
 }
 
 function lenValidValue(element) {
+    // проверка на длину
     return element.length > 0;
 }
 
 function inValid(element, text=null) {
+    // добавляет классы невалидности
     let feedback = element.parentElement.children[1]
     element.classList.add('is-invalid')
     feedback.style.display = 'block'
@@ -29,75 +33,46 @@ function inValid(element, text=null) {
 }
 
 function valid(element) {
+    // удаляет классы невалидности
     let feedback = element.parentElement.children[1]
     element.classList.remove('is-invalid')
     feedback.style.display = 'none'
     feedback.innerHTML = ''
 
 }
+function reg_valid(element, reg) {
+    // проверка на регулярку
+    return element.value.match(reg)
+}
 
 function valid_data(element, reg) {
 
-    if (lenValidValue(element.value)) {
-        if (element.value.match(reg)) {
-            valid(element)
-            return Boolean(true)
-        } else {
-            inValid(element, 'Проверьте правильность введенных данных')
-            return Boolean(false)
-        }
-        // return Boolean (true)
+    if (lenValidValue(element.value) && reg_valid(element, reg)) {
+        valid(element)
+        return true;
     } else {
-        inValid(element, 'Данное поле не может быть пустым')
-        return Boolean(false)
+        inValid(element, 'Проверьте правильность введенных данных')
+        return false;
     }
 }
 
-function valid_fetch(value) {
-    let feedback = value.parentElement.children[1]
-    let valid = valid_fetch_response({'type': value.type, 'value': value.value})
-    valid.then((res) => res.json().then((result) => {
-        if(result.result) {
-            value.classList.add('is-invalid')
-            feedback.style.display = 'block'
-            feedback.innerHTML = result.text
-            return Boolean(false)
-        } else {
-            value.classList.remove('is-invalid')
-            feedback.style.display = 'none'
-            feedback.innerHTML = ''
-            return Boolean(true)
-        }
-    }))
 
-}
-
-function blur_valid_input(element){
-    element.addEventListener('blur', () => {
-        return valid_fetch(element)
-    })
-}
-
-function get_form_input(form) {
-    let list = form.querySelectorAll('input')
-    for (let i = 0; i < list.length; i++) {
-        let input = list[i]
-        blur_valid_input(input)
-        valid_data(input, EMAIL)
-    }
-    return false;
+function blurValid(form) {
+   // написать функцию проверки поля при блюре
 }
 
 let look_form = document.getElementById('look-form')
-let look_btn = document.getElementById('look-btn')
+
 look_form.addEventListener('submit', (e) => {
-
     e.preventDefault()
-    get_form_input(look_form)
 
-    if (get_form_input(look_form)) {
-        console.log(true)
-    } else {
-        console.log(false)
+    let list = look_form.querySelectorAll('input')
+
+    for (let i = 0; i < list.length; i++) {
+        let input = list[i]
+        if (input.name === 'email') {
+            valid_data(input, EMAIL)
+        }
     }
-}, false)
+
+})
