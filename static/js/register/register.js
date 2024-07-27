@@ -21,25 +21,34 @@ function lenValidValue(element) {
     return element.length > 0;
 }
 
-function valid_data(element) {
+function inValid(element, text=null) {
     let feedback = element.parentElement.children[1]
+    element.classList.add('is-invalid')
+    feedback.style.display = 'block'
+    feedback.innerHTML = text
+}
+
+function valid(element) {
+    let feedback = element.parentElement.children[1]
+    element.classList.remove('is-invalid')
+    feedback.style.display = 'none'
+    feedback.innerHTML = ''
+
+}
+
+function valid_data(element, reg) {
 
     if (lenValidValue(element.value)) {
-        if (element.value.match(EMAIL)) {
-            element.classList.remove('is-invalid')
-            feedback.style.display = 'none'
+        if (element.value.match(reg)) {
+            valid(element)
             return Boolean(true)
         } else {
-            element.classList.add('is-invalid')
-            feedback.style.display = 'block'
-            feedback.innerHTML = 'Проверьте правильность введенных данных'
+            inValid(element, 'Проверьте правильность введенных данных')
             return Boolean(false)
         }
-        return Boolean (true)
+        // return Boolean (true)
     } else {
-        element.classList.add('is-invalid')
-        feedback.style.display = 'block'
-        feedback.innerHTML = 'Данное поле не может быть пустым'
+        inValid(element, 'Данное поле не может быть пустым')
         return Boolean(false)
     }
 }
@@ -74,80 +83,21 @@ function get_form_input(form) {
     for (let i = 0; i < list.length; i++) {
         let input = list[i]
         blur_valid_input(input)
-        valid_data(input)
+        valid_data(input, EMAIL)
     }
     return false;
 }
 
 let look_form = document.getElementById('look-form')
 let look_btn = document.getElementById('look-btn')
-
-const emailInput = look_form.querySelector('input[name="email"]')
-
-
-emailInput.addEventListener('blur', () => {
-    const email = emailInput.value.trim()
-    fetch('/users/valid-data/', {
-        method: 'POST',
-        headers: {
-            "X-CSRFToken": csrf,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({'type': 'email', 'value': email})
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            if (data.result) {
-                emailInput.classList.add('is-invalid')
-                emailInput.parentElement.children[1].style.display = 'block';
-                emailInput.parentElement.children[1].innerHTML = data.text;
-            } else {
-                console.log('false ')
-                emailInput.classList.remove('is-invalid')
-                emailInput.parentElement.children[1].style.display = 'none';
-                emailInput.parentElement.children[1].innerHTML = '';
-            }
-        }).catch(error => {
-        console.error('Error', error);
-    })
-})
-
 look_form.addEventListener('submit', (e) => {
 
     e.preventDefault()
-    const emailInput = look_form.querySelector('input[name="email"]')
-    console.log(emailInput)
-    const email = emailInput.value.trim()
-    let isValid = true;
+    get_form_input(look_form)
 
-    if (email === '') {
-        emailInput.classList.add('is-invalid')
-        emailInput.parentElement.children[1].style.display = 'block';
-        emailInput.parentElement.children[1].innerHTML = 'Это поле не может быть пустым';
-        isValid = false;
+    if (get_form_input(look_form)) {
+        console.log(true)
+    } else {
+        console.log(false)
     }
-
-    if (!EMAIL.test(email)) {
-        emailInput.classList.add('is-invalid')
-        emailInput.parentElement.children[1].style.display = 'block';
-        emailInput.parentElement.children[1].innerHTML = 'Reg';
-        isValid = false;
-    }
-
-    // fetch('/users/valid-data/', {
-    //     method: 'POST',
-    //     headers: {
-    //         "X-CSRFToken": csrf,
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({'type': 'email', 'value': email})
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     console.log(data)
-    // }).catch(error => {
-    //     console.error('Error', error);
-    // })
-
-})
+}, false)
