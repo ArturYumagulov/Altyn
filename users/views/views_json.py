@@ -40,10 +40,11 @@ def user_register(request):
 
     if request.method == "POST":
         print(request.body)
-        data = json.loads(request.body)
-        if data.get('type') == 'is_looking' or data.get('type') == 'is_shooting':
-            create_look_user(data)
-            return JsonResponse({'result': True}, safe=False)
+        # data = json.loads(request.body)
+        # if data.get('type') == 'is_looking' or data.get('type') == 'is_shooting':
+        #     create_look_user(data)
+        #     return JsonResponse({'result': True}, safe=False)
+        return JsonResponse({'result': True}, safe=False)
 
     return JsonResponse({'result': 'error'}, safe=False)
 
@@ -51,16 +52,12 @@ def user_register(request):
 def valid_data(request):
     """Валидация данных при регистрации"""
     if request.method == "POST":
-        data = json.loads(request.body)
-        print(data)
-        if data.get('type') == 'email':
-            try:
-                print(User.objects.get(email=data.get('value')))
-                return JsonResponse({'result': True, 'text': "Данный email уже зарегистрирован"}, safe=False)
-            except User.DoesNotExist:
-                return JsonResponse({'result': False}, safe=False)
-
-        return JsonResponse({'result': False}, safe=False)
+        email_exists = User.objects.filter(email=json.loads(request.body).get('email')).exists()
+        phone_exists = User.objects.filter(phone=json.loads(request.body).get('phone')).exists()
+        return JsonResponse({
+            'emailExists': email_exists,
+            'phoneExists': phone_exists
+        }, safe=False)
     return JsonResponse({'result': False}, safe=False)
 
 
