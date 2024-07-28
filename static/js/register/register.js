@@ -1,6 +1,7 @@
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRegex = /^(\+7|8)?[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/;
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+const url = window.location.search
 
 
 function inValid(element, errorElement, text=null) {
@@ -11,6 +12,8 @@ function inValid(element, errorElement, text=null) {
 }
 
 const thank = document.getElementById('popup-thank')
+let thank_text = document.querySelector('#popup-thank .thank-text')
+let thanks_btn = document.querySelector('.thank-btn')
 const look_form = document.getElementById('look-form')
 
 look_form.addEventListener('submit', (e) => {
@@ -40,6 +43,7 @@ look_form.addEventListener('submit', (e) => {
     phoneError.textContent = ''
     password1Error.textContent = ''
     password2Error.textContent = ''
+    thank_text.textContent = ''
 
     let hasError = false;
 
@@ -53,7 +57,7 @@ look_form.addEventListener('submit', (e) => {
         hasError = true;
     }
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, 'Пароль должен содержать минимум восемь символов, одну буква и одну цифра')
+        inValid(password1Input, password1Error, 'Пароль должен содержать минимум восемь символов, одну букву и одну цифру')
         hasError = true;
     }
     if (password1 !== password2) {
@@ -77,7 +81,6 @@ look_form.addEventListener('submit', (e) => {
         }
         if (data.phoneExists) {
             inValid(phoneInput, phoneError, 'Телефон уже зарегистрирован')
-            // phoneError.textContent = 'Телефон уже зарегистрирован'
         }
         if (!data.emailExists && !data.phoneExists) {
             fetch('/users/register/', {
@@ -91,7 +94,20 @@ look_form.addEventListener('submit', (e) => {
                     console.log(result)
                     if (result.result) {
                         thank.classList.add('open')
-                        // Дописать остальную логику
+                        thank_text.textContent = 'Вы успешно зарегистрировались. На ваш email отправлена ссылка на подтверждение!'
+
+                        if (url.length > 0) {
+                            let clean_url = url.slice(1).split('&')
+                            clean_url.forEach((param) => {
+                                if (param.split('=')[0] === 'next') {
+                                    thanks_btn.innerHTML = 'Продолжить'
+                                    thanks_btn.setAttribute('href', `${param.split('=')[1]}`)
+                                }
+                            })
+                        } else {
+                            thanks_btn.innerHTML = 'Закрыть'
+                            thanks_btn.setAttribute('href', window.location.pathname)
+                        }
                     }
                 })
                 .catch(

@@ -22,16 +22,11 @@ class UserAdmin(BaseUserAdmin):
     list_display = ['pk', 'username', 'phone', 'email', 'is_active', 'is_looking', 'is_shooting', 'is_organize']
     list_display_links = ["pk", "email", "username"]
     list_filter = ["is_staff"]
-    # fieldsets = [
-    #     (None, {"fields": ["email", "password"]}),
-    #     ("Personal info", {"fields": ["phone"]}),
-    #     ("Permissions", {"fields": ["is_staff"]}),
-    # ]
     fieldsets = (
         (None, {"fields": ("username",)}),
         ('Персональная информация', {"fields": ('avatar', "first_name", "last_name", "surname",
                                                 'birthday', "phone", 'email', 'male', 'password', "site",
-                                                "social_networks", 'roles', 'region', 'location')}),
+                                                "social_networks", 'roles', 'region', 'location', 'verify_token')}),
         (
             "Права доступа", {
                 "fields": (
@@ -64,7 +59,7 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ["email"]
     ordering = ["email"]
     filter_horizontal = []
-    readonly_fields = ('get_avatar',)
+    readonly_fields = ('get_avatar', 'verify_token')
 
     def get_avatar(self, obj):
         if obj.avatar:

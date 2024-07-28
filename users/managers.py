@@ -9,27 +9,10 @@ class CustomUserManager(BaseUserManager):
 
     def _create_user(self, username=None, email=None, phone=None, password=None, **extra_fields):
 
-        # if not username:
-        #     if not email and not phone:
-        #         raise ValueError('The given email/phone must be set')
+        if not username:
+            username = email
 
-        # if email:
-        #     self.normalize_email(email)
-        #     if not username:
-        #         username = email
-        #
-        #     user = self.model(email=email, username=username, **extra_fields)
-        #
-        # if phone:
-        #     if not username:
-        #         username = phone
-        #
-        #     user = self.model(email=email, phone=phone, **extra_fields)
-
-        # if extra_fields.get('is_superuser'):
-        #     user = self.model(username=username, **extra_fields)
-
-        user = self.model(username=username, phone=phone, **extra_fields)
+        user = self.model(username=username, email=email, phone=phone, **extra_fields)
 
         user.set_password(password)
         user.save(using=self._db)

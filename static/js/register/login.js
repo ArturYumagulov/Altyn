@@ -1,6 +1,22 @@
 let login_form = document.getElementById('login_form')
 let button = document.querySelector('#login_form .form-btn')
-console.log(window.location.pathname)
+const url = window.location.search
+// console.log(window.location.pathname)
+
+
+// function get_next_page(url) {
+//     if (window.location.search.length > 0) {
+//         let clean_url = url.slice(1).split('&')
+//         clean_url.forEach((param) => {
+//             if (param.split('=')[0] === 'next') {
+//                 return `/${param.split('=')[1]}/`
+//             }
+//         })
+//     } else {
+//         return ('/')
+//     }
+// }
+
 
 
 async function LoadData(username, password) {
@@ -55,11 +71,26 @@ login_form.addEventListener('submit', (e)=>{
         if (data.result === 'login') {
             popup_thank.classList.add('open')
             thank_text.innerHTML = `Здравствуйте, ${data.user}. Вы успешно авторизовались!`
-            thanks_btn.innerHTML = 'Закрыть'
-            thanks_btn.setAttribute('href', window.location.pathname)
+
+            // if (window.location.href)
+
+            if (url.length > 0) {
+                let clean_url = url.slice(1).split('&')
+                clean_url.forEach((param) => {
+                    if (param.split('=')[0] === 'next') {
+                        thanks_btn.innerHTML = 'Продолжить'
+                        thanks_btn.setAttribute('href', `${param.split('=')[1]}`)
+                    }
+                })
+            } else {
+                thanks_btn.innerHTML = 'Закрыть'
+                thanks_btn.setAttribute('href', window.location.pathname)
+            }
+
         } else if (data.result === 'no_active') {
             popup_thank.classList.add('open')
-            thank_text.innerHTML = `Здравствуйте, ${data.user}. Ваша учетная запись еще не активированна`
+            thank_text.innerHTML = `Здравствуйте, ${data.user}. Ваша учетная запись еще не активированна. 
+            Для активации необходимо подтвердить email. Ссылка отправлена на электронныу почту`
         }
         else {
             console.log('error')
@@ -71,7 +102,6 @@ login_form.addEventListener('submit', (e)=>{
                 console.log('click')
                 popup_thank.classList.remove('open')
                 reg_popup.classList.add('open')
-
             })
         }
     })

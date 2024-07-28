@@ -138,3 +138,15 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = '/users/res-login-page/'
+
+RECIPIENTS_EMAIL = ['artdevi-kzn@yandex.ru ']   # замените на свою почту
+DEFAULT_FROM_EMAIL = 'artdevi-kzn@yandex.ru '  # замените на свою почту
+
+
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
 from users.decorators.decorators import json_login_required
-from users.services import create_look_user
+from users.services import create_look_user, send_email_for_verify
 
 User = get_user_model()
 
@@ -20,6 +20,7 @@ def user_login(request):
                 login(request, user)
                 return JsonResponse({'result': 'login', 'user': user.username}, safe=False)
             else:
+                send_email_for_verify(request, user.email, user.verify_token)
                 return JsonResponse({'result': 'no_active', 'user': user.username}, safe=False)
         else:
             return JsonResponse({'result': 'no_register'}, safe=False)
@@ -39,11 +40,10 @@ def user_register(request):
     """Регистрация"""
 
     if request.method == "POST":
-        print(request.body)
-        # data = json.loads(request.body)
-        # if data.get('type') == 'is_looking' or data.get('type') == 'is_shooting':
-        #     create_look_user(data)
-        #     return JsonResponse({'result': True}, safe=False)
+        data = json.loads(request.body)
+        if data.get('type') == 'is_looking' or data.get('type') == 'is_shooting':
+            create_look_user(request, data)
+            return JsonResponse({'result': True}, safe=False)
         return JsonResponse({'result': True}, safe=False)
 
     return JsonResponse({'result': 'error'}, safe=False)
