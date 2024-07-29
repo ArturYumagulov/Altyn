@@ -19,22 +19,55 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ['pk', 'username', 'phone', 'email', 'is_active', 'is_looking', 'is_shooting', 'is_organize']
+    list_display = [
+        "pk",
+        "username",
+        "phone",
+        "email",
+        "is_active",
+        "is_looking",
+        "is_shooting",
+        "is_show",
+        "is_organize",
+    ]
     list_display_links = ["pk", "email", "username"]
     list_filter = ["is_staff"]
     fieldsets = (
         (None, {"fields": ("username",)}),
-        ('Персональная информация', {"fields": ('avatar', "first_name", "last_name", "surname",
-                                                'birthday', "phone", 'email', 'male', 'password', "site",
-                                                "social_networks", 'roles', 'region', 'location', 'verify_token')}),
         (
-            "Права доступа", {
+            "Персональная информация",
+            {
+                "fields": (
+                    "avatar",
+                    "first_name",
+                    "last_name",
+                    "surname",
+                    "birthday",
+                    "phone",
+                    "email",
+                    "male",
+                    "password",
+                    "site",
+                    "platform_name",
+                    "company_name",
+                    "social_networks",
+                    "roles",
+                    "region",
+                    "location",
+                    "verify_token",
+                    "date_joined",
+                )
+            },
+        ),
+        (
+            "Права доступа",
+            {
                 "fields": (
                     "is_active",
-                    'is_looking',
+                    "is_looking",
                     "is_show",
-                    'is_shooting',
-                    'is_organize',
+                    "is_shooting",
+                    "is_organize",
                     "is_staff",
                     "is_superuser",
                     "groups",
@@ -58,8 +91,7 @@ class UserAdmin(BaseUserAdmin):
     ]
     search_fields = ["email"]
     ordering = ["email"]
-    filter_horizontal = []
-    readonly_fields = ('get_avatar', 'verify_token')
+    readonly_fields = ("get_avatar", "verify_token", "date_joined",)
 
     def get_avatar(self, obj):
         if obj.avatar:
@@ -73,6 +105,3 @@ admin.site.register(CustomUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 # admin.site.unregister(Group)
-
-
-

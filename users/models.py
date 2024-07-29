@@ -68,7 +68,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
                                  default=None)
     company_name = models.CharField(max_length=1000, verbose_name="Наименование компании", blank=True,
                                     null=True, default=None)
-    platform_name = models.CharField(max_length=1000, verbose_name="Наименование компании", blank=True,
+    platform_name = models.CharField(max_length=1000, verbose_name="Наименование площадки", blank=True,
                                      null=True, default=None)
     date_joined = models.DateTimeField(auto_now_add=True)
     verify_token = models.CharField(max_length=40, blank=True, null=True, default=secrets.token_hex(40))
@@ -76,7 +76,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False, verbose_name="Сотрудник")
     is_active = models.BooleanField(default=False, verbose_name="Активирован")
     is_superuser = models.BooleanField(default=False, verbose_name="Суперпользователь")
-    is_looking = models.BooleanField(default=True, verbose_name="Смотрит")
+    is_looking = models.BooleanField(default=False, verbose_name="Смотрит")
     is_shooting = models.BooleanField(default=False, verbose_name="Снимает")
     is_show = models.BooleanField(default=False, verbose_name="Показывает")
     is_organize = models.BooleanField(default=False, verbose_name="Продвигает")

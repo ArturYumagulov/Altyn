@@ -18,7 +18,6 @@ const url = window.location.search
 // }
 
 
-
 async function LoadData(username, password) {
     const [user] = await Promise.all([
         fetch(login_path, {
@@ -33,7 +32,7 @@ async function LoadData(username, password) {
     return await user.json();
 }
 
-function invalidData (item_id) {
+function invalidData(item_id) {
     document.getElementById(`${item_id}-feedback`).style.display = 'block'
     document.getElementById(item_id).classList.add('is-invalid')
 }
@@ -53,7 +52,7 @@ function lenValid(element) {
 }
 
 
-login_form.addEventListener('submit', (e)=>{
+login_form.addEventListener('submit', (e) => {
 
     e.preventDefault()
 
@@ -67,12 +66,10 @@ login_form.addEventListener('submit', (e)=>{
     lenValid(email_input)
     lenValid(password_input)
 
-    LoadData(email_input.value, password_input.value).then((data)=> {
+    LoadData(email_input.value, password_input.value).then((data) => {
         if (data.result === 'login') {
             popup_thank.classList.add('open')
             thank_text.innerHTML = `Здравствуйте, ${data.user}. Вы успешно авторизовались!`
-
-            // if (window.location.href)
 
             if (url.length > 0) {
                 let clean_url = url.slice(1).split('&')
@@ -84,21 +81,20 @@ login_form.addEventListener('submit', (e)=>{
                 })
             } else {
                 thanks_btn.innerHTML = 'Закрыть'
-                thanks_btn.setAttribute('href', window.location.pathname)
+                thanks_btn.setAttribute('href', url)
             }
 
         } else if (data.result === 'no_active') {
             popup_thank.classList.add('open')
             thank_text.innerHTML = `Здравствуйте, ${data.user}. Ваша учетная запись еще не активированна. 
             Для активации необходимо подтвердить email. Ссылка отправлена на электронныу почту`
-        }
-        else {
+        } else {
             console.log('error')
             popup_thank.classList.add('open')
             thank_text.innerHTML = 'Проверьте правильность логина и пароля. Если вы забыли пароль, <a href="/reset/" style="color: #d49e3d">восстановить</a>'
             thanks_btn.innerHTML = 'Зарегистрироваться'
             thanks_btn.classList.add('popup-link')
-            thanks_btn.addEventListener('click', ()=> {
+            thanks_btn.addEventListener('click', () => {
                 console.log('click')
                 popup_thank.classList.remove('open')
                 reg_popup.classList.add('open')
@@ -106,5 +102,3 @@ login_form.addEventListener('submit', (e)=>{
         }
     })
 })
-
-console.log(window.location.pathname)

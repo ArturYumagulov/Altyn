@@ -5,7 +5,7 @@
         <div class="popup__content">
             {#					<form action="{% url 'register' %}" method="post" id="register_form" class="form-book " novalidate="novalidate">#}
             <a href="/" class="popup-logo"><img src="
-{#                        {% static '/img/logo.png' %}#}
+                        {% static '/img/logo.png' %}
                         " alt="Логотип"></a>
             <a class="popup__close close-popup" title="" href="#header"></a>
             <h3 class="popup-title">Регистрация</h3>
@@ -62,100 +62,133 @@
                     </form>
                 </div>
                 <div class="content" data-content="take">
-                    <label for="E-mail">E-mail
-                        <input type="email" class="form-book__input" name="email" autocomplete="off">
-                    </label>
-                    <label for="tel">Номер телефона
-                        <input type="tel" class="form-book__input" name="tel" autocomplete="off">
-                    </label>
-                    <label for="password">Пароль
-                        <input type="password" class="form-book__input" name="password" autocomplete="current-password">
-                    </label>
-                    <label for="repeat-password">Повторить пароль
-                        <input type="repeat-password" class="form-book__input" name="repeat-password"
-                               autocomplete="current-password">
-                    </label>
-                    <div class="form-btn registration-btns">
-                        <!-- #popup-thank проверял -->
-                        <button class="register-btn" id="shooting-btn" data-type="look" type="submit">Зарегистрироваться
-                        </button>
+                    <form id="take-form" method="post">
+                        <label for="E-mail">E-mail
+                            <input type="email" class="form-book__input" name="email" autocomplete="off">
+                            <p class="alert" id="emailError"></p>
+                        </label>
+                        <label for="tel">Номер телефона
+                            <input type="tel" class="form-book__input" name="phone" autocomplete="off">
+                            <p class="alert" id="phoneError"></p>
 
-                    </div>
+                        </label>
+                        <label for="password">Пароль
+                            <input type="password" class="form-book__input" name="password1"
+                                   autocomplete="current-password">
+                            <p class="alert" id="password1Error"></p>
+
+                        </label>
+                        <label for="repeat-password">Повторить пароль
+                            <input type="password" class="form-book__input" name="password2"
+                                   autocomplete="current-password">
+                            <p class="alert" id="password2Error"></p>
+
+                        </label>
+                        <div class="form-btn registration-btns">
+                            <!-- #popup-thank проверял -->
+                            <button class="register-btn" id="shoot-btn" data-type="look" type="submit">
+                                Зарегистрироваться
+                            </button>
+
+                        </div>
+                    </form>
                 </div>
                 <div class="content " data-content="show">
-                    <label for="lastName">Фамилия
-                        <input type="text" class="form-book__input" name="lastName"/>
-                    </label>
-                    <label for="firstName">Имя
-                        <input type="text" class="form-book__input" name="firstName"/>
-                    </label>
-                    <label for="Surname">Отчество
-                        <input type="text" class="form-book__input" name="Surname"/>
-                    </label>
-                    <label for="E-mail">E-mail
-                        <input type="email" class="form-book__input" name="email" autocomplete="off">
-                    </label>
-                    <label for="tel">Номер телефона
-                        <input type="tel" class="form-book__input" name="tel" autocomplete="off">
-                    </label>
-                    <label for="CompanyName">Наименование компании
-                        <input type="text" class="form-book__input" name="CompanyName"/>
-                    </label>
-                    <label for="Surname">Сайт
-                        <input type="text" name="homepage" class="form-book__input"
-                               pattern="^(?=[^_]+$)([\wа-яА-ЯёЁ]([\wа-яА-ЯёЁ-]*[\wа-яА-ЯёЁ])*\.)+(?=[^\d]+$)[\wа-яА-ЯёЁ]{2,63}$"
-                               required><br>
-                    </label>
-                    <label for="password">Пароль
-                        <input type="password" class="form-book__input" name="password" autocomplete="current-password">
-                    </label>
-                    <label for="repeat-password">Повторить пароль
-                        <input type="repeat-password" class="form-book__input" name="repeat-password"
-                               autocomplete="current-password">
-                    </label>
-                    <div class="form-btn registration-btns">
-                        <!-- #popup-thank проверял -->
-                        <a class="register-btn">Зарегистрироваться</a>
-                    </div>
+                    <form id="show-form" method="post">
+                        <label for="last_name">Фамилия
+                            <input type="text" class="form-book__input" name="last_name"/>
+                            <p class="alert" id="lastnameError"></p>
+                        </label>
+                        <label for="first_name">Имя
+                            <input type="text" class="form-book__input" name="first_name"/>
+                            <p class="alert" id="first_nameError"></p>
+                        </label>
+                        <label for="surname">Отчество
+                            <input type="text" class="form-book__input" name="surname"/>
+                            <p class="alert" id="surnameError"></p>
+                        </label>
+                        <label for="email">E-mail
+                            <input type="email" class="form-book__input" name="email" autocomplete="off">
+                            <p class="alert" id="emailError"></p>
+                        </label>
+                        <label for="phone">Номер телефона
+                            <input type="tel" class="form-book__input" name="phone" autocomplete="off">
+                            <p class="alert" id="phoneError"></p>
+                        </label>
+                        <label for="company_name">Наименование компании
+                            <input type="text" class="form-book__input" name="company_name"/>
+                            <p class="alert" id="company_nameError"></p>
+                        </label>
+                        <label for="site">Сайт
+                            <input type="text" name="site" class="form-book__input"
+{#                                   pattern="^(?=[^_]+$)([\wа-яА-ЯёЁ]([\wа-яА-ЯёЁ-]*[\wа-яА-ЯёЁ])*\.)+(?=[^\d]+$)[\wа-яА-ЯёЁ]{2,63}$"#}>
+                            <p class="alert" id="siteError"></p>
+                        </label>
+                        <label for="password1">Пароль
+                            <input type="password" class="form-book__input" name="password1"
+                                   autocomplete="current-password">
+                            <p class="alert" id="password1Error"></p>
+                        </label>
+                        <label for="password2">Повторить пароль
+                            <input type="password" class="form-book__input" name="password2"
+                                   autocomplete="current-password">
+                            <p class="alert" id="password2Error"></p>
+                        </label>
+                        <div class="form-btn registration-btns">
+                            <button class="register-btn" id="show-btn" data-type="look" type="submit">
+                                Зарегистрироваться
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="content" data-content="promote">
-                    <label for="lastName">Фамилия
-                        <input type="text" class="form-book__input" name="lastName"/>
-                    </label>
-                    <label for="firstName">Имя
-                        <input type="text" class="form-book__input" name="firstName"/>
-                    </label>
-                    <label for="Surname">Отчество
-                        <input type="text" class="form-book__input" name="Surname"/>
-                    </label>
-                    <label for="E-mail">E-mail
-                        <input type="email" class="form-book__input" name="email" autocomplete="off">
-                    </label>
-                    <label for="tel">Номер телефона
-                        <input type="tel" class="form-book__input" name="tel" autocomplete="off">
-                    </label>
-                    <label for="SiteName">Наименование площадки
-                        <input type="text" class="form-book__input" name="SiteName"/>
-                    </label>
-                    <label for="Surname">Сайт
-                        <input type="text" name="homepage" class="form-book__input"
-                               pattern="^(?=[^_]+$)([\wа-яА-ЯёЁ]([\wа-яА-ЯёЁ-]*[\wа-яА-ЯёЁ])*\.)+(?=[^\d]+$)[\wа-яА-ЯёЁ]{2,63}$"
-                               required><br>
-                    </label>
-                    <label for="password">Пароль
-                        <input type="password" class="form-book__input" name="password" autocomplete="current-password">
-                    </label>
-                    <label for="repeat-password">Повторить пароль
-                        <input type="repeat-password" class="form-book__input" name="repeat-password"
-                               autocomplete="current-password">
-                    </label>
-                    <div class="form-btn registration-btns">
-                        <!-- #popup-thank проверял -->
-                        <a class="register-btn">Зарегистрироваться</a>
-                    </div>
+                <form id="organize-form" method="post">
+                        <label for="last_name">Фамилия
+                            <input type="text" class="form-book__input" name="last_name"/>
+                            <p class="alert" id="lastnameError"></p>
+                        </label>
+                        <label for="first_name">Имя
+                            <input type="text" class="form-book__input" name="first_name"/>
+                            <p class="alert" id="first_nameError"></p>
+                        </label>
+                        <label for="surname">Отчество
+                            <input type="text" class="form-book__input" name="surname"/>
+                            <p class="alert" id="surnameError"></p>
+                        </label>
+                        <label for="email">E-mail
+                            <input type="email" class="form-book__input" name="email" autocomplete="off">
+                            <p class="alert" id="emailError"></p>
+                        </label>
+                        <label for="phone">Номер телефона
+                            <input type="tel" class="form-book__input" name="phone" autocomplete="off">
+                            <p class="alert" id="phoneError"></p>
+                        </label>
+                        <label for="platform_name">Наименование площадки
+                            <input type="text" class="form-book__input" name="platform_name"/>
+                            <p class="alert" id="platform_nameError"></p>
+                        </label>
+                        <label for="site">Сайт
+                            <input type="text" name="site" class="form-book__input">
+                            <p class="alert" id="siteError"></p>
+                        </label>
+                        <label for="password1">Пароль
+                            <input type="password" class="form-book__input" name="password1"
+                                   autocomplete="current-password">
+                            <p class="alert" id="password1Error"></p>
+                        </label>
+                        <label for="password2">Повторить пароль
+                            <input type="password" class="form-book__input" name="password2"
+                                   autocomplete="current-password">
+                            <p class="alert" id="password2Error"></p>
+                        </label>
+                        <div class="form-btn registration-btns">
+                            <button class="register-btn" id="organize-btn" data-type="look" type="submit">
+                                Зарегистрироваться
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            {#					</form>#}
         </div>
     </div>
 </div>
