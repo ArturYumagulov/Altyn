@@ -1,22 +1,6 @@
 let login_form = document.getElementById('login_form')
 let button = document.querySelector('#login_form .form-btn')
 const url = window.location.search
-// console.log(window.location.pathname)
-
-
-// function get_next_page(url) {
-//     if (window.location.search.length > 0) {
-//         let clean_url = url.slice(1).split('&')
-//         clean_url.forEach((param) => {
-//             if (param.split('=')[0] === 'next') {
-//                 return `/${param.split('=')[1]}/`
-//             }
-//         })
-//     } else {
-//         return ('/')
-//     }
-// }
-
 
 async function LoadData(username, password) {
     const [user] = await Promise.all([
@@ -88,15 +72,16 @@ login_form.addEventListener('submit', (e) => {
             popup_thank.classList.add('open')
             thank_text.innerHTML = `Здравствуйте, ${data.user}. Ваша учетная запись еще не активированна. 
             Для активации необходимо подтвердить email. Ссылка отправлена на электронныу почту`
+            thanks_btn.addEventListener('click', ()=> {
+                popup_thank.classList.remove('open')
+            })
         } else {
-            console.log('error')
             popup_thank.classList.add('open')
-            thank_text.innerHTML = 'Проверьте правильность логина и пароля. Если вы забыли пароль, <a href="/reset/" style="color: #d49e3d">восстановить</a>'
+            thank_text.innerHTML = 'Проверьте правильность логина и пароля. Если вы забыли пароль, <a href="/users/change-password/" style="color: #d49e3d">восстановить</a>'
             thanks_btn.innerHTML = 'Зарегистрироваться'
             thanks_btn.classList.add('popup-link')
             thanks_btn.addEventListener('click', () => {
-                console.log('click')
-                popup_thank.classList.remove('open')
+                thank_text.classList.remove('open')
                 reg_popup.classList.add('open')
             })
         }

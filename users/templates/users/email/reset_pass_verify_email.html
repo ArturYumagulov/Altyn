@@ -1,0 +1,7 @@
+{% autoescape off %}
+
+Здравствуйте,
+Пожалуйста перейдите по ссылке, чтобы сбросить пароль
+http://{{ domain }}{% url 'reset_password_form' token=token %}
+
+{% endautoescape %}

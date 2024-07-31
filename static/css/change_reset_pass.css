@@ -1,0 +1,26 @@
+.form {
+    margin-top: 100px;
+    padding: 70px 100px;
+}
+
+.email-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.email__input {
+    background: inherit;
+    padding: 15px;
+    border: 2px solid #d49e3c;
+    border-radius: 100px;
+    max-width: 100%;
+    min-height: 51px;
+    width: 100%;
+    margin: 10px 0 20px;
+}
+
+.email__input.is-invalid {
+    margin-bottom: 0;
+    border-color: #de0b0b;
+}

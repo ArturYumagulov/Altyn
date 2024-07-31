@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 from regions.models import Region, Location
 from users.managers import CustomUserManager
+# from users.services import generate_hex_token
 
 
 # Create your models here.

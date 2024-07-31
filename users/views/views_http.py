@@ -44,6 +44,19 @@ def verify_email(request, token):
         user = User.objects.get(verify_token=token)
         user.is_active = True
         user.save()
-        return HttpResponse('<h1>Ok</h1>')
+        return render(request, 'users/verify_email_done.html')
     except User.DoesNotExist:
         return HttpResponse('<h1>Error</h1>')
+
+
+def change_password(request):
+    return render(request, 'users/change-password.html')
+
+
+def reset_pass_form(request, token):
+    try:
+        User.objects.get(verify_token=token)
+        return render(request, 'users/password-reset.html')
+
+    except User.DoesNotExist:
+        return JsonResponse({'result': False}, safe=False)

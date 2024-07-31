@@ -1,11 +1,12 @@
 import json
+import secrets
 
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
 from users.decorators.decorators import json_login_required
-from users.services import create_look_user, send_email_for_verify
+from users.services import create_look_user, send_email_for_verify, send_email_for_reset_pass
 
 User = get_user_model()
 
@@ -13,6 +14,7 @@ User = get_user_model()
 def user_login(request):
     email = json.loads(request.body).get("email")
     password = json.loads(request.body).get("password")
+    print(request.body)
     if request.method == "POST":
         user = authenticate(username=email, password=password)
         if user is not None:
@@ -49,11 +51,13 @@ def user_register(request):
             new_user = create_look_user(request, data)
             new_user.is_looking = True
             new_user.save()
+            send_email_for_verify(request, new_user.email, new_user.verify_token)
             return JsonResponse({"result": True}, safe=False)
         elif data.get("type") == "is_shooting":
             new_user = create_look_user(request, data)
             new_user.is_shooting = True
             new_user.save()
+            send_email_for_verify(request, new_user.email, new_user.verify_token)
             return JsonResponse({"result": True}, safe=False)
         elif data.get("type") == "is_show":
             new_user = create_look_user(request, data)
@@ -64,6 +68,7 @@ def user_register(request):
             new_user.company_name = data.get("companyName")
             new_user.site = data.get("site")
             new_user.save()
+            send_email_for_verify(request, new_user.email, new_user.verify_token)
             return JsonResponse({"result": True}, safe=False)
         elif data.get("type") == "is_organize":
             new_user = create_look_user(request, data)
@@ -74,6 +79,7 @@ def user_register(request):
             new_user.platform_name = data.get("platformName")
             new_user.site = data.get("site")
             new_user.save()
+            send_email_for_verify(request, new_user.email, new_user.verify_token)
             return JsonResponse({"result": True}, safe=False)
 
     return JsonResponse({"result": "error"}, safe=False)
@@ -92,3 +98,28 @@ def valid_data(request):
             {"emailExists": email_exists, "phoneExists": phone_exists}, safe=False
         )
     return JsonResponse({"result": False}, safe=False)
+
+
+def change_pass_email(request):
+    if request.method == 'POST':
+        user = User.objects.get(email=json.loads(request.body).get('email'))
+        send_email_for_reset_pass(request, user.email, user.verify_token)
+        return JsonResponse({'result': True}, safe=False)
+    return JsonResponse({'result': False}, safe=False)
+
+
+def reset_password(request):
+
+    if request.method == "POST":
+        data = json.loads(request.body)
+        try:
+            user = User.objects.get(verify_token=data.get('token'))
+            user.set_password(data.get('password'))
+            user.save()
+            return JsonResponse({'result': True}, safe=False)
+        except User.DoesNotExist:
+            return JsonResponse({'result': False}, safe=False)
+
+    return JsonResponse({'result': False}, safe=False)
+
+

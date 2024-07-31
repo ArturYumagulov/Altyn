@@ -1,4 +1,5 @@
 from django.urls import path
+# from django.contrib.auth import views as auth_views
 from .views import views_json, views_http
 
 
@@ -7,6 +8,22 @@ urlpatterns = [
     path("logout/", views_json.user_logout, name="logout"),
     path("register/", views_json.user_register, name="register"),
     path("valid-data/", views_json.valid_data, name="users_valid_data"),
+    path(
+        "change-password/",
+        views_http.change_password, name="change_password"
+    ),
+    path(
+        "password-change/done/",
+        views_json.change_pass_email, name="change_password_done"
+    ),
+    path(
+        "password-reset-form/<token>/",
+        views_http.reset_pass_form, name="reset_password_form"
+    ),
+    path(
+        "password-reset/",
+        views_json.reset_password, name="reset_password"
+    ),
     # --------------------------------------------------
     path("res-login-page/", views_http.res_login_page, name="res_login_page"),
     # path('res-login/', views_http.res_user_login, name='res_login'),

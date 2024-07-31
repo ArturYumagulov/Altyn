@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/change_reset_pass.css' %}">
+{% endblock %}
+{% block content %}
+        <div class="main">
+        <section class="form">
+            <p style="text-align: center">Email успешно подтвержден</p>
+            <div class="form-btn registration-btns">
+                <!-- #popup-thank проверял -->
+                <button class="register-btn verify-login" onclick="document.getElementById('popup').classList.add('open')">
+                    Войти
+                </button>
+
+            </div>
+        </section>
+    </div>
+    <script>
+    document.querySelector('.admin').style.display = 'none'
+
+
+    </script>
+{% endblock %}
