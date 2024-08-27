@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="{% static 'css/header.css' %}">
 	<link rel="stylesheet" href="{% static 'css/footer.css' %}">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/change_reset_pass.css' %}">
     <style>
         .popup__close:before {
             content: url({% static 'img/icons/close.svg' %});
@@ -279,7 +280,7 @@
 							</ul>
                             {% if user.is_authenticated %}
                             <div class="user">
-                                <a href="">
+                                <a href="{% url 'profile' %}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-person-circle" viewBox="0 0 16 16">
                                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -302,208 +303,70 @@
 
         {% block content %}
             <main class="main">
-			<!-- bonus -->
-			<section id="bonus" class="bonus">
-				<svg width="296" height="816" viewBox="0 0 296 816" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<g filter="url(#filter0_f_212_5075)">
-						<ellipse cx="-94.2825" cy="385.472" rx="183" ry="235" transform="rotate(19.4179 -94.2825 385.472)"
-							fill="url(#paint0_linear_212_5075)" fill-opacity="0.7" />
-					</g>
-					<defs>
-						<filter id="filter0_f_212_5075" x="-483.779" y="-44.417" width="778.994" height="859.779"
-							filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-							<feFlood flood-opacity="0" result="BackgroundImageFix" />
-							<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-							<feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_212_5075" />
-						</filter>
-						<linearGradient id="paint0_linear_212_5075" x1="335.718" y1="665.418" x2="-416.516" y2="317.42"
-							gradientUnits="userSpaceOnUse">
-							<stop stop-color="#D49E3C" />
-							<stop offset="0.379697" stop-color="#D49E3C" />
-							<stop offset="1" stop-color="#D9D9D9" stop-opacity="0" />
-						</linearGradient>
-					</defs>
-				</svg>
-				<div class="container bonus-plate">
+			<section id="distribution" class="distribution">
+
+				<div class="distribution-block container">
 					<article>
-						<h1 class="bonus-title">
-							<span>Золотая</span> тарелка
-						</h1>
-						<p class="bonus-text">
+						<h2 class="distribution-title"><span>Золотая</span> тарелка</h2>
+						<p class="distribution-subtitle">
 							Межрегиональная премия
 							в области кинематографии
 						</p>
-						<a href="#" class="bonus-btn btn">
-							ПОДРОБНЕЕ
-						</a>
 					</article>
-					<img src="img/bonus-plate.png" alt="">
-				</div>
-			</section>
-			<!-- bonus -->
-
-			<!-- news -->
-			<section id="news" class="news ">
-				<div class="container">
-					<h2 class="section-title title">НОВОСТИ</h2>
-					<div class="news-content">
-						<div class="news-workshop">
-							<img src="img/img_1.png" alt="">
-							<h4>
-								Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
-							</h4>
-							<p>
-								Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
-							</p>
-						</div>
-						<div class="slider">
-							<div class="slider_item">
-								<img src="img/img_2.png" alt="">
-								<p class="slider_item--text">
-									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
-								</p>
-							</div>
-							<div class="slider_item">
-								<img src="img/img_2.png" alt="">
-								<p class="slider_item--text">
-									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
-								</p>
-							</div>
-							<div class="slider_item">
-								<img src="img/img_2.png" alt="">
-								<p class="slider_item--text">
-									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
-								</p>
-							</div>
-							<div class="slider_item">
-								<img src="img/img_2.png" alt="">
-								<p class="slider_item--text">
-									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
-								</p>
-							</div>
-							<div class="slider_item">
-								<img src="img/img_2.png" alt="">
-								<p class="slider_item--text">
-									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
-								</p>
-							</div>
-							<div class="slider_item">
-								<img src="img/img_2.png" alt="">
-								<p class="slider_item--text">
-									Мастерская братьев Котт номинирована на кинопремию «Алтын тәлинкә»
-								</p>
-							</div>
-						</div>
+					<div class="distribution-img">
+						<div class="filter"></div>
+						<img src="{% static 'img/distribution-img.png' %}" alt="">
 					</div>
 				</div>
-			</section>
-			<!-- news -->
-
-			<!-- pitching -->
-			<section id="pitching" class="pitching">
-				<div class="container">
-					<h2 class="pitching-title title">ПИТЧИНГ 2024</h2>
-					<div class="pitching-content">
-						<a href="#" class="pitching-btn btn">
-							ЗАПИСАТЬСЯ НА ПИТЧИНГ
+				<ul class="distribution-items container">
+					<li class="distribution-item _icon-award">
+						<a href="film-award.html" class="">О кинопремии
+							<svg width="5" height="11" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
+									fill="#EBEBEB" />
+							</svg>
 						</a>
-					</div>
-				</div>
+						<p>Lorem ipsum dolor sit amet consectetur. </p>
+					</li>
+					<li class="distribution-item _icon-card">
+						<a href="regions-map.html" class="">Карта регионов
+							<svg width="5" height="11" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
+									fill="#EBEBEB" />
+							</svg>
+						</a>
+						<p>Lorem ipsum dolor sit amet consectetur. </p>
+					</li>
+					<li class="distribution-item">
+						<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="27" cy="27" r="26" stroke="#EBEBEB" stroke-width="2" />
+							<path d="M37.1902 27.3811L19.4432 35.6888L19.4432 19.0734L37.1902 27.3811Z" stroke="#EBEBEB"
+								stroke-width="2" />
+						</svg>
+						<a href="watch-movie.html" class="">Смотреть кино
+							<svg width="11" height="15" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
+									fill="#EBEBEB" />
+							</svg>
+						</a>
+						<p>Lorem ipsum dolor sit amet consectetur. </p>
+					</li>
+					<li class="distribution-item _icon-program">
+						<a href="business-program.html" class="">Деловая программа
+							<svg width="5" height="11" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
+									fill="#EBEBEB" />
+							</svg>
+						</a>
+						<p>Lorem ipsum dolor sit amet consectetur. </p>
+					</li>
+				</ul>
 			</section>
-			<!-- pitching -->
-
-			<!-- media -->
-			<section id="media" class="media">
-				<div class="container">
-					<h2 class="media-title title">МЕДИА</h2>
-					<div class="media-content">
-						<img src="img/media-img.png" alt="">
-						<article>
-							<h4>Церемония награждения</h4>
-							<ul>
-								<li><svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<circle cx="3.5" cy="3.5" r="3.5" fill="#D49E3C" />
-									</svg>24.02.2024</li>
-								<li># МЕДИА</li>
-							</ul>
-							<p>Церемония награждения Лауреатов зрительского голосования - 2022 в рамках 2 Межрегиональной кинопремии“
-								Золотая тарелка “</p>
-						</article>
-					</div>
-					<div class="media-img">
-						<div class="media-img_block">
-							<img src="img/img_1.png" alt="">
-							<h3>Время кино у озера Кабан</h3>
-							<p>Открытие сезона уличных кинопоказов цикла “Время кино у озера Кабан” в рамках кинопремии “Золотая
-								тарелка” </p>
-							<a href="#" class="media-btn btn">
-								#ВРЕМЯКИНО
-							</a>
-						</div>
-						<div class="media-img_block">
-							<img src="img/img_1.png" alt="">
-							<h3>Время кино у озера Кабан</h3>
-							<p>Открытие сезона уличных кинопоказов цикла “Время кино у озера Кабан” в рамках кинопремии “Золотая
-								тарелка” </p>
-							<a href="#" class="media-btn btn">
-								#ВРЕМЯКИНО
-							</a>
-						</div>
-						<div class="media-img_block">
-							<img src="img/img_1.png" alt="">
-							<h3>Время кино у озера Кабан</h3>
-							<p>Открытие сезона уличных кинопоказов цикла “Время кино у озера Кабан” в рамках кинопремии “Золотая
-								тарелка” </p>
-							<a href="#" class="media-btn btn">
-								#ВРЕМЯКИНО
-							</a>
-						</div>
-						<div class="media-img_block">
-							<img src="img/img_1.png" alt="">
-							<h3>Время кино у озера Кабан</h3>
-							<p>Открытие сезона уличных кинопоказов цикла “Время кино у озера Кабан” в рамках кинопремии “Золотая
-								тарелка” </p>
-							<a href="#" class="media-btn btn">
-								#ВРЕМЯКИНО
-							</a>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- media -->
-
-			<!-- regulations -->
-			<section id="regulations" class="regulations">
-				<div class="regulations-block">
-					<a href="#" class="regulations-btn btn">
-						РЕГЛАМЕНТ
-					</a>
-					<a href="#" class="regulations-btn btn">
-						КАТАЛОГИ
-					</a>
-					<a href="#" class="regulations-btn btn">
-						ПОДАТЬ ЗАЯВКУ
-					</a>
-					<a href="#" class="regulations-btn btn">
-						ГОЛОСОВАТЬ
-					</a>
-				</div>
-			</section>
-			<!-- regulations -->
-
-			<!-- partners -->
-			<section id="partners" class="partners">
-				<div class="partners-block container">
-					<h2 class="partners-title title">ПАРТНЕРЫ</h2>
-					<div class="partners-block__img">
-						<img src="img/partners.png" alt="">
-					</div>
-				</div>
-			</section>
-			<!-- partners -->
 		</main>
-
-
         {% endblock %}
 
 		<!-- main -->
@@ -612,9 +475,9 @@
 		</footer>
 		<!-- footer -->
 
-        {% include 'users/login_popup.html' %}
-        {% include 'users/registration_popup.html' %}
-        {% include 'users/thanks_popup.html' %}
+        {% include 'users/register/login_popup.html' %}
+        {% include 'users/register/registration_popup.html' %}
+        {% include 'users/register/thanks_popup.html' %}
 		<!-- wrapper -->
 	</div>
     <script>

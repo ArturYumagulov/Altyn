@@ -2,6 +2,9 @@ body.lock {
 	overflow: hidden;
 }
 
+html {
+	scrollbar-gutter: stable;
+}
 
 .popup {
 	position: fixed;
@@ -93,6 +96,11 @@ body.lock {
 	transition: all ease 0.8s;
 }
 
+.popup__close:before {
+	content: url(../img/icons/close.svg);
+	position: absolute;
+}
+
 .popup__content h5 {
 	margin-bottom: 8px;
 	font-size: 16px;
@@ -109,6 +117,14 @@ body.lock {
 	min-height: 51px;
 	width: 100%;
 	margin: 10px 0 20px;
+}
+
+.form-book__input.is-invalid {
+	margin-bottom: 0;
+	border-color: #de0b0b;
+}
+.form-book__input.is-invalid::placeholder {
+	color: #de0b0b;
 }
 
 .content .form-book__input {
@@ -130,10 +146,6 @@ body.lock {
 
 .form-btn:hover {
 	border: 2px solid var(--color-title);
-}
-
-.register-btn {
-	margin: 5px;
 }
 
 .registration-btns {
@@ -223,7 +235,7 @@ body.lock {
 	display: block;
 	margin-inline: auto;
 	font-size: 16px;
-	/*line-height: 20px;*/
+	line-height: 20px;
 	text-align: center;
 	max-width: 221px;
 }
@@ -282,15 +294,7 @@ body.lock {
 	display: none;
 }
 
-.form-book__input.is-invalid {
-	margin-bottom: 0;
-	border-color: #de0b0b;
-}
-.form-book__input.is-invalid::placeholder {
-	color: #de0b0b;
-}
-
-.user svg{
+.user svg {
 	width: 45px;
 	font-size: 40px;
 	height: auto;

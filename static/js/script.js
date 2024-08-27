@@ -30,6 +30,44 @@ function menu_close() {
 	menuBody.classList.remove("_active");
 }
 
+// фильтр голосование
+let filtersBtn = document.querySelector(".filters-btn");
+if (filtersBtn != null) {
+	let delay = 500;
+	let filtersbody = document.querySelector(".filters__body");
+	filtersBtn.addEventListener("click", function (e) {
+		if (unlock) {
+			body_lock(delay);
+			filtersBtn.classList.toggle("_active");
+			filtersbody.classList.toggle("_active");
+		}
+	});
+};
+function menu_close() {
+	let filtersBtn = document.querySelector(".filters-btn");
+	let filtersbody = document.querySelector(".filters__body");
+	filtersBtn.classList.remove("_active");
+	filtersbody.classList.remove("_active");
+}
+
+// checkbox фильтры
+$(document).ready(function () {
+	$.each($('.filters__item-submenu'), function (index, val) {
+		if ($(this).find('input').prop('checked') == true) {
+			$(this).addClass('active');
+		}
+	});
+	$(document).on('click', '.filters__item-submenu', function (event) {
+		$(this).parents('.filters__sub-item').find('.filters__item-submenu').removeClass('active');
+		$(this).parents('.filters__sub-item').find('.filters__item-submenu input').prop('checked', false);
+		$(this).toggleClass('active');
+		$(this).find('input').prop('checked', true);
+		return false;
+	});
+});
+
+
+
 // Событие, которое отслеживает скроллит ли человек.
 document.addEventListener('scroll', function () {
 	if ($(window).scrollTop() > 100) {
@@ -186,7 +224,189 @@ $(document).ready(function () {
 				}
 			},
 		]
-	})
+	});
+	$('.mediaslider').slick({
+		slidesToShow: 1,
+		asNavFor: ".mediasliderMin",
+	});
+	$('.mediasliderMin').slick({
+		slidesToShow: 3,
+		arrows: false,
+		asNavFor: ".mediaslider",
+		responsive: [
+			{
+				breakpoint: 800,
+				settings: {
+					slidesToShow: 2,
+				}
+			},
+		]
+	});
+	$('.newsslider').slick({
+		slidesToShow: 3,
+		dots: true,
+		responsive: [
+			{
+				breakpoint: 750,
+				settings: {
+					slidesToShow: 2,
+				}
+			},
+			{
+				breakpoint: 615,
+				settings: {
+					slidesToShow: 1,
+				}
+			},
+		]
+	});
+	$('.locationnameslider').slick({
+		slidesToShow: 1,
+		arrows: false,
+		asNavFor: ".locationnamesliderMin",
+	});
+	$('.locationnamesliderMin').slick({
+		slidesToShow: 3,
+		asNavFor: ".locationnameslider",
+		responsive: [
+			{
+				breakpoint: 800,
+				settings: {
+					slidesToShow: 2,
+				}
+			},
+		]
+	});
+	$('.popuplocation').slick({
+		slidesToShow: 1,
+	});
+	$('.watchslider').slick({
+		slidesToShow: 1,
+		dots: true,
+		centerMode: true,
+	});
+	$('.busibessProgramslider').slick({
+		slidesToShow: 1,
+		dots: false,
+	});
+	$('.supportSubpageslider').slick({
+		slidesToShow: 3,
+		dots: true,
+		centerMode: true,
+		variableWidth: true,
+	});
+	$('.personalAccountslider').slick({
+		slidesToShow: 5,
+		responsive: [
+			{
+				breakpoint: 1200,
+				settings: {
+					slidesToShow: 4,
+				}
+			},
+			{
+				breakpoint: 914,
+				settings: {
+					slidesToShow: 3,
+				}
+			},
+			{
+				breakpoint: 840,
+				settings: {
+					slidesToShow: 2,
+				}
+			},
+			{
+				breakpoint: 600,
+				settings: {
+					slidesToShow: 1,
+					variableWidth: true,
+					// centerMode: true,
+					arrows: false,
+				}
+			},
+		]
+	});
+	$('.applications').slick({
+		slidesToShow: 5,
+		responsive: [
+
+			{
+				breakpoint: 914,
+				settings: {
+					slidesToShow: 3,
+				}
+			},
+			{
+				breakpoint: 840,
+				settings: {
+					slidesToShow: 2,
+				}
+			},
+			{
+				breakpoint: 600,
+				settings: {
+					slidesToShow: 2,
+				}
+			},
+			{
+				breakpoint: 390,
+				settings: {
+					slidesToShow: 1,
+
+				}
+			},
+		]
+	});
+	$('.expertslider').slick({
+		slidesToShow: 3,
+		responsive: [
+
+			{
+				breakpoint: 1470,
+				settings: {
+					slidesToShow: 2,
+				}
+			},
+
+			{
+				breakpoint: 1030,
+				settings: {
+					slidesToShow: 1,
+				}
+			},
+			{
+				breakpoint: 626,
+				settings: {
+					slidesToShow: 1,
+					variableWidth: true,
+					// centerMode: true,
+					arrows: false,
+				}
+			},
+		]
+	});
+	$('.prizesslider').slick({
+		slidesToShow: 3,
+		responsive: [
+
+			{
+				breakpoint: 1030,
+				settings: {
+					slidesToShow: 2,
+				}
+			},
+			{
+				breakpoint: 626,
+				settings: {
+					slidesToShow: 1,
+					variableWidth: true,
+					// centerMode: true,
+					arrows: false,
+				}
+			},
+		]
+	});
 });
 
 // !popups
@@ -230,7 +450,7 @@ function popupOpen(curentPopup) {
 		}
 		curentPopup.classList.add('open');
 		curentPopup.addEventListener("click", function (e) {
-			if (!e.target.closest('.popup__content')) {
+			if (!e.target.closest('.popup__content, .media__content')) {
 				popupClose(e.target.closest('.popup'));
 			}
 		});
@@ -316,6 +536,21 @@ tabs.addEventListener('click', e => {
 		}
 	}
 })
+
+
+
+// клик по кнопке видео на странице eventsLandingPage.html
+$(document).on('click', '.PlayPauseVideo', function () {
+	var video = $(this).closest(".video_with_link").find(".video")[0];
+	if (video.paused) {
+		video.play();
+	} else {
+		video.pause();
+	}
+});
+
+
+// подсказка
 document.querySelector('.tooltip-btn').addEventListener('mouseenter', function (event) {
 	var tooltip = this.querySelector('.tooltip');
 	tooltip.style.visibility = 'visible';
@@ -336,13 +571,86 @@ $('#stop').click(function () {
 	player.stopVideo()
 })
 
-// // библиотека lightGallery для страницы media-subpage
-// lightGallery(document.getElementById('mediasubpage-img'), {
-// 	animateThumb: false,
-// 	zoomFromOrigin: false,
-// 	allowMediaOverlap: true,
-// 	toggleThumb: true,
-// 	thumbnail: true,
-//
-// });
+	/* map start */
+	; (function () {
+		let sectionContacts = document.querySelector('.section-contacts');
 
+		let ymapInit = function () {
+			if (typeof ymaps === 'undefined') {
+				return;
+			}
+
+			ymaps.ready(function () {
+				let myMap = new ymaps.Map('ymap', {
+					center: [55.799720, 49.037702],
+					zoom: 16
+				}, {
+					searchControlProvider: 'yandex#search'
+				}),
+
+					myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+						balloonContent: 'г. Казань , Боевая. 2'
+					}, {
+						iconLayout: 'default#image',
+						iconImageHref: '../img/map.png',
+						iconImageSize: [50, 63.2],
+						iconImageOffset: [-30, -58]
+					});
+
+				myMap.geoObjects.add(myPlacemark);
+
+				myMap.behaviors.disable('scrollZoom');
+			});
+		};
+
+		let ymapLoad = function () {
+			let script = document.createElement('script');
+			script.src = 'https://api-maps.yandex.ru/2.1/?lang=en_RU';
+			myLib.body.appendChild(script);
+			script.addEventListener('load', ymapInit);
+		};
+
+
+	})();
+/* map end */
+
+// checkbox голосование
+$(document).ready(function () {
+	$.each($('.application-checked'), function (index, val) {
+		if ($(this).find('input').prop('checked') == true) {
+			$(this).addClass('active');
+		}
+	});
+	$(document).on('click', '.application-checked', function (event) {
+		$(this).parents('.application-checkeds').find('.application-checked').removeClass('active');
+		$(this).parents('.application-checkeds').find('.application-checked input').prop('checked', false);
+		$(this).toggleClass('active');
+		$(this).find('input').prop('checked', true);
+		return false;
+	});
+});
+
+
+//! eventsLandingPage 
+// видео
+const knobs = document.getElementById('knobs');
+const imgbigs = document.getElementById('imgbigs');
+
+
+const changesClass = el => {
+	for (let i = 0; i < knobs.children.length; i++) {
+		knobs.children[i].classList.remove('active')
+	}
+	el.classList.add('active');
+}
+//
+// knobs.addEventListener('click', e => {
+// 	const currTabs = e.target.dataset.knob;
+// 	changesClass(e.target);
+// 	for (let i = 0; i < imgbigs.children.length; i++) {
+// 		imgbigs.children[i].classList.remove('active');
+// 		if (imgbigs.children[i].dataset.imgbig == currTabs) {
+// 			imgbigs.children[i].classList.add('active');
+// 		}
+// 	}
+// })

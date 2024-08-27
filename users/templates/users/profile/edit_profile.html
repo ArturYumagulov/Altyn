@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/change_reset_pass.css' %}">
+{% endblock %}
+{% block content %}
+
+<div class="main">
+        <section class="form">
+            <form id="reset-form" class="form-book " novalidate="novalidate">
+                <h3 class="popup-title">Изменить данные</h3>
+                <label class="email-label" for="email-input">Пароль
+                    <input type="password" class="email__input" name="password1" autocomplete="off"
+                           required>
+                    <p class="alert" id="password1-input-feedback">Это поле не может быть пустым</p>
+                </label>
+                <label class="email-label" for="email-input">Повторите пароль
+                    <input type="password" class="email__input" name="password2" autocomplete="off"
+                           required>
+                    <p class="alert" id="password2-input-feedback">Это поле не может быть пустым</p>
+                </label>
+
+                <button class="form-btn">Установить</button>
+            </form>
+
+        </section>
+    </div>
+
+{% endblock %}

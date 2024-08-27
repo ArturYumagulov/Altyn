@@ -1,0 +1,47 @@
+{% load static %}
+<div class="personalAccount-contact">
+    <div class="personalAccount-block">
+        <div class="personalAccount-img">
+            <figure>
+                <img src="{% static 'img/allfilms/name-film.png' %}" alt="">
+            </figure>
+        </div>
+        <div class="personalAccount-information">
+            <h3 class="personalAccount-information__title">
+                <span>
+                    {% if user.first_name %}{{ user.first_name }}{% endif %}
+                    {% if user.last_name %}{{ user.last_name }}{% endif %}
+                    {% if user.surname %}{{ user.surname }}{% endif %}
+                </span>
+                <div id="edit">
+                    <img src="{% static '/img/icons/edit.svg' %}" alt="">
+                </div>
+            </h3>
+
+            <dl>
+                <dt>Почта</dt>
+                <dd>{{ user.email }}</dd>
+            </dl>
+            <dl>
+                <dt>Номер телефона</dt>
+                <dd>{{ user.phone }}</dd>
+            </dl>
+            <dl>
+                <dt>Дата рождения</dt>
+                <dd>{% if user.birthday %}{{ user.birthday }}{% else %}Нет данных{% endif %}</dd>
+            </dl>
+            <dl>
+                <dt>Пол</dt>
+                <dd>{% if user.male %}{{ user.male }}{% else %}Нет данных{% endif %}</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<script>
+    const edit = document.querySelector('#edit')
+    edit.addEventListener('click', ()=> {
+        console.log('click')
+        thank.classList.add('open')
+    })
+</script>
