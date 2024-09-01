@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.db import models
+from django.db.models import Avg
 from django.urls import reverse
 
 # Create your models here.
@@ -87,6 +88,7 @@ class Director(models.Model):
     birthday = models.DateField(
         verbose_name="Дата рождения", blank=True, null=True, default=None
     )
+    slug = models.SlugField()
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
@@ -105,6 +107,7 @@ class Producer(models.Model):
     birthday = models.DateField(
         verbose_name="Дата рождения", blank=True, null=True, default=None
     )
+    slug = models.SlugField()
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
@@ -123,6 +126,7 @@ class Scenarist(models.Model):
     birthday = models.DateField(
         verbose_name="Дата рождения", blank=True, null=True, default=None
     )
+    slug = models.SlugField()
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
@@ -138,6 +142,7 @@ class Compositor(models.Model):
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     last_name = models.CharField(max_length=150, verbose_name="Фамилия")
     first_name = models.CharField(max_length=150, verbose_name="Имя")
+    slug = models.SlugField()
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
@@ -148,9 +153,26 @@ class Compositor(models.Model):
         verbose_name_plural = "Композиторы"
 
 
+class Operator(models.Model):
+
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=150, verbose_name="Имя")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+    class Meta:
+        ordering = ["last_name"]
+        verbose_name = "Оператор"
+        verbose_name_plural = "Операторы"
+
+
 class AgeLimit(models.Model):
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(verbose_name="Возрастное ограничение", max_length=10)
+    slug = models.SlugField()
 
     def __str__(self):
         return f"{self.name}"
@@ -161,10 +183,64 @@ class AgeLimit(models.Model):
         verbose_name_plural = "Возрастные ограничения"
 
 
+class Almanach(models.Model):
+
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    main = models.BooleanField(verbose_name="Главный на странице", default=False)
+    name = models.CharField(max_length=500, verbose_name="Альмонарх")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["name"]
+        verbose_name = "Альмонарх фильма"
+        verbose_name_plural = "Альмонархи фильмов"
+
+
+class RatingStar(models.Model):
+
+    value = models.SmallIntegerField(verbose_name="Значение", default=0)
+
+    def __str__(self):
+        return f"{self.value}"
+
+    class Meta:
+        ordering = ["-value"]
+        verbose_name = "Звезда рейтинга"
+        verbose_name_plural = "Звезды рейтинга"
+
+
+class Rating(models.Model):
+
+    ip = models.CharField(verbose_name="IP", max_length=15, unique=True)
+    star = models.ForeignKey(
+        RatingStar,
+        on_delete=models.CASCADE,
+        verbose_name="Оценка",
+        related_name="ratings",
+    )
+    movie = models.ForeignKey("Movie", on_delete=models.CASCADE, verbose_name="Фильм")
+    created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.star}"
+
+    class Meta:
+        ordering = ["created_date"]
+        verbose_name = "Рейтинг"
+        verbose_name_plural = "Рейтинги"
+
+
 class Movie(models.Model):
 
     name = models.CharField(max_length=500, verbose_name="Название фильма")
     image = models.ImageField(upload_to="movie_image/", verbose_name="Картинка")
+    status = models.ForeignKey(
+        Status, verbose_name="Статус", on_delete=models.CASCADE
+    )
+    # region = models.ForeignKey()
     year = models.DecimalField(
         max_digits=4, decimal_places=0, verbose_name="Год выпуска"
     )
@@ -200,15 +276,35 @@ class Movie(models.Model):
         null=True,
         blank=True,
     )
+    operator = models.ForeignKey(
+        Operator,
+        on_delete=models.CASCADE,
+        verbose_name="Оператор",
+        null=True,
+        blank=True,
+    )
+
+    rolled_certificate = models.CharField(
+        verbose_name="Прокатное удостоверение", max_length=300, null=True, blank=True
+    )
+
+    trailer = models.URLField()
+
     timing = models.CharField(verbose_name="Хронометраж", max_length=20)
     actors = models.TextField(verbose_name="В ролях")
-    age_limit = models.ForeignKey(AgeLimit, on_delete=models.CASCADE, verbose_name="Возрастное ограничение")
+    age_limit = models.ForeignKey(
+        AgeLimit, on_delete=models.CASCADE, verbose_name="Возрастное ограничение"
+    )
     descriptions = models.TextField(verbose_name="Описание")
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
     voting = models.TextField(
         verbose_name="Ссылка на голосование", blank=True, null=True, default=None
     )
+    almanach = models.ManyToManyField(
+        Almanach, verbose_name="Альманах", blank=True, default=None
+    )
+    close = models.BooleanField(default=False, verbose_name="Закрытый фильм")
     slug = models.SlugField()
 
     def get_absolute_url(self):

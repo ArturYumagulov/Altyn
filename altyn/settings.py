@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     # 'altyn',
     "users",
     "about",
-    "regions"
+    "regions",
+    "movies",
+    "voting",
 ]
 
 MIDDLEWARE = [
