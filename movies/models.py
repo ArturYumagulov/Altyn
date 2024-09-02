@@ -76,8 +76,8 @@ class Status(models.Model):
 
     class Meta:
         ordering = ["pk"]
-        verbose_name = "Статус фильма"
-        verbose_name_plural = "Статусы фильмов"
+        verbose_name = "Статус"
+        verbose_name_plural = "Статусы"
 
 
 class Director(models.Model):
@@ -195,8 +195,8 @@ class Almanach(models.Model):
 
     class Meta:
         ordering = ["name"]
-        verbose_name = "Альмонарх фильма"
-        verbose_name_plural = "Альмонархи фильмов"
+        verbose_name = "Альмонах"
+        verbose_name_plural = "Альмонахи"
 
 
 class RatingStar(models.Model):
@@ -233,8 +233,35 @@ class Rating(models.Model):
         verbose_name_plural = "Рейтинги"
 
 
+class Type(models.Model):
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    name = models.CharField(verbose_name="Наименование", max_length=500)
+    slug = models.SlugField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Вид"
+        verbose_name_plural = "Вид"
+
+
+class CategoryGenre(models.Model):
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    name = models.CharField(max_length=300, verbose_name="Название")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Жанр вида"
+        verbose_name_plural = "Жанр вида"
+
+
 class Movie(models.Model):
 
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(max_length=500, verbose_name="Название фильма")
     image = models.ImageField(upload_to="movie_image/", verbose_name="Картинка")
     status = models.ForeignKey(
@@ -305,6 +332,7 @@ class Movie(models.Model):
         Almanach, verbose_name="Альманах", blank=True, default=None
     )
     close = models.BooleanField(default=False, verbose_name="Закрытый фильм")
+    debut = models.BooleanField(default=False, verbose_name="Дебютный")
     slug = models.SlugField()
 
     def get_absolute_url(self):
