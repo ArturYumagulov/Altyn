@@ -37,9 +37,10 @@ class AlmanachAdmin(admin.ModelAdmin):
 
 @admin.register(models.AgeLimit)
 class AgeLimitAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ('name',)}
+    list_display = ('name', 'description', 'pk', 'is_active')
 
 
-@admin.register(models.Type)
-class TypeAdmin(admin.ModelAdmin):
+@admin.register(models.RollerCertificate)
+class RollerCertificateAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}

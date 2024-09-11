@@ -1,0 +1,21 @@
+							<div class="age-limit">
+								<h4>Возрастное ограничение:</h4>
+								<span>
+                                    {% for age in age_limits %}
+                                        {{ age.name }} {{ age.description }}<br>
+                                    {% endfor %}
+                                </span>
+								<ul class="application-checkeds">
+
+                                    {% for age in age_limits %}
+
+									<li class="application-checked checkbox ">
+										<input type="checkbox" value={{ age.slug }} name="age_limit"
+                                               data-type="{{ age.slug }}">
+										{{ age.name }}
+									</li>
+
+                                    {% endfor %}
+
+								</ul>
+							</div>

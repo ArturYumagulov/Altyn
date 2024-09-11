@@ -1,0 +1,60 @@
+							<div class="application-region ">
+								<h3 class=" application-title">Регион</h3>
+								<div class="application-side">
+									<h4>Страна:</h4>
+									<span>Хотим обратить Ваше внимание на наш регламент.<br>
+										В Кинопремии не принимают участие проекты из городов Москва, Санкт-Петербург, за исключением
+										проектов,
+										подходящих под следующие условия (не менее одного пункта):<br>
+										- съёмочная команда из регионов России в количестве не менее 30% (помимо Москвы,
+										Санкт-Петербурга);<br>
+										- производство фильма осуществлялось с привлечением регионального финансирования (не менее 30%);<br>
+										- производство фильма осуществлялось на региональных локациях;<br>
+										- другое. Если фильм соответствует одному или нескольким условиям, добавьте регион(ы).
+										Если фильм не подходит под данные критерии, он может стать частью кинотеки, принимать участие в
+										некоммерческих показах, но не принимает участие в конкурсе.</span>
+									<ul class="application-checkboxs  application-view">
+										<li class="application-checkbox checkbox">
+											<input type="checkbox" id="russia">
+											<label for="russia">Россия</label>
+										</li>
+										<li class="application-checkbox checkbox other-region-item">
+											<input type="checkbox" id="other">
+											<label for="other">Другое</label>
+										</li>
+									</ul>
+									<label class="application-side__choice" for="" style="display: none" id="other-region">
+										<input type="text"/>
+									</label>
+								</div>
+								<h4 class="application-reg">Регион</h4>
+								<span>Хотим обратить Ваше внимание на наш регламент.<br>
+									В Кинопремии не принимают участие проекты из городов Москва, Санкт-Петербург, за исключением проектов,
+									подходящих под следующие условия (не менее одного пункта):<br>
+									- съёмочная команда из регионов России в количестве не менее 30% (помимо Москвы,
+									Санкт-Петербурга);<br>
+									- производство фильма осуществлялось с привлечением регионального финансирования (не менее 30%);<br>
+									- производство фильма осуществлялось на региональных локациях;<br>
+									- другое. Если фильм соответствует одному или нескольким условиям, добавьте регион(ы).
+									Если фильм не подходит под данные критерии, он может стать частью кинотеки, принимать участие в
+									некоммерческих показах, но не принимает участие в конкурсе.</span>
+								<button class=" region-btn btn _icon-derection-right ">
+									Регион
+								</button>
+								<nav class="region__body">
+									<ul class="genre-add__list">
+										<li class="genre-add__item">
+											<ul class="application-checkboxs application-checkboxs genre__sub-item">
+                                                {% for region in regions %}
+												<li class="application-checkbox checkbox  genre__item-submenu">
+													<input type="checkbox" id="{{ region.slug }}" name="region" value="{{ region.slug }}">
+													<label for="{{ region.slug }}">{{ region.name }}</label>
+												</li>
+                                                {% endfor %}
+											</ul>
+										</li>
+									</ul>
+								</nav>
+								<h4 class="terrain">Населённый пункт</h4>
+								<input type="text" value="" />
+							</div>

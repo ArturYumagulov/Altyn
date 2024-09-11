@@ -15,6 +15,7 @@ class Region(models.Model):
         return self.name
 
     class Meta:
+        ordering = ['pk']
         verbose_name = "Регионы"
         verbose_name_plural = "Регион"
 
@@ -29,8 +30,8 @@ class Location(models.Model):
         return f"{self.name} - {self.region}"
 
     class Meta:
-        verbose_name = "Локации"
-        verbose_name_plural = "Локация"
+        verbose_name = "Населённый пункт"
+        verbose_name_plural = "Населённый пункт"
 
 
 class Speciality(models.Model):

@@ -27,6 +27,8 @@ class Region(models.Model):
 class Genre(models.Model):
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(verbose_name="Название", max_length=1000)
+    group_1 = models.BooleanField(default=False, verbose_name="Группа 1")
+    group_2 = models.BooleanField(default=False, verbose_name="Группа 2")
     slug = models.SlugField()
 
     class Meta:
@@ -172,13 +174,14 @@ class Operator(models.Model):
 class AgeLimit(models.Model):
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(verbose_name="Возрастное ограничение", max_length=10)
+    description = models.TextField(verbose_name="Описание", blank=True, null=True, default=None)
     slug = models.SlugField()
 
     def __str__(self):
         return f"{self.name}"
 
     class Meta:
-        ordering = ["name"]
+        ordering = ["pk"]
         verbose_name = "Возрастное ограничение"
         verbose_name_plural = "Возрастные ограничения"
 
@@ -233,19 +236,6 @@ class Rating(models.Model):
         verbose_name_plural = "Рейтинги"
 
 
-class Type(models.Model):
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    name = models.CharField(verbose_name="Наименование", max_length=500)
-    slug = models.SlugField()
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "Вид"
-        verbose_name_plural = "Вид"
-
-
 class CategoryGenre(models.Model):
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(max_length=300, verbose_name="Название")
@@ -257,6 +247,19 @@ class CategoryGenre(models.Model):
     class Meta:
         verbose_name = "Жанр вида"
         verbose_name_plural = "Жанр вида"
+
+
+class RollerCertificate(models.Model):
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    name = models.CharField(max_length=300, verbose_name="Название")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Прокатное удостоверение"
+        verbose_name_plural = "Прокатное удостоверение"
 
 
 class Movie(models.Model):
@@ -272,9 +275,11 @@ class Movie(models.Model):
         max_digits=4, decimal_places=0, verbose_name="Год выпуска"
     )
     genre = models.ManyToManyField(Genre, verbose_name="Жанр", blank=True, default=None)
+
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, verbose_name="Категория"
     )
+    kind = models.ForeignKey(Kind, on_delete=models.PROTECT, verbose_name="Вид", blank=True, null=True, default=None)
     director = models.ForeignKey(
         Director,
         on_delete=models.CASCADE,
@@ -311,9 +316,9 @@ class Movie(models.Model):
         blank=True,
     )
 
-    rolled_certificate = models.CharField(
-        verbose_name="Прокатное удостоверение", max_length=300, null=True, blank=True
-    )
+    rolled_certificate = models.ForeignKey(RollerCertificate, on_delete=models.PROTECT,
+                                           verbose_name="Прокатное удостоверение", null=True, blank=True
+                                           )
 
     trailer = models.URLField()
 
@@ -333,6 +338,7 @@ class Movie(models.Model):
     )
     close = models.BooleanField(default=False, verbose_name="Закрытый фильм")
     debut = models.BooleanField(default=False, verbose_name="Дебютный")
+    music = models.BooleanField(default=False, verbose_name="Оригинальная музыка")
     slug = models.SlugField()
 
     def get_absolute_url(self):

@@ -1,0 +1,17 @@
+							<h4>Прокатное удостоверение: </h4>
+							<ul class="application-checkeds application-view">
+                                {% for rolled_certificate in rolled_certificates %}
+								<li class="application-checked checkbox ">
+									<input type="checkbox" value="{{ rolled_certificate.slug }}"
+                                           data-type="{{ rolled_certificate.slug }}"
+                                           name="rolled_certificate">
+									{{ rolled_certificate.name }}
+								</li>
+                                {% endfor %}
+							</ul>
+                            <div class="rolled_certificate_num" style="display: none">
+                                <h4>Номер прокатного удостоверения:</h4>
+                                <div class="rental-number:">
+                                    <input type="number" name="rolled_certificate_num"/>
+                                </div>
+                            </div>

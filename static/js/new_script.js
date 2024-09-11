@@ -50,22 +50,198 @@ function menu_close() {
 	filtersbody.classList.remove("_active");
 }
 
-// checkbox фильтры
-$(document).ready(function () {
-	$.each($('.filters__item-submenu'), function (index, val) {
-		if ($(this).find('input').prop('checked') == true) {
-			$(this).addClass('active');
+// /*  Выпадающий список Жанра application_new.html*/
+let genreBtn = document.querySelector(".genre-btn");
+if (genreBtn != null) {
+	let delay = 500;
+	let genrebody = document.querySelector(".genre__body");
+	genreBtn.addEventListener("click", function (e) {
+		if (unlock) {
+			body_lock(delay);
+			genreBtn.classList.toggle("_active");
+			genrebody.classList.toggle("_active");
 		}
 	});
-	$(document).on('click', '.filters__item-submenu', function (event) {
-		$(this).parents('.filters__sub-item').find('.filters__item-submenu').removeClass('active');
-		$(this).parents('.filters__sub-item').find('.filters__item-submenu input').prop('checked', false);
-		$(this).toggleClass('active');
-		$(this).find('input').prop('checked', true);
-		return false;
-	});
-});
+};
+function menu_close() {
+	let genreBtn = document.querySelector(".genre-btn");
+	let genrebody = document.querySelector(".genre__body");
+	genreBtn.classList.remove("_active");
+	genrebody.classList.remove("_active");
+}
 
+// /* второй Выпадающий список Жанра application_new.html*/
+let genreBtnTwo = document.querySelector(".genre-btn_two");
+if (genreBtnTwo != null) {
+	let delay = 500;
+	let genrebodyTwo = document.querySelector(".genre__body_two");
+	genreBtnTwo.addEventListener("click", function (e) {
+		if (unlock) {
+			body_lock(delay);
+			genreBtnTwo.classList.toggle("_active");
+			genrebodyTwo.classList.toggle("_active");
+		}
+	});
+};
+function menu_close() {
+	let genreBtnTwo = document.querySelector(".genre-btn_two");
+	let genrebodyTwo = document.querySelector(".genre__body_two");
+	genreBtnTwo.classList.remove("_active");
+	genrebodyTwo.classList.remove("_active");
+}
+
+// /*  Выпадающий список Регион application_new.html*/
+let regionBtn = document.querySelector(".region-btn");
+if (regionBtn != null) {
+	let delay = 500;
+	let regionBody = document.querySelector(".region__body");
+	regionBtn.addEventListener("click", function (e) {
+		if (unlock) {
+			body_lock(delay);
+			regionBtn.classList.toggle("_active");
+			regionBody.classList.toggle("_active");
+		}
+	});
+};
+function menu_close() {
+	let regionBtn = document.querySelector(".region-btn");
+	let regionBody = document.querySelector(".region__body");
+	regionBtn.classList.remove("_active");
+	regionBody.classList.remove("_active");
+}
+
+// /*  Выпадающий список Специальность application_new.html*/
+let specialityBtn = document.querySelector(".speciality-btn");
+if (specialityBtn != null) {
+	let delay = 500;
+	let specialityBody = document.querySelector(".speciality__body");
+	specialityBtn.addEventListener("click", function (e) {
+		if (unlock) {
+			body_lock(delay);
+			specialityBtn.classList.toggle("_active");
+			specialityBody.classList.toggle("_active");
+		}
+	});
+};
+function menu_close() {
+	let specialityBtn = document.querySelector(".speciality-btn");
+	let specialityBody = document.querySelector(".speciality__body");
+	specialityBtn.classList.remove("_active");
+	specialityBody.classList.remove("_active");
+}
+
+// /*  Выпадающий список регион 2 application_new.html*/
+let specialityRegionBtn = document.querySelector(".specialist-region__btn");
+if (specialityRegionBtn != null) {
+	let delay = 500;
+	let specialityRegionBody = document.querySelector(".specialist-region__body");
+	specialityRegionBtn.addEventListener("click", function (e) {
+		if (unlock) {
+			body_lock(delay);
+			specialityRegionBtn.classList.toggle("_active");
+			specialityRegionBody.classList.toggle("_active");
+		}
+	});
+};
+function menu_close() {
+	let specialityRegionBtn = document.querySelector(".specialist-region__btn");
+	let specialityRegionBody = document.querySelector(".specialist-region__body");
+	specialityRegionBtn.classList.remove("_active");
+	specialityRegionBody.classList.remove("_active");
+}
+
+// добавить в плейлист
+let tooltipPlaylist = document.querySelector(".playlist-btn");
+if (tooltipPlaylist != null) {
+	let delay = 500;
+	let filmAddBody = document.querySelector(".film__body");
+	tooltipPlaylist.addEventListener("click", function (e) {
+		if (unlock) {
+			body_lock(delay);
+			tooltipPlaylist.classList.toggle("_active");
+			filmAddBody.classList.toggle("_active");
+		}
+	});
+};
+function menu_close() {
+	let tooltipPlaylist = document.querySelector(".playlist-btn");
+	let filmAddBody = document.querySelector(".film__body");
+	tooltipPlaylist.classList.remove("_active");
+	filmAddBody.classList.remove("_active");
+}
+
+// фильтр смотреть и голосовать(регион)
+let iconRegion = document.querySelector("._icon-derection-right");
+if (iconRegion != null) {
+	let delay = 500;
+	let filtersBody = document.querySelector(".filters-region__body");
+	iconRegion.addEventListener("click", function (e) {
+		if (unlock) {
+			body_lock(delay);
+			iconRegion.classList.toggle("_active");
+			filtersBody.classList.toggle("_active");
+		}
+	});
+};
+function menu_close() {
+	let iconRegion = document.querySelector("._icon-derection-right");
+	let filtersBody = document.querySelector(".filters-region__body");
+	iconRegion.classList.remove("_active");
+	filtersBody.classList.remove("_active");
+}
+// фильтр смотреть и голосовать(Категория)
+let iconCategory = document.querySelector("._icon-derection-right");
+if (iconCategory != null) {
+	let delay = 500;
+	let filtersBody = document.querySelector(".filters-category__body");
+	iconCategory.addEventListener("click", function (e) {
+		if (unlock) {
+			body_lock(delay);
+			iconCategory.classList.toggle("_active");
+			filtersBody.classList.toggle("_active");
+		}
+	});
+};
+function menu_close() {
+	let iconCategory = document.querySelector("._icon-derection-right");
+	let filtersBody = document.querySelector(".filters-category__body");
+	iconCategory.classList.remove("_active");
+	filtersBody.classList.remove("_active");
+}
+
+
+
+// checkbox фильтры
+// $(document).ready(function () {
+// 	$.each($('.filters__item-submenu'), function (index, val) {
+// 		if ($(this).find('input').prop('checked') == true) {
+// 			$(this).addClass('active');
+// 		}
+// 	});
+// 	$(document).on('click', '.filters__item-submenu', function (event) {
+// 		$(this).parents('.filters__sub-item').find('.filters__item-submenu').removeClass('active');
+// 		$(this).parents('.filters__sub-item').find('.filters__item-submenu input').prop('checked', false);
+// 		$(this).toggleClass('active');
+// 		$(this).find('input').prop('checked', true);
+// 		return false;
+// 	});
+// });
+
+// Добавить в плейлист checkbox
+// $(document).ready(function () {
+// 	$.each($('.film__item-submenu'), function (index, val) {
+// 		if ($(this).find('input').prop('checked') == true) {
+// 			$(this).addClass('active');
+// 		}
+// 	});
+// 	$(document).on('click', '.film__item-submenu', function (event) {
+// 		$(this).parents('.film__sub-item').find('.film__item-submenu').removeClass('active');
+// 		$(this).parents('.film__sub-item').find('.film__item-submenu input').prop('checked', false);
+// 		$(this).toggleClass('active');
+// 		$(this).find('input').prop('checked', true);
+// 		return false;
+// 	});
+// });
 
 
 // Событие, которое отслеживает скроллит ли человек.
@@ -110,13 +286,13 @@ function body_lock_remove(delay) {
 function body_lock_add(delay) {
 	let body = document.querySelector("body");
 	if (unlock) {
-		let lock_padding = document.querySelectorAll("._lp");
-		for (let index = 0; index < lock_padding.length; index++) {
-			const el = lock_padding[index];
-			el.style.paddingRight = window.innerWidth - document.querySelector('.header').offsetWidth + 'px';
-		}
-		body.style.paddingRight = window.innerWidth - document.querySelector('.header').offsetWidth + 'px';
-		body.classList.add("_lock");
+		// let lock_padding = document.querySelectorAll("._lp");
+		// for (let index = 0; index < lock_padding.length; index++) {
+		// 	const el = lock_padding[index];
+		// 	el.style.paddingRight = window.innerWidth - document.querySelector('.header').offsetWidth + 'px';
+		// }
+		// body.style.paddingRight = window.innerWidth - document.querySelector('.header').offsetWidth + 'px';
+		// body.classList.add("_lock");
 
 		unlock = false;
 		setTimeout(function () {
@@ -156,11 +332,22 @@ $(document).ready(function () {
 		verticalSwiping: true,
 		responsive: [
 			{
-				breakpoint: 1200,
+				breakpoint: 1420,
 				settings: {
-					slidesToShow: 4,
+					slidesToShow: 3,
+					vertical: true,
+					verticalSwiping: true,
+				}
+			},
+			{
+				breakpoint: 1100,
+				settings: {
+					slidesToShow: 3,
 					vertical: false,
 					verticalSwiping: false,
+					arrows: false,
+					variableWidth: true,
+					// centerMode: true,
 				}
 			},
 			{
@@ -169,6 +356,8 @@ $(document).ready(function () {
 					slidesToShow: 3,
 					vertical: false,
 					verticalSwiping: false,
+					variableWidth: true,
+					arrows: false,
 				}
 			},
 			{
@@ -177,6 +366,8 @@ $(document).ready(function () {
 					slidesToShow: 2,
 					vertical: false,
 					verticalSwiping: false,
+					variableWidth: true,
+					arrows: false,
 				}
 			},
 			{
@@ -186,6 +377,8 @@ $(document).ready(function () {
 					adaptiveHeight: true,
 					vertical: false,
 					verticalSwiping: false,
+					arrows: false,
+					// centerMode: true,
 				}
 			}
 		]
@@ -283,7 +476,14 @@ $(document).ready(function () {
 	$('.watchslider').slick({
 		slidesToShow: 1,
 		dots: true,
-		centerMode: true,
+		responsive: [
+
+			{
+				breakpoint: 500,
+				settings: {
+					dots: false,
+				}
+			},]
 	});
 	$('.busibessProgramslider').slick({
 		slidesToShow: 1,
@@ -538,6 +738,22 @@ tabs.addEventListener('click', e => {
 })
 
 
+// checkbox голосование одиночные
+$(document).ready(function () {
+	$.each($('.application-checked'), function (index, val) {
+		if ($(this).find('input').prop('checked') == true) {
+			$(this).addClass('active');
+		}
+	});
+	$(document).on('click', '.application-checked', function (event) {
+		$(this).parents('.application-checkeds').find('.application-checked').removeClass('active');
+		$(this).parents('.application-checkeds').find('.application-checked input').prop('checked', false);
+		$(this).toggleClass('active');
+		$(this).find('input').prop('checked', true);
+		return false;
+	});
+});
+
 
 // клик по кнопке видео на странице eventsLandingPage.html
 $(document).on('click', '.PlayPauseVideo', function () {
@@ -550,16 +766,6 @@ $(document).on('click', '.PlayPauseVideo', function () {
 });
 
 
-// подсказка
-document.querySelector('.tooltip-btn').addEventListener('mouseenter', function (event) {
-	var tooltip = this.querySelector('.tooltip');
-	tooltip.style.visibility = 'visible';
-});
-
-document.querySelector('.tooltip-btn').addEventListener('mouseleave', function (event) {
-	var tooltip = this.querySelector('.tooltip');
-	tooltip.style.visibility = 'hidden';
-});
 
 // видеоплеер
 var player;
@@ -612,27 +818,6 @@ $('#stop').click(function () {
 
 
 	})();
-/* map end */
-
-
-// checkbox голосование
-$(document).ready(function () {
-	$.each($('.application-checked'), function (index, val) {
-		if ($(this).find('input').prop('checked') == true) {
-			$(this).addClass('active');
-			// console.log(this)
-		}
-	});
-	$(document).on('click', '.application-checked', function (event) {
-		$(this).parents('.application-checkeds').find('.application-checked').removeClass('active');
-		$(this).parents('.application-checkeds').find('.application-checked input').prop('checked', false);
-		$(this).toggleClass('active');
-		// $(this).toggleAttribute('disabled')
-		$(this).find('input').prop('checked', true);
-		return false;
-	});
-});
-
 
 //! eventsLandingPage 
 // видео
@@ -646,7 +831,7 @@ const changesClass = el => {
 	}
 	el.classList.add('active');
 }
-//
+
 // knobs.addEventListener('click', e => {
 // 	const currTabs = e.target.dataset.knob;
 // 	changesClass(e.target);
@@ -657,3 +842,36 @@ const changesClass = el => {
 // 		}
 // 	}
 // })
+
+
+
+// подсказка
+// document.querySelector('.tooltip-btn').addEventListener('mouseenter', function (event) {
+// 	var tooltip = this.querySelector('.tooltip');
+// 	tooltip.style.visibility = 'visible';
+// });
+
+// document.querySelector('.tooltip-btn').addEventListener('mouseleave', function (event) {
+// 	var tooltip = this.querySelector('.tooltip');
+// 	tooltip.style.visibility = 'hidden';
+// });
+
+// document.querySelector('.tooltip-btn').addEventListener('mouseenter', function (event) {
+// 	var tooltipPlaylist = this.querySelector('.tooltip-playlist');
+// 	tooltipPlaylist.style.visibility = 'visible';
+// });
+
+// document.querySelector('.tooltip-btn').addEventListener('mouseleave', function (event) {
+// 	var tooltipPlaylist = this.querySelector('.tooltip-playlist');
+// 	tooltipPlaylist.style.visibility = 'hidden';
+// });
+
+// document.querySelector('.tooltip-btn').addEventListener('mouseenter', function (event) {
+// 	var tooltipFavorites = this.querySelector('.tooltip-favorites');
+// 	tooltipFavorites.style.visibility = 'visible';
+// });
+
+// document.querySelector('.tooltip-btn').addEventListener('mouseleave', function (event) {
+// 	var tooltipFavorites = this.querySelector('.tooltip-favorites');
+// 	tooltipFavorites.style.visibility = 'hidden';
+// });

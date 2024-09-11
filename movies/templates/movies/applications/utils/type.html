@@ -1,0 +1,9 @@
+                            <h4>Вид: </h4>
+                            <ul class="application-checkeds application-view">
+                                {% for kind in kinds %}
+                                    <li class="application-checked checkbox ">
+                                        <input type="checkbox" name="kind" value="{{ kind.slug }}" data-type="{{ kind.slug }}">
+                                        {{ kind.name }}
+                                    </li>
+                                {% endfor %}
+                            </ul>

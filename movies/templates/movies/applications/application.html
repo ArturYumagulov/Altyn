@@ -1,0 +1,1050 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+<main class="main">
+			<section id="application" class="application">
+				<div class="container">
+					<article class="header-application">
+						<img src="{% static 'img/header-application.png' %}" alt="">
+						<h2>Межрегиональная премия в области кинематографии<span> «Алтын тəлинкə» («Золотая тарелка»)</span></h2>
+						<a href="" class="header-application__btn application-btn btn">Регламент</a>
+					</article>
+					<div class="order container">
+						<p>Разделы заявки: </p>
+						<ol type="1">
+							<li>Информация о фильме (название, дебют, вид, категория);</li>
+							<li>Жанр; </li>
+							<li>Информация о фильме (хронометраж, логлайн, год, ПУ, возрастной ценз);</li>
+							<li>Регион; </li>
+							<li>Съёмочная команда (даты рождения, фильмография/биография членов команды); </li>
+							<li> Карта регионов (данный раздел заполняется по желанию);</li>
+							<li> Портфолио фильма (участие в фестивалях, охват в Интернете, публикации в СМИ); </li>
+							<li>Контактная информация. </li>
+						</ol>
+						<p>Перед заполнением заявки подготовьте, пожалуйста, информацию:<br>
+							- номер прокатного удостоверения (при наличии);<br>
+							- биографию/фильмографию режиссера (при наличии – у сценариста и продюсера);<br>
+							- ссылку на материалы, которая содержит: фильм, трейлер, афишу;<br>
+							- информацию о правообладателе фильма<br>
+							- контакты;<br>
+							- информацию для составления договора на некоммерческие показы (заполняется по желанию)<br>
+							(для физ.лиц - ФИО, адрес, контактные данные, для юр.лиц - наименование организации, адрес, ИНН (номер),
+							КПП (номер), расчетный счет (номер), банковские реквизиты (к/с, БИК), контактные данные).
+							При наличии данной информации под рукой, примерное время заполнение заявки составит 5 минут.</p>
+
+						<p class="required-question">*Обязательный вопрос</p>
+                        <form action="{% url 'create_app' %}" method="post">
+                            {% csrf_token %}
+
+                        {% include 'movies/applications/utils/movie_title.html' %}
+                            
+						<div class="your-debut">
+
+                            {% include 'movies/applications/utils/debut.html' %}
+
+                            {% include 'movies/applications/utils/type.html' %}
+
+                            {% include 'movies/applications/utils/category.html' %}
+                            
+                            {% include 'movies/applications/utils/genre.html' %}
+
+                            {% include 'movies/applications/utils/timing.html' %}
+
+                            {% include 'movies/applications/utils/logline.html' %}
+
+                            {% include 'movies/applications/utils/year.html' %}
+
+                            {% include 'movies/applications/utils/rolled_certificate.html' %}
+
+                            {% include 'movies/applications/utils/age_limit.html' %}
+
+                            <!-- РЕГИОН -->
+
+                            {% include 'movies/applications/utils/region.html' %}
+
+                            <button type="submit" class="btn application-btn" style="margin-top: 15px">Отправить заявку</button>
+
+
+{#							<div class="film-grew">#}
+{#								<h3 class="film-grew__title application-title">Съемочная команда</h3>#}
+{#								<div class="stage-director">#}
+{#									<h4>Режиссер-постановщик: </h4>#}
+{#									<div class="stage-director_person person">#}
+{#										<input type="text" placeholder="Имя" value="" />#}
+{#										<input type="text" placeholder="Фамилия" value="" />#}
+{#									</div>#}
+{#								</div>#}
+{#								<div class="date-director">#}
+{#									<h4>Дата рождения режиссера-постановщика: </h4>#}
+{#									<input type="date" value="01.08.1998" />#}
+{#								</div>#}
+{#								<div class="biography-director textarea">#}
+{#									<h4>Биография/Фильмография режиссера-постановщика: </h4>#}
+{#									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#										rows="10"></textarea>#}
+{#								</div>#}
+{#								<div class="producer">#}
+{#									<h4>Продюсер:</h4>#}
+{#									<div class="producer-person person">#}
+{#										<input type="text" placeholder="Имя" />#}
+{#										<input type="text" placeholder="Фамилия" />#}
+{#									</div>#}
+{#								</div>#}
+{#								<div class="producer-date">#}
+{#									<h4>Дата рождения продюсера: </h4>#}
+{#									<input type="date" value="01.08.1998" />#}
+{#								</div>#}
+{#								<div class="biography-producer textarea">#}
+{#									<h4>Биография/Фильмография продюсера: </h4>#}
+{#									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#										rows="10"></textarea>#}
+{#								</div>#}
+{#								<div class="screenwriter">#}
+{#									<h4>Сценарист:</h4>#}
+{#									<div class="screenwriter-person person">#}
+{#										<input type="text" placeholder="Имя" />#}
+{#										<input type="text" placeholder="Фамилия" />#}
+{#									</div>#}
+{#								</div>#}
+{#								<div class="screenwriter-date">#}
+{#									<h4>Дата рождения сценариста: </h4>#}
+{#									<input type="date" value="01.08.1998" />#}
+{#								</div>#}
+{#								<div class="biography-screenwriter textarea">#}
+{#									<h4>Биография/Фильмография сценариста: </h4>#}
+{#									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#										rows="10"></textarea>#}
+{#								</div>#}
+{#								<h4>В Вашем фильме музыка является оригинальной?:</h4>#}
+{#								<ul class="application-checkeds application-view">#}
+{#									<li class="application-checked checkbox ">#}
+{#										<input class="" type="checked" value="1" name="nameradio">#}
+{#										Да#}
+{#									</li>#}
+{#									<li class="application-checked checkbox">#}
+{#										<input type="checked" value="2" name="nameradio">#}
+{#										Нет#}
+{#									</li>#}
+{#								</ul>#}
+{#								<div class="composer">#}
+{#									<h4>Композитор:</h4>#}
+{#									<div class="composer-person person">#}
+{#										<input type="text" placeholder="Имя" name="" id="">#}
+{#										<input type="text" placeholder="Фамилия" name="" id="">#}
+{#									</div>#}
+{#								</div>#}
+{#								<div class="directorPhotography">#}
+{#									<h4>Оператор - постановщик:</h4>#}
+{#									<div class="directorPhotography-person person">#}
+{#										<input type="text" placeholder="Имя" name="" id="">#}
+{#										<input type="text" placeholder="Фамилия" name="" id="">#}
+{#									</div>#}
+{#								</div>#}
+{#								<div class="directorPhotography">#}
+{#									<h4>Художник постановщик:</h4>#}
+{#									<div class="directorPhotography-person person">#}
+{#										<input type="text" placeholder="Имя" name="" id="">#}
+{#										<input type="text" placeholder="Фамилия" name="" id="">#}
+{#									</div>#}
+{#								</div>#}
+{#								<div class="directorPhotography">#}
+{#									<h4>Художник по костюмам:</h4>#}
+{#									<div class="directorPhotography-person person">#}
+{#										<input type="text" placeholder="Имя" name="" id="">#}
+{#										<input type="text" placeholder="Фамилия" name="" id="">#}
+{#									</div>#}
+{#								</div>#}
+{#								<div class="film-crew textarea">#}
+{#									<h4>Остальные члены съемочной команды: </h4>#}
+{#									<span>Перечисление главных актёров через запятую/столбиком, с указанием ролей,<br>#}
+{#										пример:<br>#}
+{#										Художник по свету - Виталий Волков<br>#}
+{#										Режиссер монтажа - Миляуша Давлетшина</span>#}
+{#									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#										placeholder="" rows="10"></textarea>#}
+{#								</div>#}
+{#								<div class="casting textarea">#}
+{#									<h4>В ролях: </h4>#}
+{#									<span>Перечисление члёнов съемочной команды через запятую/столбиком, с указанием должностей,<br>#}
+{#										пример:<br>#}
+{#										Мафруша - Светлана Новинокова<br>#}
+{#										Олег Александрович - Дмитрий Иванов</span>#}
+{#									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#										placeholder="" rows="10"></textarea>#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="regions-card">#}
+{#								<h3 class="filmCrew-title application-title">Карта регионов</h3>#}
+{#								<p>Предлагаем присоединиться к нашей Карте регионов, в которой представлена база региональных#}
+{#									специалистов, локаций, мероприятий и пр.#}
+{#									Это откроет для Вас возможность участия во входящих федеральных и межрегиональных проектах,#}
+{#									снимающихся#}
+{#									в вашем регионе.#}
+{#									Публично будет представлена следующая информация:<br>#}
+{#									-Имя Фамилия,<br>#}
+{#									-Биография/ Фильмография,<br>#}
+{#									-дата рождения,<br>#}
+{#									-карточка Вашего фильма,<br>#}
+{#									-контактные данные.<br>#}
+{#									Если вы уже есть в базе специалистов, то новый проект подгрузится к вашему профилю после модерации.#}
+{#									На данный момент раздел находится в доработке, но это не отменяет возможность подать свою заявку.#}
+{#									Данный раздел заявки можно пропустить.</p>#}
+{#								<a href="#" class="btn application-btn">Пропустить раздел</a>#}
+{#							</div>#}
+{#							<div class="specialist">#}
+{#								<h4> Имя Фамилия:</h4>#}
+{#								<div class="specialist-person person">#}
+{#									<input type="text" placeholder="Имя" name="" id="">#}
+{#									<input type="text" placeholder="Фамилия" name="" id="">#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="speciality-sellect">#}
+{#								<button class=" speciality-btn btn _icon-derection-right ">#}
+{#									Специальность#}
+{#								</button>#}
+{#								<nav class="speciality__body">#}
+{#									<ul class="genre-add__list">#}
+{#										<li class="genre-add__item">#}
+{#											<ul class="application-checkboxs genre__sub-item">#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_1">#}
+{#													<label for="expert_1">Аниматор</label>#}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_2">#}
+{#													<label for="expert_2">Ассистент по актёрам</label>#}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_3">#}
+{#													<label for="expert_3">Бригадир массовых сцен</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_4">#}
+{#													<label for="expert_4">Второй режиссер</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_5">#}
+{#													<label for="expert_5">Звукорежиссер площадки</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_6">#}
+{#													<label for="expert_6">Звукорежиссер пост-продакшена</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_7">#}
+{#													<label for="expert_7">Кастинг-директор</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_8">#}
+{#													<label for="expert_8">Монтажёр</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_9">#}
+{#													<label for="expert_9">Оператор коптера</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_10">#}
+{#													<label for="expert_10">Оператор-постановщик</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_11">#}
+{#													<label for="expert_11">Осветитель</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_12">#}
+{#													<label for="expert_12">Помощник режиссера</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_13">#}
+{#													<label for="expert_13">Постановщик</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_14">#}
+{#													<label for="expert_14">Продюсер</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_15">#}
+{#													<label for="expert_15">Редактор</label>#}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_16">#}
+{#													<label for="expert_16">Режиссер монтажа</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_17">#}
+{#													<label for="expert_17">Режиссер-постановщик</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_18">#}
+{#													<label for="expert_18">Специалист по VFX</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_19">#}
+{#													<label for="expert_19">Сценарист</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_20">#}
+{#													<label for="expert_20">Фокус-пуллер</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_21">#}
+{#													<label for="expert_21">Фотограф</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_22">#}
+{#													<label for="expert_22">Художник по гриму</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_23">#}
+{#													<label for="expert_23">Художник по костюмам</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="expert_24">#}
+{#													<label for="expert_24">Художник-постановщик</label>#}
+{##}
+{#												</li>#}
+{#											</ul>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</nav>#}
+{#								<ul class="application-checkboxs  speciality-other">#}
+{#									<li class="application-checkbox checkbox genre__item-submenu">#}
+{#										<input type="checkbox" id="other">#}
+{#										<label for="other">Другое</label>#}
+{#									</li>#}
+{#								</ul>#}
+{#								<input type="text" id="">#}
+{#							</div>#}
+{#							<div class="specialist-region">#}
+{#								<button class=" specialist-region__btn btn _icon-derection-right ">#}
+{#									Регион#}
+{#								</button>#}
+{#								<nav class="specialist-region__body">#}
+{#									<ul class="genre-add__list">#}
+{#										<li class="genre-add__item">#}
+{#											<ul class="application-checkboxs application-checkboxs genre__sub-item">#}
+{#												<li class="application-checkbox checkbox  genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_1">#}
+{#													<label for="reg_1">Москва</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_2">#}
+{#													<label for="reg_2">Санкт-Петербург</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_3">#}
+{#													<label for="reg_3">Алтайский край</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_4">#}
+{#													<label for="reg_4">Амурская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_5">#}
+{#													<label for="reg_5">Архангельская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_6">#}
+{#													<label for="reg_6">Белгородская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_7">#}
+{#													<label for="reg_7">Брянская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_8">#}
+{#													<label for="reg_8">Владимирская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_9">#}
+{#													<label for="reg_9">Волгоградская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_10">#}
+{#													<label for="reg_10">Воронежская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_11">#}
+{#													<label for="reg_11">город федерального значения</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_12">#}
+{#													<label for="reg_12">Севастополь</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_13">#}
+{#													<label for="reg_13">Донецкая Народная Республика</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_14">#}
+{#													<label for="reg_14">Еврейская автономная область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_15">#}
+{#													<label for="reg_15">Забайкальский край</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_16">#}
+{#													<label for="reg_16">Запорожская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_17">#}
+{#													<label for="reg_17">Ивановская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_18">#}
+{#													<label for="reg_18">Иные территории,включая город и космодром Байконур</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_19">#}
+{#													<label for="reg_19">Иркутская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_20">#}
+{#													<label for="reg_20">Кабардино-Балкарская Республика</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_21">#}
+{#													<label for="reg_21">Калининградская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_22">#}
+{#													<label for="reg_22">Калужская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_23">#}
+{#													<label for="reg_23">Камчатский край</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_24">#}
+{#													<label for="reg_24">Карачаево-Черкесская Республика</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_25">#}
+{#													<label for="reg_25">Кемеровская область — Кузбасс</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_26">#}
+{#													<label for="reg_26">Кировская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_27">#}
+{#													<label for="reg_27">Костромская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_28">#}
+{#													<label for="reg_28">Краснодарский край</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_29">#}
+{#													<label for="reg_29">Красноярский край</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_30">#}
+{#													<label for="reg_30">Курганская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_31">#}
+{#													<label for="reg_31">Курская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_32">#}
+{#													<label for="reg_32">Ленинградская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_33">#}
+{#													<label for="reg_33">Липецкая область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_34">#}
+{#													<label for="reg_34">Луганская Народная Республика</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_35">#}
+{#													<label for="reg_35">Магаданская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_36">#}
+{#													<label for="reg_36">Московская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_37">#}
+{#													<label for="reg_37">Мурманская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_38">#}
+{#													<label for="reg_38">Ненецкий автономный округ</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_38">#}
+{#													<label for="reg_38">Нижегородская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_39">#}
+{#													<label for="reg_39">Новгородская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_40">#}
+{#													<label for="reg_40">Новосибирская область</label>#}
+{##}
+{#												</li>#}
+{#												< class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_41">#}
+{#													<label for="reg_41">Омская область</label>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_42">#}
+{#													<label for="reg_42">Оренбургская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_43">#}
+{#													<label for="reg_43">Орловская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_44">#}
+{#													<label for="reg_44">Пензенская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_45">#}
+{#													<label for="reg_45"> Пермский край</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_46">#}
+{#													<label for="reg_46">Приморский край</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_47">#}
+{#													<label for="reg_47">Псковская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_48">#}
+{#													<label for="reg_48">Республика Адыгея (Адыгея)</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_49">#}
+{#													<label for="reg_49">Республика Алтай</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_50">#}
+{#													<label for="reg_50">Республика Башкортостан</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_51">#}
+{#													<label for="reg_51">Республика Бурятия</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_52">#}
+{#													<label for="reg_52">Республика Дагестан</label>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_53">#}
+{#													<label for="reg_53">Республика Ингушетия</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_54">#}
+{#													<label for="reg_54">Республика Калмыкия</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_55">#}
+{#													<label for="reg_55">Республика Карелия</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_56">#}
+{#													<label for="reg_56">Республика Коми</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_57">#}
+{#													<label for="reg_57">Республика Марий Эл</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_58">#}
+{#													<label for="reg_58">Республика Мордовия</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_59">#}
+{#													<label for="reg_59">Республика Саха (Якутия)</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_60">#}
+{#													<label for="reg_60">Республика Северная Осетия — Алания</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_61">#}
+{#													<label for="reg_61">Республика Татарстан (Татарстан)</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_62">#}
+{#													<label for="reg_62">Республика Тыва</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_63">#}
+{#													<label for="reg_63">Республика Хакасия</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_64">#}
+{#													<label for="reg_64">Ростовская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_65">#}
+{#													<label for="reg_65">Рязанская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_66">#}
+{#													<label for="reg_66">Самарская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_67">#}
+{#													<label for="reg_67">Саратовская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_68">#}
+{#													<label for="reg_68">Сахалинская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_69">#}
+{#													<label for="reg_69">Свердловская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_70">#}
+{#													<label for="reg_70">Смоленская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_71">#}
+{#													<label for="reg_71">Ставропольский край</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_72">#}
+{#													<label for="reg_72">Тамбовская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_73">#}
+{#													<label for="reg_73">Тверская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_74">#}
+{#													<label for="reg_74">Томская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_75">#}
+{#													<label for="reg_75">Тульская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_76">#}
+{#													<label for="reg_76">Тюменская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_77">#}
+{#													<label for="reg_77">Удмуртская Республика</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_78">#}
+{#													<label for="reg_78">Ульяновская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_79">#}
+{#													<label for="reg_79">Хабаровский край</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_80">#}
+{#													<label for="reg_80">Ханты-Мансийский автономный округ — Югра</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_81">#}
+{#													<label for="reg_81">Херсонская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_82">#}
+{#													<label for="reg_82">Челябинская область</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_83">#}
+{#													<label for="reg_83">Чеченская Республика</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_84">#}
+{#													<label for="reg_84">Чувашская Республика</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_85">#}
+{#													<label for="reg_85">Чукотский автономный округ</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_86">#}
+{#													<label for="reg_86">Ямало-Ненецкий автономный округ</label>#}
+{##}
+{#												</li>#}
+{#												<li class="application-checkbox checkbox genre__item-submenu">#}
+{#													<input type="checkbox" id="reg_87">#}
+{#													<label for="reg_87">Ярославская область</label>#}
+{##}
+{#												</li>#}
+{#											</ul>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</nav>#}
+{#							</div>#}
+{#							<div>#}
+{#								<h4>Населённый пункт: </h4>#}
+{#								<input type="text" id="">#}
+{#							</div>#}
+{#							<div>#}
+{#								<h4>Номер телефона: </h4>#}
+{#								<input type="tel" id="phone" name="phone">#}
+{#							</div>#}
+{#							<div>#}
+{#								<h4>Email: </h4>#}
+{#								<input type="email" id="email">#}
+{#							</div>#}
+{#							<div class="textarea">#}
+{#								<h4>Ссылка на портфолио:</h4>#}
+{#								<textarea spellcheck="true" title="до 25 слов" type="url" autocapitalize="sentences" name="" id=""#}
+{#									cols="30" rows="10"></textarea>#}
+{#							</div>#}
+{#							<div class="textarea">#}
+{#								<h4>Биография/Фильмография:</h4>#}
+{#								<textarea spellcheck="true" title="до 25 слов" type="url" autocapitalize="sentences" name="" id=""#}
+{#									cols="30" rows="10"></textarea>#}
+{#							</div>#}
+{#							<div class="textarea">#}
+{#								<h4>Ссылка на социальные сети/мессенджеры:</h4>#}
+{#								<textarea spellcheck="true" title="до 25 слов" type="url" autocapitalize="sentences" name="" id=""#}
+{#									cols="30" rows="10"></textarea>#}
+{#							</div>#}
+{#							<div class="send-invitation">#}
+{#								<h4 class="application-subtitle">Отправить приглашение на заполнение анкеты члену съемочной команды#}
+{#								</h4>#}
+{#								<ul class="application-checkboxs ">#}
+{#									<li class="application-checkbox checkbox ">#}
+{#										<input type="checkbox" id="send_1">#}
+{#										<label for="send_1">Отправить</label>#}
+{#									</li>#}
+{#								</ul>#}
+{#								<p class="send-invitation__text">Отправление приглашения члену съемочной команды даёт возможность#}
+{#									расширить базу#}
+{#									специалистов, а также#}
+{#									расширить информацию о вашем фильме в кинотеке.</p>#}
+{##}
+{#								<div class="specialist-region">#}
+{#									<h4>Email:</h4>#}
+{#									<input type="email" placeholder="Email:" name="" id="">#}
+{#									<h4> Имя Фамилия:</h4>#}
+{#									<div class="specialist-region__person person">#}
+{#										<input type="text" placeholder="Имя" name="" id="">#}
+{#										<input type="text" placeholder="Фамилия" name="" id="">#}
+{#									</div>#}
+{#									<h4>Кем является этот человек на вашем проекте? (фильме, который вы подаёте на кинопремию).</h4>#}
+{#									<input type="text" name="" id="">#}
+{#								</div>#}
+{#								<h4 class="application-subtitle">Отправить приглашение ещё одному члену съемочной команды#}
+{#								</h4>#}
+{#								<ul class="application-checkboxs ">#}
+{#									<li class="application-checkbox checkbox ">#}
+{#										<input type="checkbox" id="send_2">#}
+{#										<label for="send_2">Отправить</label>#}
+{#									</li>#}
+{#								</ul>#}
+{#								<p class="send-invitation__text">Отправление приглашения члену съемочной команды даёт возможность#}
+{#									расширить базу#}
+{#									специалистов, а также#}
+{#									расширить информацию о вашем фильме в кинотеке.</p>#}
+{#							</div>#}
+{#							<div class="film-portfolio">#}
+{#								<h3 class="application-title">Портфолио фильма</h3>#}
+{#								<div class="participation-festivals textarea">#}
+{#									<h4 class="application-subtitle">Участие в фестивалях:</h4>#}
+{#									<span class="agreement-subtitle">Необходимо указать на каких фестивалях был представлен фильм:<br> 1.#}
+{#										Конкурс<br>#}
+{#										2. Вне конкурса<br>#}
+{#										3. Призы</span>#}
+{#									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#										rows="10"></textarea>#}
+{#								</div>#}
+{#								<div class="internet-coverage textarea">#}
+{#									<h4 class="application-subtitle">Охват в интернете:</h4>#}
+{#									<span class="agreement-subtitle">Необходимо указать ссылки, если ваш фильм размещен в сети#}
+{#										Интернет.</span>#}
+{#									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#										rows="10"></textarea>#}
+{#								</div>#}
+{#								<div class="textarea">#}
+{#									<h4 class="application-subtitle">Публикации в СМИ:</h4>#}
+{#									<span class="agreement-subtitle">Необходимо указать ссылки на публикации в СМИ о фильме.</span>#}
+{#									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#										rows="10"></textarea>#}
+{#								</div>#}
+{#								<div class="textarea">#}
+{#									<h4 class=""> Ссылка для скачивания материалов</h4>#}
+{#									<span class="agreement-subtitle">Ссылка должна содержать: фильм, трейлер, постер, по желанию#}
+{#										дополнительные#}
+{#										материалы</span>#}
+{#									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#										rows="10"></textarea>#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="copyright-information">#}
+{#								<h3 class="application-title">Информация о правообладателе</h3>#}
+{#								<div class="textarea">#}
+{#									<p>Описание раздела</p>#}
+{#									<h4 class="">Правообладатель:</h4>#}
+{#									<span class="agreement-subtitle">ФИО/название компании</span>#}
+{#									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#										placeholder="#}
+{#									" rows="10"></textarea>#}
+{#								</div>#}
+{#								<div>#}
+{#									<h4 class="">Почта правообладателя:</h4>#}
+{#									<input type="email" name="" id="">#}
+{#								</div>#}
+{#								<div>#}
+{#									<h4>Контакт для связи (телефон):</h4>#}
+{#									<input type="tel" name="" id="">#}
+{#								</div>#}
+{#								<div>#}
+{#									<h4>Контакт для связи (почта):</h4>#}
+{#									<input type="email" name="" id="">#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="assent">#}
+{#								<div class="assent-yea">#}
+{#									<ul class="application-checkboxs ">#}
+{#										<li class="application-checkbox checkbox ">#}
+{#											<input type="checkbox" id="yea_1">#}
+{#											<label for="yea_1">Я#}
+{#												даю согласие на то, что фильм будет размещен на сайте кинопремии и#}
+{#												доступен для<br> просмотра любому пользователю</label>#}
+{#										</li>#}
+{#										<li class="application-checkbox checkbox ">#}
+{#											<input type="checkbox" id="yea_2">#}
+{#											<label for="yea_2">Я даю согласие на участие в зрительском голосовании.</label>#}
+{#										</li>#}
+{##}
+{#										<li class="application-checkbox checkbox ">#}
+{#											<input type="checkbox" id="yea_3">#}
+{#											<label for="yea_3">Я#}
+{#												даю согласие на участие фильма в некоммерческих#}
+{#												показах в#}
+{#												рамках#}
+{#												мероприятий<br> Межрегиональной кинопремии «Алтын тэлинке» («Золотая тарелка»)<span> При#}
+{#													необходимости условия#}
+{#													соглашения обсуждаются индивидуально, напишите нам об этом на почту Goldenplatekzn@gmail.com#}
+{#													(с#}
+{#													пометкой#}
+{#													"Некоммерческие показы").</span></label>#}
+{#										</li>#}
+{#									</ul>#}
+{#									<div class="concordad">#}
+{#										<a href="#" class="btn application-btn">Заполнить договор сейчас</a>#}
+{#										<a href="#" class="btn application-btn">Заполнить договор позже</a>#}
+{#									</div>#}
+{#								</div>#}
+{#								<div class="submit-request">#}
+{#									<a href="#">#}
+{#										<p class="agreement-subtitle">Нажимая отправить вы соглашаетесь с обработкой персональных данных.#}
+{#										</p>#}
+{#									</a>#}
+{#									<a href="#" class="btn application-btn">Отправить заявку</a>#}
+{#								</div>#}
+{##}
+{#								<div class="individual">#}
+{#									<h4 class="application-subtitle">Вы являетесь</h4>#}
+{#									<ul class="application-checkeds application-request application-view">#}
+{#										<li class="application-checked checkbox ">#}
+{#											<input class="" type="checked" value="1" name="nameradio">#}
+{#											Физическое лицо#}
+{#										</li>#}
+{#										<li class="application-checked checkbox ">#}
+{#											<input class="" type="checked" value="1" name="nameradio">#}
+{#											Юридическое лицо#}
+{#										</li>#}
+{#									</ul>#}
+{#									<h3 class="application-title">Физическое лицо</h3>#}
+{#									<h4> Фамилия Имя Отчество правообладателя</h4>#}
+{#									<span class="agreement-subtitle">в именительном падеже</span>#}
+{#									<div class="individual-person person">#}
+{#										<input type="text" placeholder="Фамилия" value="">#}
+{#										<input type="text" placeholder="Имя" value="">#}
+{#										<input type="text" placeholder="Отчество" value="">#}
+{#									</div>#}
+{#									<h4 class="application-title">Название фильма </h4>#}
+{#									<span for="">без кавычек</span>#}
+{#									<input type="text" name="" id="">#}
+{#									<div class="submit-individual">#}
+{#										<p class="submit-individual__title">После отправки формы, мы сформируем Вам договор на#}
+{#											некоммерческие#}
+{#											показы и#}
+{#											отправим его Вам на почту</p>#}
+{#										<a href="#" class="btn application-btn">Сформировать договор</a>#}
+{#									</div>#}
+{#								</div>#}
+{#								<div class="legal-entity">#}
+{#									<h3 class="application-title">Юридическое лицо</h3>#}
+{#									<div class="entity">#}
+{#										<h4>Наименование организации: </h4>#}
+{#										<span class="agreement-subtitle">В соответствии с уставом/лицензией</span>#}
+{#										<input type="text" name="" id="">#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4 class="application-subtitle ">Фамилия Имя Отчество: </h4>#}
+{#										<span class="agreement-subtitle">В соответствии с уставом/лицензией</span>#}
+{#										<div class="legal-person person">#}
+{#											<input type="text" placeholder="Фамилия" value="">#}
+{#											<input type="text" placeholder="Имя" value="">#}
+{#											<input type="text" placeholder="Отчество" value="">#}
+{#										</div>#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4>Название фильма: </h4>#}
+{#										<span class="agreement-subtitle"> (без кавычек)</span>#}
+{#										<input type="text" name="" id="">#}
+{#									</div>#}
+{#									<h4 class="agreement-subtitle">Адрес регистрации (индекс, регион, населенный пункт, улица, дом)</h4>#}
+{#									<div class="textarea">#}
+{#										<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#											placeholder="#}
+{#									" rows="10"></textarea>#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4 class="agreement-subtitle">ИНН / КПП</h4>#}
+{#										<input type="number" name="" id="">#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4>Расчётный счёт: </h4>#}
+{#										<input type="number" name="" id="">#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4>Название банка: </h4>#}
+{#										<input type="text" name="" id="">#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4>БИК: </h4>#}
+{#										<input type="number" name="" id="">#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4>Коррекционный счет: </h4>#}
+{#										<input type="number" name="" id="">#}
+{#									</div>#}
+{#								</div>#}
+{#								<a href="#" class="btn application-btn legal-btn">Сформировать договор</a>#}
+{#							</div>#}
+						</div>
+                        </form>
+					</div>
+				</div>
+			</section>
+		</main>
+
+
+{% endblock %}
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{% static 'js/app/script.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
+{% endblock %}

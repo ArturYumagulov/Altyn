@@ -1,0 +1,47 @@
+                                <div class="genregroup_1">
+                                <h4>Жанр 1:</h4>
+
+								<button class="genre-btn btn _icon-derection-right genres_group_1">
+									Жанр
+								</button>
+								<div class="genre__menu ">
+									<nav class="genre__body">
+										<ul class="genre-add__list">
+											<li class="genre-add__item">
+												<ul class="application-checkboxs genre__sub-item">
+                                                    {% for genre in genres_group_1 %}
+                                                        <li class="application-checkbox checkbox genre__item-submenu">
+                                                            <input type="checkbox" id="genre_{{ genre.pk }}" name="genre_1" value="{{ genre.slug }}">
+                                                            <label for="genre_{{ genre.pk }}">{{ genre.name }}</label>
+                                                        </li>
+                                                    {% endfor %}
+												</ul>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+
+                            <div class="genregroup_2" style="display: none">
+                                <h4>Жанр 2:</h4>
+                                <button class="genre-btn genre-btn_two btn _icon-derection-right" >
+                                    Жанр
+                                </button>
+                                <div class="genre__menu ">
+                                    <nav class="genre__body genre__body_two">
+                                        <ul class="genre-add__list">
+                                            <li class="genre-add__item">
+                                                <ul class="application-checkboxs genre__sub-item">
+                                                    {% for genre in genres_group_2 %}
+                                                    <li class="application-checkbox checkbox  genre__item-submenu">
+                                                        <input type="checkbox" id="genre_{{ genre.pk }}" name="genre_2"
+                                                               value="{{ genre.slug }}">
+                                                        <label for="genre_{{ genre.pk }}">{{ genre.name }}</label>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
