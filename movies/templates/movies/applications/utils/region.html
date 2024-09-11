@@ -15,11 +15,11 @@
 										некоммерческих показах, но не принимает участие в конкурсе.</span>
 									<ul class="application-checkboxs  application-view">
 										<li class="application-checkbox checkbox">
-											<input type="checkbox" id="russia">
+											<input type="checkbox" checked id="russia" value="russia" name="country">
 											<label for="russia">Россия</label>
 										</li>
 										<li class="application-checkbox checkbox other-region-item">
-											<input type="checkbox" id="other">
+											<input type="checkbox" id="other" value="true">
 											<label for="other">Другое</label>
 										</li>
 									</ul>
@@ -27,6 +27,7 @@
 										<input type="text"/>
 									</label>
 								</div>
+                                <div id="region-block">
 								<h4 class="application-reg">Регион</h4>
 								<span>Хотим обратить Ваше внимание на наш регламент.<br>
 									В Кинопремии не принимают участие проекты из городов Москва, Санкт-Петербург, за исключением проектов,
@@ -46,7 +47,7 @@
 										<li class="genre-add__item">
 											<ul class="application-checkboxs application-checkboxs genre__sub-item">
                                                 {% for region in regions %}
-												<li class="application-checkbox checkbox  genre__item-submenu">
+												<li class="application-checkbox checkbox  genre__item-submenu" id="region-item">
 													<input type="checkbox" id="{{ region.slug }}" name="region" value="{{ region.slug }}">
 													<label for="{{ region.slug }}">{{ region.name }}</label>
 												</li>
@@ -55,6 +56,7 @@
 										</li>
 									</ul>
 								</nav>
+                                </div>
 								<h4 class="terrain">Населённый пункт</h4>
 								<input type="text" value="" />
 							</div>

@@ -4,7 +4,12 @@ let group_1 = document.querySelector('.genregroup_1')
 let group_2 = document.querySelector('.genregroup_2')
 let rolled_certificate_num = document.querySelector('.rolled_certificate_num')
 let rolled_certificate_num_input = rolled_certificate_num.querySelector('input[type=number]')
+let regionOther = document.getElementById('other')
+let regionRussia = document.getElementById('russia')
+let regionBlock = document.getElementById('region-block')
+let regionItems = document.querySelectorAll('#region-item')
 
+// console.log(regionItems)
 
 let observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
@@ -46,16 +51,40 @@ targetElement.forEach((elem) => {
     })
 })
 
-// Другие регионы
-
-let regionOther = document.querySelector('.other-region-item')
+// Начало другие регионы
 regionOther.addEventListener('change', (e) => {
     if (e.target.checked) {
+        e.target.setAttribute('name', 'other_country')
         other_region.style.display = 'block'
+        other_region.childNodes[1].setAttribute('required', '')
+        other_region.childNodes[1].setAttribute('name', 'other_country_name')
     } else {
+        e.target.removeAttribute('name')
         other_region.style.display = 'none'
+        other_region.childNodes[1].removeAttribute('required')
+        other_region.childNodes[1].removeAttribute('name')
     }
 })
+// Конец другие регион
+
+// -------------------------
+
+// Если регион Россия
+regionRussia.addEventListener('change', (e) => {
+    if (e.target.checked) {
+        regionBlock.style.display = 'block'
+        // regionItems.forEach((item) => {
+        //     item.childNodes[1].setAttribute('required', '')
+        // })
+    } else {
+        regionBlock.style.display = 'none'
+        // regionItems.forEach((item) => {
+        //     item.childNodes[1].removeAttribute('required')
+        // })
+    }
+})
+// Конец если регион Россия
+
 
 const buttons = document.querySelectorAll('.btn._icon-derection-right')
 buttons.forEach((button) => {

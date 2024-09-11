@@ -339,6 +339,8 @@ class Movie(models.Model):
     close = models.BooleanField(default=False, verbose_name="Закрытый фильм")
     debut = models.BooleanField(default=False, verbose_name="Дебютный")
     music = models.BooleanField(default=False, verbose_name="Оригинальная музыка")
+    country = models.CharField(max_length=2000, verbose_name="Страна", blank=True, null=True, default=None)
+    other_region = models.CharField(max_length=2000, verbose_name="Другой регион", blank=True, null=True, default=None)
     slug = models.SlugField()
 
     def get_absolute_url(self):
