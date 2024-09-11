@@ -90,6 +90,7 @@ class Director(models.Model):
     birthday = models.DateField(
         verbose_name="Дата рождения", blank=True, null=True, default=None
     )
+    biography = models.TextField(verbose_name="Биография")
     slug = models.SlugField()
 
     def __str__(self):
@@ -109,6 +110,7 @@ class Producer(models.Model):
     birthday = models.DateField(
         verbose_name="Дата рождения", blank=True, null=True, default=None
     )
+    biography = models.TextField(verbose_name="Биография")
     slug = models.SlugField()
 
     def __str__(self):
@@ -128,6 +130,7 @@ class Scenarist(models.Model):
     birthday = models.DateField(
         verbose_name="Дата рождения", blank=True, null=True, default=None
     )
+    biography = models.TextField(verbose_name="Биография")
     slug = models.SlugField()
 
     def __str__(self):

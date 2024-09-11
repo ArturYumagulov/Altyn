@@ -7,9 +7,9 @@ let rolled_certificate_num_input = rolled_certificate_num.querySelector('input[t
 let regionOther = document.getElementById('other')
 let regionRussia = document.getElementById('russia')
 let regionBlock = document.getElementById('region-block')
-let regionItems = document.querySelectorAll('#region-item')
+let compositor = document.querySelector('.composer')
 
-// console.log(regionItems)
+// console.log(trueMusic)
 
 let observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
@@ -48,6 +48,20 @@ targetElement.forEach((elem) => {
             rolled_certificate_num_input.removeAttribute('required')
             rolled_certificate_num_input.removeAttribute('value')
         }
+
+        // Музыка
+
+        if (element.id === 'true-music'){
+            compositor.style.display = 'block'
+            compositor.querySelectorAll('input').forEach((compositor_input)=> {
+                compositor_input.setAttribute('required', '')
+            })
+        } else {
+            compositor.style.display = 'none'
+            compositor.querySelectorAll('input').forEach((compositor_input)=> {
+                compositor_input.removeAttribute('required')
+            })
+        }
     })
 })
 
@@ -84,6 +98,12 @@ regionRussia.addEventListener('change', (e) => {
     }
 })
 // Конец если регион Россия
+
+// Музыка
+
+trueMusic.addEventListener('click', (e)=> {
+    console.log('click')
+})
 
 
 const buttons = document.querySelectorAll('.btn._icon-derection-right')

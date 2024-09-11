@@ -1,0 +1,121 @@
+							<div class="film-grew">
+								<h3 class="film-grew__title application-title">Съемочная команда</h3>
+{#                                Режиссер            #}
+								<div class="stage-director">
+									<h4>Режиссер-постановщик: </h4>
+									<div class="stage-director_person person">
+										<input type="text" placeholder="Имя" value="" name="director_first_name"/>
+										<input type="text" placeholder="Фамилия" value="" name="director_last_name"/>
+									</div>
+								</div>
+								<div class="date-director">
+									<h4>Дата рождения режиссера-постановщика: </h4>
+									<input type="date" value="01.08.1998" name="director_birthday"/>
+								</div>
+								<div class="biography-director textarea">
+									<h4>Биография/Фильмография режиссера-постановщика: </h4>
+									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences"
+                                              name="director_biography" id="" cols="30"
+										rows="10"></textarea>
+								</div>
+
+{#                                Продюссер            #}
+
+
+								<div class="producer">
+									<h4>Продюсер:</h4>
+									<div class="producer-person person">
+										<input type="text" placeholder="Имя" name="producer_first_name"/>
+										<input type="text" placeholder="Фамилия" name="producer_last_name"/>
+									</div>
+								</div>
+								<div class="producer-date">
+									<h4>Дата рождения продюсера: </h4>
+									<input type="date" value="01.08.1998" name="producer_birthday"/>
+								</div>
+								<div class="biography-producer textarea">
+									<h4>Биография/Фильмография продюсера: </h4>
+									<textarea name="producer_biography" spellcheck="true" title="до 25 слов" autocapitalize="sentences"
+                                              cols="30" rows="10"></textarea>
+								</div>
+
+{#                                Сценарист            #}
+
+								<div class="screenwriter">
+									<h4>Сценарист:</h4>
+									<div class="screenwriter-person person">
+										<input type="text" placeholder="Имя" name="scenarist_first_name"/>
+										<input type="text" placeholder="Фамилия" name="scenarist_last_name"/>
+									</div>
+								</div>
+								<div class="screenwriter-date">
+									<h4>Дата рождения сценариста: </h4>
+									<input type="date" value="01.08.1998" name="scenarist_birthday"/>
+								</div>
+								<div class="biography-screenwriter textarea">
+									<h4>Биография/Фильмография сценариста: </h4>
+									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences"
+                                              cols="30" name="scenarist_biography"
+										rows="10"></textarea>
+								</div>
+
+{#                                Музыка                            #}
+
+								<h4>В Вашем фильме музыка является оригинальной?:</h4>
+								<ul class="application-checkeds application-view">
+									<li class="application-checked checkbox ">
+										<input type="checkbox" data-type="true" id="true-music" name="music">
+										Да
+									</li>
+									<li class="application-checked checkbox">
+										<input type="checkbox" data-type="false" name="music">
+										Нет
+									</li>
+								</ul>
+								<div class="composer" style="display: none">
+									<h4>Композитор:</h4>
+									<div class="composer-person person">
+										<input type="text" placeholder="Имя" name="compositor_first_name">
+										<input type="text" placeholder="Фамилия" name="compositor_last_name">
+									</div>
+								</div>
+								<div class="directorPhotography">
+									<h4>Оператор - постановщик:</h4>
+									<div class="directorPhotography-person person">
+										<input type="text" placeholder="Имя" name="" id="">
+										<input type="text" placeholder="Фамилия" name="" id="">
+									</div>
+								</div>
+								<div class="directorPhotography">
+									<h4>Художник постановщик:</h4>
+									<div class="directorPhotography-person person">
+										<input type="text" placeholder="Имя" name="" id="">
+										<input type="text" placeholder="Фамилия" name="" id="">
+									</div>
+								</div>
+								<div class="directorPhotography">
+									<h4>Художник по костюмам:</h4>
+									<div class="directorPhotography-person person">
+										<input type="text" placeholder="Имя" name="" id="">
+										<input type="text" placeholder="Фамилия" name="" id="">
+									</div>
+								</div>
+								<div class="film-crew textarea">
+									<h4>Остальные члены съемочной команды: </h4>
+									<span>Перечисление главных актёров через запятую/столбиком, с указанием ролей,<br>
+										пример:<br>
+										Художник по свету - Виталий Волков<br>
+										Режиссер монтажа - Миляуша Давлетшина</span>
+									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"
+										placeholder="" rows="10"></textarea>
+								</div>
+								<div class="casting textarea">
+									<h4>В ролях: </h4>
+									<span>Перечисление члёнов съемочной команды через запятую/столбиком, с указанием должностей,<br>
+										пример:<br>
+										Мафруша - Светлана Новинокова<br>
+										Олег Александрович - Дмитрий Иванов</span>
+									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"
+										placeholder="" rows="10"></textarea>
+								</div>
+							</div>
