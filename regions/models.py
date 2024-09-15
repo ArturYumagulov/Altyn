@@ -9,6 +9,7 @@ from movies.models import Status
 class Region(models.Model):
     is_active = models.BooleanField(default=False, verbose_name="Активность")
     name = models.CharField(verbose_name="Название", max_length=500)
+    other = models.BooleanField(verbose_name="Другой", default=False)
     slug = models.SlugField()
 
     def __str__(self):
@@ -67,7 +68,7 @@ class Specialist(models.Model):
     photo = models.FileField(verbose_name="Фотография", upload_to='specialists/')
     first_name = models.CharField(verbose_name="Имя", max_length=100, blank=True, null=True)
     last_name = models.CharField(verbose_name="Фамилия", max_length=100, blank=True, null=True)
-    surname = models.CharField(verbose_name="Отчество", max_length=100, blank=True, null=True)
+    # surname = models.CharField(verbose_name="Отчество", max_length=100, blank=True, null=True)
     speciality = models.ManyToManyField(Speciality, related_name="specialities")
     region = models.ForeignKey(Region, on_delete=models.PROTECT, verbose_name="Регион")
     city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name="Населенный пункт")
@@ -79,7 +80,7 @@ class Specialist(models.Model):
     status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name="Статус")
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} {self.surname}"
+        return f"{self.first_name} {self.last_name}"
 
     class Meta:
         verbose_name = "Специалист"

@@ -273,7 +273,7 @@ class Movie(models.Model):
     status = models.ForeignKey(
         Status, verbose_name="Статус", on_delete=models.CASCADE
     )
-    # region = models.ForeignKey()
+    region = models.ManyToManyField(Region, related_name="regions")
     year = models.DecimalField(
         max_digits=4, decimal_places=0, verbose_name="Год выпуска"
     )

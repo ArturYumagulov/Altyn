@@ -8934,3 +8934,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"]::-webkit-input-placeholder {
 	visibility: hidden !important;
 }
+
+
+/* Contract */
+
+.contract-quest {
+	display: none;
+}
+
+.contract-quest.show {
+	display: block;
+}
+

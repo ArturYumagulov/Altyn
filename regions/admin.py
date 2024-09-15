@@ -17,7 +17,7 @@ class CityAdmin(admin.ModelAdmin):
 
 @admin.register(models.Speciality)
 class SpecialityAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ('name',)}
 
 
 @admin.register(models.Specialist)

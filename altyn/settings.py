@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-7ct24y&i=5z=htdr@(c2mg$r&z_ce#3q4-e@qk$f8fcixw-n7&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "regions",
     "movies",
     "voting",
+    "applications",
 ]
 
 MIDDLEWARE = [
@@ -153,3 +154,15 @@ else:
 
 
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'your@yandex.ru'
+EMAIL_HOST_PASSWORD = 'pass'
+
+EMAIL_SERVER = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
+

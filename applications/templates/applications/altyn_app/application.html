@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% load static %}
+{% block defer_scripts %}
+    <script defer src="{% static 'js/app/create_app.js' %}"></script>
+{% endblock %}
+{% block content %}
+<main class="main">
+			<section id="application" class="application">
+				<div class="container">
+					<article class="header-application">
+						<img src="{% static 'img/header-application.png' %}" alt="">
+						<h2>Межрегиональная премия в области кинематографии<span> «Алтын тəлинкə» («Золотая тарелка»)</span></h2>
+						<a href="" class="header-application__btn application-btn btn">Регламент</a>
+					</article>
+					<div class="order container">
+						<p>Разделы заявки: </p>
+						<ol type="1">
+							<li>Информация о фильме (название, дебют, вид, категория);</li>
+							<li>Жанр; </li>
+							<li>Информация о фильме (хронометраж, логлайн, год, ПУ, возрастной ценз);</li>
+							<li>Регион; </li>
+							<li>Съёмочная команда (даты рождения, фильмография/биография членов команды); </li>
+							<li> Карта регионов (данный раздел заполняется по желанию);</li>
+							<li> Портфолио фильма (участие в фестивалях, охват в Интернете, публикации в СМИ); </li>
+							<li>Контактная информация. </li>
+						</ol>
+						<p>Перед заполнением заявки подготовьте, пожалуйста, информацию:<br>
+							- номер прокатного удостоверения (при наличии);<br>
+							- биографию/фильмографию режиссера (при наличии – у сценариста и продюсера);<br>
+							- ссылку на материалы, которая содержит: фильм, трейлер, афишу;<br>
+							- информацию о правообладателе фильма<br>
+							- контакты;<br>
+							- информацию для составления договора на некоммерческие показы (заполняется по желанию)<br>
+							(для физ.лиц - ФИО, адрес, контактные данные, для юр.лиц - наименование организации, адрес, ИНН (номер),
+							КПП (номер), расчетный счет (номер), банковские реквизиты (к/с, БИК), контактные данные).
+							При наличии данной информации под рукой, примерное время заполнение заявки составит 5 минут.</p>
+
+						<p class="required-question">*Обязательный вопрос</p>
+                        <form action="{% url 'create_altyn_app' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="invite_count" id="invite_count" value="0">
+
+                        {% include 'applications/altyn_app/utils/movie_title.html' %}
+                            
+						<div class="your-debut">
+
+                            {% include 'applications/altyn_app/utils/debut.html' %}
+
+                            {% include 'applications/altyn_app/utils/type.html' %}
+
+                            {% include 'applications/altyn_app/utils/category.html' %}
+                            
+                            {% include 'applications/altyn_app/utils/genre.html' %}
+
+                            {% include 'applications/altyn_app/utils/timing.html' %}
+
+                            {% include 'applications/altyn_app/utils/logline.html' %}
+
+                            {% include 'applications/altyn_app/utils/year.html' %}
+
+                            {% include 'applications/altyn_app/utils/rolled_certificate.html' %}
+
+                            {% include 'applications/altyn_app/utils/age_limit.html' %}
+
+                            <!-- РЕГИОН -->
+
+                            {% include 'applications/altyn_app/utils/region.html' %}
+
+                            {% include 'applications/altyn_app/utils/shooting_group.html' %}
+
+
+                            <!-- Карта Регионов -->
+
+                            {% include 'applications/altyn_app/utils/region_map_question.html' %}
+
+                            <!-- Портфолио фильма -->
+
+                            {% include 'applications/altyn_app/utils/movie_portfolio.html' %}
+
+                            {% include 'applications/altyn_app/utils/copyright_information.html' %}
+
+                            {% include 'applications/altyn_app/utils/contract.html' %}
+
+
+                            <div class="submit-request">
+                                <a href="#">
+                                    <p class="agreement-subtitle">Нажимая отправить вы соглашаетесь с обработкой
+                                        персональных данных.
+                                    </p>
+                                </a>
+                                <button type="submit" class="btn application-btn">Отправить заявку</button>
+                            </div>
+
+
+{#								<div class="individual">#}
+{#									<h4 class="application-subtitle">Вы являетесь</h4>#}
+{#									<ul class="application-checkeds application-request application-view">#}
+{#										<li class="application-checked checkbox ">#}
+{#											<input class="" type="checked" value="1" name="nameradio">#}
+{#											Физическое лицо#}
+{#										</li>#}
+{#										<li class="application-checked checkbox ">#}
+{#											<input class="" type="checked" value="1" name="nameradio">#}
+{#											Юридическое лицо#}
+{#										</li>#}
+{#									</ul>#}
+{#									<h3 class="application-title">Физическое лицо</h3>#}
+{#									<h4> Фамилия Имя Отчество правообладателя</h4>#}
+{#									<span class="agreement-subtitle">в именительном падеже</span>#}
+{#									<div class="individual-person person">#}
+{#										<input type="text" placeholder="Фамилия" value="">#}
+{#										<input type="text" placeholder="Имя" value="">#}
+{#										<input type="text" placeholder="Отчество" value="">#}
+{#									</div>#}
+{#									<h4 class="application-title">Название фильма </h4>#}
+{#									<span for="">без кавычек</span>#}
+{#									<input type="text" name="" id="">#}
+{#									<div class="submit-individual">#}
+{#										<p class="submit-individual__title">После отправки формы, мы сформируем Вам договор на#}
+{#											некоммерческие#}
+{#											показы и#}
+{#											отправим его Вам на почту</p>#}
+{#										<a href="#" class="btn application-btn">Сформировать договор</a>#}
+{#									</div>#}
+{#								</div>#}
+{#								<div class="legal-entity">#}
+{#									<h3 class="application-title">Юридическое лицо</h3>#}
+{#									<div class="entity">#}
+{#										<h4>Наименование организации: </h4>#}
+{#										<span class="agreement-subtitle">В соответствии с уставом/лицензией</span>#}
+{#										<input type="text" name="" id="">#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4 class="application-subtitle ">Фамилия Имя Отчество: </h4>#}
+{#										<span class="agreement-subtitle">В соответствии с уставом/лицензией</span>#}
+{#										<div class="legal-person person">#}
+{#											<input type="text" placeholder="Фамилия" value="">#}
+{#											<input type="text" placeholder="Имя" value="">#}
+{#											<input type="text" placeholder="Отчество" value="">#}
+{#										</div>#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4>Название фильма: </h4>#}
+{#										<span class="agreement-subtitle"> (без кавычек)</span>#}
+{#										<input type="text" name="" id="">#}
+{#									</div>#}
+{#									<h4 class="agreement-subtitle">Адрес регистрации (индекс, регион, населенный пункт, улица, дом)</h4>#}
+{#									<div class="textarea">#}
+{#										<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
+{#											placeholder="#}
+{#									" rows="10"></textarea>#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4 class="agreement-subtitle">ИНН / КПП</h4>#}
+{#										<input type="number" name="" id="">#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4>Расчётный счёт: </h4>#}
+{#										<input type="number" name="" id="">#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4>Название банка: </h4>#}
+{#										<input type="text" name="" id="">#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4>БИК: </h4>#}
+{#										<input type="number" name="" id="">#}
+{#									</div>#}
+{#									<div>#}
+{#										<h4>Коррекционный счет: </h4>#}
+{#										<input type="number" name="" id="">#}
+{#									</div>#}
+{#								</div>#}
+{#								<a href="#" class="btn application-btn legal-btn">Сформировать договор</a>#}
+{#							</div>#}
+						</div>
+                        </form>
+					</div>
+				</div>
+			</section>
+		</main>
+
+
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/app/script.js' %}"></script>
+{% endblock %}
