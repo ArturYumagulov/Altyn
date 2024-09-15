@@ -28,7 +28,6 @@ class AppDirector(models.Model):
         verbose_name="Дата рождения", blank=True, null=True, default=None
     )
     biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
-    slug = models.SlugField()
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
@@ -43,7 +42,6 @@ class AppScenarist(models.Model):
         verbose_name="Дата рождения", blank=True, null=True, default=None
     )
     biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
-    slug = models.SlugField()
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
@@ -58,7 +56,6 @@ class AppProducer(models.Model):
         verbose_name="Дата рождения", blank=True, null=True, default=None
     )
     biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
-    slug = models.SlugField()
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
@@ -101,11 +98,13 @@ class MovieApp(models.Model):
     status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name="Статус")
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(max_length=500, verbose_name="Название фильма")
-    image = models.ImageField(upload_to="movie_image/", verbose_name="Картинка")
+    # image = models.ImageField(upload_to="movie_image/", verbose_name="Картинка")
     year = models.DecimalField(max_digits=4, decimal_places=0, verbose_name="Год выпуска")
-    genre = models.ManyToManyField(Genre, verbose_name="Жанр", blank=True, default=None)
+    rolled_certificate = models.CharField(verbose_name="Прокатное удостоверение", null=True, blank=True,
+                                          max_length=1000)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Категория")
     kind = models.ForeignKey(Kind, on_delete=models.PROTECT, verbose_name="Вид", blank=True, null=True, default=None)
+    trailer = models.URLField()
     director = models.ForeignKey(
         AppDirector,
         on_delete=models.CASCADE,
@@ -128,20 +127,14 @@ class MovieApp(models.Model):
         blank=True,
     )
 
-    rolled_certificate = models.CharField(verbose_name="Прокатное удостоверение", null=True, blank=True,
-                                          max_length=1000)
-
-    trailer = models.URLField()
+    # trailer = models.URLField()
 
     timing = models.CharField(verbose_name="Хронометраж", max_length=20)
     actors = models.TextField(verbose_name="В ролях")
     age_limit = models.ForeignKey(
         AgeLimit, on_delete=models.CASCADE, verbose_name="Возрастное ограничение"
     )
-    descriptions = models.TextField(verbose_name="Описание")
-    created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
-    edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
-    close = models.BooleanField(default=False, verbose_name="Закрытый фильм")
+    logline = models.TextField(verbose_name="Логлайн")
     debut = models.BooleanField(default=False, verbose_name="Дебютный")
     music = models.BooleanField(default=False, verbose_name="Оригинальная музыка")
     country = models.CharField(max_length=2000, verbose_name="Страна", blank=True, null=True, default=None)
@@ -179,6 +172,11 @@ class MovieApp(models.Model):
     agreement_to_placement = models.BooleanField(default=False, verbose_name="согласие на размещение на сайте")
     agreement_to_vote = models.BooleanField(default=False, verbose_name="согласие на голосование")
     agreement_to_no_commerce_show = models.BooleanField(default=False, verbose_name="согласие на некоммерческие показы")
+    created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
+    edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
+
+    genre = models.ManyToManyField(Genre, verbose_name="Жанр", blank=True, default=None)
+
 
 
 class SpecialistApp(models.Model):

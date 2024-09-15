@@ -1,121 +1,68 @@
-import os
-import django
+from datetime import datetime
 
-from django.conf import settings
-import datetime
-import io
+from django.contrib.auth import get_user_model
 
-from django.core.mail import EmailMessage
-from django.http import HttpResponse
-from docx import Document
+from movies.models import Category, Kind, RollerCertificate, Movie, AgeLimit
+from .models import MovieApp, Status, AppDirector, AppProducer, AppScenarist
 
-# Устанавливаем переменную окружения для настройки Django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'altyn.settings')
-
-# Инициализируем Django
-django.setup()
-
-# Теперь можно импортировать модели и использовать настройки
+user = get_user_model()
 
 
-# Используем модели и настройки
-contract_ooo_path = os.path.join(settings.BASE_DIR, 'contract/contract_ooo.docx')
+def clean_date(date):
+    return datetime.strptime(date, "%Y-%m-%d")
 
 
-def send_word_via_email(request):
-    # Открываем шаблон документа
-    template_path = contract_ooo_path
-    doc = Document(template_path)
+def get_rolled_certificates(request):
+    if request.get("rolled_certificate") == "est":
+        return request.get("rolled_certificate_num")
+    return RollerCertificate.objects.get(slug=request.get("rolled_certificate")).name
 
-    # Данные для замены в шаблоне
-    context = {
-        'имя': 'Иван Иванов',
-        'должность': 'Программист',
-        'дата': '13 сентября 2024'
-    }
 
-    # Функция для замены маркеров в тексте абзацев
-    def replace_text_in_paragraph(paragraph, context):
-        for key, value in context.items():
-            if key in paragraph.text:
-                paragraph.text = paragraph.text.replace(f'{{{key}}}', value)
+def save_app(request):
+    print(request)
 
-    # Проходим по всем абзацам документа и заменяем маркеры
-    for paragraph in doc.paragraphs:
-        replace_text_in_paragraph(paragraph, context)
+    new_movie_app = MovieApp()
 
-    # Создаем объект in-memory для хранения документа
-    file_stream = io.BytesIO()
-    doc.save(file_stream)
-    file_stream.seek(0)
+    new_movie_app.user = user.objects.get(request.user.pk)
+    new_movie_app.status = Status.objects.get(name="на рассмотрении")
 
-    # Создаем письмо
-    email = EmailMessage(
-        subject='Ваш документ Word',
-        body='Пожалуйста, найдите вложение с вашим документом.',
-        from_email=settings.EMAIL_HOST_USER,  # Ваш email
-        to=['zico.13288@gmail.com', 'vladakrylova@ya.ru']  # Получатель письма
+    request = request.POST
+    new_movie_app.name = request.get("name")
+    new_movie_app.year = request.get("year")
+    new_movie_app.rolled_certificate = get_rolled_certificates(request)
+    new_movie_app.timing = request.get("timing")
+    new_movie_app.actors = request.get("actors")
+    new_movie_app.logline = request.get('logline')
+
+    # ForeignKey
+    new_movie_app.category = Category.objects.get(slug=request.get("category"))
+    new_movie_app.kind = Kind.objects.get(slug=request.get("kind"))
+    new_movie_app.age_limit = AgeLimit.objects.get(slug=request.get('age_limit'))
+
+    # Режиссер
+    new_director = AppDirector.objects.update_or_create(
+        first_name=request.get("director_first_name"),
+        last_name=request.get("director_last_name"),
+        birthday=clean_date(request.get("director_birthday")),
+        biography=request.get("director_biography"),
     )
 
-    # Добавляем документ как вложение
-    email.attach('договор_на_фильм.docx', file_stream.getvalue(),
-                 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+    new_movie_app.director = new_director
+    # Продюссер
+    new_producer = AppProducer.objects.update_or_create(
+        first_name=request.get("producer_first_name"),
+        last_name=request.get("producer_last_name"),
+        birthday=clean_date(request.get("producer_birthday")),
+        biography=request.get("producer_biography"),
+    )
 
-    # Отправляем письмо
-    if email.send():
-        return True
-    return False
-#
-#
-# # Открываем шаблон
-# doc = Document('/Users/arturumagulov/PycharmProjects/Altyn/contract_ooo.docx')
-#
-# # Словарь с данными для замены
-# context = {
-#     'create_date': f'{datetime.datetime.now().year}-{datetime.datetime.now().month}-{datetime.datetime.now().day}',
-# }
-#
-#
-# bold_context = {
-#     'full_name': "Юмагулов Артур Ильгизович"
-# }
-#
-#
-# # Функция для замены текста в документе
-# def replace_text(paragraph, context):
-#     for key, value in context.items():
-#         if key in paragraph.text:
-#             paragraph.text = paragraph.text.replace(f'{{{key}}}', value)
-#
-#
-# def replace_bold_text(paragraph, context):
-#     for key, value in context.items():
-#         if f'{{{key}}}' in paragraph.text:
-#             # Разбиваем текст абзаца на части до и после маркера
-#             parts = paragraph.text.split(f'{{{key}}}')
-#
-#             # Очищаем текущий текст абзаца
-#             paragraph.clear()
-#
-#             # Добавляем текст до маркера
-#             if parts[0]:
-#                 paragraph.add_run(parts[0])
-#
-#             # Добавляем значение переменной с жирным шрифтом
-#             run = paragraph.add_run(value)
-#             run.bold = True
-#
-#             # Добавляем текст после маркера
-#             if parts[1]:
-#                 paragraph.add_run(parts[1])
-#
-#
-# # Проходим по всем абзацам документа и заменяем маркеры
-# for paragraph in doc.paragraphs:
-#     replace_text(paragraph, context)
-#     replace_bold_text(paragraph, bold_context)
-#
-# # Сохранение нового документа
-# doc.save('/Users/arturumagulov/PycharmProjects/Altyn/generated_document.docx')
+    new_movie_app.producer = new_producer
 
+    new_scenarist = AppScenarist.objects.update_or_create(
+        first_name=request.get("scenarist_first_name"),
+        last_name=request.get("scenarist_last_name"),
+        birthday=clean_date(request.get("scenarist_birthday")),
+        biography=request.get("scenarist_biography"),
+    )
 
+    new_movie_app.scenarist = new_scenarist

@@ -16,6 +16,8 @@ let otherSpecialityInput = document.getElementById('other_speciality_input')
 let sendInviteButton = document.getElementById('send_invite_1')
 let inviteBody = document.querySelector('.invite-body')
 
+let musicBlock = document.querySelector('.music-block')
+
 // Contract
 
 let contractNow = document.getElementById('contract_now')
@@ -27,7 +29,7 @@ let individualButton = document.getElementById('individual')
 let legalButton = document.getElementById('legal')
 
 
-console.log(individualButton)
+// console.log(individualButton)
 
 function deleteInvite(count) {
     let invite = document.getElementById(`specialist-region_${count}`)
@@ -72,42 +74,19 @@ targetElement.forEach((elem) => {
 
         }
 
-        // Номер прокатного удостоверения
-        if (element.getAttribute('value') === 'est') {
-            rolled_certificate_num.style.display = 'block'
-            rolled_certificate_num_input.setAttribute('required', '')
-        } else {
-            rolled_certificate_num.style.display = 'none'
-            rolled_certificate_num_input.removeAttribute('required')
-            rolled_certificate_num_input.removeAttribute('value')
-        }
-
         // Музыка
 
-        if (element.id === 'true-music'){
-            compositor.style.display = 'block'
-            compositor.querySelectorAll('input').forEach((compositor_input)=> {
-                compositor_input.setAttribute('required', '')
-            })
-        } else {
-            compositor.style.display = 'none'
-            compositor.querySelectorAll('input').forEach((compositor_input)=> {
-                compositor_input.removeAttribute('required')
-            })
-        }
-
-        // Договор
-        if (element.id === 'individual') {
-            createIndividualBlock()
-        } else {
-            document.querySelector('.individual-block').textContent = ''
-        }
-
-        if (element.id === 'legal') {
-            createLegalBlock()
-        } else {
-            document.querySelector('.legal-entity').textContent = ''
-        }
+        // if (element.id === 'true-music'){
+        //     compositor.style.display = 'block'
+        //     compositor.querySelectorAll('input').forEach((compositor_input)=> {
+        //         compositor_input.setAttribute('required', '')
+        //     })
+        // } else {
+        //     compositor.style.display = 'none'
+        //     compositor.querySelectorAll('input').forEach((compositor_input)=> {
+        //         compositor_input.removeAttribute('required')
+        //     })
+        // }
     })
 })
 
@@ -124,6 +103,21 @@ regionOther.addEventListener('change', (e) => {
         other_region.style.display = 'none'
         other_region.childNodes[1].removeAttribute('required')
         other_region.childNodes[1].removeAttribute('name')
+    }
+})
+
+let rolledCertificate = document.querySelector('.rolled-certificate')
+
+
+rolledCertificate.addEventListener('click', (event)=> {
+    let child_id = event.target.childNodes[1].value
+    if (child_id === 'est') {
+        rolled_certificate_num.style.display = 'block'
+        rolled_certificate_num_input.setAttribute('required', '')
+    } else {
+        rolled_certificate_num.style.display = 'none'
+        rolled_certificate_num_input.removeAttribute('required')
+        rolled_certificate_num_input.removeAttribute('value')
     }
 })
 // Конец другие регион
@@ -161,7 +155,6 @@ passButton.addEventListener('click', ()=> {
 /// Другое Специалист
 otherSpecialityCheckbox.addEventListener('change', (e)=> {
     if(e.target.checked) {
-        console.log('true')
         otherSpecialityInput.style.display = 'block'
         otherSpecialityInput.setAttribute('required', '')
         otherSpecialityInput.setAttribute('name', 'other_speciality')
@@ -170,7 +163,6 @@ otherSpecialityCheckbox.addEventListener('change', (e)=> {
         otherSpecialityInput.style.display = 'none'
         otherSpecialityInput.removeAttribute('required')
         otherSpecialityInput.removeAttribute('name')
-        console.log('false')
     }
 })
 
@@ -221,4 +213,42 @@ contractLater.addEventListener('click', ()=>{
     }
     document.querySelector('.individual-block').textContent = ''
     document.querySelector('.legal-entity').textContent = ''
+})
+
+
+
+questBody.addEventListener('click', (event) => {
+    let child_id = event.target.childNodes[1].id
+
+    if (child_id === 'individual') {
+        createIndividualBlock()
+    } else {
+        document.querySelector('.individual-block').textContent = ''
+    }
+
+    if (child_id === 'legal') {
+        createLegalBlock()
+    } else {
+        document.querySelector('.legal-entity').textContent = ''
+    }
+})
+
+
+// Оригинальная музыка
+musicBlock.addEventListener('click', (event) => {
+    let child_id = event.target.childNodes[1]
+    if (child_id.value === 'true') {
+        compositor.style.display = 'block'
+        compositor.querySelectorAll('input').forEach((compositor_input) => {
+            compositor_input.setAttribute('required', '')
+            compositor_input.value = ''
+        })
+    } else if (child_id.value === 'false') {
+        console.log(compositor)
+        compositor.style.display = 'none'
+        compositor.querySelectorAll('input').forEach((compositor_input) => {
+            compositor_input.removeAttribute('required')
+            compositor_input.value = ''
+        })
+    }
 })
