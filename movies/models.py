@@ -4,24 +4,13 @@ from django.db import models
 from django.db.models import Avg
 from django.urls import reverse
 
+from regions.models import Region
+
 # Create your models here.
 
 
 def get_years():
     return {i: i for i in range(1970, datetime.now().year + 1)}
-
-
-class Region(models.Model):
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    name = models.CharField(verbose_name="Название", max_length=1000)
-    slug = models.SlugField()
-
-    class Meta:
-        verbose_name = "Регионы"
-        verbose_name_plural = "Регион"
-
-    def __str__(self):
-        return self.name
 
 
 class Genre(models.Model):
@@ -273,7 +262,7 @@ class Movie(models.Model):
     status = models.ForeignKey(
         Status, verbose_name="Статус", on_delete=models.CASCADE
     )
-    region = models.ManyToManyField(Region, related_name="regions")
+    region = models.ManyToManyField(Region, related_name="movie_regions")
     year = models.DecimalField(
         max_digits=4, decimal_places=0, verbose_name="Год выпуска"
     )

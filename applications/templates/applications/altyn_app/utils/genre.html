@@ -11,7 +11,7 @@
 												<ul class="application-checkboxs genre__sub-item">
                                                     {% for genre in genres_group_1 %}
                                                         <li class="application-checkbox checkbox genre__item-submenu">
-                                                            <input type="checkbox" id="genre_{{ genre.pk }}" name="genre_1" value="{{ genre.slug }}">
+                                                            <input type="checkbox" id="genre_{{ genre.pk }}" name="genre" value="{{ genre.slug }}">
                                                             <label for="genre_{{ genre.pk }}">{{ genre.name }}</label>
                                                         </li>
                                                     {% endfor %}
@@ -34,7 +34,7 @@
                                                 <ul class="application-checkboxs genre__sub-item">
                                                     {% for genre in genres_group_2 %}
                                                     <li class="application-checkbox checkbox  genre__item-submenu">
-                                                        <input type="checkbox" id="genre_{{ genre.pk }}" name="genre_2"
+                                                        <input type="checkbox" id="genre_{{ genre.pk }}" name="genre"
                                                                value="{{ genre.slug }}">
                                                         <label for="genre_{{ genre.pk }}">{{ genre.name }}</label>
                                                     </li>

@@ -147,10 +147,10 @@ RECIPIENTS_EMAIL = ['artdevi-kzn@yandex.ru ']   # замените на свою
 DEFAULT_FROM_EMAIL = 'artdevi-kzn@yandex.ru '  # замените на свою почту
 
 
-if DEBUG:
-    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# if DEBUG:
+#     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# else:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
@@ -160,8 +160,8 @@ EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = 'your@yandex.ru'
-EMAIL_HOST_PASSWORD = 'pass'
+EMAIL_HOST_USER = 'zico13288@yandex.ru'
+EMAIL_HOST_PASSWORD = 'srqtiiopxdeirvqt'
 
 EMAIL_SERVER = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER

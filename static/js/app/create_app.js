@@ -8,7 +8,7 @@ function createInvite(count) {
     Emailh4.textContent = "Email:"
 
     let EmailInput = document.createElement('input')
-    EmailInput.setAttribute('name', `email_${count}`)
+    EmailInput.setAttribute('name', `invite_email_${count}`)
     EmailInput.setAttribute('type', 'email')
     EmailInput.setAttribute('placeholder', 'Email:')
 
@@ -35,7 +35,7 @@ function createInvite(count) {
     whoIsH4.textContent = 'Кем является этот человек на вашем проекте? (фильме, который вы подаёте на кинопремию).'
 
     let whoIsInput = document.createElement('input')
-    whoIsInput.setAttribute('name', `who_is_${count}`)
+    whoIsInput.setAttribute('name', `invite_who_is_${count}`)
     whoIsInput.setAttribute('type', 'text')
 
     let inviteH4 = document.createElement('h4')
@@ -136,14 +136,35 @@ function createIndividualBlock() {
     movie_input.setAttribute('required', '')
 
 
+    let passport_H4 = document.createElement('h4')
+    passport_H4.classList.add('application-subtitle')
+    passport_H4.textContent = "Номер и серия паспорта"
+
+    let passport_input = document.createElement('input')
+    passport_input.setAttribute('type', 'text')
+    passport_input.setAttribute('name', 'passport_number')
+
+    let birthdayH4 = document.createElement('h4')
+    birthdayH4.classList.add('application-subtitle')
+    birthdayH4.textContent = "Дата рождения:"
+
+    let birthdayInput = document.createElement('input')
+    birthdayInput.setAttribute('type', 'date')
+    birthdayInput.setAttribute('value', '01.08.1998')
+    birthdayInput.setAttribute('name', 'contract_birthday')
+
     main.append(
         mainH3,
         mainH4,
         mainSpan,
         person_individual_block,
+        passport_H4,
+        passport_input,
+        birthdayH4,
+        birthdayInput,
         movie_nameH4,
         movie_span,
-        movie_input
+        movie_input,
     )
 }
 
@@ -205,7 +226,7 @@ function createLegalBlock() {
     addressTextAreaDiv.classList.add('textarea')
     addressTextAreaDiv.innerHTML = `<textarea spellcheck="true" title="до 25 слов" ` +
     `autocapitalize="sentences" name="address" cols="30" placeholder="" rows="10"></textarea> </div>` +
-    `<div><h4 class="agreement-subtitle">ИНН / КПП</h4><input type="number" name="inn"></div>` +
+    `<div><h4 class="agreement-subtitle">ИНН / КПП</h4><input type="text" name="inn"></div>` +
 `<div><h4>Расчётный счёт: </h4><input type="number" name="payroll"></div><div><h4>Название банка: </h4>` +
 `<input type="text" name="bank"></div><div><h4>БИК: </h4><input type="number" name="bik">` +
 `</div><div><h4>Коррекционный счет: </h4> <input type="number" name="correction">`

@@ -21,8 +21,8 @@
                                 <div class="specialist">
                                     <h4> Имя Фамилия:</h4>
                                     <div class="specialist-person person">
-                                        <input type="text" placeholder="Имя" name="first_name" required>
-                                        <input type="text" placeholder="Фамилия" name="last_name" required>
+                                        <input type="text" placeholder="Имя" name="specialist_first_name" required>
+                                        <input type="text" placeholder="Фамилия" name="specialist_last_name" required>
                                     </div>
                                 </div>
                                 <div class="speciality-sellect">
@@ -50,7 +50,7 @@
 
                                 <ul class="application-checkboxs  speciality-other">
 									<li class="application-checkbox checkbox genre__item-submenu">
-										<input type="checkbox" id="other_speciality">
+										<input type="checkbox" id="other_speciality" name="other_speciality">
 										<label for="other_speciality">Другое</label>
 									</li>
 								</ul>
@@ -67,7 +67,8 @@
                                                 <ul class="application-checkboxs application-checkboxs genre__sub-item">
                                                     {% for region in regions %}
                                                     <li class="application-checkbox checkbox  genre__item-submenu">
-                                                        <input type="checkbox" name="speciality_region" id="speciality_{{ region.slug }}">
+                                                        <input type="checkbox" name="speciality_region"
+                                                               id="speciality_{{ region.slug }}" value="{{ region.slug }}">
                                                         <label for="speciality_{{ region.slug }}">{{ region.name }}</label>
                                                     </li>
                                                     {% endfor %}
@@ -79,44 +80,43 @@
                                 </div>
                                 <div>
                                     <h4>Населённый пункт: </h4>
-                                    <input type="text">
+                                    <input type="text" name="speciality_city">
                                 </div>
                                 <div>
                                     <h4>Номер телефона: </h4>
-                                    <input type="tel" name="phone">
+                                    <input type="tel" name="speciality_phone">
                                 </div>
                                 <div>
                                     <h4>Email: </h4>
-                                    <input type="email" name="email">
+                                    <input type="email" name="speciality_email">
                                 </div>
                                 <div class="textarea">
                                     <h4>Ссылка на портфолио:</h4>
-                                    <textarea spellcheck="true" title="до 25 слов" type="url" autocapitalize="sentences"
-                                              name="portfolio_link" cols="30" rows="10"></textarea>
+                                    <textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences"
+                                              name="speciality_portfolio_link" cols="30" rows="10"></textarea>
                                 </div>
                                 <div class="textarea">
                                     <h4>Биография/Фильмография:</h4>
-                                    <textarea spellcheck="true" title="до 25 слов" type="url" autocapitalize="sentences" name=""
-                                        cols="30" rows="10"></textarea>
+                                    <textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences"
+                                              name="speciality_biography" cols="30" rows="10"></textarea>
                                 </div>
                                 <div class="textarea">
                                     <h4>Ссылка на социальные сети/мессенджеры:</h4>
-                                    <textarea spellcheck="true" title="до 25 слов" type="url" autocapitalize="sentences" name=""
-                                        cols="30" rows="10"></textarea>
+                                    <textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences"
+                                              name="speciality_social_link" cols="30" rows="10"></textarea>
                                 </div>
                                 <div class="send-invitation">
-                                    <h4 class="application-subtitle">Отправить приглашение на заполнение анкеты члену съемочной команды
-                                    </h4>
+                                    <h4 class="application-subtitle">Отправить приглашение на заполнение анкеты члену
+                                        съемочной команды</h4>
                                     <ul class="application-checkboxs ">
                                         <li class="application-checkbox checkbox ">
                                             <input type="checkbox" id="send_invite_1" class="send-invite_1">
                                             <label for="send_invite_1">Отправить</label>
                                         </li>
                                     </ul>
-                                    <p class="send-invitation__text">Отправление приглашения члену съемочной команды даёт возможность
-                                        расширить базу
-                                        специалистов, а также
-                                        расширить информацию о вашем фильме в кинотеке.</p>
+                                    <p class="send-invitation__text">Отправление приглашения члену съемочной команды
+                                        даёт возможность расширить базу специалистов, а также расширить информацию о
+                                        вашем фильме в кинотеке.</p>
                                 </div>
                             </div>
 <!-- Приглашение -->

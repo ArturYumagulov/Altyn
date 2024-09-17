@@ -39,141 +39,61 @@
                         <form action="{% url 'create_altyn_app' %}" method="post">
                             {% csrf_token %}
                             <input type="hidden" name="invite_count" id="invite_count" value="0">
+                            <input type="hidden" name="region_map" id="region_count" value="1">
+                            <input type="hidden" name="contract_status" id="contract_status" value="later">
 
-                        {% include 'applications/altyn_app/utils/movie_title.html' %}
+
+                            {% include 'applications/altyn_app/utils/movie_title.html' %}
                             
-						<div class="your-debut">
+						    <div class="your-debut">
 
-                            {% include 'applications/altyn_app/utils/debut.html' %}
+                                {% include 'applications/altyn_app/utils/debut.html' %}
 
-                            {% include 'applications/altyn_app/utils/type.html' %}
+                                {% include 'applications/altyn_app/utils/type.html' %}
 
-                            {% include 'applications/altyn_app/utils/category.html' %}
-                            
-                            {% include 'applications/altyn_app/utils/genre.html' %}
+                                {% include 'applications/altyn_app/utils/category.html' %}
 
-                            {% include 'applications/altyn_app/utils/timing.html' %}
+                                {% include 'applications/altyn_app/utils/genre.html' %}
 
-                            {% include 'applications/altyn_app/utils/logline.html' %}
+                                {% include 'applications/altyn_app/utils/timing.html' %}
 
-                            {% include 'applications/altyn_app/utils/year.html' %}
+                                {% include 'applications/altyn_app/utils/logline.html' %}
 
-                            {% include 'applications/altyn_app/utils/rolled_certificate.html' %}
+                                {% include 'applications/altyn_app/utils/year.html' %}
 
-                            {% include 'applications/altyn_app/utils/age_limit.html' %}
+                                {% include 'applications/altyn_app/utils/rolled_certificate.html' %}
 
-                            <!-- РЕГИОН -->
+                                {% include 'applications/altyn_app/utils/age_limit.html' %}
 
-                            {% include 'applications/altyn_app/utils/region.html' %}
+                                <!-- РЕГИОН -->
 
-                            {% include 'applications/altyn_app/utils/shooting_group.html' %}
+                                {% include 'applications/altyn_app/utils/region.html' %}
 
-
-                            <!-- Карта Регионов -->
-
-                            {% include 'applications/altyn_app/utils/region_map_question.html' %}
-
-                            <!-- Портфолио фильма -->
-
-                            {% include 'applications/altyn_app/utils/movie_portfolio.html' %}
-
-                            {% include 'applications/altyn_app/utils/copyright_information.html' %}
-
-                            {% include 'applications/altyn_app/utils/contract.html' %}
+                                {% include 'applications/altyn_app/utils/shooting_group.html' %}
 
 
-                            <div class="submit-request">
-                                <a href="#">
-                                    <p class="agreement-subtitle">Нажимая отправить вы соглашаетесь с обработкой
-                                        персональных данных.
-                                    </p>
-                                </a>
-                                <button type="submit" class="btn application-btn">Отправить заявку</button>
+                                <!-- Карта Регионов -->
+
+                                {% include 'applications/altyn_app/utils/region_map_question.html' %}
+
+                                <!-- Портфолио фильма -->
+
+                                {% include 'applications/altyn_app/utils/movie_portfolio.html' %}
+
+                                {% include 'applications/altyn_app/utils/copyright_information.html' %}
+
+                                {% include 'applications/altyn_app/utils/contract.html' %}
+
+
+                                <div class="submit-request">
+                                    <a href="#">
+                                        <p class="agreement-subtitle">Нажимая отправить вы соглашаетесь с обработкой
+                                            персональных данных.
+                                        </p>
+                                    </a>
+                                    <button type="submit" class="btn application-btn">Отправить заявку</button>
+                                </div>
                             </div>
-
-
-{#								<div class="individual">#}
-{#									<h4 class="application-subtitle">Вы являетесь</h4>#}
-{#									<ul class="application-checkeds application-request application-view">#}
-{#										<li class="application-checked checkbox ">#}
-{#											<input class="" type="checked" value="1" name="nameradio">#}
-{#											Физическое лицо#}
-{#										</li>#}
-{#										<li class="application-checked checkbox ">#}
-{#											<input class="" type="checked" value="1" name="nameradio">#}
-{#											Юридическое лицо#}
-{#										</li>#}
-{#									</ul>#}
-{#									<h3 class="application-title">Физическое лицо</h3>#}
-{#									<h4> Фамилия Имя Отчество правообладателя</h4>#}
-{#									<span class="agreement-subtitle">в именительном падеже</span>#}
-{#									<div class="individual-person person">#}
-{#										<input type="text" placeholder="Фамилия" value="">#}
-{#										<input type="text" placeholder="Имя" value="">#}
-{#										<input type="text" placeholder="Отчество" value="">#}
-{#									</div>#}
-{#									<h4 class="application-title">Название фильма </h4>#}
-{#									<span for="">без кавычек</span>#}
-{#									<input type="text" name="" id="">#}
-{#									<div class="submit-individual">#}
-{#										<p class="submit-individual__title">После отправки формы, мы сформируем Вам договор на#}
-{#											некоммерческие#}
-{#											показы и#}
-{#											отправим его Вам на почту</p>#}
-{#										<a href="#" class="btn application-btn">Сформировать договор</a>#}
-{#									</div>#}
-{#								</div>#}
-{#								<div class="legal-entity">#}
-{#									<h3 class="application-title">Юридическое лицо</h3>#}
-{#									<div class="entity">#}
-{#										<h4>Наименование организации: </h4>#}
-{#										<span class="agreement-subtitle">В соответствии с уставом/лицензией</span>#}
-{#										<input type="text" name="" id="">#}
-{#									</div>#}
-{#									<div>#}
-{#										<h4 class="application-subtitle ">Фамилия Имя Отчество: </h4>#}
-{#										<span class="agreement-subtitle">В соответствии с уставом/лицензией</span>#}
-{#										<div class="legal-person person">#}
-{#											<input type="text" placeholder="Фамилия" value="">#}
-{#											<input type="text" placeholder="Имя" value="">#}
-{#											<input type="text" placeholder="Отчество" value="">#}
-{#										</div>#}
-{#									</div>#}
-{#									<div>#}
-{#										<h4>Название фильма: </h4>#}
-{#										<span class="agreement-subtitle"> (без кавычек)</span>#}
-{#										<input type="text" name="" id="">#}
-{#									</div>#}
-{#									<h4 class="agreement-subtitle">Адрес регистрации (индекс, регион, населенный пункт, улица, дом)</h4>#}
-{#									<div class="textarea">#}
-{#										<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences" name="" id="" cols="30"#}
-{#											placeholder="#}
-{#									" rows="10"></textarea>#}
-{#									</div>#}
-{#									<div>#}
-{#										<h4 class="agreement-subtitle">ИНН / КПП</h4>#}
-{#										<input type="number" name="" id="">#}
-{#									</div>#}
-{#									<div>#}
-{#										<h4>Расчётный счёт: </h4>#}
-{#										<input type="number" name="" id="">#}
-{#									</div>#}
-{#									<div>#}
-{#										<h4>Название банка: </h4>#}
-{#										<input type="text" name="" id="">#}
-{#									</div>#}
-{#									<div>#}
-{#										<h4>БИК: </h4>#}
-{#										<input type="number" name="" id="">#}
-{#									</div>#}
-{#									<div>#}
-{#										<h4>Коррекционный счет: </h4>#}
-{#										<input type="number" name="" id="">#}
-{#									</div>#}
-{#								</div>#}
-{#								<a href="#" class="btn application-btn legal-btn">Сформировать договор</a>#}
-{#							</div>#}
-						</div>
                         </form>
 					</div>
 				</div>
@@ -184,4 +104,5 @@
 {% endblock %}
 {% block script %}
     <script src="{% static 'js/app/script.js' %}"></script>
+{#    <script src="{% static 'js/app/valid_app.js' %}"></script>#}
 {% endblock %}

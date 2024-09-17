@@ -29,6 +29,11 @@ let individualButton = document.getElementById('individual')
 let legalButton = document.getElementById('legal')
 
 
+let agreement_to_placement = document.getElementById('agreement_to_placement')
+let agreement_to_vote = document.getElementById('agreement_to_vote')
+let agreement_to_no_commerce_show = document.getElementById('agreement_to_no_commerce_show')
+
+
 // console.log(individualButton)
 
 function deleteInvite(count) {
@@ -150,6 +155,7 @@ buttons.forEach((button) => {
 
 // Пропустить регион
 passButton.addEventListener('click', ()=> {
+    document.getElementById('region_count').value = "0"
     document.querySelector('.region-app-block').textContent = ''
 })
 /// Другое Специалист
@@ -193,6 +199,7 @@ inviteBody.addEventListener('click', (event) => {
 // кнопки появления договора
 contractNow.addEventListener('click', ()=>{
     questBody.classList.add('show')
+    document.getElementById('contract_status').value = 'now'
     let quest_input = questBody.querySelectorAll('input')
     if (quest_input.length > 0) {
         quest_input.forEach((input) => {
@@ -204,6 +211,7 @@ contractNow.addEventListener('click', ()=>{
 // кнопки исчезания договора
 contractLater.addEventListener('click', ()=>{
     questBody.classList.remove('show')
+    document.getElementById('contract_status').value = 'later'
     let quest_input = questBody.querySelectorAll('input')
     if (quest_input.length > 0) {
         quest_input.forEach((input) => {
@@ -216,20 +224,26 @@ contractLater.addEventListener('click', ()=>{
 })
 
 
-
+// Договор
 questBody.addEventListener('click', (event) => {
-    let child_id = event.target.childNodes[1].id
+    let child_id = event.target.childNodes[1]
 
-    if (child_id === 'individual') {
+    if (child_id.id === 'individual') {
         createIndividualBlock()
+        legalButton.removeAttribute('required')
     } else {
+        legalButton.setAttribute('required', '')
         document.querySelector('.individual-block').textContent = ''
     }
 
-    if (child_id === 'legal') {
+    if (child_id.id === 'legal') {
         createLegalBlock()
+        console.log(individualButton)
+        individualButton.removeAttribute('required')
     } else {
+        individualButton.setAttribute('required', '')
         document.querySelector('.legal-entity').textContent = ''
+
     }
 })
 
@@ -237,18 +251,50 @@ questBody.addEventListener('click', (event) => {
 // Оригинальная музыка
 musicBlock.addEventListener('click', (event) => {
     let child_id = event.target.childNodes[1]
-    if (child_id.value === 'true') {
+    document.getElementById('false-music').removeAttribute('required')
+    document.getElementById('true-music').setAttribute('required', '')
+    if (child_id.value === '1') {
+        console.log(child_id)
         compositor.style.display = 'block'
         compositor.querySelectorAll('input').forEach((compositor_input) => {
             compositor_input.setAttribute('required', '')
             compositor_input.value = ''
         })
-    } else if (child_id.value === 'false') {
+    } else if (child_id.value === '0') {
+        document.getElementById('false-music').setAttribute('required', '')
+        document.getElementById('true-music').removeAttribute('required')
         console.log(compositor)
         compositor.style.display = 'none'
         compositor.querySelectorAll('input').forEach((compositor_input) => {
             compositor_input.removeAttribute('required')
             compositor_input.value = ''
         })
+    }
+})
+
+// Согласия
+agreement_to_placement.addEventListener('change', (e)=> {
+    if (e.target.checked === true) {
+        agreement_to_placement.value = 1
+    } else {
+        agreement_to_placement.value = 0
+    }
+})
+
+
+agreement_to_vote.addEventListener('change', (e)=> {
+    if (e.target.checked === true) {
+        agreement_to_vote.value = 1
+    } else {
+        agreement_to_vote.value = 0
+    }
+})
+
+
+agreement_to_no_commerce_show.addEventListener('change', (e)=> {
+    if (e.target.checked === true) {
+        agreement_to_no_commerce_show.value = 1
+    } else {
+        agreement_to_no_commerce_show.value = 0
     }
 })

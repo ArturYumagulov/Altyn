@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from movies.models import Movie, Genre, Category, Kind, AgeLimit, Region
-from regions.models import Speciality, Specialist
+from movies.models import Movie, Genre, Category, Kind, AgeLimit
+from regions.models import Speciality, Specialist, Region
 
 User = get_user_model()
 
@@ -76,6 +76,7 @@ class CopyrightInformation(models.Model):
 
 
 class MovieContract(models.Model):
+
     legal = models.BooleanField(verbose_name="Юридическое лицо", default=False)
     individual = models.BooleanField(verbose_name="Физическое лицо", default=False)
     organization_name = models.CharField(max_length=2000, verbose_name="Название организации", blank=True, null=True,
@@ -90,21 +91,23 @@ class MovieContract(models.Model):
     bank = models.CharField(verbose_name="Название банка", max_length=1000, blank=True, null=True)
     bik = models.CharField(verbose_name="БИК", max_length=1000, blank=True, null=True)
     correction = models.CharField(verbose_name="Коррекционный счет", max_length=1000, blank=True, null=True)
+    created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
+    edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
+    birthday = models.DateField(verbose_name="Дата рождения", blank=True, null=True, default=None)
+    passport_number = models.CharField(verbose_name="Номер паспорта", blank=True, null=True, default=None,
+                                       max_length=100)
 
 
 class MovieApp(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name="Статус")
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(max_length=500, verbose_name="Название фильма")
-    # image = models.ImageField(upload_to="movie_image/", verbose_name="Картинка")
     year = models.DecimalField(max_digits=4, decimal_places=0, verbose_name="Год выпуска")
     rolled_certificate = models.CharField(verbose_name="Прокатное удостоверение", null=True, blank=True,
                                           max_length=1000)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Категория")
     kind = models.ForeignKey(Kind, on_delete=models.PROTECT, verbose_name="Вид", blank=True, null=True, default=None)
-    trailer = models.URLField()
     director = models.ForeignKey(
         AppDirector,
         on_delete=models.CASCADE,
@@ -130,7 +133,7 @@ class MovieApp(models.Model):
     # trailer = models.URLField()
 
     timing = models.CharField(verbose_name="Хронометраж", max_length=20)
-    actors = models.TextField(verbose_name="В ролях")
+    actors = models.TextField(verbose_name="В ролях",  blank=True, null=True, default=None)
     age_limit = models.ForeignKey(
         AgeLimit, on_delete=models.CASCADE, verbose_name="Возрастное ограничение"
     )
@@ -138,9 +141,10 @@ class MovieApp(models.Model):
     debut = models.BooleanField(default=False, verbose_name="Дебютный")
     music = models.BooleanField(default=False, verbose_name="Оригинальная музыка")
     country = models.CharField(max_length=2000, verbose_name="Страна", blank=True, null=True, default=None)
+    other_country = models.CharField(max_length=2000, verbose_name="Другая страна", blank=True, null=True, default=None)
     other_region = models.CharField(max_length=2000, verbose_name="Другой регион", blank=True, null=True, default=None)
     slug = models.SlugField()
-    movie = models.ForeignKey(Movie, on_delete=models.PROTECT, verbose_name="Фильм")
+    # movie = models.ForeignKey(Movie, on_delete=models.PROTECT, verbose_name="Фильм")
 
     # Shooting_Group
 
@@ -165,31 +169,35 @@ class MovieApp(models.Model):
     other_shooting_group = models.TextField(verbose_name="Остальные члены съемочной команды", blank=True,
                                             null=True, default=None)
 
-    into_to_role = models.TextField(verbose_name="В ролях", blank=True, null=True, default=None)
-    portfolio = models.OneToOneField(MoviePortfolio, verbose_name="Ссылка на портфолио", on_delete=models.PROTECT)
-    copyright_information = models.OneToOneField(CopyrightInformation, verbose_name="Информация о правообладателе",
-                                                 on_delete=models.PROTECT)
-    agreement_to_placement = models.BooleanField(default=False, verbose_name="согласие на размещение на сайте")
-    agreement_to_vote = models.BooleanField(default=False, verbose_name="согласие на голосование")
-    agreement_to_no_commerce_show = models.BooleanField(default=False, verbose_name="согласие на некоммерческие показы")
+    agreement_to_placement = models.BooleanField(default=False, verbose_name="согласие на размещение на сайте",
+                                                 null=True)
+    agreement_to_vote = models.BooleanField(default=False, verbose_name="согласие на голосование", null=True)
+    agreement_to_no_commerce_show = models.BooleanField(default=False, verbose_name="согласие на некоммерческие показы",
+                                                        null=True)
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
 
-    genre = models.ManyToManyField(Genre, verbose_name="Жанр", blank=True, default=None)
+    portfolio = models.OneToOneField(MoviePortfolio, verbose_name="Ссылка на портфолио", on_delete=models.PROTECT)
+    copyright_information = models.OneToOneField(CopyrightInformation, verbose_name="Информация о правообладателе",
+                                                 on_delete=models.PROTECT)
+    contract = models.OneToOneField(MovieContract, on_delete=models.PROTECT, verbose_name="Договор")
 
+    genre = models.ManyToManyField(Genre, verbose_name="Жанр", blank=True, default=None)
+    regions = models.ManyToManyField(Region, verbose_name="Регионы", blank=True, default=None)
+
+    def __str__(self):
+        return f"Заявка на фильм - {self.name}"
 
 
 class SpecialistApp(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.PROTECT)
-    is_active = models.BooleanField(default=False, verbose_name="Активность")
     first_name = models.CharField(verbose_name="Имя", max_length=100, blank=True, null=True)
     last_name = models.CharField(verbose_name="Фамилия", max_length=100, blank=True, null=True)
-    speciality = models.ManyToManyField(Speciality, related_name="app_specialities")
     other_speciality = models.CharField(verbose_name="Другая специальность", max_length=1000,
                                         blank=True, null=True, default=None)
     portfolio = models.URLField(verbose_name="Ссылка на портфолио")
-    region = models.ForeignKey(Region, on_delete=models.PROTECT, verbose_name="Регион")
+    region = models.ManyToManyField(Region, verbose_name="Регион")
     city = models.CharField(verbose_name="Населенный пункт", max_length=1000)
     phone = models.CharField(verbose_name="Телефон", max_length=20)
     email = models.EmailField(max_length=225, verbose_name="Электронный адрес")
@@ -197,7 +205,8 @@ class SpecialistApp(models.Model):
     descriptions = models.TextField(verbose_name="Дополнительно")
     status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name="Статус")
     biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
-    spec = models.ForeignKey(Specialist, on_delete=models.PROTECT, blank=True, null=True, default=None)
+    speciality = models.ManyToManyField(Speciality, related_name="app_specialities")
+
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
 

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from applications.services import save_app
+from applications.services import save_app, create_region_speciality, save_invite
 from movies import models
 from regions.models import Region, Speciality
 
@@ -35,13 +35,21 @@ def altyn_app_page(requests):
 
 def create_altyn_app(request):
     if request.method == "POST":
-        print(request.POST)
+
         if request.user.is_authenticated:
+            invite_count = int(request.POST.get('invite_count'))  # Количество приглашений
+            print(request.POST)
+            if request.POST.get('region_map'):
+                create_region_speciality(request)
+            if invite_count > 0:
+                save_invite(request)
             # save_movie(request)
             save_app(request)
-            return render(request, "base.html")
+            return HttpResponse(
+                '<h1>OK</h1>'
+            )
         else:
-            return render(request, "base.html")
+            return render(request, "res_login.html")
     return render(request, "base.html")
 
 

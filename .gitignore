@@ -418,6 +418,4 @@ static/fonts
 static/video
 static/js/jquery
 static/js/front
-contract/contract.doc
-contract/contract_ooo.docx
-contract/generated_document.docx
+contract
