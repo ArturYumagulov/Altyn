@@ -54,7 +54,7 @@ class Category(models.Model):
         return self.name
 
 
-class Status(models.Model):
+class MovieStatus(models.Model):
 
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(max_length=500, verbose_name="Статус")
@@ -260,9 +260,9 @@ class Movie(models.Model):
     name = models.CharField(max_length=500, verbose_name="Название фильма")
     image = models.ImageField(upload_to="movie_image/", verbose_name="Картинка")
     status = models.ForeignKey(
-        Status, verbose_name="Статус", on_delete=models.CASCADE
+        MovieStatus, verbose_name="Статус", on_delete=models.CASCADE
     )
-    region = models.ManyToManyField(Region, related_name="movie_regions")
+    regions = models.ManyToManyField(Region, related_name="movie_regions")
     year = models.DecimalField(
         max_digits=4, decimal_places=0, verbose_name="Год выпуска"
     )
@@ -308,9 +308,7 @@ class Movie(models.Model):
         blank=True,
     )
 
-    rolled_certificate = models.ForeignKey(RollerCertificate, on_delete=models.PROTECT,
-                                           verbose_name="Прокатное удостоверение", null=True, blank=True
-                                           )
+    rolled_certificate = models.CharField(verbose_name="Прокатное удостоверение", null=True, blank=True, max_length=1000)
 
     trailer = models.URLField()
 

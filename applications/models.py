@@ -19,48 +19,6 @@ class Status(models.Model):
         return self.name
 
 
-class AppDirector(models.Model):
-
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
-    first_name = models.CharField(max_length=150, verbose_name="Имя")
-    birthday = models.DateField(
-        verbose_name="Дата рождения", blank=True, null=True, default=None
-    )
-    biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
-
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"
-
-
-class AppScenarist(models.Model):
-
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
-    first_name = models.CharField(max_length=150, verbose_name="Имя")
-    birthday = models.DateField(
-        verbose_name="Дата рождения", blank=True, null=True, default=None
-    )
-    biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
-
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"
-
-
-class AppProducer(models.Model):
-
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
-    first_name = models.CharField(max_length=150, verbose_name="Имя")
-    birthday = models.DateField(
-        verbose_name="Дата рождения", blank=True, null=True, default=None
-    )
-    biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
-
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"
-
-
 class MoviePortfolio(models.Model):
     festivals = models.TextField(verbose_name="Участие в фестивалях")
     internet = models.TextField(verbose_name="Охват в интернете")
@@ -98,74 +56,55 @@ class MovieContract(models.Model):
                                        max_length=100)
 
 
+class ShootingGroupSpecialist(models.Model):
+    is_active = models.BooleanField(default=False, verbose_name="Активность")
+    name = models.CharField(max_length=1000, verbose_name="Наименование специальности")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        verbose_name_plural = "Специалист съемочной группы"
+        verbose_name = "Специалист съемочной группы"
+
+
+class MainShootingGroup(models.Model):
+    speciality = models.ForeignKey(ShootingGroupSpecialist, on_delete=models.PROTECT)
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=150, verbose_name="Имя")
+    birthday = models.DateField(
+        verbose_name="Дата рождения", blank=True, null=True, default=None
+    )
+    biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+
 class MovieApp(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name="Статус")
     name = models.CharField(max_length=500, verbose_name="Название фильма")
     year = models.DecimalField(max_digits=4, decimal_places=0, verbose_name="Год выпуска")
-    rolled_certificate = models.CharField(verbose_name="Прокатное удостоверение", null=True, blank=True,
-                                          max_length=1000)
+    rolled_certificate = models.CharField(verbose_name="Прокатное удостоверение", null=True, blank=True, max_length=1000)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Категория")
     kind = models.ForeignKey(Kind, on_delete=models.PROTECT, verbose_name="Вид", blank=True, null=True, default=None)
-    director = models.ForeignKey(
-        AppDirector,
-        on_delete=models.CASCADE,
-        verbose_name="Режиссер",
-        null=True,
-        blank=True,
-    )
-    producer = models.ForeignKey(
-        AppProducer,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        verbose_name="Продюссер",
-    )
-    scenarist = models.ForeignKey(
-        AppScenarist,
-        on_delete=models.CASCADE,
-        verbose_name="Сценарист",
-        null=True,
-        blank=True,
-    )
-
-    # trailer = models.URLField()
-
     timing = models.CharField(verbose_name="Хронометраж", max_length=20)
     actors = models.TextField(verbose_name="В ролях",  blank=True, null=True, default=None)
-    age_limit = models.ForeignKey(
-        AgeLimit, on_delete=models.CASCADE, verbose_name="Возрастное ограничение"
-    )
+    age_limit = models.ForeignKey(AgeLimit, on_delete=models.CASCADE, verbose_name="Возрастное ограничение")
     logline = models.TextField(verbose_name="Логлайн")
     debut = models.BooleanField(default=False, verbose_name="Дебютный")
     music = models.BooleanField(default=False, verbose_name="Оригинальная музыка")
     country = models.CharField(max_length=2000, verbose_name="Страна", blank=True, null=True, default=None)
     other_country = models.CharField(max_length=2000, verbose_name="Другая страна", blank=True, null=True, default=None)
     other_region = models.CharField(max_length=2000, verbose_name="Другой регион", blank=True, null=True, default=None)
-    slug = models.SlugField()
     # movie = models.ForeignKey(Movie, on_delete=models.PROTECT, verbose_name="Фильм")
 
     # Shooting_Group
-
-    compositor_first_name = models.CharField(max_length=1000, verbose_name="Имя композитора", blank=True, null=True,
-                                             default=None)
-    compositor_last_name = models.CharField(max_length=1000, verbose_name="Фамилия композитора", blank=True, null=True,
-                                            default=None)
-
-    operator_first_name = models.CharField(max_length=1000)
-    operator_last_name = models.CharField(max_length=1000)
-
-    artistical_director_first_name = models.CharField(verbose_name="Имя художник постановщик", max_length=1000,
-                                                      blank=True, null=True, default=None)
-    artistical_director_last_name = models.CharField(verbose_name="Фамилия художник постановщик", max_length=1000,
-                                                     blank=True, null=True, default=None)
-
-    costume_designer_first_name = models.CharField(verbose_name="Имя художник по костюмам", max_length=1000, blank=True,
-                                                   null=True, default=None)
-    costume_designer_last_name = models.CharField(verbose_name="Имя художник по костюмам", max_length=1000, blank=True,
-                                                  null=True, default=None)
-
+    shooting_group = models.ManyToManyField(MainShootingGroup, null=True,  default=None)
     other_shooting_group = models.TextField(verbose_name="Остальные члены съемочной команды", blank=True,
                                             null=True, default=None)
 
@@ -196,14 +135,14 @@ class SpecialistApp(models.Model):
     last_name = models.CharField(verbose_name="Фамилия", max_length=100, blank=True, null=True)
     other_speciality = models.CharField(verbose_name="Другая специальность", max_length=1000,
                                         blank=True, null=True, default=None)
-    portfolio = models.URLField(verbose_name="Ссылка на портфолио")
+    portfolio = models.URLField(verbose_name="Ссылка на портфолио", null=True, default=None)
     region = models.ManyToManyField(Region, verbose_name="Регион")
-    city = models.CharField(verbose_name="Населенный пункт", max_length=1000)
-    phone = models.CharField(verbose_name="Телефон", max_length=20)
-    email = models.EmailField(max_length=225, verbose_name="Электронный адрес")
-    social_link = models.TextField(verbose_name="Ссылка на социальные сети")
-    descriptions = models.TextField(verbose_name="Дополнительно")
-    status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name="Статус")
+    city = models.CharField(verbose_name="Населенный пункт", max_length=1000, null=True, default=None)
+    phone = models.CharField(verbose_name="Телефон", max_length=20, null=True, default=None)
+    email = models.EmailField(max_length=225, verbose_name="Электронный адрес", null=True, default=None)
+    social_link = models.TextField(verbose_name="Ссылка на социальные сети", null=True, default=None)
+    descriptions = models.TextField(verbose_name="Дополнительно", null=True, default=None)
+    status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name="Статус", null=True, default=None)
     biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
     speciality = models.ManyToManyField(Speciality, related_name="app_specialities")
 

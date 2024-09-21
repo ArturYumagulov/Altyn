@@ -10,7 +10,7 @@ class MovieAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
 
 
-@admin.register(models.Status)
+@admin.register(models.MovieStatus)
 class ModelNameAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
 

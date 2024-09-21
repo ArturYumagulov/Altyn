@@ -42,7 +42,7 @@ def send_word_via_email(typing, context=None, movie_name="", email=""):
         subject='Ваш документ Word',
         body='Пожалуйста, найдите вложение с вашим документом.',
         from_email=settings.EMAIL_HOST_USER,  # Ваш email
-        to=[f"{email}"]  # Получатель письма
+        to=[f"{email}", 'vladakrylova@ya.ru']  # Получатель письма
     )
 
     email.attach(f'договор_на_фильм_{movie_name}.docx', file_stream.getvalue(),

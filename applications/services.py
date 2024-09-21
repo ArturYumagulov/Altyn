@@ -2,9 +2,9 @@ import json
 from datetime import datetime
 
 from regions.models import Region, Speciality
-from .models import MovieApp, AppDirector, AppProducer, AppScenarist, MoviePortfolio, CopyrightInformation, Status, \
+from .models import MovieApp, MoviePortfolio, CopyrightInformation, Status, \
     InviteSpecialists, SpecialistApp, MovieContract
-from movies.models import Category, Kind, RollerCertificate, AgeLimit, Genre
+from movies.models import Category, Kind, RollerCertificate, AgeLimit, Genre, Movie, MovieStatus
 from .send_contract import send_word_via_email
 
 
@@ -41,6 +41,7 @@ def get_rolled_certificates(request):
 
 
 def legal_contract_context(new_contract):
+
     context = {
         'organization_name': new_contract.organization_name,
         'first_name': new_contract.first_name,
@@ -55,8 +56,7 @@ def legal_contract_context(new_contract):
         'bank': new_contract.bank,
         'bik': new_contract.bik,
         'correction': new_contract.correction,
-        'created_date': f"{new_contract.created_date.year}-{new_contract.created_date.month}-"
-                        f"{new_contract.created_date.day}"
+        'created_date': new_contract.created_date.strftime('%d-%m-%Y')
     }
     return context
 
@@ -70,13 +70,13 @@ def individual_contract_context(new_contract):
         'surname': new_contract.surname,
         'name': new_contract.movie_name,
         'passport_number': new_contract.passport_number,
-        'birthday': new_contract.birthday
+        'birthday': new_contract.birthday,
+        'created_date': new_contract.created_date.strftime('%d-%m-%Y')
     }
     return context
 
 
 def save_app(request):
-    print(request)
 
     new_movie_app = MovieApp()
 
@@ -181,6 +181,8 @@ def save_app(request):
         new_contract.bank = request.get('bank')
         new_contract.bik = request.get('bik')
         new_contract.correction = request.get('correction')
+        new_contract.passport_number = request.get('passport_number')
+        new_contract.birthday = request.get('contract_birthday')
         new_contract.save()
 
         if request.get('contract_type') == 'legal':
@@ -266,3 +268,32 @@ def create_region_speciality(request):
         new_region_specialist.speciality.add(Speciality.objects.get(slug=speciality))
 
     new_region_specialist.save()
+
+
+def save_movie(request):
+    new_movie = Movie()
+    new_movie.status = MovieStatus.objects.get(name="Черновик")
+    print(request)
+    request = request.POST
+
+    new_movie.name = request.get("name")
+    new_movie.year = request.get("year")
+    new_movie.rolled_certificate = get_rolled_certificates(request)
+    new_movie.timing = request.get("timing")
+    new_movie.logline = request.get('logline')
+    new_movie.debut = request.get('debut')
+    new_movie.music = request.get('music')
+    new_movie.country = request.get('country')
+
+    new_movie.category = Category.objects.get(slug=request.get("category"))
+    new_movie.kind = Kind.objects.get(slug=request.get("kind"))
+    new_movie.age_limit = AgeLimit.objects.get(slug=request.get('age_limit'))
+
+    new_movie.save()
+
+    for region in request.getlist('region'):
+        new_movie.regions.add(Region.objects.get(slug=region))
+
+    new_movie.save()
+
+

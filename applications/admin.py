@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Status, AppDirector, AppProducer, AppScenarist, MovieApp, SpecialistApp
+from .models import Status, MovieApp, SpecialistApp
 
 # Register your models here.
 
@@ -7,11 +7,6 @@ from .models import Status, AppDirector, AppProducer, AppScenarist, MovieApp, Sp
 @admin.register(Status)
 class StatusAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-
-
-@admin.register(AppDirector)
-class AppDirectorAdmin(admin.ModelAdmin):
-    pass
 
 
 @admin.register(MovieApp)
