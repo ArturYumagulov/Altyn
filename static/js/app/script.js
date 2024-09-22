@@ -18,6 +18,94 @@ let inviteBody = document.querySelector('.invite-body')
 
 let musicBlock = document.querySelector('.music-block')
 
+let specialists_id = {
+        'producer': {
+            'specialist': 'producer',
+            'name': 'Продюсер:',
+            'subname': 'продюсера',
+        },
+        'stage-director': {
+            'specialist': 'stage-director',
+            'name': 'Режиссер-постановщик:',
+            'subname': 'режиссера-постановщика:',
+        }
+}
+
+function createSpecialistBlock(specialist, name, subname, count) {
+    let specialist_block = document.querySelector(`.new-${specialist}`)
+
+    let div = document.createElement('div')
+    div.classList.add(specialist)
+
+    let specH4 = document.createElement('h4')
+    specH4.textContent = name
+
+    let namesDiv = document.createElement('div')
+    namesDiv.classList.add('producer-person', 'person')
+
+    div.append(specH4, namesDiv)
+
+    let names1Input = document.createElement('input')
+    names1Input.setAttribute('type', 'text')
+    names1Input.setAttribute('placeholder', 'Имя')
+    names1Input.setAttribute('name', `producer_first_name_${count}`)
+    names1Input.setAttribute('required', ``)
+
+    let names2Input = document.createElement('input')
+    names2Input.setAttribute('type', 'text')
+    names2Input.setAttribute('placeholder', 'Имя')
+    names2Input.setAttribute('name', `producer_last_name_${count}`)
+    names2Input.setAttribute('required', ``)
+
+    namesDiv.append(names1Input, names2Input)
+
+    let specialistBirthdayDiv = document.createElement('div')
+    specialistBirthdayDiv.classList.add(`${specialist}-date`)
+    let specialistBirthdayH4 = document.createElement('h4')
+    specialistBirthdayH4.textContent = `Дата рождения ${subname}:`
+    let specialistBirthdayInput = document.createElement('input')
+    specialistBirthdayInput.setAttribute('type', 'text')
+    specialistBirthdayInput.setAttribute('value', 'дд.мм.гггг')
+    specialistBirthdayInput.setAttribute('name', `${specialist}_birthday_${count}`)
+    specialistBirthdayInput.setAttribute('required', '')
+
+    specialistBirthdayDiv.append(specialistBirthdayH4, specialistBirthdayInput)
+
+    let biographyDiv = document.createElement('div')
+    biographyDiv.classList.add(`biography-${specialist}`, 'textarea')
+    let biographyH4 = document.createElement('h4')
+    biographyH4.textContent = `Биография/Фильмография ${subname}:`
+    let biographyTextArea = document.createElement('textarea')
+    biographyTextArea.setAttribute('spellcheck', 'true')
+    biographyTextArea.setAttribute('title', 'до 25 слов')
+    biographyTextArea.setAttribute('autocapitalize', 'sentences')
+    biographyTextArea.setAttribute('cols', '30')
+    biographyTextArea.setAttribute('rows', '10')
+    biographyTextArea.setAttribute('required', '')
+    biographyTextArea.setAttribute('name', `${specialist}_biography_${count}`)
+
+    biographyDiv.append(biographyH4, biographyTextArea)
+
+    let addButton = document.createElement('div')
+    addButton.classList.add('speciality-add')
+    let addButtonA = document.createElement('a')
+    addButtonA.classList.add('btn', 'speciality-add__btn')
+    addButtonA.setAttribute('id', `${specialist}-add-${count}`)
+    let addSpan = document.createElement('span')
+    addSpan.setAttribute("data-type", "add")
+    addSpan.textContent = "+"
+    addButtonA.append(addSpan)
+
+    addButton.append(addButtonA)
+
+    specialist_block.append(
+        div,
+        specialistBirthdayDiv,
+        biographyDiv,
+        addButton
+    )
+}
+
 // Contract
 
 let contractNow = document.getElementById('contract_now')
@@ -78,20 +166,6 @@ targetElement.forEach((elem) => {
             group_1.style.display = 'none'
 
         }
-
-        // Музыка
-
-        // if (element.id === 'true-music'){
-        //     compositor.style.display = 'block'
-        //     compositor.querySelectorAll('input').forEach((compositor_input)=> {
-        //         compositor_input.setAttribute('required', '')
-        //     })
-        // } else {
-        //     compositor.style.display = 'none'
-        //     compositor.querySelectorAll('input').forEach((compositor_input)=> {
-        //         compositor_input.removeAttribute('required')
-        //     })
-        // }
     })
 })
 
@@ -296,5 +370,30 @@ agreement_to_no_commerce_show.addEventListener('change', (e)=> {
         agreement_to_no_commerce_show.value = 1
     } else {
         agreement_to_no_commerce_show.value = 0
+    }
+})
+
+//  Съемочная группа
+
+let add_specialists = document.querySelectorAll('.btn.speciality-add__btn')
+
+add_specialists.forEach((add) => {
+    add.addEventListener('click', (e) => {
+        let specialist_count = document.getElementById('specialists_count')
+        specialist_count.value = Number(specialist_count.value) + 1
+        // console.log(specialist_count.value)
+        let block_id = add.id.split('_')[0]
+        let specialist = specialists_id[block_id].specialist
+        let name = specialists_id[block_id].name
+        let subname = specialists_id[block_id].subname
+        createSpecialistBlock(specialist, name, subname, specialist_count.value)
+    })
+})
+
+let shooting_group = document.querySelector('.film-grew')
+shooting_group.addEventListener('click', (e) => {
+    // console.log(e.target)
+    if (e.target.dataset.type === 'add') {
+        console.log(e.target.parentNode)
     }
 })

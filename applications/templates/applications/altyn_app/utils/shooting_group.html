@@ -1,7 +1,7 @@
                             <div class="film-grew">
                                     <h3 class="film-grew__title application-title">Съемочная команда</h3>
                                 {#                                Режиссер            #}
-                                    <div class="stage-director">
+                                    <div class="stage-director-block">
                                         <h4>Режиссер-постановщик: </h4>
                                         <div class="stage-director_person person">
                                             <input type="text" placeholder="Имя" value="" name="director_first_name" required/>
@@ -19,13 +19,16 @@
                                                 rows="10" required></textarea>
                                         </div>
 
-                                        <div class="speciality-add">
-                                            <a href="#" id="director-add" class="btn speciality-add__btn"><span>+</span></a>
+                                        <div class="speciality-add" style="margin-right: 10px">
+                                            <a id="stage-director_add"
+                                               class="btn speciality-add__btn add"><span>+</span></a>
                                         </div>
                                     </div>
+
+                                    <div class="new-stage-director"></div>
+
 {#                                Продюссер            #}
-
-
+                            <div class="producer-block">
 								<div class="producer">
 									<h4>Продюсер:</h4>
 									<div class="producer-person person">
@@ -39,9 +42,15 @@
 								</div>
 								<div class="biography-producer textarea">
 									<h4>Биография/Фильмография продюсера: </h4>
-									<textarea name="producer_biography" spellcheck="true" title="до 25 слов" autocapitalize="sentences"
+                                    <textarea name="producer_biography" spellcheck="true" title="до 25 слов"
+                                              autocapitalize="sentences"
                                               cols="30" rows="10" required></textarea>
-								</div>
+                                </div>
+                                <div class="speciality-add">
+                                    <a id="producer_add" class="btn speciality-add__btn"><span>+</span></a>
+                                </div>
+                            </div>
+                                <div class="new-producer"></div>
 
 {#                                Сценарист            #}
 

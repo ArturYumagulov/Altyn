@@ -104,7 +104,7 @@ class MovieApp(models.Model):
     # movie = models.ForeignKey(Movie, on_delete=models.PROTECT, verbose_name="Фильм")
 
     # Shooting_Group
-    shooting_group = models.ManyToManyField(MainShootingGroup, null=True,  default=None)
+    shooting_group = models.ManyToManyField(MainShootingGroup)
     other_shooting_group = models.TextField(verbose_name="Остальные члены съемочной команды", blank=True,
                                             null=True, default=None)
 

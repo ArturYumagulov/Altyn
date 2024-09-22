@@ -137,33 +137,7 @@ def save_app(request):
     new_movie_app.kind = Kind.objects.get(slug=request.get("kind"))
     new_movie_app.age_limit = AgeLimit.objects.get(slug=request.get('age_limit'))
 
-    # Режиссер
-    new_director = AppDirector.objects.create(
-        first_name=request.get("director_first_name"),
-        last_name=request.get("director_last_name"),
-        birthday=clean_date(request.get("director_birthday")),
-        biography=request.get("director_biography"),
-    )
-
-    new_movie_app.director = new_director
-    # Продюссер
-    new_producer = AppProducer.objects.create(
-        first_name=request.get("producer_first_name"),
-        last_name=request.get("producer_last_name"),
-        birthday=clean_date(request.get("producer_birthday")),
-        biography=request.get("producer_biography"),
-    )
-
-    new_movie_app.producer = new_producer
-
-    new_scenarist = AppScenarist.objects.create(
-        first_name=request.get("scenarist_first_name"),
-        last_name=request.get("scenarist_last_name"),
-        birthday=clean_date(request.get("scenarist_birthday")),
-        biography=request.get("scenarist_biography"),
-    )
-
-    new_movie_app.scenarist = new_scenarist
+    # Съемочная группа
 
     #   Договор
 
