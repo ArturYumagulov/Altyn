@@ -70,6 +70,7 @@ class ShootingGroupSpecialist(models.Model):
 
 
 class MainShootingGroup(models.Model):
+
     speciality = models.ForeignKey(ShootingGroupSpecialist, on_delete=models.PROTECT)
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     last_name = models.CharField(max_length=150, verbose_name="Фамилия")

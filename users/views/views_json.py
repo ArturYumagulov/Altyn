@@ -1,12 +1,15 @@
 import json
 import secrets
 
+import redis
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
 from users.decorators.decorators import json_login_required
-from users.services import create_look_user, send_email_for_verify, send_email_for_reset_pass
+from users.services import create_look_user, send_email_for_verify, send_email_for_reset_pass, confirm_code_generator, \
+    valid_code
 
 User = get_user_model()
 
@@ -85,6 +88,7 @@ def user_register(request):
     return JsonResponse({"result": "error"}, safe=False)
 
 
+@csrf_exempt
 def valid_data(request):
     """Валидация данных при регистрации"""
     if request.method == "POST":
@@ -122,4 +126,51 @@ def reset_password(request):
 
     return JsonResponse({'result': False}, safe=False)
 
+
+def profile_valid_email(request):
+
+    if request.method == "POST":
+        typ = json.loads(request.body).get('type')
+        exclude_user = User.objects.exclude(pk=request.user.pk)
+        if typ == "email":
+            return JsonResponse({'exists': exclude_user.filter(email=json.loads(request.body).get("email")).exists()})
+
+        elif typ == 'phone':
+            return JsonResponse({'exists': exclude_user.filter(phone=json.loads(request.body).get("phone")).exists()})
+    return JsonResponse({"result": "Method is not allowed "})
+
+
+def edit_user_profile(request):
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            data = json.loads(request.body)
+            user = User.objects.get(pk=request.user.pk)
+            user.email = data.get('email')
+            user.phone = data.get('phone')
+            user.birthday = data.get('birthday')
+            user.male = data.get('male')
+            user.save()
+            return JsonResponse({'result': True})
+
+        return JsonResponse({"result": "User is not auth"}, status=401)
+    return JsonResponse({"result": "Error"})
+
+
+def email_edit_code_gen(request):
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            data = json.loads(request.body)
+            confirm_code_generator(email=data.get('email'), username=request.user.username)
+            return JsonResponse({'result': True}, status=200)
+        return JsonResponse({'detail': "User is not auth"}, status=401)
+    return JsonResponse({'detail': "Method is not allowed"})
+
+
+def verify_code(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if valid_code(data.get('code'), data.get('email')):
+            return JsonResponse({'exists': True})
+        return JsonResponse({'exists': False})
+    return JsonResponse({'exists': False})
 

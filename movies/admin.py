@@ -8,6 +8,7 @@ from movies import models
 @admin.register(models.Movie)
 class MovieAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
+    list_display = ('name', 'status')
 
 
 @admin.register(models.MovieStatus)

@@ -33,4 +33,8 @@ urlpatterns = [
     path("edit-profile/", views_http.edit_profile, name="edit_profile"),
 
     path("index/", views_json.index, name="index"),
+    path('edit-email-phone/', views_json.profile_valid_email, name="edit_email_phone"),
+    path('edit-user-profile/', views_json.edit_user_profile, name="edit_user_profile"),
+    path('email-verify/', views_json.email_edit_code_gen, name="email-verify"),
+    path('verify-code/', views_json.verify_code, name='verify_code')
 ]

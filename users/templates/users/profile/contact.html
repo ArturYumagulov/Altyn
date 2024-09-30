@@ -7,41 +7,67 @@
             </figure>
         </div>
         <div class="personalAccount-information">
+            <form class="contact-form" method="post" action="{% url 'edit_user_profile' %}">
+            {% csrf_token %}
             <h3 class="personalAccount-information__title">
                 <span>
                     {% if user.first_name %}{{ user.first_name }}{% endif %}
                     {% if user.last_name %}{{ user.last_name }}{% endif %}
-                    {% if user.surname %}{{ user.surname }}{% endif %}
                 </span>
-                <div id="edit">
-                    <img src="{% static '/img/icons/edit.svg' %}" alt="">
-                </div>
             </h3>
 
-            <dl>
+            <dl class="email-block">
                 <dt>Почта</dt>
-                <dd>{{ user.email }}</dd>
+                <dd class="email" name="email">{{ user.email }}</dd>
+                <div class="verify-block" style="display: none">
+                    <div class="verify-wrapper">
+                    <input type="text" class="verify_email" placeholder="Введите код из email">
+                        <p class="alert" id="verify_error"></p>
+                    </div>
+                </div>
+                <p class="alert" id="email_error"></p>
             </dl>
             <dl>
                 <dt>Номер телефона</dt>
-                <dd>{{ user.phone }}</dd>
+                <dd class="phone" name="phone">{{ user.phone }}</dd>
+                <p class="alert" id="phone_error"></p>
             </dl>
             <dl>
                 <dt>Дата рождения</dt>
-                <dd>{% if user.birthday %}{{ user.birthday }}{% else %}Нет данных{% endif %}</dd>
+                <dd class="birthday" name="birthday" data-date="{{ user.birthday|date:"Y-m-d" }}">{% if user.birthday %}{{ user.birthday }}{% else %}Нет данных{% endif %}</dd>
             </dl>
             <dl>
-                <dt>Пол</dt>
-                <dd>{% if user.male %}{{ user.male }}{% else %}Нет данных{% endif %}</dd>
+                <div class="male-block">
+                    <dt>Пол</dt>
+                    <dd class="male">{% if user.male != "None" %}{{ user.get_male_display }}{% else %}Нет данных{% endif %}</dd>
+                    <div class="male-check-block" style="display: none">
+                    <ul class="application-checkeds application-view" style="margin-top: 5px">
+                        <li class="application-checked checkbox {% if user.male == "M"%}active{% endif %}">
+                            <input id="M" name="male" type="checkbox" value="M">Мужской
+                        </li>
+                        <li class="application-checked checkbox {% if user.male == "F"%}active{% endif %}">
+                            <input id="F"  name="male" value="F" type="checkbox">Женский
+                        </li>
+                    </ul>
+                    </div>
+                </div>
             </dl>
+            <div class="save" style="display: none">
+                <button type="submit" class="btn application-btn">Сохранить</button>
+            </div>
+        </form>
         </div>
     </div>
 </div>
 
+
 <script>
-    const edit = document.querySelector('#edit')
-    edit.addEventListener('click', ()=> {
-        console.log('click')
-        thank.classList.add('open')
+    let males = document.querySelectorAll('.application-checked.checkbox')
+    console.log(males)
+    males.forEach(male => {
+        male.addEventListener('click', () => {
+            console.log('click')
+            male_type = male.childNodes[1].id
+        })
     })
 </script>

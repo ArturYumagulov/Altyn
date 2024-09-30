@@ -3,7 +3,7 @@ from datetime import datetime
 
 from regions.models import Region, Speciality
 from .models import MovieApp, MoviePortfolio, CopyrightInformation, Status, \
-    InviteSpecialists, SpecialistApp, MovieContract
+    InviteSpecialists, SpecialistApp, MovieContract, MainShootingGroup, ShootingGroupSpecialist
 from movies.models import Category, Kind, RollerCertificate, AgeLimit, Genre, Movie, MovieStatus
 from .send_contract import send_word_via_email
 
@@ -76,7 +76,67 @@ def individual_contract_context(new_contract):
     return context
 
 
+def create_contract(request, new_movie_app):
+    """отправка договра по типу"""
+
+    new_contract = MovieContract()
+    new_contract.organization_name = request.get('organization_name')
+    new_contract.first_name = request.get('contract_first_name')
+    new_contract.last_name = request.get('contract_last_name')
+    new_contract.surname = request.get('contract_surname')
+    new_contract.movie_name = request.get('movie_name')
+    new_contract.address = request.get('address')
+    new_contract.inn = request.get('inn')
+    new_contract.payroll = request.get('payroll')
+    new_contract.bank = request.get('bank')
+    new_contract.bik = request.get('bik')
+    new_contract.correction = request.get('correction')
+    new_contract.passport_number = request.get('passport_number')
+    new_contract.birthday = request.get('contract_birthday')
+    new_contract.save()
+
+    if request.get('contract_type') == 'legal':
+        send_word_via_email(
+            "legal",
+            context=legal_contract_context(new_contract),
+            movie_name=new_contract.movie_name,
+            email=new_movie_app.copyright_information.contact_email
+        )
+        new_contract.legal = True
+        new_contract.save()
+    elif request.get('contract_type') == 'individual':
+        send_word_via_email(
+            "individual",
+            context=individual_contract_context(new_contract),
+            movie_name=new_contract.movie_name,
+            email=new_movie_app.copyright_information.contact_email
+        )
+        new_contract.individual = True
+        new_contract.save()
+
+    new_movie_app.contract = new_contract
+
+    new_movie_app.save()
+
+
+def save_shooting_group(request, app_model):
+    """Создание элементов съемочной группы"""
+
+    for specialist in ShootingGroupSpecialist.objects.all():
+        for count in range(1, int(request.get(f'{specialist.slug}_count')) + 1):
+            new_specialist = MainShootingGroup()
+            new_specialist.speciality = specialist
+            new_specialist.first_name = request.get(f"{specialist.slug}_first_name_{count}")
+            new_specialist.last_name = request.get(f"{specialist.slug}_last_name_{count}")
+            new_specialist.birthday = request.get(f"{specialist.slug}_birthday_{count}")
+            new_specialist.biography = request.get(f"{specialist.slug}_biography_{count}")
+            new_specialist.save()
+            app_model.shooting_group.add(new_specialist)
+            app_model.save()
+
+
 def save_app(request):
+    """Создание заявки на кинопремию"""
 
     new_movie_app = MovieApp()
 
@@ -84,6 +144,7 @@ def save_app(request):
     new_movie_app.status = Status.objects.get(name="На рассмотрении")
 
     request = request.POST
+    print(request)
     new_movie_app.name = request.get("name")
     new_movie_app.year = request.get("year")
     new_movie_app.rolled_certificate = get_rolled_certificates(request)
@@ -94,23 +155,11 @@ def save_app(request):
     new_movie_app.music = request.get('music')
     new_movie_app.country = request.get('country')
     new_movie_app.other_country = get_other_country(request)['other_country']
-
-    new_movie_app.operator_first_name = request.get('operator_first_name')
-    new_movie_app.operator_last_name = request.get('operator_last_name')
-
-    new_movie_app.artistical_director_first_name = request.get('artistical_director_first_name')
-    new_movie_app.artistical_director_last_name = request.get('artistical_director_last_name')
-
-    new_movie_app.costume_designer_first_name = request.get('costume_designer_first_name')
-    new_movie_app.costume_designer_last_name = request.get('costume_designer_last_name')
-
     new_movie_app.other_shooting_group = request.get('other_shooting_group')
 
     new_movie_app.agreement_to_placement = request.get('agreement_to_placement')
     new_movie_app.agreement_to_vote = request.get('agreement_to_vote')
     new_movie_app.agreement_to_no_commerce_show = request.get('agreement_to_no_commerce_show')
-
-    # new_movie_app.save()
 
     # One2One
 
@@ -137,48 +186,10 @@ def save_app(request):
     new_movie_app.kind = Kind.objects.get(slug=request.get("kind"))
     new_movie_app.age_limit = AgeLimit.objects.get(slug=request.get('age_limit'))
 
-    # Съемочная группа
-
     #   Договор
 
     if request.get('contract_status') == 'now':
-
-        new_contract = MovieContract()
-        new_contract.organization_name = request.get('organization_name')
-        new_contract.first_name = request.get('contract_first_name')
-        new_contract.last_name = request.get('contract_last_name')
-        new_contract.surname = request.get('contract_surname')
-        new_contract.movie_name = request.get('movie_name')
-        new_contract.address = request.get('address')
-        new_contract.inn = request.get('inn')
-        new_contract.payroll = request.get('payroll')
-        new_contract.bank = request.get('bank')
-        new_contract.bik = request.get('bik')
-        new_contract.correction = request.get('correction')
-        new_contract.passport_number = request.get('passport_number')
-        new_contract.birthday = request.get('contract_birthday')
-        new_contract.save()
-
-        if request.get('contract_type') == 'legal':
-            send_word_via_email(
-                "legal",
-                context=legal_contract_context(new_contract),
-                movie_name=new_contract.movie_name,
-                email=new_movie_app.copyright_information.contact_email
-            )
-            new_contract.legal = True
-            new_contract.save()
-        elif request.get('contract_type') == 'individual':
-            send_word_via_email(
-                "individual",
-                context=individual_contract_context(new_contract),
-                movie_name=new_contract.movie_name,
-                email=new_movie_app.copyright_information.contact_email
-            )
-            new_contract.individual = True
-            new_contract.save()
-
-        new_movie_app.contract = new_contract
+        create_contract(request, new_movie_app)
     else:
         send_word_via_email("individual")
 
@@ -197,8 +208,11 @@ def save_app(request):
 
     new_movie_app.save()
 
+    save_shooting_group(request, new_movie_app)
+
 
 def save_invite(request):
+
     user = request.user
     request = request.POST
 

@@ -28,10 +28,19 @@ let specialists_id = {
             'specialist': 'stage-director',
             'name': 'Режиссер-постановщик:',
             'subname': 'режиссера-постановщика:',
+        },
+        'screenwriter': {
+            'specialist': 'screenwriter',
+            'name': 'Сценарист:',
+            'subname': 'сценариста:',
         }
 }
 
-function createSpecialistBlock(specialist, name, subname, count) {
+function createSpecialistBlock(specialist, name, subname) {
+    let specialist_count = document.getElementById(`${specialist}_count`)
+    specialist_count.value = Number(specialist_count.value) + 1
+    let count = specialist_count.value
+
     let specialist_block = document.querySelector(`.new-${specialist}`)
 
     let div = document.createElement('div')
@@ -41,20 +50,20 @@ function createSpecialistBlock(specialist, name, subname, count) {
     specH4.textContent = name
 
     let namesDiv = document.createElement('div')
-    namesDiv.classList.add('producer-person', 'person')
+    namesDiv.classList.add(`${specialist}-person`, 'person')
 
     div.append(specH4, namesDiv)
 
     let names1Input = document.createElement('input')
     names1Input.setAttribute('type', 'text')
     names1Input.setAttribute('placeholder', 'Имя')
-    names1Input.setAttribute('name', `producer_first_name_${count}`)
+    names1Input.setAttribute('name', `${specialist}_first_name_${count}`)
     names1Input.setAttribute('required', ``)
 
     let names2Input = document.createElement('input')
     names2Input.setAttribute('type', 'text')
-    names2Input.setAttribute('placeholder', 'Имя')
-    names2Input.setAttribute('name', `producer_last_name_${count}`)
+    names2Input.setAttribute('placeholder', 'Фамилия')
+    names2Input.setAttribute('name', `${specialist}_last_name_${count}`)
     names2Input.setAttribute('required', ``)
 
     namesDiv.append(names1Input, names2Input)
@@ -64,8 +73,8 @@ function createSpecialistBlock(specialist, name, subname, count) {
     let specialistBirthdayH4 = document.createElement('h4')
     specialistBirthdayH4.textContent = `Дата рождения ${subname}:`
     let specialistBirthdayInput = document.createElement('input')
-    specialistBirthdayInput.setAttribute('type', 'text')
-    specialistBirthdayInput.setAttribute('value', 'дд.мм.гггг')
+    specialistBirthdayInput.setAttribute('type', 'date')
+    specialistBirthdayInput.setAttribute('value', '01.08.1998')
     specialistBirthdayInput.setAttribute('name', `${specialist}_birthday_${count}`)
     specialistBirthdayInput.setAttribute('required', '')
 
@@ -90,7 +99,9 @@ function createSpecialistBlock(specialist, name, subname, count) {
     addButton.classList.add('speciality-add')
     let addButtonA = document.createElement('a')
     addButtonA.classList.add('btn', 'speciality-add__btn')
-    addButtonA.setAttribute('id', `${specialist}-add-${count}`)
+    addButtonA.setAttribute('id', `${specialist}_add`)
+    addButtonA.setAttribute('data-count', `${Number(count) + 1}`)
+    // addButtonA.setAttribute("data-type", "add")
     let addSpan = document.createElement('span')
     addSpan.setAttribute("data-type", "add")
     addSpan.textContent = "+"
@@ -373,27 +384,28 @@ agreement_to_no_commerce_show.addEventListener('change', (e)=> {
     }
 })
 
-//  Съемочная группа
+//  Съемочная группа - первый элемент
 
 let add_specialists = document.querySelectorAll('.btn.speciality-add__btn')
 
 add_specialists.forEach((add) => {
     add.addEventListener('click', (e) => {
-        let specialist_count = document.getElementById('specialists_count')
-        specialist_count.value = Number(specialist_count.value) + 1
-        // console.log(specialist_count.value)
         let block_id = add.id.split('_')[0]
         let specialist = specialists_id[block_id].specialist
         let name = specialists_id[block_id].name
         let subname = specialists_id[block_id].subname
-        createSpecialistBlock(specialist, name, subname, specialist_count.value)
+        createSpecialistBlock(specialist, name, subname)
     })
 })
 
+//  Съемочная группа - след. элементы
 let shooting_group = document.querySelector('.film-grew')
 shooting_group.addEventListener('click', (e) => {
-    // console.log(e.target)
     if (e.target.dataset.type === 'add') {
-        console.log(e.target.parentNode)
+        let block_id = e.target.parentNode.id.split('_')[0]
+        let specialist = specialists_id[block_id].specialist
+        let name = specialists_id[block_id].name
+        let subname = specialists_id[block_id].subname
+        createSpecialistBlock(specialist, name, subname)
     }
 })

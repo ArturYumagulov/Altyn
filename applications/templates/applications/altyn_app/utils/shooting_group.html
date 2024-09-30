@@ -4,22 +4,22 @@
                                     <div class="stage-director-block">
                                         <h4>Режиссер-постановщик: </h4>
                                         <div class="stage-director_person person">
-                                            <input type="text" placeholder="Имя" value="" name="director_first_name" required/>
-                                            <input type="text" placeholder="Фамилия" value="" name="director_last_name" required/>
+                                            <input type="text" placeholder="Имя" value="" name="stage-director_first_name_1" required/>
+                                            <input type="text" placeholder="Фамилия" value="" name="stage-director_last_name_1" required/>
                                         </div>
 
                                         <div class="date-director">
                                             <h4>Дата рождения режиссера-постановщика: </h4>
-                                            <input type="date" value="01.08.1998" name="director_birthday" required/>
+                                            <input type="date" value="01.08.1998" name="stage-director_birthday_1" required/>
                                         </div>
                                         <div class="biography-director textarea">
                                             <h4>Биография/Фильмография режиссера-постановщика: </h4>
                                             <textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences"
-                                                      name="director_biography" cols="30"
+                                                      name="stage-director_biography_1" cols="30"
                                                 rows="10" required></textarea>
                                         </div>
 
-                                        <div class="speciality-add" style="margin-right: 10px">
+                                        <div class="speciality-add">
                                             <a id="stage-director_add"
                                                class="btn speciality-add__btn add"><span>+</span></a>
                                         </div>
@@ -32,17 +32,17 @@
 								<div class="producer">
 									<h4>Продюсер:</h4>
 									<div class="producer-person person">
-										<input type="text" placeholder="Имя" name="producer_first_name" required/>
-										<input type="text" placeholder="Фамилия" name="producer_last_name" required/>
+										<input type="text" placeholder="Имя" name="producer_first_name_1" required/>
+										<input type="text" placeholder="Фамилия" name="producer_last_name_1" required/>
 									</div>
 								</div>
 								<div class="producer-date">
 									<h4>Дата рождения продюсера: </h4>
-									<input type="date" value="01.08.1998" name="producer_birthday" required/>
+									<input type="date" value="01.08.1998" name="producer_birthday_1" required/>
 								</div>
 								<div class="biography-producer textarea">
 									<h4>Биография/Фильмография продюсера: </h4>
-                                    <textarea name="producer_biography" spellcheck="true" title="до 25 слов"
+                                    <textarea name="producer_biography_1" spellcheck="true" title="до 25 слов"
                                               autocapitalize="sentences"
                                               cols="30" rows="10" required></textarea>
                                 </div>
@@ -53,25 +53,29 @@
                                 <div class="new-producer"></div>
 
 {#                                Сценарист            #}
-
-								<div class="screenwriter">
-									<h4>Сценарист:</h4>
-									<div class="screenwriter-person person">
-										<input type="text" placeholder="Имя" name="scenarist_first_name" required/>
-										<input type="text" placeholder="Фамилия" name="scenarist_last_name" required/>
-									</div>
-								</div>
-								<div class="screenwriter-date">
-									<h4>Дата рождения сценариста: </h4>
-									<input type="date" value="01.08.1998" name="scenarist_birthday" required/>
-								</div>
-								<div class="biography-screenwriter textarea">
-									<h4>Биография/Фильмография сценариста: </h4>
-									<textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences"
-                                              cols="30" name="scenarist_biography"
-										rows="10" required></textarea>
-								</div>
-
+                                <div class="screenwriter-block">
+                                    <div class="screenwriter">
+                                        <h4>Сценарист:</h4>
+                                        <div class="screenwriter-person person">
+                                            <input type="text" placeholder="Имя" name="screenwriter_first_name_1" required/>
+                                            <input type="text" placeholder="Фамилия" name="screenwriter_last_name_1" required/>
+                                        </div>
+                                    </div>
+                                    <div class="screenwriter-date">
+                                        <h4>Дата рождения сценариста: </h4>
+                                        <input type="date" value="01.08.1998" name="screenwriter_birthday_1" required/>
+                                    </div>
+                                    <div class="biography-screenwriter textarea">
+                                        <h4>Биография/Фильмография сценариста: </h4>
+                                        <textarea spellcheck="true" title="до 25 слов" autocapitalize="sentences"
+                                                  cols="30" name="screenwriter_biography_1"
+                                            rows="10" required></textarea>
+                                    </div>
+                                    <div class="speciality-add">
+                                        <a id="screenwriter_add" class="btn speciality-add__btn"><span>+</span></a>
+                                    </div>
+                                </div>
+                                <div class="new-screenwriter"></div>
 {#                                Музыка                            #}
 
 								<h4>В Вашем фильме музыка является оригинальной?:</h4>
@@ -88,29 +92,29 @@
 								<div class="composer" style="display: none">
 									<h4>Композитор:</h4>
 									<div class="composer-person person">
-										<input type="text" placeholder="Имя" name="compositor_first_name">
-										<input type="text" placeholder="Фамилия" name="compositor_last_name">
+										<input type="text" placeholder="Имя" name="compositor_first_name_1">
+										<input type="text" placeholder="Фамилия" name="compositor_last_name_1">
 									</div>
 								</div>
 								<div class="directorPhotography">
 									<h4>Оператор - постановщик:</h4>
 									<div class="directorPhotography-person person">
-										<input type="text" placeholder="Имя" name="operator_first_name" required>
-										<input type="text" placeholder="Фамилия" name="operator_last_name" required>
+										<input type="text" placeholder="Имя" name="operator_first_name_1" required>
+										<input type="text" placeholder="Фамилия" name="operator_last_name_1" required>
 									</div>
 								</div>
 								<div class="directorPhotography">
 									<h4>Художник постановщик:</h4>
 									<div class="directorPhotography-person person">
-										<input type="text" placeholder="Имя" name="artistical_director_first_name">
-										<input type="text" placeholder="Фамилия" name="artistical_director_last_name">
+										<input type="text" placeholder="Имя" name="artistical_director_first_name_1">
+										<input type="text" placeholder="Фамилия" name="artistical_director_last_name_1">
 									</div>
 								</div>
 								<div class="directorPhotography">
 									<h4>Художник по костюмам:</h4>
 									<div class="directorPhotography-person person">
-										<input type="text" placeholder="Имя" name="costume_designer_first_name">
-										<input type="text" placeholder="Фамилия" name="costume_designer_last_name">
+										<input type="text" placeholder="Имя" name="costumer_designer_first_name_1">
+										<input type="text" placeholder="Фамилия" name="costumer_designer_last_name_1">
 									</div>
 								</div>
 								<div class="film-crew textarea">

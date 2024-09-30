@@ -32,68 +32,66 @@
 		<!-- header -->
 
         {% block content %}
-            <main class="main">
+	<!-- header -->
+		<main class="main">
 			<section id="distribution" class="distribution">
-
 				<div class="distribution-block container">
 					<article>
 						<h2 class="distribution-title"><span>Золотая</span> тарелка</h2>
 						<p class="distribution-subtitle">
-							Межрегиональная премия в области кинематографии
+							<span>Межрегиональная премия</span><br>
+							в области кинематографии
 						</p>
+						<ul class="distribution-items ">
+							<li class="distribution-item ">
+								<a href="film-award.html" class=""><img src="{% static 'img/icons/kino.svg' %}" alt=""> О кинопремии
+									<svg width="5" height="11" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
+											fill="#EBEBEB" />
+									</svg>
+								</a>
+							</li>
+							<li class="distribution-item ">
+								<a href="regions-map.html" class=""><img src="{% static 'img/icons/region.svg' %}" alt="">Карта регионов
+									<svg width="5" height="11" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
+											fill="#EBEBEB" />
+									</svg>
+								</a>
+							</li>
+						</ul>
+						<ul class="distribution-items ">
+							<li class="distribution-item">
+
+								<a href="watch-movie.html" class=""><img src="{% static 'img/icons/film.svg' %}" alt="">Смотреть кино
+									<svg width="11" height="15" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
+											fill="#EBEBEB" />
+									</svg>
+								</a>
+							</li>
+							<li class="distribution-item">
+								<a href="business-program.html" class="">
+									<img src="{% static 'img/icons/del.svg' %}" alt="">
+									Деловая программа
+									<svg width="5" height="11" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
+											fill="#EBEBEB" />
+									</svg>
+								</a>
+							</li>
+						</ul>
 					</article>
 					<div class="distribution-img">
-						<div class="filter"></div>
-						<img src="{% static 'img/distribution-img.png' %}" alt="">
+
+						<img src="{% static 'img/distribution.png' %}" alt="">
 					</div>
 				</div>
-				<ul class="distribution-items container">
-					<li class="distribution-item _icon-award">
-						<a href="film-award.html" class="">О кинопремии
-							<svg width="5" height="11" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path
-									d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
-									fill="#EBEBEB" />
-							</svg>
-						</a>
-						<p>Lorem ipsum dolor sit amet consectetur. </p>
-					</li>
-					<li class="distribution-item _icon-card">
-						<a href="regions-map.html" class="">Карта регионов
-							<svg width="5" height="11" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path
-									d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
-									fill="#EBEBEB" />
-							</svg>
-						</a>
-						<p>Lorem ipsum dolor sit amet consectetur. </p>
-					</li>
-					<li class="distribution-item">
-						<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<circle cx="27" cy="27" r="26" stroke="#EBEBEB" stroke-width="2" />
-							<path d="M37.1902 27.3811L19.4432 35.6888L19.4432 19.0734L37.1902 27.3811Z" stroke="#EBEBEB"
-								stroke-width="2" />
-						</svg>
-						<a href="watch-movie.html" class="">Смотреть кино
-							<svg width="11" height="15" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path
-									d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
-									fill="#EBEBEB" />
-							</svg>
-						</a>
-						<p>Lorem ipsum dolor sit amet consectetur. </p>
-					</li>
-					<li class="distribution-item _icon-program">
-						<a href="business-program.html" class="">Деловая программа
-							<svg width="5" height="11" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path
-									d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"
-									fill="#EBEBEB" />
-							</svg>
-						</a>
-						<p>Lorem ipsum dolor sit amet consectetur. </p>
-					</li>
-				</ul>
+
 			</section>
 		</main>
         {% endblock %}

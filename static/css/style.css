@@ -6800,7 +6800,6 @@ dt {
 	color: var(--color-yellow);
 	margin-bottom: 19px;
 }
-
 .personalAccount-information__title::after {
 	content: url(../img/icons/edit.svg);
 }
@@ -7720,6 +7719,7 @@ dt {
 	}
 }
 
+.personalAccount-information input,
 .application input {
 	display: block;
 	border: 2px solid #d49e3c;
@@ -8934,15 +8934,3 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"]::-webkit-input-placeholder {
 	visibility: hidden !important;
 }
-
-
-/* Contract */
-
-.contract-quest {
-	display: none;
-}
-
-.contract-quest.show {
-	display: block;
-}
-

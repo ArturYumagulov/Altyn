@@ -2,13 +2,29 @@
 {% load static %}
 {% block style %}
     <style>
-        #edit {
-            margin: 3px;
-            width: 25px;
-            height: 100%;
-            cursor: pointer;
+        .application-checked::after {
+            top: 6px;
+        }
+        .personalAccount-information__title.check::after {
+            content: "";
+        }
+        .verify-wrapper {
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
         }
     </style>
+{% endblock %}
+
+{% block defer_scripts %}
+    <script>
+        let old_male_type = "{{ user.male }}"
+        let male_type = "{{ user.male }}"
+        const edit_user_profile = "{% url 'edit_user_profile' %}"
+        const edit_user_phone = "{% url 'edit_email_phone' %}"
+        const email_verify = "{% url 'email-verify' %}"
+        const verify_code_url = "{% url 'verify_code' %}"
+    </script>
 {% endblock %}
 {% block content %}
 
@@ -66,18 +82,14 @@
 						<div class="personalAccount-content">
 							<h3 class="personalAccount-content__title ">Мои заявки<span class="_icon-derection-right "></span></h3>
 							<div class="applications">
+                                {% for app in apps %}
 								<div class="personalAccountslider__item">
 									<figure>
 										<img src="{% static 'img/icons/simple-line-icons_docs.svg' %}" alt="">
-										<figcaption>Кинопремия<span>“Тишина”</span></figcaption>
+										<figcaption>Кинопремия<span>“{{ app.name }}”</span></figcaption>
 									</figure>
 								</div>
-								<div class="personalAccountslider__item">
-									<figure>
-										<img src="{% static 'img/icons/simple-line-icons_docs.svg' %}" alt="">
-										<figcaption>Кинопремия<span>“Тишина”</span></figcaption>
-									</figure>
-								</div>
+                                {% endfor %}
 							</div>
 						</div>
 						<div class="personalAccount-content">
@@ -240,4 +252,8 @@
 		</main>
 
 
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/user/update_profile.js' %}"></script>
 {% endblock %}

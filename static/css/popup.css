@@ -294,6 +294,11 @@ html {
 	display: none;
 }
 
+.alert.is-valid{
+	color: #0bde35;
+	text-align: center;
+}
+
 .user svg {
 	width: 45px;
 	font-size: 40px;
