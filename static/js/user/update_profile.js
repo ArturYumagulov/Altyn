@@ -233,11 +233,10 @@ edit.addEventListener('click',
 
 
             let birthday = main_contact.querySelector('.birthday')
-            let birthday_value = birthday.dataset.date
             let new_birthday = changeTag(birthday, 'input')
             new_birthday.style.marginTop = '5px'
             new_birthday.setAttribute('type', 'date')
-            new_birthday.value = birthday_value
+            new_birthday.value = birthday.dataset.date
 
             // Male
             let male_block = main_contact.querySelector('.male')

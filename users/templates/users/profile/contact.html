@@ -34,7 +34,8 @@
             </dl>
             <dl>
                 <dt>Дата рождения</dt>
-                <dd class="birthday" name="birthday" data-date="{{ user.birthday|date:"Y-m-d" }}">{% if user.birthday %}{{ user.birthday }}{% else %}Нет данных{% endif %}</dd>
+                <dd class="birthday" name="birthday" data-date="{% if user.birthday %}{{ user.birthday|date:"Y-m-d" }}{% else %}none{% endif %}">
+                    {% if user.birthday %}{{ user.birthday }}{% else %}Нет данных{% endif %}</dd>
             </dl>
             <dl>
                 <div class="male-block">

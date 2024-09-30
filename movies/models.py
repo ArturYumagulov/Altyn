@@ -166,7 +166,9 @@ class Operator(models.Model):
 class AgeLimit(models.Model):
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(verbose_name="Возрастное ограничение", max_length=10)
-    description = models.TextField(verbose_name="Описание", blank=True, null=True, default=None)
+    description = models.TextField(
+        verbose_name="Описание", blank=True, null=True, default=None
+    )
     slug = models.SlugField()
 
     def __str__(self):
@@ -178,20 +180,30 @@ class AgeLimit(models.Model):
         verbose_name_plural = "Возрастные ограничения"
 
 
-class Almanach(models.Model):
+class Almanac(models.Model):
 
     is_active = models.BooleanField(verbose_name="Активность", default=False)
-    main = models.BooleanField(verbose_name="Главный на странице", default=False)
-    name = models.CharField(max_length=500, verbose_name="Альмонарх")
+    on_slide = models.BooleanField(verbose_name="На слайде", default=False)
+    slide_image = models.ImageField(upload_to="movies/main/slides", verbose_name="Картинка слайдера", default=None,
+                                    null=True)
+    name = models.CharField(max_length=500, verbose_name="Название")
+    short_name = models.CharField(max_length=30, verbose_name="Короткое название", blank=True, null=True, default=None)
+    description = models.TextField(verbose_name="Описание")
+    image = models.ImageField(upload_to="movies/main/slides", verbose_name="Картинка")
+    created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
+    edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
     slug = models.SlugField()
 
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("almanarch_detail", kwargs={'slug': self.slug})
+
     class Meta:
         ordering = ["name"]
-        verbose_name = "Альмонах"
-        verbose_name_plural = "Альмонахи"
+        verbose_name = "Альманах"
+        verbose_name_plural = "Альманахи"
 
 
 class RatingStar(models.Model):
@@ -271,7 +283,14 @@ class Movie(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, verbose_name="Категория"
     )
-    kind = models.ForeignKey(Kind, on_delete=models.PROTECT, verbose_name="Вид", blank=True, null=True, default=None)
+    kind = models.ForeignKey(
+        Kind,
+        on_delete=models.PROTECT,
+        verbose_name="Вид",
+        blank=True,
+        null=True,
+        default=None,
+    )
     director = models.ForeignKey(
         Director,
         on_delete=models.CASCADE,
@@ -308,7 +327,9 @@ class Movie(models.Model):
         blank=True,
     )
 
-    rolled_certificate = models.CharField(verbose_name="Прокатное удостоверение", null=True, blank=True, max_length=1000)
+    rolled_certificate = models.CharField(
+        verbose_name="Прокатное удостоверение", null=True, blank=True, max_length=1000
+    )
 
     trailer = models.URLField()
 
@@ -324,13 +345,21 @@ class Movie(models.Model):
         verbose_name="Ссылка на голосование", blank=True, null=True, default=None
     )
     almanach = models.ManyToManyField(
-        Almanach, verbose_name="Альманах", blank=True, default=None
+        Almanac, verbose_name="Альманах", blank=True, default=None
     )
     close = models.BooleanField(default=False, verbose_name="Закрытый фильм")
     debut = models.BooleanField(default=False, verbose_name="Дебютный")
     music = models.BooleanField(default=False, verbose_name="Оригинальная музыка")
-    country = models.CharField(max_length=2000, verbose_name="Страна", blank=True, null=True, default=None)
-    other_region = models.CharField(max_length=2000, verbose_name="Другой регион", blank=True, null=True, default=None)
+    country = models.CharField(
+        max_length=2000, verbose_name="Страна", blank=True, null=True, default=None
+    )
+    other_region = models.CharField(
+        max_length=2000,
+        verbose_name="Другой регион",
+        blank=True,
+        null=True,
+        default=None,
+    )
     slug = models.SlugField()
 
     def get_absolute_url(self):

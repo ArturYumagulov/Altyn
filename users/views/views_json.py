@@ -148,7 +148,7 @@ def edit_user_profile(request):
             user.email = data.get('email')
             user.phone = data.get('phone')
 
-            if data.get('birthday') is None:
+            if data.get('birthday') is None or len(data.get('birthday')) <= 0:
                 user.birthday = None
             else:
                 user.birthday = data.get('birthday')

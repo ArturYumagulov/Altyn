@@ -31,8 +31,8 @@ class KindAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
 
 
-@admin.register(models.Almanach)
-class AlmanachAdmin(admin.ModelAdmin):
+@admin.register(models.Almanac)
+class AlmanarchAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
 
 
