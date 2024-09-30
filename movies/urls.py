@@ -4,6 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    # path('app/', views.app, name="application"),
+    path('main/', views.movie_main, name="movie_main"),
     # path('create-app/', views.create_app, name="create_app")
 ]

@@ -147,8 +147,17 @@ def edit_user_profile(request):
             user = User.objects.get(pk=request.user.pk)
             user.email = data.get('email')
             user.phone = data.get('phone')
-            user.birthday = data.get('birthday')
-            user.male = data.get('male')
+
+            if data.get('birthday') is None:
+                user.birthday = None
+            else:
+                user.birthday = data.get('birthday')
+
+            if data.get('male') is None:
+                user.male = None
+            else:
+                user.male = data.get('male')
+
             user.save()
             return JsonResponse({'result': True})
 
