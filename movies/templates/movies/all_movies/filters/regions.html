@@ -1,0 +1,27 @@
+
+                        <li class="filters__item">
+
+                            <button class="filters__link"> Регион</button>
+                            <span class="_icon-derection-right">
+                                                                    </span>
+                            <ul class="filters__sub-item">
+                                <div class="filters-region__body">
+                                    <div class="filters-search filters__item-submen">
+                                        <input data-type="regions" type="search" placeholder="Поиск" class="search-icon btn filter-search">
+                                    </div>
+                                    <ul class="filters-add__list">
+                                        <li class="filters-add__item">
+                                            <ul class="application-checkboxs  filters__sub-item" id="regions-item">
+                                                {% for region in filters.regions %}
+                                                    <li class="application-checkbox checkbox  genre__item-submenu">
+                                                        <input type="checkbox" data-type="regions" name="regions"
+                                                               value="{{ region.regions__slug }}" id="{{ region.regions__slug }}">
+                                                        <label for="{{ region.regions__slug }}">{{ region.regions__name }}</label>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </ul>
+                        </li>

@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Avg
 from django.urls import reverse
@@ -7,6 +8,8 @@ from django.urls import reverse
 from regions.models import Region
 
 # Create your models here.
+
+User = get_user_model()
 
 
 def get_years():
@@ -185,17 +188,25 @@ class Almanac(models.Model):
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     on_slide = models.BooleanField(verbose_name="На слайде", default=False)
     slide_image = models.ImageField(upload_to="movies/main/slides", verbose_name="Картинка слайдера", default=None,
-                                    null=True)
+                                    null=True, blank=True)
     name = models.CharField(max_length=500, verbose_name="Название")
     short_name = models.CharField(max_length=30, verbose_name="Короткое название", blank=True, null=True, default=None)
     description = models.TextField(verbose_name="Описание")
     image = models.ImageField(upload_to="movies/main/slides", verbose_name="Картинка")
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
+    laureate = models.BooleanField(default=False, verbose_name="Лауреат")
+    year = models.CharField(
+        verbose_name="Год",
+        default=None,
+        blank=True,
+        null=True,
+        max_length=4
+    )
     slug = models.SlugField()
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.year}"
 
     def get_absolute_url(self):
         return reverse("almanarch_detail", kwargs={'slug': self.slug})
@@ -268,6 +279,7 @@ class RollerCertificate(models.Model):
 
 class Movie(models.Model):
 
+    user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Добавил")
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(max_length=500, verbose_name="Название фильма")
     image = models.ImageField(upload_to="movie_image/", verbose_name="Картинка")

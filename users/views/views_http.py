@@ -8,6 +8,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from applications.models import MovieApp
+from movies.models import Movie
 from users.forms import LoginForm
 User = get_user_model()
 
@@ -69,10 +70,12 @@ def profile(request):
 
     user = User.objects.get(pk=request.user.pk)
     app = MovieApp.objects.filter(user=user)
+    movies = Movie.objects.filter(user=user)
 
     context = {
         'user': user,
-        'apps': app
+        'apps': app,
+        'movies': movies
     }
 
     return render(request, 'users/profile/profile.html', context=context)

@@ -1,0 +1,30 @@
+                    <li class="filters__item">
+                        <button class="filters__link">Лауреаты</button>
+                        <span class="_icon-derection-right">
+											</span>
+                        <ul class="filters__sub-item">
+                            <div class="filters-laureate__body">
+                                <div class="filters-search filters__item-submen">
+                                    <input type="search"
+                                           data-type="laureates"
+                                           placeholder="Поиск"
+                                           class="search-icon btn filter-search">
+                                </div>
+                                <ul class="filters-add__list">
+                                    <li class="filters-add__item">
+                                        <ul class="application-checkboxs  filters__sub-item" id="laureates-item">
+                                            {% for laureate in filters.laureates %}
+                                            <li class="application-checkbox checkbox  genre__item-submenu">
+                                                <input type="checkbox"
+                                                       name="almanac"
+                                                       value="{{ laureate.almanach__slug }}"
+                                                       id="{{ laureate.almanach__slug }}">
+                                                <label for="{{ laureate.almanach__slug }}">{{ laureate.almanach__name }} {{ laureate.almanach__year }}</label>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </li>

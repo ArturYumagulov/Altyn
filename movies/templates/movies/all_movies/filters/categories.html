@@ -1,0 +1,31 @@
+                    <li class="filters__item">
+                        <button class="filters__link">Категория</button>
+                        <span class="_icon-derection-right">
+											</span>
+                        <ul class="filters__sub-item">
+                            <div class="filters-category__body">
+
+                                <div class="filters-search filters__item-submen">
+                                    <input type="search"
+                                           data-type="category"
+                                           placeholder="Поиск"
+                                           class="search-icon btn filter-search">
+                                </div>
+
+                                <ul class="filters-add__list">
+                                    <li class="filters-add__item">
+                                        <ul class="application-checkboxs filters__sub-item" id="category-item">
+                                            {% for category in filters.categories %}
+                                            <li class="application-checkbox checkbox  genre__item-submenu">
+                                                <input type="checkbox" name="category"
+                                                       value="{{ category.category__slug }}"
+                                                       id="{{ category.category__slug }}">
+                                                <label for="{{ category.category__slug }}">{{ category.category__name }}</label>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </li>

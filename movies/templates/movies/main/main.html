@@ -25,12 +25,12 @@
             <section id="watchmovieTop" class="watchmovieTop">
                 <div class="container">
                     <div class="watchmovieTop-btn ">
-                        <a href="all-films.html" class="btn ">Каталог фильмов</a>
+                        <a href="{% url 'all_movies' %}" class="btn ">Каталог фильмов</a>
                     </div>
                     <div class="watchmovieTop-cards">
                         {% for almanac in almanacs %}
                         <article>
-                            <h4>{{ almanac.name }}</h4>
+                            <h4>{{ almanac.name }} {% if almanac.year %}{{ almanac.year }}{% else %}{% endif %}</h4>
                             <div class="card watchmovieTop-card">
                                 <div class="watchmovieTop__img">
                                     <img src="{{ almanac.image.url }}" alt="{{ almanac.slug }}">
@@ -39,125 +39,13 @@
                                     <p>{{ almanac.description }}</p>
                                 </div>
                                 <div>
-                                    <a href="#" class="morelink watchmovieTop-morelink  _icon-ring-arrow">Узнать
+                                    <a href="{% url 'all_movies' %}?almanac={{ almanac.slug }}" class="morelink watchmovieTop-morelink  _icon-ring-arrow">Узнать
                                         больше</a>
                                 </div>
                             </div>
                         </article>
                         {% endfor %}
-{#                        <article>#}
-{#                            <h4>Победитель зрительского голосования 2019</h4>#}
-{#                            <div class="card watchmovieTop-card">#}
-{#                                <div class="watchmovieTop__img">#}
-{#                                    <img src="{% static 'img/watchmovie/watchmovieTop-card.png' %}" alt="">#}
-{#                                </div>#}
-{#                                <div class="watchmovieTop__block">#}
-{#                                    <p>Это проблема всех начинающих авторов, когда хочется снять такое, чтобы все#}
-{#                                        ахнули, а получается#}
-{#                                        просто ужас. Тем не менее мне было бы очень интересно в этом поучаствовать. Это#}
-{#                                        проблема всех#}
-{#                                        начинающих авторов, когда хочется снять такое, чтобы все ахнули, а получается#}
-{#                                        просто ужас. Тем не#}
-{#                                        менее мне было бы очень интересно в этом поучаствовать#}
-{#                                    </p>#}
-{#                                </div>#}
-{#                                <div>#}
-{#                                    <a href="#" class="morelink watchmovieTop-morelink  _icon-ring-arrow">Узнать#}
-{#                                        больше</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </article>#}
-{#                        <article>#}
-{#                            <h4>Победитель зрительского голосования 2019</h4>#}
-{#                            <div class="card watchmovieTop-card">#}
-{#                                <div class="watchmovieTop__img">#}
-{#                                    <img src="{% static 'img/watchmovie/watchmovieTop-card.png' %}" alt="">#}
-{#                                </div>#}
-{#                                <div class="watchmovieTop__block">#}
-{#                                    <p>Это проблема всех начинающих авторов, когда хочется снять такое, чтобы все#}
-{#                                        ахнули, а получается#}
-{#                                        просто ужас. Тем не менее мне было бы очень интересно в этом поучаствовать. Это#}
-{#                                        проблема всех#}
-{#                                        начинающих авторов, когда хочется снять такое, чтобы все ахнули, а получается#}
-{#                                        просто ужас. Тем не#}
-{#                                        менее мне было бы очень интересно в этом поучаствовать#}
-{#                                    </p>#}
-{#                                </div>#}
-{#                                <div>#}
-{#                                    <a href="#" class="morelink watchmovieTop-morelink  _icon-ring-arrow">Узнать#}
-{#                                        больше</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </article>#}
-{#                        <article>#}
-{#                            <h4>Победитель зрительского голосования 2019</h4>#}
-{#                            <div class="card watchmovieTop-card">#}
-{#                                <div class="watchmovieTop__img">#}
-{#                                    <img src="{% static 'img/watchmovie/watchmovieTop-card.png' %}" alt="">#}
-{#                                </div>#}
-{#                                <div class="watchmovieTop__block">#}
-{#                                    <p>Это проблема всех начинающих авторов, когда хочется снять такое, чтобы все#}
-{#                                        ахнули, а получается#}
-{#                                        просто ужас. Тем не менее мне было бы очень интересно в этом поучаствовать. Это#}
-{#                                        проблема всех#}
-{#                                        начинающих авторов, когда хочется снять такое, чтобы все ахнули, а получается#}
-{#                                        просто ужас. Тем не#}
-{#                                        менее мне было бы очень интересно в этом поучаствовать#}
-{#                                    </p>#}
-{#                                </div>#}
-{#                                <div>#}
-{#                                    <a href="#" class="morelink watchmovieTop-morelink  _icon-ring-arrow">Узнать#}
-{#                                        больше</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </article>#}
                     </div>
-{#                    <div class="watchmovieTop-cards container">#}
-{#                        <article>#}
-{#                            <h4>Победитель зрительского голосования 2019</h4>#}
-{#                            <div class="card watchmovieTop-card">#}
-{#                                <div class="watchmovieTop__img">#}
-{#                                    <img src="{% static 'img/watchmovie/watchmovieTop-card.png' %}" alt="">#}
-{#                                </div>#}
-{#                                <div class="watchmovieTop__block">#}
-{#                                    <p>Это проблема всех начинающих авторов, когда хочется снять такое, чтобы все#}
-{#                                        ахнули, а получается#}
-{#                                        просто ужас. Тем не менее мне было бы очень интересно в этом поучаствовать. Это#}
-{#                                        проблема всех#}
-{#                                        начинающих авторов, когда хочется снять такое, чтобы все ахнули, а получается#}
-{#                                        просто ужас. Тем не#}
-{#                                        менее мне было бы очень интересно в этом поучаствовать#}
-{#                                    </p>#}
-{#                                </div>#}
-{#                                <div>#}
-{#                                    <a href="#" class="morelink watchmovieTop-morelink  _icon-ring-arrow">Узнать#}
-{#                                        больше</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </article>#}
-{#                        <article>#}
-{#                            <h4>Победитель зрительского голосования 2019</h4>#}
-{#                            <div class="card watchmovieTop-card">#}
-{#                                <div class="watchmovieTop__img">#}
-{#                                    <img src="{% static 'img/watchmovie/watchmovieTop-card.png' %}" alt="фото мастер класса">#}
-{#                                </div>#}
-{#                                <div class="watchmovieTop__block">#}
-{#                                    <p>Это проблема всех начинающих авторов, когда хочется снять такое, чтобы все#}
-{#                                        ахнули, а получается#}
-{#                                        просто ужас. Тем не менее мне было бы очень интересно в этом поучаствовать. Это#}
-{#                                        проблема всех#}
-{#                                        начинающих авторов, когда хочется снять такое, чтобы все ахнули, а получается#}
-{#                                        просто ужас. Тем не#}
-{#                                        менее мне было бы очень интересно в этом поучаствовать#}
-{#                                    </p>#}
-{#                                </div>#}
-{#                                <div>#}
-{#                                    <a href="#" class="morelink watchmovieTop-morelink  _icon-ring-arrow">Узнать#}
-{#                                        больше</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </article>#}
-{#                    </div>#}
                 </div>
             </section>
 

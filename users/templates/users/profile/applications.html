@@ -1,0 +1,14 @@
+{% load static %}
+<div class="personalAccount-content">
+    <h3 class="personalAccount-content__title ">Мои заявки<span class="_icon-derection-right "></span></h3>
+    <div class="applications">
+        {% for app in apps %}
+            <div class="personalAccountslider__item">
+                <figure>
+                    <img src="{% static 'img/icons/simple-line-icons_docs.svg' %}" alt="">
+                    <figcaption>Кинопремия<span>“{{ app.name }}”</span></figcaption>
+                </figure>
+            </div>
+        {% endfor %}
+    </div>
+</div>

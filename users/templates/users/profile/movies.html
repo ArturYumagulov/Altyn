@@ -1,0 +1,24 @@
+{% load static %}
+<div class="personalAccount-content">
+    <h3 class="personalAccount-content__title ">Мои фильмы<span class="_icon-derection-right "></span></h3>
+    <div class="personalAccountslider">
+        {% for movie in movies %}
+            <div class="personalAccountslider__item">
+            <figure>
+                <img src="{{ movie.image.url }}" alt="{{ movie.slug }}">
+                <figcaption>{{ movie.name }}</figcaption>
+            </figure>
+            <a href="#" class="allfilms__overlay">
+                <article class="allfilms__item-overlay">
+                    <div class="allfilms__overlay-start">
+                        <img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="star">
+                        <span>5.0</span>
+                    </div>
+                    <p>{{ movie.year }} | 110 минут</p>
+                    <p>{% for genre in movie.genre.all %}{{ genre.name }}{% endfor %}</p>
+                </article>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>

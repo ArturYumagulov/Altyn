@@ -1,8 +1,7 @@
-{% url 'change_password' as change_password %}
-
 <!DOCTYPE html>
 <html lang="ru">
 {% load static %}
+{% url 'change_password' as change_password %}
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +64,7 @@
 						<ul class="distribution-items ">
 							<li class="distribution-item">
 
-								<a href="watch-movie.html" class=""><img src="{% static 'img/icons/film.svg' %}" alt="">Смотреть кино
+								<a href="{% url 'movie_main' %}" class=""><img src="{% static 'img/icons/film.svg' %}" alt="">Смотреть кино
 									<svg width="11" height="15" viewBox="0 0 5 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path
 											d="M0.311705 -2.04932e-07C0.232632 -2.08388e-07 0.151711 0.0369235 0.0910268 0.108599C-0.0303416 0.25195 -0.0303416 0.486524 0.0910268 0.629874L4.24513 5.53638L0.15171 10.3712C0.0303421 10.5146 0.0303421 10.7491 0.15171 10.8925C0.273078 11.0358 0.471681 11.0358 0.593049 10.8925L4.90897 5.79702C5.03034 5.65367 5.03034 5.41909 4.90897 5.27574L0.534204 0.108599C0.471682 0.0347515 0.392617 -2.01395e-07 0.311705 -2.04932e-07Z"

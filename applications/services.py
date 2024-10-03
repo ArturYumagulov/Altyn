@@ -261,6 +261,7 @@ def create_region_speciality(request):
 def save_movie(request):
     new_movie = Movie()
     new_movie.status = MovieStatus.objects.get(name="Черновик")
+    new_movie.user = request.user
     print(request)
     request = request.POST
 

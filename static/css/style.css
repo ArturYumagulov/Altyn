@@ -5076,7 +5076,7 @@ select option {
 	left: -40px;
 	width: 100vw;
 	height: 0.50px;
-	background: #fff;
+	/*background: #fff;*/
 }
 
 .filters__sub-item label {
@@ -5283,7 +5283,7 @@ select option {
 .allfilms-img {
 	margin-top: 62px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: start;
 	flex-wrap: wrap;
 }
 
@@ -5333,6 +5333,7 @@ select option {
 
 .allfilms__item {
 	position: relative;
+	margin: 0 20px;
 }
 
 .allfilms__overlay {

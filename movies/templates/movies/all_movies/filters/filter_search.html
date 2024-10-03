@@ -1,0 +1,131 @@
+<div class="allfilms-filterSearch">
+    <div class="filters">
+        <a href="#" class="filters-btn btn _icon-derection-right">
+            Фильтры
+        </a>
+        <div class="header__menu menu">
+            <nav class="filters__body ">
+                <form class="filter-form" action="/movies/all-movies/" method="get">
+                <ul class="filters__list">
+
+                    {% include 'movies/all_movies/filters/regions.html' %}
+
+                    {% include 'movies/all_movies/filters/categories.html' %}
+
+                    {% include 'movies/all_movies/filters/genres.html' %}
+
+                    {% include 'movies/all_movies/filters/laureates.html' %}
+
+                    {% include 'movies/all_movies/filters/almanacs.html' %}
+
+                </ul>
+                <button class="btn filters__body-btn" type="submit">Применить</button>
+                </form>
+                <button class="btn filters__body-reset--btn">Сбросить</button>
+            </nav>
+
+        </div>
+    </div>
+    <div class="search">
+        <input type="search" placeholder="Поиск" class=" search-btn btn ">
+    </div>
+</div>
+
+<script>
+    let content = {
+        regions: `{% for region in filters.regions %}` +
+                    `<li class="application-checkbox checkbox  genre__item-submenu">` +
+                    `<input type="checkbox" id="{{ region.regions__slug }}">` +
+                    `<label for="{{ region.regions__slug }}">{{ region.regions__name }}</label>` +
+                    `</li>` +
+                    `{% endfor %}`,
+        category: `{% for category in filters.categories %}` +
+                    `<li class="application-checkbox checkbox  genre__item-submenu">` +
+                    `<input type="checkbox" id="{{ category.category__slug }}">` +
+                    `<label for="{{ category.category__slug }}">{{ category.category__name }}</label>` +
+                    `</li>` +
+                    `{% endfor %}`,
+        genres: `{% for genre in filters.genres %}` +
+                    `<li class="application-checkbox checkbox  genre__item-submenu">` +
+                    `<input type="checkbox" id="{{ genre.genre__slug }}">` +
+                    `<label for="{{ genre.genre__slug }}">{{ genre.genre__name }}</label>` +
+                    `</li>` +
+                    `{% endfor %}`,
+        almanacs: `{% for almanac in filters.almanacs %}` +
+                    `<li class="application-checkbox checkbox  genre__item-submenu">` +
+                    `<input type="checkbox" id="{{ almanac.almanach__slug }}">` +
+                    `<label for="{{ almanac.almanach__slug }}">{{ almanac.almanach__name }}</label>` +
+                    `</li>` +
+                    `{% endfor %}`,
+        laureates: `{% for laureate in filters.laureates %}` +
+                    `<li class="application-checkbox checkbox  genre__item-submenu">` +
+                    `<input type="checkbox" id="{{ laureate.almanach__slug }}">` +
+                    `<label for="{{ laureate.almanach__slug }}">{{ laureate.almanach__name }} {{ laureate.almanach__year }}</label>` +
+                    `</li>{% endfor %}`
+    }
+
+    let search_inputs = document.querySelectorAll('.filter-search')
+
+    function create_search_elem(slug, name, year=null) {
+        let li = document.createElement('li')
+        li.classList.add('application-checkbox', 'checkbox', 'genre__item-submenu')
+
+        let input = document.createElement('input')
+        input.setAttribute('type', 'checkbox')
+        input.setAttribute('id', slug)
+
+        let label = document.createElement('label')
+        label.setAttribute('for', slug)
+        if (year !== null) {
+            label.textContent = `${name} ${year}`
+        } else {
+            label.textContent = `${name}`
+        }
+
+        li.append(input, label)
+
+        return li;
+    }
+
+    search_inputs.forEach(search => {
+        search.addEventListener('keyup', (event) => {
+            {#console.log(location.search.slice(1).split('&'))#}
+            const params = new URLSearchParams(window.location.search);
+            console.log(params.toString())
+            let type = event.target.dataset.type
+            fetch(filter_url + location.search, {
+                method: 'POST',
+                headers: {"X-CSRFToken": csrf},
+                body: JSON.stringify({
+                    search: event.target.value,
+                    type: type
+                })
+            }).then(response => response.json()).then(data => {
+                {#console.log(data.result)#}
+                const region_block = document.getElementById(`${type}-item`)
+                region_block.innerHTML = content[type]
+                if (data.result.length > 0) {
+                    region_block.textContent = ""
+                    data.result.forEach(elem => {
+                        region_block.append(create_search_elem(elem.slug, elem.name, elem.year))
+                    })
+                } else {
+                    region_block.textContent = ""
+                    region_block.textContent = "Ничего не найдено"
+                }
+            })
+        })
+    })
+    // Сбросить фильтры
+    let reset = document.querySelector('.filters__body-reset--btn')
+    let form = document.querySelector('.filter-form')
+    reset.addEventListener('click', () => {
+        let inputs = form.querySelectorAll('input')
+        inputs.forEach(input => {
+            input.checked = false;
+        })
+        window.history.replaceState(null, null, window.location.pathname);
+        location.replace(window.location.pathname)
+        {#alert('фильтры сброшены')#}
+    })
+</script>

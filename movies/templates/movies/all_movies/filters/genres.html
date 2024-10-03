@@ -1,0 +1,30 @@
+<li class="filters__item">
+                        <button class="filters__link">Жанры</button>
+                        <span class="_icon-derection-right">
+											</span>
+                        <ul class="filters__sub-item">
+                            <div class="filters-genres__body">
+                                <div class="filters-search filters__item-submen">
+                                    <input type="search"
+                                           placeholder="Поиск"
+                                           data-type="genres"
+                                           class="search-icon btn filter-search">
+                                </div>
+                                <ul class="filters-add__list">
+                                    <li class="filters-add__item">
+
+                                        <ul class="application-checkboxs  filters__sub-item" id="genres-item">
+                                            {% for genre in filters.genres %}
+                                            <li class="application-checkbox checkbox  genre__item-submenu">
+                                                <input type="checkbox"
+                                                       name="genre" value="{{ genre.genre__slug }}"
+                                                       id="{{ genre.genre__slug }}">
+                                                <label for="{{ genre.genre__slug }}">{{ genre.genre__name }}</label>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </li>

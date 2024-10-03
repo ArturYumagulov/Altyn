@@ -32,8 +32,10 @@ class KindAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.Almanac)
-class AlmanarchAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ('name',)}
+class AlmanacAdmin(admin.ModelAdmin):
+    list_filter = ('laureate',)
+    list_display = ('name', "year", 'is_active', 'laureate')
+    prepopulated_fields = {"slug": ('name', 'year')}
 
 
 @admin.register(models.AgeLimit)
