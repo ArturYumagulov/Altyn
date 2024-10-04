@@ -7,7 +7,7 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])(?!.*(.)\1{
 
 function inValid(element, errorElement, text = null) {
     // добавляет классы невалидности
-    element.classList.add('is-invalid')
+    errorElement.classList.add('is-invalid')
     errorElement.style.display = 'block'
     errorElement.textContent = text
 }

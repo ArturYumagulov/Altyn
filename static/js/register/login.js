@@ -18,12 +18,13 @@ async function LoadData(username, password) {
 
 function invalidData(item_id) {
     document.getElementById(`${item_id}-feedback`).style.display = 'block'
-    document.getElementById(item_id).classList.add('is-invalid')
+    document.getElementById(`${item_id}-feedback`).classList.add('is-invalid')
 }
 
 function validData(item_id) {
+    console.log(item_id)
     document.getElementById(`${item_id}-feedback`).style.display = 'none'
-    document.getElementById(item_id).classList.remove('is-invalid')
+    document.getElementById(`${item_id}-feedback`).classList.remove('is-invalid')
 }
 
 function lenValid(element) {

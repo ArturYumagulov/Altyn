@@ -116,15 +116,9 @@ html {
 	max-width: 906px;
 	min-height: 51px;
 	width: 100%;
-	margin: 10px 0 20px;
-}
-
-.form-book__input.is-invalid {
-	margin-bottom: 0;
-	border-color: #de0b0b;
-}
-.form-book__input.is-invalid::placeholder {
-	color: #de0b0b;
+	/*margin: 10px 0 20px;*/
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 
 .content .form-book__input {
@@ -244,6 +238,7 @@ html {
 	position: relative;
 }
 
+
 .tooltip {
 	visibility: hidden;
 	position: absolute;
@@ -288,20 +283,76 @@ html {
 	}
 }
 
+.tooltip-playlist {
+	visibility: hidden;
+	position: absolute;
+	top: 29px;
+	right: 2px;
+	white-space: nowrap;
+	background: var(--color-title);
+	color: var(--color-text);
+	display: inline-table;
+	align-items: center;
+	border-radius: 2px;
+	border-radius: 2px;
+	padding: 2px 13px;
+	width: 157px;
+	height: 19px;
+	z-index: 1;
+}
+
+.tooltip-favorites {
+	visibility: hidden;
+	position: absolute;
+	top: 35px;
+	right: 10px;
+	white-space: nowrap;
+	background: var(--color-title);
+	color: var(--color-text);
+	display: inline-table;
+	align-items: center;
+	border-radius: 2px;
+	border-radius: 2px;
+	padding: 2px 13px;
+	width: 157px;
+	height: 19px;
+	z-index: 1;
+}
+
+
+
+.tooltip-btn:hover .tooltip-playlist,
+.tooltip-btn:hover .tooltip-favorites {
+	cursor: pointer;
+	visibility: visible;
+}
+
+.tooltip-playlist:hover .tooltiptext,
+.tooltip-favorites:hover .tooltiptext {
+	visibility: visible;
+	font-weight: 300;
+	font-size: 12px;
+}
+
+.section-title svg {
+	margin-inline: 3px;
+}
+
+@media(max-width:992px) {
+
+	.tooltip-playlist,
+	.tooltip-favorites {
+		display: none;
+
+	}
+}
+
 .alert {
-	color: #de0b0b;
-	text-align: center;
 	display: none;
 }
 
-.alert.is-valid{
-	color: #0bde35;
+.alert.is-invalid {
+	/*display: none;*/
+	color: red;
 	text-align: center;
-}
-
-.user svg {
-	width: 45px;
-	font-size: 40px;
-	height: auto;
-	margin-left: 12px;
 }
