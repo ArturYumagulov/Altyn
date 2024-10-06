@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}{{ movie.name }}{% endblock %}
-
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/star.css' %}">
+{% endblock %}
 {% block content %}
     		<main class="main">
 			<div class="breadcrumb-block container">
@@ -12,7 +14,8 @@
 					<li class="breadcrumb-link _icon-derection-right active" aria-current="page">{{ movie.name }}</li>
 				</ol>
 			</div>
-			<section id="name-film" class="name-film  container">
+			<section id="name-film" class="name-film container" data-rating="{% url 'get_rating' slug=movie.slug%}"
+                     data-valid="{% url 'ip_valid' %}" data-slug="{{ movie.slug }}" data-action="{% url 'get_star' %}">
 				<div class="film-content">
 					<div class="film-block">
 						<div class="film-img">
@@ -142,19 +145,29 @@
 					<div class="film-stars">
 						<div class="film-star__rating">
 							<img src="{% static 'img/allfilms/star_1.svg' %}" alt="">
-							<span>5.0</span>
+                            {% if movie.get_avg_rating != 0 %}
+                                <span class="rating__value">{{ movie.get_avg_rating }}</span>
+                            {% else %}
+                                <span class="rating__value">0</span>
+                            {% endif %}
 						</div>
 						<div class="film-star">
-							<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
-							<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
-							<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
-							<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
-							<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
+                            <div data-ajax="true" class="rating rating_set">
+                                <div class="rating__body">
+                                    <div class="rating__active"></div>
+                                    <div class="rating__items">
+                                            {% for rating in ratings %}
+                                                <label for="rating"></label>
+                                                <input id="rating" type="radio" class="rating__item"
+                                                       value="{{ rating }}"
+                                                       name="rating">
+                                            {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
 						</div>
-						<p class="film-vote">Голосов 1255</p>
+						<p class="film-vote">Голосов <span>{{ rating_count }}</span></p>
 					</div>
-
-
 
 					<div class="about-film">
 						<ul>
@@ -246,43 +259,153 @@
 
                                 {% endif %}
 							</li>
-							<li> {% if movie.compositor %}
-								Композитор:<dd>{{ movie.compositor }}</dd>
+							<li>
+                                {% if movie.compositor.count != 0 %}
+                                    Композитор:
+                                    <dd>
+                                    {% for dir in movie.compositor.all %}
+                                        {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                    {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                    {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    {% if movie.shooting_group.count > 0 %}
+                                        <dd>
+                                        {% for spec in movie.shooting_group.all %}
+                                            {% if spec.speciality.slug == 'compositor' %}
+                                                {{ spec.last_name }} {{ spec.first_name }}
+                                            {% endif %}
+                                        {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
                                 {% endif %}
 							</li>
 							<li>
-								Оператор:<dd></dd>
+                                {% if movie.operator.count != 0 %}
+                                    Оператор-постановщик:
+                                    <dd>
+                                    {% for dir in movie.operator.all %}
+                                        {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                    {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                    {% endfor %}
+                                    </dd>
+                                {% else %}
+                                     Оператор-постановщик:
+                                    {% if movie.shooting_group.count > 0 %}
+                                        <dd>
+                                        {% for spec in movie.shooting_group.all %}
+                                            {% if spec.speciality.slug == 'operator' %}
+                                                {{ spec.last_name }} {{ spec.first_name }},
+                                            {% endif %}
+                                        {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+							</li>
+                            <li>
+                                {% if movie.operator.count != 0 %}
+                                    Художник-постановщик:
+                                    <dd>
+                                        {% for dir in movie.operator.all %}
+                                            {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                        {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                        {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    Художник-постановщик:
+                                    {% if movie.shooting_group.count > 0 %}
+                                        <dd>
+                                            {% for spec in movie.shooting_group.all %}
+                                                {% if spec.speciality.slug == 'artistical_director' %}
+                                                    {{ spec.last_name }} {{ spec.first_name }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+                            </li>
+                            <li>
+                                {% if movie.operator.count != 0 %}
+                                    Художник по костюмам:
+                                    <dd>
+                                        {% for dir in movie.operator.all %}
+                                            {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                        {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                        {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    Художник по костюмам:
+                                    {% if movie.shooting_group.count > 0 %}
+                                        <dd>
+                                            {% for spec in movie.shooting_group.all %}
+                                                {% if spec.speciality.slug == 'costumer_designer' %}
+                                                    {{ spec.last_name }} {{ spec.first_name }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+                            </li>
+
+							<li>
+								Актеры:<dd>{% if movie.actors %}{{ movie.actors }}{% endif %}</dd>
 							</li>
 							<li>
-								Актеры:<dd></dd>
+								Хронометраж:<dd>{{ movie.timing }}</dd>
 							</li>
 							<li>
-								Хронометраж:<dd></dd>
+								{% if movie.almanach.count != 0 %}
+                                Победитель номинации:
+                                <dd>
+                                    {% for almanac in movie.almanach.all %}
+                                        {% if almanac.laureate %}{{ almanac }}{% endif %}
+                                    {% endfor %}
+                                </dd>
+                                {% else %}
+                                {% endif %}
 							</li>
 							<li>
-								Афиша:<dd></dd>
-							</li>
-							<li>
-								Трейлер:<dd></dd>
-							</li>
-							<li>
-								Фильм:<dd></dd>
-							</li>
-							<li>
-								Рейтинг:<dd></dd>
-							</li>
-							<li>
-								Зрительское голосование:<dd></dd>
-							</li>
-							<li>
-								Победитель номинации:<dd></dd>
-							</li>
-							<li>
-								Альманах:<dd></dd>
+                                {% if movie.almanach.count != 0 %}
+                                    Альманах:
+                                    {% for almanac in movie.almanach.all %}
+                                        <dd>
+                                        {% if almanac.laureate == "False" %}{{ almanac }}{% endif %}
+                                    {% endfor %}
+                                        </dd>
+                                {% else %}
+                                {% endif %}
 							</li>
 						</ul>
 					</div>
+
 				</div>
 			</section>
 		</main>
 {% endblock %}
+
+{% block video_modal %}
+    		<!-- Модальный блок видео О проекте-->
+		<div class="overlay" id="video2"></div>
+		<div class="modal">
+			<div class="video" id="video">
+				<video controls>
+					<source src="" autoplay muted loop type="video/mp4">
+					<source src="" autoplay muted loop type="video/webm">
+				</video>
+			</div>
+			<a href="" id="stop" class="close-sliderProject"></a>
+		</div>
+		<!-- конец блока видео-->
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/movie/stars.js' %}"></script>
+{% endblock%}

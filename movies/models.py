@@ -5,7 +5,8 @@ from django.db import models
 from django.db.models import Avg
 from django.urls import reverse
 
-from regions.models import Region, Director, Producer, Scenarist, Compositor, Operator
+from regions.models import Region, Director, Producer, Scenarist, Compositor, Operator, ArtisticalDirector, \
+    CostumerDesigner
 
 # Create your models here.
 
@@ -251,6 +252,8 @@ class Movie(models.Model):
                                        related_name="scenarists")
     compositor = models.ManyToManyField(Compositor, verbose_name="Композитор-регион", blank=True)
     operator = models.ManyToManyField(Operator, verbose_name="Оператор-регион", blank=True)
+    artistical_director = models.ManyToManyField(ArtisticalDirector, verbose_name="Художник постановщик", blank=True)
+    costumer_designer = models.ManyToManyField(CostumerDesigner, verbose_name="Художник по костюмам", blank=True)
     shooting_group = models.ManyToManyField(MainShootingGroup, verbose_name="Съемочная группа", blank=True,
                                             related_name='movies')
     trailer = models.URLField()

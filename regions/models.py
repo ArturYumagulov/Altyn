@@ -173,3 +173,35 @@ class Operator(models.Model):
         ordering = ["last_name"]
         verbose_name = "Оператор"
         verbose_name_plural = "Операторы"
+
+
+class ArtisticalDirector(models.Model):
+
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=150, verbose_name="Имя")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+    class Meta:
+        ordering = ["last_name"]
+        verbose_name = "Художник постановщик"
+        verbose_name_plural = "Художник постановщик"
+
+
+class CostumerDesigner(models.Model):
+
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=150, verbose_name="Имя")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+    class Meta:
+        ordering = ["last_name"]
+        verbose_name = "Художник по костюмам"
+        verbose_name_plural = "Художник по костюмам"

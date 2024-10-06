@@ -89,3 +89,13 @@ class MainShootingGroupAdmin(admin.ModelAdmin):
         return ", ".join([movie.name for movie in obj.movies.all()])
 
     get_movies.short_description = "Фильм"  # Название столбца в админке
+
+
+@admin.register(models.RatingStar)
+class RatingStarAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.Rating)
+class RatingAdmin(admin.ModelAdmin):
+    pass
