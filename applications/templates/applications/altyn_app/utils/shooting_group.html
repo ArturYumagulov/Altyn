@@ -89,39 +89,58 @@
 										Нет
 									</li>
 								</ul>
-								<div class="composer" style="display: none">
-									<h4>Композитор:</h4>
-									<div class="composer-person person">
-										<input type="text" placeholder="Имя" name="compositor_first_name_1">
-										<input type="text" placeholder="Фамилия" name="compositor_last_name_1">
-									</div>
-								</div>
-                                <div class="new-composer"></div>
-								<div class="directorPhotography">
-									<h4>Оператор - постановщик:</h4>
-									<div class="directorPhotography-person person">
-										<input type="text" placeholder="Имя" name="operator_first_name_1" required>
-										<input type="text" placeholder="Фамилия" name="operator_last_name_1" required>
-									</div>
-								</div>
+                                <div class="composer-block">
+                                    <div class="composer" style="display: none">
+                                        <h4>Композитор:</h4>
+                                        <div class="composer-person person">
+                                            <input type="text" placeholder="Имя" name="compositor_first_name_1">
+                                            <input type="text" placeholder="Фамилия" name="compositor_last_name_1">
+                                        </div>
+{#                                        <div class="speciality-add">#}
+{#                                            <a id="composer_add" class="btn speciality-add__btn"><span>+</span></a>#}
+{#                                        </div>#}
+                                    </div>
+                                    </div>
+{#                                </div>#}
+{#                                <div class="new-composer"></div>#}
+
+                                <div class="operator-block">
+                                    <div class="operator">
+                                        <h4>Оператор - постановщик:</h4>
+                                        <div class="directorPhotography-person person">
+                                            <input type="text" placeholder="Имя" name="operator_first_name_1" required>
+                                            <input type="text" placeholder="Фамилия" name="operator_last_name_1" required>
+                                        </div>
+                                    </div>
+                                    <div class="speciality-add">
+                                        <a id="operator_add" class="btn speciality-add__btn"><span>+</span></a>
+                                    </div>
+                                </div>
                                 <div class="new-operator"></div>
-								<div class="directorPhotography">
-									<h4>Художник постановщик:</h4>
-									<div class="directorPhotography-person person">
-										<input type="text" placeholder="Имя" name="artistical_director_first_name_1">
-										<input type="text" placeholder="Фамилия" name="artistical_director_last_name_1">
-									</div>
-								</div>
+
+                                <div class="artistical_director-block">
+                                    <div class="artistical_director">
+                                        <h4>Художник постановщик:</h4>
+                                        <div class="directorPhotography-person person">
+                                            <input type="text" placeholder="Имя" name="artistical_director_first_name_1">
+                                            <input type="text" placeholder="Фамилия" name="artistical_director_last_name_1">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="new-artistical_director"></div>
-								<div class="directorPhotography">
-									<h4>Художник по костюмам:</h4>
-									<div class="directorPhotography-person person">
-										<input type="text" placeholder="Имя" name="costumer_designer_first_name_1">
-										<input type="text" placeholder="Фамилия" name="costumer_designer_last_name_1">
-									</div>
-								</div>
+
+								<div class="costumer_designer-block">
+                                    <div class="costumer_designer">
+                                        <h4>Художник по костюмам:</h4>
+                                        <div class="directorPhotography-person person">
+                                            <input type="text" placeholder="Имя" name="costumer_designer_first_name_1">
+                                            <input type="text" placeholder="Фамилия" name="costumer_designer_last_name_1">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="new-costumer_designer_"></div>
-								<div class="film-crew textarea">
+
+                                <div class="film-crew textarea">
 									<h4>Остальные члены съемочной команды: </h4>
 									<span>Перечисление главных актёров через запятую/столбиком, с указанием ролей,<br>
 										пример:<br>

@@ -19,21 +19,80 @@ let inviteBody = document.querySelector('.invite-body')
 let musicBlock = document.querySelector('.music-block')
 
 let specialists_id = {
-        'producer': {
-            'specialist': 'producer',
-            'name': 'Продюсер:',
-            'subname': 'продюсера',
-        },
-        'stage-director': {
-            'specialist': 'stage-director',
-            'name': 'Режиссер-постановщик:',
-            'subname': 'режиссера-постановщика:',
-        },
-        'screenwriter': {
-            'specialist': 'screenwriter',
-            'name': 'Сценарист:',
-            'subname': 'сценариста:',
-        }
+    'producer': {
+        'specialist': 'producer',
+        'name': 'Продюсер:',
+        'subname': 'продюсера',
+    },
+    'stage-director': {
+        'specialist': 'stage-director',
+        'name': 'Режиссер-постановщик:',
+        'subname': 'режиссера-постановщика:',
+    },
+    'screenwriter': {
+        'specialist': 'screenwriter',
+        'name': 'Сценарист:',
+        'subname': 'сценариста:',
+    },
+    'operator': {
+        'specialist': 'operator',
+        'name': 'Оператор - постановщик:',
+    },
+}
+
+const sub_spec= ['operator']
+
+function createSubSpecialistBlock(specialist, name, subname) {
+
+    let specialist_count = document.getElementById(`${specialist}_count`)
+    specialist_count.value = Number(specialist_count.value) + 1
+    let count = specialist_count.value
+
+    let specialist_block = document.querySelector(`.new-${specialist}`)
+
+    let div = document.createElement('div')
+    div.classList.add(specialist)
+
+    let specH4 = document.createElement('h4')
+    specH4.textContent = name
+
+    let namesDiv = document.createElement('div')
+    namesDiv.classList.add(`${specialist}-person`, 'person')
+
+    div.append(specH4, namesDiv)
+
+    let names1Input = document.createElement('input')
+    names1Input.setAttribute('type', 'text')
+    names1Input.setAttribute('placeholder', 'Имя')
+    names1Input.setAttribute('name', `${specialist}_first_name_${count}`)
+    names1Input.setAttribute('required', ``)
+
+    let names2Input = document.createElement('input')
+    names2Input.setAttribute('type', 'text')
+    names2Input.setAttribute('placeholder', 'Фамилия')
+    names2Input.setAttribute('name', `${specialist}_last_name_${count}`)
+    names2Input.setAttribute('required', ``)
+
+    namesDiv.append(names1Input, names2Input)
+
+    let addButton = document.createElement('div')
+    addButton.classList.add('speciality-add')
+    let addButtonA = document.createElement('a')
+    addButtonA.classList.add('btn', 'speciality-add__btn')
+    addButtonA.setAttribute('id', `${specialist}_add`)
+    addButtonA.setAttribute('data-count', `${Number(count) + 1}`)
+    // addButtonA.setAttribute("data-type", "add")
+    let addSpan = document.createElement('span')
+    addSpan.setAttribute("data-type", "add")
+    addSpan.textContent = "+"
+    addButtonA.append(addSpan)
+
+    addButton.append(addButtonA)
+
+    specialist_block.append(
+        div,
+        addButton
+    )
 }
 
 function createSpecialistBlock(specialist, name, subname) {
@@ -390,22 +449,33 @@ let add_specialists = document.querySelectorAll('.btn.speciality-add__btn')
 
 add_specialists.forEach((add) => {
     add.addEventListener('click', (e) => {
+        console.log(add.id)
         let block_id = add.id.split('_')[0]
         let specialist = specialists_id[block_id].specialist
         let name = specialists_id[block_id].name
         let subname = specialists_id[block_id].subname
-        createSpecialistBlock(specialist, name, subname)
+        if (!sub_spec.includes(block_id)) {
+            createSpecialistBlock(specialist, name, subname)
+        } else {
+            createSubSpecialistBlock(specialist, name)
+        }
     })
 })
 
 //  Съемочная группа - след. элементы
 let shooting_group = document.querySelector('.film-grew')
 shooting_group.addEventListener('click', (e) => {
+    console.log(e.target.dataset.type)
     if (e.target.dataset.type === 'add') {
         let block_id = e.target.parentNode.id.split('_')[0]
         let specialist = specialists_id[block_id].specialist
         let name = specialists_id[block_id].name
         let subname = specialists_id[block_id].subname
-        createSpecialistBlock(specialist, name, subname)
+        if (!sub_spec.includes(block_id)) {
+            createSpecialistBlock(specialist, name, subname)
+        } else {
+            createSubSpecialistBlock(specialist, name)
+        }
+
     }
 })

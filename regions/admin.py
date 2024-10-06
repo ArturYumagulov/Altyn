@@ -61,6 +61,18 @@ class ProducerAdmin(admin.ModelAdmin):
         obj.save()
 
 
+@admin.register(models.Compositor)
+class CompositorAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('first_name', 'last_name')}
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        # Генерируем slug с использованием фамилии, имени и pk
+        obj.slug = obj.slug + f'-{obj.pk}'
+        # Снова сохраняем объект с обновленным slug
+        obj.save()
+
+
 @admin.register(models.Operator)
 class OperatorAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('first_name', 'last_name')}
