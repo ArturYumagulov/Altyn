@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Status, MovieApp, SpecialistApp, ShootingGroupSpecialist
+from .models import Status, MovieApp, SpecialistApp
 
 
 # Register your models here.
@@ -18,12 +18,3 @@ class MovieAppAdmin(admin.ModelAdmin):
 @admin.register(SpecialistApp)
 class SpecialistAppAdmin(admin.ModelAdmin):
     pass
-
-
-@admin.register(ShootingGroupSpecialist)
-class ShootingGroupSpecialistAdmin(admin.ModelAdmin):
-    pass
-
-
-
-

@@ -8,15 +8,15 @@
                 <form class="filter-form" action="/movies/all-movies/" method="get">
                 <ul class="filters__list">
 
-                    {% include 'movies/all_movies/filters/regions.html' %}
+                    {% include 'movies/movies/filters/regions.html' %}
 
-                    {% include 'movies/all_movies/filters/categories.html' %}
+                    {% include 'movies/movies/filters/categories.html' %}
 
-                    {% include 'movies/all_movies/filters/genres.html' %}
+                    {% include 'movies/movies/filters/genres.html' %}
 
-                    {% include 'movies/all_movies/filters/laureates.html' %}
+                    {% include 'movies/movies/filters/laureates.html' %}
 
-                    {% include 'movies/all_movies/filters/almanacs.html' %}
+                    {% include 'movies/movies/filters/almanacs.html' %}
 
                 </ul>
                 <button class="btn filters__body-btn" type="submit">Применить</button>
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="search">
-        <input type="search" placeholder="Поиск" class=" search-btn btn ">
+        <input type="search" placeholder="Поиск" class="search-btn btn">
     </div>
 </div>
 

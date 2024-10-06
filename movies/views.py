@@ -1,12 +1,21 @@
 import json
 
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 
 from movies.models import Almanac, Movie, Category, Genre
 from regions.models import Region
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 
 def movie_main(request):
@@ -20,7 +29,7 @@ def movie_main(request):
     return render(request, "movies/main/main.html", context=context)
 
 
-def all_movies(request):
+def movies(request):
     params = request.GET
 
     if len(params) == 0:
@@ -48,8 +57,9 @@ def all_movies(request):
 
     filters = {
         'regions': queryset.values('regions__name', 'regions__slug').distinct(),
-        'categories': queryset.values('category__name', 'category__slug').distinct(),
-        'genres': queryset.values('genre__name', 'genre__slug', ).distinct(),
+        'categories': {category['category__slug']: category for category in queryset.values('category__name',
+                                                                                            'category__slug')}.values(),
+        'genres': {genre['genre__slug']: genre for genre in queryset.values('genre__name', 'genre__slug')}.values(),
         'almanacs': queryset.filter(almanach__in=almanacs).values('almanach__name', 'almanach__slug').distinct(),
         'laureates': queryset.filter(almanach__in=laureates).values('almanach__name', 'almanach__slug', 'almanach__year').distinct()
     }
@@ -57,7 +67,7 @@ def all_movies(request):
         'filters': filters,
         'movies': queryset,
     }
-    return render(request, 'movies/all_movies/all_movies.html', context=context)
+    return render(request, 'movies/movies/movies.html', context=context)
 
 
 def get_json_filters(request):
@@ -69,7 +79,7 @@ def get_json_filters(request):
         if len(params) == 0:
             queryset = Movie.objects.filter(is_active=True)
         else:
-            almanac = params.get('almanac')
+            almanac = params.getlist('almanac')
             category = params.getlist('category')
             genre = params.getlist('genre')
             region = params.getlist('regions')
@@ -125,6 +135,71 @@ def get_json_filters(request):
 
 
 def movie_search(request):
+
     if request.method == "POST":
-        return JsonResponse({'result': True}, safe=False)
+        search = json.loads(request.body).get('search')
+        params = request.GET
+
+        if len(params) == 0:
+            queryset = Movie.objects.filter(name__icontains=search, is_active=True)
+
+        else:
+            almanac = params.getlist('almanac')
+            category = params.getlist('category')
+            genre = params.getlist('genre')
+            region = params.getlist('regions')
+
+            # Проверяем наличие фильтров и добавляем их по очереди
+
+            queryset = Movie.objects.filter(is_active=True)
+
+            # Проверяем наличие фильтров и добавляем их по очереди
+            if almanac:
+                queryset = queryset.filter(Q(almanach__slug__in=almanac))
+
+            if region:
+                queryset = queryset.filter(Q(regions__slug__in=region))
+
+            if category:
+                queryset = queryset.filter(Q(category__slug__in=category))
+
+            if genre:
+                queryset = queryset.filter(Q(genre__slug__in=genre))
+
+            queryset = queryset.filter(name__icontains=search)
+
+        result = {}
+
+        for movie in queryset.values(
+                "id",
+                'name',
+                'image',
+                'rating',
+                'year',
+                'timing',
+                'slug',
+                'genre__name',
+                'genre__slug'):
+            movie_id = movie['id']
+            genre = {'name': movie['genre__name']}
+            if movie_id not in result:
+                result[movie_id] = {
+                    'name': movie['name'],
+                    'slug': movie['slug'],
+                    'image': movie['image'],
+                    'rating': movie['rating'],
+                    'year': movie['year'],
+                    'movie_time': movie['timing'],
+                    'genres': []}
+            result[movie_id]['genres'].append(genre)
+
+        json_result = list(result.values())
+
+        return JsonResponse({'result': json_result}, safe=False)
     return JsonResponse({'result': "method is not allowed"}, safe=False)
+
+
+def movie_detail(request, slug):
+    # movie = get_object_or_404(Movie, slug=slug)
+    movie = Movie.objects.prefetch_related('genre').get(slug=slug)
+    return render(request, 'movies/movies/movie_detail.html', {'movie': movie})

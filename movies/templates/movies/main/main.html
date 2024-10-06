@@ -12,7 +12,7 @@
                         <div class="watchslider__item">
                             <div class="watchslider__item-link">
                                 <img src="{{ slide.slide_image.url }}" alt="">
-                                <a href="#">
+                                <a href="{% url 'movies' %}?almanac={{ slide.slug }}">
                                     <h2>{{ slide.short_name }}</h2>
                                 </a>
                             </div>
@@ -25,7 +25,7 @@
             <section id="watchmovieTop" class="watchmovieTop">
                 <div class="container">
                     <div class="watchmovieTop-btn ">
-                        <a href="{% url 'all_movies' %}" class="btn ">Каталог фильмов</a>
+                        <a href="{% url 'movies' %}" class="btn ">Каталог фильмов</a>
                     </div>
                     <div class="watchmovieTop-cards">
                         {% for almanac in almanacs %}
@@ -39,7 +39,7 @@
                                     <p>{{ almanac.description }}</p>
                                 </div>
                                 <div>
-                                    <a href="{% url 'all_movies' %}?almanac={{ almanac.slug }}" class="morelink watchmovieTop-morelink  _icon-ring-arrow">Узнать
+                                    <a href="{% url 'movies' %}?almanac={{ almanac.slug }}" class="morelink watchmovieTop-morelink  _icon-ring-arrow">Узнать
                                         больше</a>
                                 </div>
                             </div>

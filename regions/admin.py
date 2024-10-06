@@ -23,3 +23,51 @@ class SpecialityAdmin(admin.ModelAdmin):
 @admin.register(models.Specialist)
 class SpecialistAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(models.Director)
+class DirectorAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('first_name', 'last_name')}
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        # Генерируем slug с использованием фамилии, имени и pk
+        obj.slug = obj.slug + f'-{obj.pk}'
+        # Снова сохраняем объект с обновленным slug
+        obj.save()
+
+
+@admin.register(models.Scenarist)
+class ScenaristAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('first_name', 'last_name')}
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        # Генерируем slug с использованием фамилии, имени и pk
+        obj.slug = obj.slug + f'-{obj.pk}'
+        # Снова сохраняем объект с обновленным slug
+        obj.save()
+
+
+@admin.register(models.Producer)
+class ProducerAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('first_name', 'last_name')}
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        # Генерируем slug с использованием фамилии, имени и pk
+        obj.slug = obj.slug + f'-{obj.pk}'
+        # Снова сохраняем объект с обновленным slug
+        obj.save()
+
+
+@admin.register(models.Operator)
+class OperatorAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('first_name', 'last_name')}
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        # Генерируем slug с использованием фамилии, имени и pk
+        obj.slug = obj.slug + f'-{obj.pk}'
+        # Снова сохраняем объект с обновленным slug
+        obj.save()

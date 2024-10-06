@@ -1,0 +1,285 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ movie.name }}{% endblock %}
+
+{% block content %}
+    		<main class="main">
+			<div class="breadcrumb-block container">
+				<ol class="breadcrumb contact-breadcrumb">
+					<li class="breadcrumb-link ">
+						<a href="{% url 'movies' %}">Смотреть кино</a>
+					</li>
+					<li class="breadcrumb-link _icon-derection-right active" aria-current="page">{{ movie.name }}</li>
+				</ol>
+			</div>
+			<section id="name-film" class="name-film  container">
+				<div class="film-content">
+					<div class="film-block">
+						<div class="film-img">
+							<figure>
+								<img src="{{ movie.image.url }}" alt="{{ movie.name }}">
+							</figure>
+						</div>
+						<div class="film-description">
+							<div class="section-title">
+								<h2>{{ movie.name    }}</h2>
+								<div class="film-description__add film-add">
+									<div class="tooltip-btn playlist-btn" data-btn="show">
+										<svg width="31" height="25" viewBox="0 0 31 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path
+												d="M3.83268 24.1673C3.0306 24.1673 2.34421 23.882 1.77352 23.3113C1.20282 22.7406 0.916988 22.0537 0.916016 21.2507V3.75065C0.916016 2.94857 1.20185 2.26218 1.77352 1.69148C2.34518 1.12079 3.03157 0.834957 3.83268 0.833984H12.5827L15.4993 3.75065H27.166C27.9681 3.75065 28.655 4.03648 29.2266 4.60815C29.7983 5.17982 30.0837 5.86621 30.0827 6.66732V21.2507C30.0827 22.0527 29.7973 22.7396 29.2266 23.3113C28.6559 23.8829 27.9691 24.1683 27.166 24.1673H3.83268ZM3.83268 21.2507H27.166V6.66732H14.2962L11.3796 3.75065H3.83268V21.2507Z"
+												fill="white" />
+										</svg>
+										<span class="tooltip-playlist _active">добавить в
+											плейлист</span>
+									</div>
+									<nav class="film__body">
+										<ul class="genre-add__list">
+											<li class="genre-add__item">
+												<a href="#" class="film-add__title"> Добавить в плейлист</a>
+												<div class="film-add__link">
+													<input type="text" placeholder="Создать плейлист" class="film-btn"><span>➕</span>
+												</div>
+												<ul class="application-checkboxs film__sub-item">
+													<li class="application-checkbox checkbox genre__item-submenu">
+														<input type="checkbox" id="playlist_1">
+														<label for="playlist_1">Посмотреть позже</label>
+													</li>
+													<li class="application-checkbox checkbox genre__item-submenu">
+														<input type="checkbox" id="playlist_2">
+														<label for="playlist_2">Ужастики</label>
+													</li>
+													<li class="application-checkbox checkbox genre__item-submenu">
+														<input type="checkbox" id="playlist_3">
+														<label for="playlist_3">На вечер</label>
+													</li>
+													<li class="application-checkbox checkbox genre__item-submenu">
+														<input type="checkbox" id="playlist_4">
+														<label for="playlist_4">Посмотреть позже</label>
+													</li>
+													<li class="application-checkbox checkbox genre__item-submenu">
+														<input type="checkbox" id="playlist_5">
+														<label for="playlist_5">Ужастики</label>
+													</li>
+													<li class="application-checkbox checkbox genre__item-submenu">
+														<input type="checkbox" id="playlist_6">
+														<label for="playlist_6">На вечер</label>
+													</li>
+													<li class="application-checkbox checkbox genre__item-submenu">
+														<input type="checkbox" id="playlist_7">
+														<label for="playlist_7">Посмотреть позже</label>
+													</li>
+													<li class="application-checkbox checkbox genre__item-submenu">
+														<input type="checkbox" id="playlist_8">
+														<label for="playlist_8">Ужастики</label>
+													</li>
+													<li class="application-checkbox checkbox genre__item-submenu">
+														<input type="checkbox" id="playlist_9">
+														<label for="playlist_9">На вечер</label>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</nav>
+									<div class="tooltip-btn" data-btn="show">
+										<svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path
+												d="M7.29102 30.625V7.29167C7.29102 6.48958 7.57685 5.80319 8.14852 5.2325C8.72018 4.66181 9.40657 4.37597 10.2077 4.375H24.791C25.5931 4.375 26.28 4.66083 26.8516 5.2325C27.4233 5.80417 27.7087 6.49056 27.7077 7.29167V30.625L17.4993 26.25L7.29102 30.625ZM10.2077 26.1771L17.4993 23.0417L24.791 26.1771V7.29167H10.2077V26.1771Z"
+												fill="white" />
+										</svg>
+										<a href="" class="tooltip-favorites tol">добавить в избранное</a>
+										<!-- <span class="tooltip-favorites">добавить в избранное</span> -->
+									</div>
+								</div>
+							</div>
+							<h4 class="film-description__title">Описание</h4>
+							<div class="film-description__text">
+								<p class="film-description__subtext">{{ movie.descriptions }}</p>
+								<div class="information">
+									<div class="film-information">
+										<dd>{% if movie.year %}Год выпуска: {{ movie.year }}{% endif %}</dd>
+										<dd>Жанр:
+                                            {% for genre in movie.genre.all %}
+                                            {{ genre }},
+                                            {% endfor %}</dd>
+										<dd>
+                                            {% if movie.director.count != 0 %}
+                                                Режиссер:
+                                                {% for dir in movie.director.all %}
+                                                    {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                                        {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                                {% endfor %}
+                                            {% else %}
+                                                {% if movie.shooting_group.count > 0 %}
+                                                Режиссер:
+                                                {% for spec in movie.shooting_group.all %}
+                                                    {% if spec.speciality.slug == 'stage-director' %}
+                                                        {{ spec.last_name }} {{ spec.first_name }},
+                                                    {% endif %}
+                                                {% endfor %}
+                                                    {% else %}
+                                                {% endif %}
+                                            {% endif %}
+										<dd>
+                                            {% if movie.regions.count != 0 %}
+                                            Регион:
+                                            {% for reg in movie.regions.all %}
+                                                {{ reg.name }},
+                                            {% endfor %}
+                                        {% endif %}
+                                        </dd>
+										<dd>Хронометраж: {{ movie.timing }}</dd>
+									</div>
+									<div class="film-button">
+										<a href="#video2" class="btn trailer-btn">Трейлер</a>
+										<a href="#video2" class="btn look-btn">Смотреть</a>
+										<a href="#" class="btn vote-btn">Голосовать</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="film-stars">
+						<div class="film-star__rating">
+							<img src="{% static 'img/allfilms/star_1.svg' %}" alt="">
+							<span>5.0</span>
+						</div>
+						<div class="film-star">
+							<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
+							<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
+							<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
+							<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
+							<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
+						</div>
+						<p class="film-vote">Голосов 1255</p>
+					</div>
+					<div class="about-film">
+						<ul>
+							<li>
+								{% if movie.kind %}Вид:
+                                    <dd>{{ movie.kind }}{% endif %}</dd>
+							</li>
+							<li>{% if movie.category %}Категория:
+                                    <dd>{{ movie.category }}{% endif %}</dd>
+							</li>
+                            <li>
+                                {% if movie.rolled_certificate %}Прокатное удостоверение:
+                                    <dd>{{ movie.rolled_certificate }}{% endif %}</dd>
+                            </li>
+                            <li>
+                                {% if movie.age_limit %}Возрастное ограничение:
+                                    <dd>{{ movie.age_limit }}{% endif %}</dd>
+                            </li>
+                            <li>
+                                {% if movie.director.count != 0 %}
+                                    Режиссер постановщик:
+                                    <dd>
+                                    {% for dir in movie.director.all %}
+                                        {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                    {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                    {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    {% if movie.shooting_group.count > 0 %}
+                                        Режиссер постановщик:
+                                        <dd>
+                                        {% for spec in movie.shooting_group.all %}
+                                            {% if spec.speciality.slug == 'stage-director' %}
+                                                {{ spec.last_name }} {{ spec.first_name }},
+                                            {% endif %}
+                                        {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+
+                            </li>
+							<li>
+                                {% if movie.producer.count != 0 %}
+                                    Продюсер:
+                                    <dd>
+                                    {% for dir in movie.producer.all %}
+                                        {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                    {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                    {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    {% if movie.shooting_group.count > 0 %}
+                                        Продюсер:
+                                        <dd>
+                                        {% for spec in movie.shooting_group.all %}
+                                            {% if spec.speciality.slug == 'producer' %}
+                                                {{ spec.last_name }} {{ spec.first_name }},
+                                            {% endif %}
+                                        {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+							</li>
+							<li>
+                                {% if movie.scenarist.count != 0 %}
+                                    Сценарист:
+                                    <dd>
+                                    {% for dir in movie.scenarist.all %}
+                                        {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                    {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                    {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    {% if movie.shooting_group.count > 0 %}
+                                        Сценарист:
+                                        <dd>
+                                        {% for spec in movie.shooting_group.all %}
+                                            {% if spec.speciality.slug == 'screenwriter' %}
+                                                {{ spec.last_name }} {{ spec.first_name }},
+                                            {% endif %}
+                                        {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+							</li>
+							<li> {% if movie.compositor %}
+								Композитор:<dd>{{ movie.compositor }}</dd>
+                                {% endif %}
+							</li>
+							<li>
+								Оператор:<dd></dd>
+							</li>
+							<li>
+								Актеры:<dd></dd>
+							</li>
+							<li>
+								Хронометраж:<dd></dd>
+							</li>
+							<li>
+								Афиша:<dd></dd>
+							</li>
+							<li>
+								Трейлер:<dd></dd>
+							</li>
+							<li>
+								Фильм:<dd></dd>
+							</li>
+							<li>
+								Рейтинг:<dd></dd>
+							</li>
+							<li>
+								Зрительское голосование:<dd></dd>
+							</li>
+							<li>
+								Победитель номинации:<dd></dd>
+							</li>
+							<li>
+								Альманах:<dd></dd>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</main>
+{% endblock %}

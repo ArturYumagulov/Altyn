@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from movies.models import Movie, Genre, Category, Kind, AgeLimit
+from movies.models import Movie, Genre, Category, Kind, AgeLimit, MainShootingGroup
 from regions.models import Speciality, Specialist, Region
 
 User = get_user_model()
@@ -56,32 +56,36 @@ class MovieContract(models.Model):
                                        max_length=100)
 
 
-class ShootingGroupSpecialist(models.Model):
-    is_active = models.BooleanField(default=False, verbose_name="Активность")
-    name = models.CharField(max_length=1000, verbose_name="Наименование специальности")
-    slug = models.SlugField()
+# class ShootingGroupSpecialist(models.Model):
+#     is_active = models.BooleanField(default=False, verbose_name="Активность")
+#     name = models.CharField(max_length=1000, verbose_name="Наименование специальности")
+#     slug = models.SlugField()
+#
+#     def __str__(self):
+#         return f"{self.name}"
+#
+#     class Meta:
+#         verbose_name_plural = "Специалист съемочной группы"
+#         verbose_name = "Специалист съемочной группы"
 
-    def __str__(self):
-        return f"{self.name}"
 
-    class Meta:
-        verbose_name_plural = "Специалист съемочной группы"
-        verbose_name = "Специалист съемочной группы"
-
-
-class MainShootingGroup(models.Model):
-
-    speciality = models.ForeignKey(ShootingGroupSpecialist, on_delete=models.PROTECT)
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
-    first_name = models.CharField(max_length=150, verbose_name="Имя")
-    birthday = models.DateField(
-        verbose_name="Дата рождения", blank=True, null=True, default=None
-    )
-    biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
-
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"
+# class MainShootingGroup(models.Model):
+#
+#     speciality = models.ForeignKey(ShootingGroupSpecialist, on_delete=models.PROTECT)
+#     is_active = models.BooleanField(verbose_name="Активность", default=False)
+#     last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+#     first_name = models.CharField(max_length=150, verbose_name="Имя")
+#     birthday = models.DateField(
+#         verbose_name="Дата рождения", blank=True, null=True, default=None
+#     )
+#     biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
+#
+#     def __str__(self):
+#         return f"{self.last_name} {self.first_name}"
+#
+#     class Meta:
+#         verbose_name_plural = "Съемочная группа"
+#         verbose_name = "Съемочные группы"
 
 
 class MovieApp(models.Model):

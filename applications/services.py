@@ -3,8 +3,9 @@ from datetime import datetime
 
 from regions.models import Region, Speciality
 from .models import MovieApp, MoviePortfolio, CopyrightInformation, Status, \
-    InviteSpecialists, SpecialistApp, MovieContract, MainShootingGroup, ShootingGroupSpecialist
-from movies.models import Category, Kind, RollerCertificate, AgeLimit, Genre, Movie, MovieStatus
+    InviteSpecialists, SpecialistApp, MovieContract
+from movies.models import (Category, Kind, RollerCertificate, AgeLimit, Genre, Movie, MovieStatus, MainShootingGroup,
+                           ShootingGroupSpecialist)
 from .send_contract import send_word_via_email
 
 
@@ -77,7 +78,7 @@ def individual_contract_context(new_contract):
 
 
 def create_contract(request, new_movie_app):
-    """отправка договра по типу"""
+    """Отправка договора по типу"""
 
     new_contract = MovieContract()
     new_contract.organization_name = request.get('organization_name')
@@ -208,7 +209,7 @@ def save_app(request):
 
     new_movie_app.save()
 
-    save_shooting_group(request, new_movie_app)
+    # save_shooting_group(request, new_movie_app)
 
 
 def save_invite(request):
@@ -282,6 +283,8 @@ def save_movie(request):
 
     for region in request.getlist('region'):
         new_movie.regions.add(Region.objects.get(slug=region))
+
+    save_shooting_group(request, new_movie)
 
     new_movie.save()
 

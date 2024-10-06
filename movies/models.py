@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models import Avg
 from django.urls import reverse
 
-from regions.models import Region
+from regions.models import Region, Director, Producer, Scenarist, Compositor, Operator
 
 # Create your models here.
 
@@ -14,6 +14,38 @@ User = get_user_model()
 
 def get_years():
     return {i: i for i in range(1970, datetime.now().year + 1)}
+
+
+class ShootingGroupSpecialist(models.Model):
+    is_active = models.BooleanField(default=False, verbose_name="Активность")
+    name = models.CharField(max_length=1000, verbose_name="Наименование специальности")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        verbose_name_plural = "Специалист съемочной группы"
+        verbose_name = "Специалист съемочной группы"
+
+
+class MainShootingGroup(models.Model):
+
+    speciality = models.ForeignKey(ShootingGroupSpecialist, on_delete=models.PROTECT)
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=150, verbose_name="Имя")
+    birthday = models.DateField(
+        verbose_name="Дата рождения", blank=True, null=True, default=None
+    )
+    biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
+
+    def __str__(self):
+        return f"{self.speciality.name} - {self.last_name} {self.first_name}"
+
+    class Meta:
+        verbose_name_plural = "Съемочная группа"
+        verbose_name = "Съемочные группы"
 
 
 class Genre(models.Model):
@@ -72,98 +104,6 @@ class MovieStatus(models.Model):
         ordering = ["pk"]
         verbose_name = "Статус"
         verbose_name_plural = "Статусы"
-
-
-class Director(models.Model):
-
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
-    first_name = models.CharField(max_length=150, verbose_name="Имя")
-    birthday = models.DateField(
-        verbose_name="Дата рождения", blank=True, null=True, default=None
-    )
-    biography = models.TextField(verbose_name="Биография")
-    slug = models.SlugField()
-
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"
-
-    class Meta:
-        ordering = ["last_name"]
-        verbose_name = "Режиссер фильма"
-        verbose_name_plural = "Режиссеры фильмов"
-
-
-class Producer(models.Model):
-
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
-    first_name = models.CharField(max_length=150, verbose_name="Имя")
-    birthday = models.DateField(
-        verbose_name="Дата рождения", blank=True, null=True, default=None
-    )
-    biography = models.TextField(verbose_name="Биография")
-    slug = models.SlugField()
-
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"
-
-    class Meta:
-        ordering = ["last_name"]
-        verbose_name = "Продюссер"
-        verbose_name_plural = "Продюссеры"
-
-
-class Scenarist(models.Model):
-
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
-    first_name = models.CharField(max_length=150, verbose_name="Имя")
-    birthday = models.DateField(
-        verbose_name="Дата рождения", blank=True, null=True, default=None
-    )
-    biography = models.TextField(verbose_name="Биография")
-    slug = models.SlugField()
-
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"
-
-    class Meta:
-        ordering = ["last_name"]
-        verbose_name = "Сценарист"
-        verbose_name_plural = "Сценаристы"
-
-
-class Compositor(models.Model):
-
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
-    first_name = models.CharField(max_length=150, verbose_name="Имя")
-    slug = models.SlugField()
-
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"
-
-    class Meta:
-        ordering = ["last_name"]
-        verbose_name = "Композитор"
-        verbose_name_plural = "Композиторы"
-
-
-class Operator(models.Model):
-
-    is_active = models.BooleanField(verbose_name="Активность", default=False)
-    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
-    first_name = models.CharField(max_length=150, verbose_name="Имя")
-    slug = models.SlugField()
-
-    def __str__(self):
-        return f"{self.last_name} {self.first_name}"
-
-    class Meta:
-        ordering = ["last_name"]
-        verbose_name = "Оператор"
-        verbose_name_plural = "Операторы"
 
 
 class AgeLimit(models.Model):
@@ -278,100 +218,42 @@ class RollerCertificate(models.Model):
 
 
 class Movie(models.Model):
+    """Фильм"""
 
     user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Добавил")
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(max_length=500, verbose_name="Название фильма")
     image = models.ImageField(upload_to="movie_image/", verbose_name="Картинка")
-    status = models.ForeignKey(
-        MovieStatus, verbose_name="Статус", on_delete=models.CASCADE
-    )
+    status = models.ForeignKey(MovieStatus, verbose_name="Статус", on_delete=models.CASCADE)
     regions = models.ManyToManyField(Region, related_name="movie_regions")
-    year = models.DecimalField(
-        max_digits=4, decimal_places=0, verbose_name="Год выпуска"
-    )
+    year = models.DecimalField(max_digits=4, decimal_places=0, verbose_name="Год выпуска")
     genre = models.ManyToManyField(Genre, verbose_name="Жанр", blank=True, default=None)
-
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, verbose_name="Категория"
-    )
-    kind = models.ForeignKey(
-        Kind,
-        on_delete=models.PROTECT,
-        verbose_name="Вид",
-        blank=True,
-        null=True,
-        default=None,
-    )
-    director = models.ForeignKey(
-        Director,
-        on_delete=models.CASCADE,
-        verbose_name="Режиссер",
-        null=True,
-        blank=True,
-    )
-    producer = models.ForeignKey(
-        Producer,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        verbose_name="Продюссер",
-    )
-    scenarist = models.ForeignKey(
-        Scenarist,
-        on_delete=models.CASCADE,
-        verbose_name="Сценарист",
-        null=True,
-        blank=True,
-    )
-    compositor = models.ForeignKey(
-        Compositor,
-        on_delete=models.CASCADE,
-        verbose_name="Композитор",
-        null=True,
-        blank=True,
-    )
-    operator = models.ForeignKey(
-        Operator,
-        on_delete=models.CASCADE,
-        verbose_name="Оператор",
-        null=True,
-        blank=True,
-    )
-
-    rolled_certificate = models.CharField(
-        verbose_name="Прокатное удостоверение", null=True, blank=True, max_length=1000
-    )
-
-    trailer = models.URLField()
-
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Категория")
+    almanach = models.ManyToManyField(Almanac, verbose_name="Альманах", blank=True, default=None)
+    kind = models.ForeignKey(Kind, on_delete=models.PROTECT, verbose_name="Вид", blank=True, null=True, default=None)
+    rolled_certificate = models.CharField(verbose_name="Прокатное удостоверение", null=True, blank=True,
+                                          max_length=1000)
     timing = models.CharField(verbose_name="Хронометраж", max_length=20)
     actors = models.TextField(verbose_name="В ролях")
-    age_limit = models.ForeignKey(
-        AgeLimit, on_delete=models.CASCADE, verbose_name="Возрастное ограничение"
-    )
+    age_limit = models.ForeignKey(AgeLimit, on_delete=models.CASCADE, verbose_name="Возрастное ограничение")
     descriptions = models.TextField(verbose_name="Описание")
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
-    voting = models.TextField(
-        verbose_name="Ссылка на голосование", blank=True, null=True, default=None
-    )
-    almanach = models.ManyToManyField(
-        Almanac, verbose_name="Альманах", blank=True, default=None
-    )
+    voting = models.TextField(verbose_name="Ссылка на голосование", blank=True, null=True, default=None)
     close = models.BooleanField(default=False, verbose_name="Закрытый фильм")
     debut = models.BooleanField(default=False, verbose_name="Дебютный")
     music = models.BooleanField(default=False, verbose_name="Оригинальная музыка")
-    country = models.CharField(
-        max_length=2000, verbose_name="Страна", blank=True, null=True, default=None
-    )
-    other_region = models.CharField(
-        max_length=2000,
-        verbose_name="Другой регион",
-        blank=True,
-        null=True,
-        default=None,
-    )
+    country = models.CharField(max_length=2000, verbose_name="Страна", blank=True, null=True, default=None)
+    other_region = models.CharField(max_length=2000, verbose_name="Другой регион", blank=True, null=True, default=None)
+    director = models.ManyToManyField(Director, verbose_name="Режиссеры-регион", blank=True, related_name='directors')
+    producer = models.ManyToManyField(Producer, blank=True, verbose_name="Продюссеры-регион", related_name="producers")
+    scenarist = models.ManyToManyField(Scenarist, verbose_name="Сценарист-регион", blank=True,
+                                       related_name="scenarists")
+    compositor = models.ManyToManyField(Compositor, verbose_name="Композитор-регион", blank=True)
+    operator = models.ManyToManyField(Operator, verbose_name="Оператор-регион", blank=True)
+    shooting_group = models.ManyToManyField(MainShootingGroup, verbose_name="Съемочная группа", blank=True,
+                                            related_name='movies')
+    trailer = models.URLField()
     slug = models.SlugField()
 
     def get_absolute_url(self):

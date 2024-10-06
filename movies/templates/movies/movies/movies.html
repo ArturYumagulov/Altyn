@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% block title %}Каталог фильмов{% endblock %}
+{% load static %}
+{% block style %}
+    <style>
+        .allfilms-img.search {
+            margin-bottom: 50vh;
+        }
+    </style>
+{% endblock %}
+{%  block defer_scripts %}
+    <script>
+        const filter_url = "{% url 'get_filter' %}"
+    </script>
+{% endblock %}
+{% block content %}
+    		<main class="main">
+{#            breadcrumb#}
+			<div class="breadcrumb-block container">
+				<ol class="breadcrumb contact-breadcrumb">
+					<li class="breadcrumb-link "><a href="{% url 'movie_main' %}">Смотреть кино</a></li>
+					<li class="breadcrumb-link _icon-derection-right active" aria-current="page">Смотреть и голосовать</li>
+				</ol>
+			</div>
+                
+			<section id="allfilms" class="allfilms">
+				<div class="container">
+
+                    {% include 'movies/movies/filters/filter_search.html' %}
+
+					<div class="allfilms-content">
+                    {% if movies|length == 0 %}
+
+                        <div class="allfilms-img">
+                            <div class="allfilms__item">
+                                По вашему запросу ничего нет
+                            </div>
+                        </div>
+                    {% else %}
+						<div class="allfilms-img">
+                            {% for movie in movies %}
+							<div class="allfilms__item">
+								<figure>
+									<img src="{{ movie.image.url }}" alt="">
+									<figcaption>{{ movie.name }}</figcaption>
+								</figure>
+								<a href="{{ movie.get_absolute_url }}" class="allfilms__overlay">
+									<article class="allfilms__item-overlay">
+										<div class="allfilms__overlay-start">
+											<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
+											<span>5.0</span>
+										</div>
+										<p>{{ movie.year }} | 110 минут</p>
+										<p>{% for genre in movie.genre.all %}
+                                            {{ genre }}
+                                        {% endfor %}
+                                            </p>
+									</article>
+								</a>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+                    {% endif %}
+
+				</div>
+			</section>
+		</main>
+
+        <script>
+        function create_movie_item(main, name, movie_image, rating, year, timing, genres, detail_url=null) {
+            const item_div = document.createElement('div')
+            item_div.classList.add('allfilms__item')
+
+            const figure = document.createElement('figure')
+            const figure_img = document.createElement('img')
+            const figure_caption = document.createElement('figcaption')
+            figure_img.setAttribute('src', movie_image)
+            figure_caption.textContent = name
+            figure.append(figure_img, figure_caption)
+
+            const a = document.createElement('a')
+            a.classList.add('allfilms__overlay')
+
+            const a_article = document.createElement('article')
+            a_article.classList.add('allfilms__item-overlay')
+
+            const a_article_div = document.createElement('div')
+            a_article_div.classList.add('allfilms__overlay-start')
+
+            const a_article_div_img = document.createElement('img')
+            a_article_div_img.setAttribute('src', '{% static 'img/allfilms/star_1.svg' %}')
+            a_article_div_img.classList.add('star')
+
+            const a_article_div_span = document.createElement('span')
+            a_article_div_span.textContent = rating
+
+            a_article_div.append(a_article_div_img, a_article_div_span)
+
+            const a_article_p = document.createElement('p')
+            a_article_p.textContent = `${year} | ${timing}`
+
+            const a_article_pp = document.createElement('p')
+            console.log(genres)
+            if (genres.length > 0) {
+                genres.forEach(genre_item => {
+                    a_article_pp.textContent += genre_item.name + ' '})}
+            else {
+                a_article_pp.textContent = genres[0].name}
+
+
+            a_article.append(a_article_div, a_article_p, a_article_pp)
+
+            a.append(a_article)
+
+            item_div.append(figure, a)
+
+            main.append(item_div)
+        }
+
+        const search = document.querySelector('.search-btn')
+        const film_block = document.querySelector('.allfilms-img')
+        search.addEventListener('keyup', (event) => {
+            film_block.innerHTML = ""
+            {#film_block.textContent = "Ничего не найдено"#}
+            {#create_movie_item(film_block, "Terminator", '/media/movie_image/allfilms_v02butp.png', 'detail', '5', "2022", "15 vbyen", 'Genre')#}
+
+            fetch("{% url 'movie_search' %}" + location.search, {
+                method: 'POST',
+                headers: {"X-CSRFToken": csrf},
+                body: JSON.stringify({
+                    search: event.target.value,
+                })
+            }).then(response => response.json()).then(data => {
+                if (data.result.length > 0) {
+                    data = data.result
+                    data.forEach(item => {
+                        console.log(item.genres)
+                        create_movie_item(
+                            film_block,
+                            item.name,
+                            '/media/' + item.image,
+                            item.rating,
+                            item.year,
+                            item.movie_time,
+                            item.genres
+                        )
+                    })
+                } else {
+                    film_block.innerHTML = "Ничего не найдено"
+                    film_block.classList.add('search')
+                }
+            })
+        })
+    </script>
+
+{% endblock %}

@@ -81,3 +81,95 @@ class Specialist(models.Model):
     class Meta:
         verbose_name = "Специалист"
         verbose_name_plural = "Специалист"
+
+
+class Director(models.Model):
+
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=150, verbose_name="Имя")
+    birthday = models.DateField(
+        verbose_name="Дата рождения", blank=True, null=True, default=None
+    )
+    biography = models.TextField(verbose_name="Биография")
+    slug = models.SlugField(blank=True)
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name} {self.pk}"
+
+    class Meta:
+        ordering = ["last_name"]
+        verbose_name = "Режиссер"
+        verbose_name_plural = "Режиссеры"
+
+
+class Producer(models.Model):
+
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=150, verbose_name="Имя")
+    birthday = models.DateField(
+        verbose_name="Дата рождения", blank=True, null=True, default=None
+    )
+    biography = models.TextField(verbose_name="Биография")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+    class Meta:
+        ordering = ["last_name"]
+        verbose_name = "Продюссер"
+        verbose_name_plural = "Продюссеры"
+
+
+class Scenarist(models.Model):
+
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=150, verbose_name="Имя")
+    birthday = models.DateField(
+        verbose_name="Дата рождения", blank=True, null=True, default=None
+    )
+    biography = models.TextField(verbose_name="Биография")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+    class Meta:
+        ordering = ["last_name"]
+        verbose_name = "Сценарист"
+        verbose_name_plural = "Сценаристы"
+
+
+class Compositor(models.Model):
+
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=150, verbose_name="Имя")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+    class Meta:
+        ordering = ["last_name"]
+        verbose_name = "Композитор"
+        verbose_name_plural = "Композиторы"
+
+
+class Operator(models.Model):
+
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    last_name = models.CharField(max_length=150, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=150, verbose_name="Имя")
+    slug = models.SlugField()
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+    class Meta:
+        ordering = ["last_name"]
+        verbose_name = "Оператор"
+        verbose_name_plural = "Операторы"
