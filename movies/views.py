@@ -7,6 +7,7 @@ from django.db.models import Q
 
 from movies.models import Almanac, Movie, Category, Genre, RatingStar, Rating
 from regions.models import Region
+from voting.models import Voting, Vote
 
 
 def get_client_ip(request):
@@ -244,11 +245,15 @@ def movie_detail(request, slug):
     # movie = get_object_or_404(Movie, slug=slug)
     movie = Movie.objects.prefetch_related("genre").get(slug=slug)
     ratings = RatingStar.objects.all()
+    voting_status = Voting.objects.filter(movies=movie).exists()
+    vote_status = request.user.pk in Vote.objects.filter(movie=movie).values_list("user", flat=True)
 
     context = {
         'movie': movie,
         'ratings': ratings.reverse(),
-        'rating_count': Rating.objects.filter(movie=movie).count()
+        'rating_count': Rating.objects.filter(movie=movie).count(),
+        'voting_status': voting_status,
+        'vote_status': vote_status
     }
 
     return render(request, "movies/movies/movie_detail.html", context=context)
@@ -271,13 +276,13 @@ def get_star_rating(request):
 
 def valid_user_ip(request):
 
-    if request.method == "GET":
+    if request.method == "POST":
+        movie = Movie.objects.get(slug=json.loads(request.body).get('slug'))
         ip = get_client_ip(request)
-        try:
-            valid_ip = Rating.objects.get(ip=ip)
-            return JsonResponse({'valid': False}, safe=False)
-        except Rating.DoesNotExist:
+        movies_ips = Rating.objects.filter(movie=movie).values_list("ip", flat=True)
+        if ip not in movies_ips:
             return JsonResponse({'valid': True}, safe=False)
+    return JsonResponse({'valid': False}, safe=False)
 
 
 def get_average_rating(request, slug):

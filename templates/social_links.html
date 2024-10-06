@@ -1,8 +1,10 @@
 						<div class="header__right">
 							<div class="header-apply">
+                                {% if active_voting %}
 								<a href="#" class="header-apply__vote btn">
-									Голосовать
+									{{ active_voting.name }}
 								</a>
+                                {% endif %}
 								<a href="{% url 'altyn_app' %}" class="header-apply__application btn">
 									Подать заявку
 								</a>

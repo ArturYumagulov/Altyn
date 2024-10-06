@@ -48,9 +48,9 @@
 									<article class="allfilms__item-overlay">
 										<div class="allfilms__overlay-start">
 											<img src="{% static 'img/allfilms/star_1.svg' %}" class="star" alt="">
-											<span>5.0</span>
+											<span>{{ movie.get_avg_rating }}</span>
 										</div>
-										<p>{{ movie.year }} | 110 минут</p>
+										<p>{{ movie.year }} | {{ movie.timing }}</p>
 										<p>{% for genre in movie.genre.all %}
                                             {{ genre }}
                                         {% endfor %}
@@ -122,8 +122,6 @@
         const film_block = document.querySelector('.allfilms-img')
         search.addEventListener('keyup', (event) => {
             film_block.innerHTML = ""
-            {#film_block.textContent = "Ничего не найдено"#}
-            {#create_movie_item(film_block, "Terminator", '/media/movie_image/allfilms_v02butp.png', 'detail', '5', "2022", "15 vbyen", 'Genre')#}
 
             fetch("{% url 'movie_search' %}" + location.search, {
                 method: 'POST',

@@ -8943,3 +8943,8 @@ input[type="date"]::-webkit-input-placeholder {
 .contract-quest.show {
 	display: block;
 }
+.vote-btn.voting-sending {
+	background-color: var(--color-yellow);
+	opacity: .5;
+	pointer-events: none;
+}

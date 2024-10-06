@@ -26,7 +26,11 @@ async function getRatingValue() {
 
 async function validUserIp() {
     let valid = await fetch(valid_ip, {
-        method: 'GET',
+        method: 'POST',
+        headers: {"X-CSRFToken": csrf},
+        body: JSON.stringify({
+            slug: movie_slug,
+        })
     })
     if (valid.ok) {
         let valid_data = await valid.json()

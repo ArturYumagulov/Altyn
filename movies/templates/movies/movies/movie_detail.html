@@ -136,7 +136,9 @@
 									<div class="film-button">
 										<a href="#video2" class="btn trailer-btn">Трейлер</a>
 										<a href="#video2" class="btn look-btn">Смотреть</a>
-										<a href="#" class="btn vote-btn">Голосовать</a>
+                                        {% if voting_status and user.is_authenticated %}
+										<a href="#" class="btn vote-btn {% if vote_status %}voting-sending{% endif %}">Голосовать</a>
+                                        {% endif %}
 									</div>
 								</div>
 							</div>
@@ -166,7 +168,7 @@
                                 </div>
                             </div>
 						</div>
-						<p class="film-vote">Голосов <span>{{ rating_count }}</span></p>
+						<p class="film-vote">Оценок <span>{{ rating_count }}</span></p>
 					</div>
 
 					<div class="about-film">
@@ -407,5 +409,6 @@
 {% endblock %}
 
 {% block script %}
+    <script src="{% static 'js/movie/voting.js' %}"></script>
     <script src="{% static 'js/movie/stars.js' %}"></script>
 {% endblock%}

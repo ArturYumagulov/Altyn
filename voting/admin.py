@@ -1,17 +1,16 @@
 from django.contrib import admin
 
-from voting.models import Voting, VoteItem
+from voting.models import Vote, Voting
 
 
 # Register your models here.
 
 
-@admin.register(Voting)
+@admin.register(Vote)
 class VotingAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(VoteItem)
-class VoteItemAdmin(admin.ModelAdmin):
+@admin.register(Voting)
+class VotingAdmin(admin.ModelAdmin):
     pass
-

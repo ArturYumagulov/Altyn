@@ -173,7 +173,7 @@ class RatingStar(models.Model):
 
 class Rating(models.Model):
 
-    ip = models.CharField(verbose_name="IP", max_length=15, unique=True)
+    ip = models.CharField(verbose_name="IP", max_length=15)
     star = models.ForeignKey(
         RatingStar,
         on_delete=models.CASCADE,
