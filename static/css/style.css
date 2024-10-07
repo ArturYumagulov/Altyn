@@ -1241,7 +1241,7 @@ iframe {
 	-moz-transition: opacity 500ms ease-in;
 	transition: opacity 500ms ease-in;
 	margin: 0 auto;
-	padding: 24px;
+	/*padding: 24px;*/
 	min-width: 320px;
 	max-width: 1333px;
 	width: 100%;
@@ -1253,6 +1253,7 @@ iframe {
 	-webkit-box-shadow: 0 0 13px 3px rgba(0, 0, 0, .5);
 	-moz-box-shadow: 0 0 13px 3px rgba(0, 0, 0, .5);
 	box-shadow: 0 0 13px 3px rgba(0, 0, 0, .5);
+	height: 90%;
 }
 
 

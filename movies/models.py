@@ -240,7 +240,7 @@ class Movie(models.Model):
     descriptions = models.TextField(verbose_name="Описание")
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
-    vk_iframe = models.TextField(verbose_name="Ссылка на iframe", blank=True, null=True, default=None)
+    vk_iframe = models.TextField(verbose_name="Ссылка на iframe - фильм", blank=True, null=True, default=None)
     close = models.BooleanField(default=False, verbose_name="Закрытый фильм")
     debut = models.BooleanField(default=False, verbose_name="Дебютный")
     music = models.BooleanField(default=False, verbose_name="Оригинальная музыка")
@@ -256,7 +256,7 @@ class Movie(models.Model):
     costumer_designer = models.ManyToManyField(CostumerDesigner, verbose_name="Художник по костюмам", blank=True)
     shooting_group = models.ManyToManyField(MainShootingGroup, verbose_name="Съемочная группа", blank=True,
                                             related_name='movies')
-    trailer = models.URLField()
+    trailer = models.TextField(verbose_name="Ссылка на iframe - трейлер", blank=True, null=True, default=None)
     slug = models.SlugField()
 
     def get_absolute_url(self):

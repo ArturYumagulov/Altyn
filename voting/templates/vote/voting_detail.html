@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}{{ voting.name }}{% endblock %}
-{% block style %}
+
+{% block defer_scripts %}
+     <script src="{% static 'js/create_modal.js' %}"></script>
 {% endblock %}
+
 {% block content %}
     <main class="main">
 			<div class="breadcrumb-block container">
@@ -70,8 +73,14 @@
 											<dd>Хронометраж: {{ movie.timing }}</dd>
 										</div>
 										<div class="film-button">
-											<a href="#{{ movie.slug }}" class="btn trailer-btn">Трейлер</a>
-											<a href="#{{ movie.slug }}" class="btn look-btn">Смотреть</a>
+                                            {% if movie.trailer %}
+                                                <a href="#{{ movie.slug }}" data-iframe="{{ movie.trailer }}"
+                                                   class="btn trailer-btn">Трейлер</a>
+                                            {% endif %}
+                                            {% if movie.vk_iframe %}
+                                                <a href="#{{ movie.slug }}" data-iframe="{{ movie.vk_iframe }}"
+                                                   class="btn look-btn">Смотреть</a>
+                                            {% endif %}
                                             {% if user.is_authenticated %}
                                                 {% if movie.vote_status %}
                                                     <a data-url="{% url 'vote' %}" data-slug="{{ movie.slug }}"
@@ -92,6 +101,7 @@
 			</section>
 		</main>
         {% include 'vote/paginator.html' %}
+        <div class="modal-block"></div>
 {% endblock %}
 
 {% block script %}
@@ -116,9 +126,29 @@
                 })
             })
         })
-    </script>
-{% endblock %}
+        let trailers_btn = document.querySelectorAll('.trailer-btn')
+        let movies_btn = document.querySelectorAll('.look-btn')
+        let modal_block = document.querySelector('.modal-block')
 
-{% block video_modal %}
-    {% include 'movies/movies/video-modal.html' %}
+        trailers_btn.forEach(trailer => {
+            trailer.addEventListener('click', () => {
+                console.log('click')
+                let iframe = trailer.getAttribute('data-iframe')
+                let slug = trailer.getAttribute('href').slice(1)
+                createModal(modal_block, slug, iframe)
+            })
+        })
+
+
+        movies_btn.forEach(movie => {
+            movie.addEventListener('click', () => {
+                console.log('click')
+                let iframe = movie.getAttribute('data-iframe')
+                let slug = movie.getAttribute('href').slice(1)
+                createModal(modal_block, slug, iframe)
+            })
+        })
+
+
+    </script>
 {% endblock %}

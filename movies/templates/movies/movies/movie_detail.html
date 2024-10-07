@@ -4,6 +4,9 @@
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/star.css' %}">
 {% endblock %}
+{% block defer_scripts %}
+    <script src="{% static 'js/create_modal.js' %}"></script>
+{% endblock %}
 {% block content %}
     		<main class="main">
 			<div class="breadcrumb-block container">
@@ -134,8 +137,12 @@
 										<dd>Хронометраж: {{ movie.timing }}</dd>
 									</div>
 									<div class="film-button">
-										<a href="#video2" class="btn trailer-btn">Трейлер</a>
-										<a href="#video2" class="btn look-btn">Смотреть</a>
+                                        {% if movie.trailer %}
+										<a href="#{{ movie.slug }}" data-iframe="{{ movie.trailer }}" class="btn trailer-btn">Трейлер</a>
+                                        {% endif %}
+                                        {% if movie.vk_iframe %}
+										<a href="#{{ movie.slug }}" data-iframe="{{ movie.vk_iframe }}" class="btn look-btn">Смотреть</a>
+                                        {% endif %}
                                         {% if voting_status and user.is_authenticated %}
                                             {% if vote_status %}
 										        <a data-url="{% url 'vote' %}" data-slug="{{ movie.slug }}" class="btn vote-btn voting-sending">Проголосовано</a>
@@ -395,11 +402,30 @@
 				</div>
 			</section>
 		</main>
+        <div class="modal-block"></div>
+
+    <script>
+        let trailer = document.querySelector('.trailer-btn')
+        let modal_block = document.querySelector('.modal-block')
+        trailer.addEventListener('click', ()=> {
+            let iframe = trailer.getAttribute('data-iframe')
+            let slug = trailer.getAttribute('href').slice(1)
+            createModal(modal_block, slug, iframe)
+        })
+
+        let movie = document.querySelector('.look-btn')
+        movie.addEventListener('click', ()=> {
+            let iframe = movie.getAttribute('data-iframe')
+            let slug = movie.getAttribute('href').slice(1)
+            createModal(modal_block, slug, iframe)
+        })
+    </script>
+
 {% endblock %}
 
-{% block video_modal %}
-    {% include 'movies/movies/video-modal.html' %}
-{% endblock %}
+{#{% block video_modal %}#}
+{#    {% include 'movies/movies/video-modal.html' %}#}
+{#{% endblock %}#}
 
 {% block script %}
     <script src="{% static 'js/movie/voting.js' %}"></script>
