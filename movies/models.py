@@ -240,7 +240,7 @@ class Movie(models.Model):
     descriptions = models.TextField(verbose_name="Описание")
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
-    voting = models.TextField(verbose_name="Ссылка на голосование", blank=True, null=True, default=None)
+    vk_iframe = models.TextField(verbose_name="Ссылка на iframe", blank=True, null=True, default=None)
     close = models.BooleanField(default=False, verbose_name="Закрытый фильм")
     debut = models.BooleanField(default=False, verbose_name="Дебютный")
     music = models.BooleanField(default=False, verbose_name="Оригинальная музыка")

@@ -70,8 +70,8 @@
 											<dd>Хронометраж: {{ movie.timing }}</dd>
 										</div>
 										<div class="film-button">
-											<a href="#video2" class="btn trailer-btn">Трейлер</a>
-											<a href="#video2" class="btn look-btn">Смотреть</a>
+											<a href="#{{ movie.slug }}" class="btn trailer-btn">Трейлер</a>
+											<a href="#{{ movie.slug }}" class="btn look-btn">Смотреть</a>
                                             {% if user.is_authenticated %}
                                                 {% if movie.vote_status %}
                                                     <a data-url="{% url 'vote' %}" data-slug="{{ movie.slug }}"
