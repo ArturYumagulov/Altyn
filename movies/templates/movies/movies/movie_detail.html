@@ -172,7 +172,7 @@
                                 </div>
                             </div>
 						</div>
-						<p class="film-vote">Оценок <span>{{ rating_count }}</span></p>
+						<p class="film-vote">Оценок <span>{{ movie.get_rating_count }}</span></p>
 					</div>
 
 					<div class="about-film">
@@ -398,18 +398,7 @@
 {% endblock %}
 
 {% block video_modal %}
-    		<!-- Модальный блок видео О проекте-->
-		<div class="overlay" id="video2"></div>
-		<div class="modal">
-			<div class="video" id="video">
-				<video controls>
-					<source src="" autoplay muted loop type="video/mp4">
-					<source src="" autoplay muted loop type="video/webm">
-				</video>
-			</div>
-			<a href="" id="stop" class="close-sliderProject"></a>
-		</div>
-		<!-- конец блока видео-->
+    {% include 'movies/movies/video-modal.html' %}
 {% endblock %}
 
 {% block script %}

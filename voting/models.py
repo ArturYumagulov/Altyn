@@ -16,6 +16,7 @@ class Voting(models.Model):
     start_date = models.DateTimeField(verbose_name="Дата начала голосования", blank=True, null=True, default=None)
     end_date = models.DateTimeField(verbose_name="Дата окончания голосования", blank=True, null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания", blank=True, null=True)
+    slug = models.SlugField(blank=True)
 
     def __str__(self):
         return f"{self.name} с {self.start_date} до {self.end_date}"

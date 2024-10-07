@@ -8948,3 +8948,31 @@ input[type="date"]::-webkit-input-placeholder {
 	opacity: .5;
 	pointer-events: none;
 }
+
+.paginator {
+	display: flex;
+	justify-content: center;
+	padding: 50px 0;
+}
+
+.pagination {
+	display: flex;
+	justify-content: space-around;
+	width: auto;
+}
+.page-item {
+	margin: 0 20px;
+}
+
+.page-item.deactive a {
+	color: #595959;
+	pointer-events: none;
+}
+
+.page-item.active a {
+	color: var(--color-yellow);
+}
+
+.page-item a:hover {
+	color: var(--color-yellow);
+}

@@ -1,0 +1,19 @@
+<li class="filters__item">
+											<a href="#" class="filters__link">Категория</a>
+											<span class="_icon-derection-right">
+											</span>
+											<div class="filters-search">
+												<input type="search"
+                                                       data-type="category"
+                                                       placeholder="Поиск"
+                                                       class="search-icon btn filter-search">
+											</div>
+											<ul class="filters__sub-item">
+                                                {% for category in filters.categories %}
+												<li class="filters__item-submenu">
+													{{ category.category__name }}
+													<input type="radio" value="{{ category.category__slug }}" name="category">
+												</li>
+                                                {% endfor %}
+											</ul>
+										</li>

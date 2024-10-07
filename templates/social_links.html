@@ -1,7 +1,7 @@
 						<div class="header__right">
 							<div class="header-apply">
                                 {% if active_voting %}
-								<a href="#" class="header-apply__vote btn">
+								<a href="{% url 'voting_detail' slug=active_voting.slug %}" class="header-apply__vote btn">
 									{{ active_voting.name }}
 								</a>
                                 {% endif %}

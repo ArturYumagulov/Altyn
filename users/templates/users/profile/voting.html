@@ -1,0 +1,41 @@
+{% load static %}
+<div class="personalAccount-content">
+							<h3 class="personalAccount-content__title ">Зрительское голосование<span
+									class="_icon-derection-right "></span></h3>
+							<div class="personalAccountslider">
+                                {% for movie in voting_movies %}
+								<div class="personalAccountslider__item">
+									<figure>
+										<img src="/media/{{ movie.movie__image }}" alt="{{ movie.movie__slug }}">
+										<figcaption>{{ movie.movie__name }}</figcaption>
+									</figure>
+									<a href="{% url 'movie_detail' slug=movie.movie__slug %}" class="allfilms__overlay">
+										<article class="allfilms__item-overlay">
+											<div class="allfilms__overlay-start">
+												<img src="{% static 'img/allfilms/Star 1.svg' %}" class="star" alt="">
+												<span>5.0</span>
+											</div>
+											<p>2019 | 110 минут</p>
+											<p>Жанр</p>
+										</article>
+									</a>
+								</div>
+                                {% endfor %}
+{#								<div class="personalAccountslider__item">#}
+{#									<figure>#}
+{#										<img src="{% static 'img/allfilms/allfilms.png' %}" alt="">#}
+{#										<figcaption>Пустота</figcaption>#}
+{#									</figure>#}
+{#									<a href="" class="allfilms__overlay">#}
+{#										<article class="allfilms__item-overlay">#}
+{#											<div class="allfilms__overlay-start">#}
+{#												<img src="{% static 'img/allfilms/Star 1.svg' %}" class="star" alt="">#}
+{#												<span>5.0</span>#}
+{#											</div>#}
+{#											<p>2019 | 110 минут</p>#}
+{#											<p>Жанр</p>#}
+{#										</article>#}
+{#									</a>#}
+{#								</div>#}
+							</div>
+						</div>

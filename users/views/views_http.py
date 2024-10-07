@@ -10,6 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 from applications.models import MovieApp
 from movies.models import Movie
 from users.forms import LoginForm
+from voting.models import Vote
+
 User = get_user_model()
 
 # from django.contrib.auth.decorators import login_required
@@ -68,14 +70,16 @@ def reset_pass_form(request, token):
 @login_required
 def profile(request):
 
-    user = User.objects.get(pk=request.user.pk)
+    user = request.user
     app = MovieApp.objects.filter(user=user)
     movies = Movie.objects.filter(user=user)
+    voting_movies = Vote.objects.filter(user=user).values('movie__name', 'movie__slug', "movie__image")
 
     context = {
         'user': user,
         'apps': app,
-        'movies': movies
+        'movies': movies,
+        'voting_movies': voting_movies
     }
 
     return render(request, 'users/profile/profile.html', context=context)

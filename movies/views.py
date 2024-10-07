@@ -251,7 +251,7 @@ def movie_detail(request, slug):
     context = {
         'movie': movie,
         'ratings': ratings,
-        'rating_count': Rating.objects.filter(movie=movie).count(),
+        # 'rating_count': Rating.objects.filter(movie=movie).count(),
         'voting_status': voting_status,
         'vote_status': vote_status
     }

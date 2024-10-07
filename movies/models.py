@@ -272,6 +272,11 @@ class Movie(models.Model):
         else:
             return 0
 
+    def get_rating_count(self):
+        movie = Movie.objects.get(pk=self.pk)
+        rating_count = Rating.objects.filter(movie=movie).count(),
+        return rating_count[0]
+
     def __str__(self):
         return self.name
 

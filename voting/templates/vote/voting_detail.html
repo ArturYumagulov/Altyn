@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ voting.name }}{% endblock %}
+{% block style %}
+{% endblock %}
+{% block content %}
+    <main class="main">
+			<div class="breadcrumb-block container">
+				<ol class="breadcrumb contact-breadcrumb">
+					<li class="breadcrumb-link ">
+						<a href="{% url 'main' %}"> Главная</a>
+					</li>
+					<li class="breadcrumb-link _icon-derection-right active" aria-current="page">Голосование</li>
+				</ol>
+			</div>
+			<section id="name-film" class="vote-film  container">
+				<div class="vote-content">
+
+{#					{% include 'vote/filters/filters_search.html' %}#}
+
+					<div class="vote-block">
+                        {% for movie in movies %}
+						<div class="vote-block__card">
+							<div class="film-img__min">
+								<figure>
+									<img src="{{ movie.image.url }}" alt="">
+								</figure>
+							</div>
+							<div class="film-description">
+								<h4>{{ movie.name }}</h4>
+								<p class="film-vote">Оценок {{ movie.get_rating_count }}</p>
+								<div class="film-description__text">
+									<div class="information">
+										<div class="film-information">
+											<dd>Год выпуска: {{ movie.year }}</dd>
+											<dd>
+                                                {% if movie.genre.count != 0 %}
+                                                Жанр:
+                                                {% for genre in movie.genre.all %}
+                                                {{ genre.name }},
+                                                {% endfor %}
+                                            {% endif %}</dd>
+											<dd>
+                                                {% if movie.director.count != 0 %}
+                                                Режиссер:
+                                                {% for dir in movie.director.all %}
+                                                    {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                                        {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                                {% endfor %}
+                                            {% else %}
+                                                {% if movie.shooting_group.count > 0 %}
+                                                Режиссер:
+                                                {% for spec in movie.shooting_group.all %}
+                                                    {% if spec.speciality.slug == 'stage-director' %}
+                                                        {{ spec.last_name }} {{ spec.first_name }},
+                                                    {% endif %}
+                                                {% endfor %}
+                                                    {% else %}
+                                                {% endif %}
+                                            {% endif %}
+                                            </dd>
+											<dd>
+                                                {% if movie.regions.count != 0 %}
+                                                    Регион:
+                                                    {% for reg in movie.regions.all %}
+                                                        {{ reg.name }},
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </dd>
+											<dd>Хронометраж: {{ movie.timing }}</dd>
+										</div>
+										<div class="film-button">
+											<a href="#video2" class="btn trailer-btn">Трейлер</a>
+											<a href="#video2" class="btn look-btn">Смотреть</a>
+                                            {% if user.is_authenticated %}
+                                                {% if movie.vote_status %}
+                                                    <a data-url="{% url 'vote' %}" data-slug="{{ movie.slug }}"
+                                                       class="btn vote-btn voting-sending">Проголосовано</a>
+                                                {% else %}
+                                                    <a data-url="{% url 'vote' %}" data-slug="{{ movie.slug }}"
+                                                       class="btn vote-btn">Голосовать</a>
+                                                {% endif %}
+                                            {% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                        {% endfor %}
+					</div>
+				</div>
+			</section>
+		</main>
+        {% include 'vote/paginator.html' %}
+{% endblock %}
+
+{% block script %}
+    <script>
+        const vote_btns = document.querySelectorAll('.vote-btn')
+        vote_btns.forEach(button => {
+            button.addEventListener('click', ()=>{
+                const movie_slug = button.getAttribute('data-slug')
+                const vote_url = button.getAttribute('data-url')
+                console.log(vote_url)
+                const response = fetch(`${vote_url}`, {
+                    method: 'POST',
+                    headers: {"X-CSRFToken": csrf},
+                    body: JSON.stringify(
+                        {slug: movie_slug})
+
+                }).then(res => res.json()).then(data => {
+                    if (data.result) {
+                        button.classList.add('voting-sending')
+                        button.textContent = "Проголосовано"
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}
+
+{% block video_modal %}
+    {% include 'movies/movies/video-modal.html' %}
+{% endblock %}

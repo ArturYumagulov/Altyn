@@ -1,0 +1,20 @@
+										<li class="filters__item">
+											<a href="#" class="filters__link"> Регион</a>
+											<span class="_icon-derection-right">
+											</span>
+											<div class="filters-search">
+												<input type="search" data-type="regions" placeholder="Поиск" class="search-icon btn filter-search">
+											</div>
+											<ul class="filters__sub-item">
+                                                {% for region in filters.regions %}
+                                                    <li class="filters__item-submenu">
+													{{ region.regions__name }}
+                                                        <input
+                                                                type="radio"
+                                                                value="{{ region.regions__slug }}"
+                                                                id="{{ region.regions__slug }}"
+                                                                data-type="regions" name="regions" checked>
+												</li>
+                                                {% endfor %}
+											</ul>
+										</li>
