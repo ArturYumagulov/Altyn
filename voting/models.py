@@ -38,8 +38,8 @@ class Vote(models.Model):
 
     class Meta:
         unique_together = ('movie', 'user')
-        verbose_name = "Голоса"
-        verbose_name_plural = "Голос"
+        verbose_name = "Голос"
+        verbose_name_plural = "Голоса"
 
     def __str__(self):
         return f"{self.user} проголосовал за {self.movie}"

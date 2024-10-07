@@ -166,7 +166,7 @@ class RatingStar(models.Model):
         return f"{self.value}"
 
     class Meta:
-        ordering = ["-value"]
+        ordering = ["value"]
         verbose_name = "Звезда рейтинга"
         verbose_name_plural = "Звезды рейтинга"
 

@@ -78,7 +78,6 @@ async function initRatings() {
             ratingItem.addEventListener("mouseleave", function (e) {
                 setRatingActiveWidth()
             });
-            console.log(ratingItem.value, 'value')
             ratingItem.addEventListener("click", function (e) {
                 initRatingVars(rating);
                 if(rating.dataset.ajax){

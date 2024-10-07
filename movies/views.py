@@ -250,7 +250,7 @@ def movie_detail(request, slug):
 
     context = {
         'movie': movie,
-        'ratings': ratings.reverse(),
+        'ratings': ratings,
         'rating_count': Rating.objects.filter(movie=movie).count(),
         'voting_status': voting_status,
         'vote_status': vote_status
@@ -282,6 +282,7 @@ def valid_user_ip(request):
         movies_ips = Rating.objects.filter(movie=movie).values_list("ip", flat=True)
         if ip not in movies_ips:
             return JsonResponse({'valid': True}, safe=False)
+        return JsonResponse({'valid': False}, safe=False)
     return JsonResponse({'valid': False}, safe=False)
 
 

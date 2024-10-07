@@ -26,6 +26,7 @@ urlpatterns = [
     path('about/', include('about.urls')),
     path('movies/', include("movies.urls")),
     path('applications/', include("applications.urls")),
+    path('voting/', include("voting.urls")),
     path("admin/", admin.site.urls),
 ]
 

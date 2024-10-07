@@ -137,7 +137,11 @@
 										<a href="#video2" class="btn trailer-btn">Трейлер</a>
 										<a href="#video2" class="btn look-btn">Смотреть</a>
                                         {% if voting_status and user.is_authenticated %}
-										<a href="#" class="btn vote-btn {% if vote_status %}voting-sending{% endif %}">Голосовать</a>
+                                            {% if vote_status %}
+										        <a data-url="{% url 'vote' %}" data-slug="{{ movie.slug }}" class="btn vote-btn voting-sending">Проголосовано</a>
+                                                {% else %}
+                                                <a data-url="{% url 'vote' %}" data-slug="{{ movie.slug }}" class="btn vote-btn">Голосовать</a>
+                                            {% endif %}
                                         {% endif %}
 									</div>
 								</div>
