@@ -8,7 +8,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from applications.models import MovieApp
-from movies.models import Movie
+from movies.models import Movie, FavoriteMovie, Playlist
 from users.forms import LoginForm
 from voting.models import Vote
 
@@ -72,14 +72,18 @@ def profile(request):
 
     user = request.user
     app = MovieApp.objects.filter(user=user)
-    movies = Movie.objects.filter(user=user)
+    movies = Movie.objects.filter(user=user).filter(status__name="Опубликовано")
     voting_movies = Vote.objects.filter(user=user).values('movie__name', 'movie__slug', "movie__image")
+    favorites = FavoriteMovie.objects.filter(user=request.user)
+    playlists = Playlist.objects.filter(user=request.user)
 
     context = {
         'user': user,
         'apps': app,
         'movies': movies,
-        'voting_movies': voting_movies
+        'voting_movies': voting_movies,
+        'favorites': favorites,
+        'playlists': playlists
     }
 
     return render(request, 'users/profile/profile.html', context=context)

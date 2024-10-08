@@ -1,0 +1,216 @@
+                    <div class="about-film">
+						<ul>
+							<li>
+								{% if movie.kind %}Вид:
+                                    <dd>{{ movie.kind }}{% endif %}</dd>
+							</li>
+							<li>{% if movie.category %}Категория:
+                                    <dd>{{ movie.category }}{% endif %}</dd>
+							</li>
+                            <li>
+                                {% if movie.rolled_certificate %}Прокатное удостоверение:
+                                    <dd>{{ movie.rolled_certificate }}{% endif %}</dd>
+                            </li>
+                            <li>
+                                {% if movie.age_limit %}Возрастное ограничение:
+                                    <dd>{{ movie.age_limit }}{% endif %}</dd>
+                            </li>
+                            <li>
+                                {% if movie.director.count != 0 %}
+                                    Режиссер постановщик:
+                                    <dd>
+                                    {% for dir in movie.director.all %}
+                                        {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                    {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                    {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    {% if movie.shooting_group.count > 0 %}
+                                        Режиссер постановщик:
+                                        <dd>
+                                        {% for spec in movie.shooting_group.all %}
+                                            {% if spec.speciality.slug == 'stage-director' %}
+                                                {{ spec.last_name }} {{ spec.first_name }},
+                                            {% endif %}
+                                        {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+
+                            </li>
+							<li>
+                                {% if movie.producer.count != 0 %}
+                                    Продюсер:
+                                    <dd>
+                                    {% for dir in movie.producer.all %}
+                                        {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                    {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                    {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    {% if movie.shooting_group.count > 0 %}
+                                        Продюсер:
+                                        <dd>
+                                        {% for spec in movie.shooting_group.all %}
+                                            {% if spec.speciality.slug == 'producer' %}
+                                                {{ spec.last_name }} {{ spec.first_name }},
+                                            {% endif %}
+                                        {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+							</li>
+							<li>
+                                {% if movie.scenarist.count != 0 %}
+                                    Сценарист:
+                                    <dd>
+                                    {% for dir in movie.scenarist.all %}
+                                        {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                    {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                    {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    {% if movie.shooting_group.count > 0 %}
+                                        Сценарист:
+                                        <dd>
+                                        {% for spec in movie.shooting_group.all %}
+                                            {% if spec.speciality.slug == 'screenwriter' %}
+                                                {{ spec.last_name }} {{ spec.first_name }},
+                                            {% endif %}
+                                        {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+							</li>
+							<li>
+                                {% if movie.compositor.count != 0 %}
+                                    Композитор:
+                                    <dd>
+                                    {% for dir in movie.compositor.all %}
+                                        {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                    {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                    {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    {% if movie.shooting_group.count > 0 %}
+                                        <dd>
+                                        {% for spec in movie.shooting_group.all %}
+                                            {% if spec.speciality.slug == 'compositor' %}
+                                                {{ spec.last_name }} {{ spec.first_name }}
+                                            {% endif %}
+                                        {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+							</li>
+							<li>
+                                {% if movie.operator.count != 0 %}
+                                    Оператор-постановщик:
+                                    <dd>
+                                    {% for dir in movie.operator.all %}
+                                        {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                    {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                    {% endfor %}
+                                    </dd>
+                                {% else %}
+                                     Оператор-постановщик:
+                                    {% if movie.shooting_group.count > 0 %}
+                                        <dd>
+                                        {% for spec in movie.shooting_group.all %}
+                                            {% if spec.speciality.slug == 'operator' %}
+                                                {{ spec.last_name }} {{ spec.first_name }},
+                                            {% endif %}
+                                        {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+							</li>
+                            <li>
+                                {% if movie.operator.count != 0 %}
+                                    Художник-постановщик:
+                                    <dd>
+                                        {% for dir in movie.operator.all %}
+                                            {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                        {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                        {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    Художник-постановщик:
+                                    {% if movie.shooting_group.count > 0 %}
+                                        <dd>
+                                            {% for spec in movie.shooting_group.all %}
+                                                {% if spec.speciality.slug == 'artistical_director' %}
+                                                    {{ spec.last_name }} {{ spec.first_name }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+                            </li>
+                            <li>
+                                {% if movie.operator.count != 0 %}
+                                    Художник по костюмам:
+                                    <dd>
+                                        {% for dir in movie.operator.all %}
+                                            {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                        {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                        {% endfor %}
+                                    </dd>
+                                {% else %}
+                                    Художник по костюмам:
+                                    {% if movie.shooting_group.count > 0 %}
+                                        <dd>
+                                            {% for spec in movie.shooting_group.all %}
+                                                {% if spec.speciality.slug == 'costumer_designer' %}
+                                                    {{ spec.last_name }} {{ spec.first_name }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </dd>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endif %}
+                            </li>
+
+							<li>
+								Актеры:<dd>{% if movie.actors %}{{ movie.actors }}{% endif %}</dd>
+							</li>
+							<li>
+								Хронометраж:<dd>{{ movie.timing }}</dd>
+							</li>
+							<li>
+								{% if movie.almanach.count != 0 %}
+                                Победитель номинации:
+                                <dd>
+                                    {% for almanac in movie.almanach.all %}
+                                        {% if almanac.laureate %}{{ almanac }}{% endif %}
+                                    {% endfor %}
+                                </dd>
+                                {% else %}
+                                {% endif %}
+							</li>
+							<li>
+                                {% if movie.almanach.count != 0 %}
+                                    Альманах:
+                                    {% for almanac in movie.almanach.all %}
+                                        <dd>
+                                        {% if almanac.laureate == "False" %}{{ almanac }}{% endif %}
+                                    {% endfor %}
+                                        </dd>
+                                {% else %}
+                                {% endif %}
+							</li>
+						</ul>
+					</div>

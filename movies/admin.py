@@ -91,6 +91,11 @@ class MainShootingGroupAdmin(admin.ModelAdmin):
     get_movies.short_description = "Фильм"  # Название столбца в админке
 
 
+@admin.register(models.FavoriteMovie)
+class FavoriteMovieAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(models.RatingStar)
 class RatingStarAdmin(admin.ModelAdmin):
     pass
@@ -98,4 +103,9 @@ class RatingStarAdmin(admin.ModelAdmin):
 
 @admin.register(models.Rating)
 class RatingAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.Playlist)
+class PlaylistAdmin(admin.ModelAdmin):
     pass

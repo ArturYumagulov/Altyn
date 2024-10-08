@@ -443,3 +443,7 @@ input[type="number"]:focus {
 .card {
 	position: relative;
 }
+
+.favorite-svg.added {
+	fill: #d49e3c;
+}

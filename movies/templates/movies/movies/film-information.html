@@ -1,0 +1,34 @@
+                                        <div class="film-information">
+										<dd>{% if movie.year %}Год выпуска: {{ movie.year }}{% endif %}</dd>
+										<dd>Жанр:
+                                            {% for genre in movie.genre.all %}
+                                            {{ genre }},
+                                            {% endfor %}</dd>
+										<dd>
+                                            {% if movie.director.count != 0 %}
+                                                Режиссер:
+                                                {% for dir in movie.director.all %}
+                                                    {% if dir.is_active %}<a href="{{ dir.slug }}">{% endif %}
+                                                        {{ dir.first_name }} {{ dir.last_name }}</a>,
+                                                {% endfor %}
+                                            {% else %}
+                                                {% if movie.shooting_group.count > 0 %}
+                                                Режиссер:
+                                                {% for spec in movie.shooting_group.all %}
+                                                    {% if spec.speciality.slug == 'stage-director' %}
+                                                        {{ spec.last_name }} {{ spec.first_name }},
+                                                    {% endif %}
+                                                {% endfor %}
+                                                    {% else %}
+                                                {% endif %}
+                                            {% endif %}
+										<dd>
+                                            {% if movie.regions.count != 0 %}
+                                            Регион:
+                                            {% for reg in movie.regions.all %}
+                                                {{ reg.name }},
+                                            {% endfor %}
+                                        {% endif %}
+                                        </dd>
+										<dd>Хронометраж: {{ movie.timing }}</dd>
+									</div>

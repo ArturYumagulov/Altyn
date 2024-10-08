@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 
-from movies.models import Almanac, Movie, Category, Genre, RatingStar, Rating
+from movies.models import Almanac, Movie, Category, Genre, RatingStar, Rating, FavoriteMovie, Playlist
 from regions.models import Region
 from voting.models import Voting, Vote
 
@@ -247,13 +247,15 @@ def movie_detail(request, slug):
     ratings = RatingStar.objects.all()
     voting_status = Voting.objects.filter(movies=movie).exists()
     vote_status = request.user.pk in Vote.objects.filter(movie=movie).values_list("user", flat=True)
+    favorite = movie.slug in FavoriteMovie.objects.filter(user=request.user).values_list("movie__slug", flat=True)
 
     context = {
         'movie': movie,
         'ratings': ratings,
         # 'rating_count': Rating.objects.filter(movie=movie).count(),
         'voting_status': voting_status,
-        'vote_status': vote_status
+        'vote_status': vote_status,
+        'favorite': favorite
     }
 
     return render(request, "movies/movies/movie_detail.html", context=context)
@@ -290,3 +292,88 @@ def get_average_rating(request, slug):
     if request.method == "GET":
         movie = Movie.objects.get(slug=slug)
         return JsonResponse({'rating': movie.get_avg_rating()}, safe=False, status=200)
+
+
+def add_to_favorites(request):
+    if request.method == "POST":
+        slug = json.loads(request.body).get('slug')
+        movie = Movie.objects.get(slug=slug)
+        favorite, created = FavoriteMovie.objects.get_or_create(user=request.user, movie=movie)
+
+        if created:
+            return JsonResponse({'result': True}, safe=True)
+
+        return JsonResponse({'result': False}, safe=True)
+
+    return JsonResponse({'result': False}, safe=True)
+
+
+def remove_from_favorites(request):
+    if request.method == "POST":
+        slug = json.loads(request.body).get('slug')
+        movie = Movie.objects.get(slug=slug)
+        favorite = FavoriteMovie.objects.filter(user=request.user, movie=movie)
+
+        if favorite.exists():
+            favorite.delete()
+            return JsonResponse({'result': True}, safe=True)
+        else:
+            return JsonResponse({'result': False}, safe=True)
+
+    return JsonResponse({'result': False}, safe=True)
+
+
+def playlists(request):
+    if request.method == "POST":
+        result = []
+        slug = json.loads(request.body).get('slug')
+        user_playlists = Playlist.objects.filter(user=request.user)
+        data = {}
+
+        for playlist in user_playlists:
+            data['pk'] = playlist.pk
+            data['name'] = playlist.name
+            data['has_to_playlist'] = slug in playlist.movies.values_list('slug', flat=True)
+            clen_data = data.copy()
+            result.append(clen_data)
+            data.clear()
+
+        return JsonResponse({'result': True, 'playlists': result}, safe=True)
+    return JsonResponse({'result': False}, safe=True)
+
+
+def add_to_playlist(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        movie = Movie.objects.get(slug=data.get('slug'))
+        playlist = Playlist.objects.get(pk=data.get('playlist_id'), user=request.user)
+        if movie not in playlist.movies.all():
+            playlist.movies.add(movie)
+        return JsonResponse({'result': True}, safe=True)
+    return JsonResponse({'result': 'Ошибка'}, safe=True)
+
+
+def remove_from_playlist(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        movie = Movie.objects.get(slug=data.get('slug'))
+        playlist = Playlist.objects.get(id=data.get('playlist_id'), user=request.user)
+        if movie in playlist.movies.all():
+            playlist.movies.remove(movie)
+            playlist.save()
+        return JsonResponse({'result': True}, safe=True)
+    return JsonResponse({'result': False}, safe=True)
+
+
+def add_playlist(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        movie = Movie.objects.get(slug=data.get('slug'))
+        new_playlist = Playlist()
+        new_playlist.user = request.user
+        new_playlist.name = data.get('playlist_name')
+        new_playlist.save()
+        new_playlist.movies.add(movie)
+        pk = new_playlist.pk
+        return JsonResponse({'result': True, 'playlist_pk': pk}, safe=True)
+    return JsonResponse({'result': False}, safe=True)

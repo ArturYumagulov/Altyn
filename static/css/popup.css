@@ -236,6 +236,7 @@ html {
 
 .tooltip-btn {
 	position: relative;
+	cursor: pointer;
 }
 
 

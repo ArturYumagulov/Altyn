@@ -1,0 +1,24 @@
+{% load static %}
+<div class="personalAccount-content">
+    <h3 class="personalAccount-content__title ">Плейлисты<span class="_icon-derection-right "></span></h3>
+    <div class="personalAccountslider">
+        {% for playlist in playlists %}
+        <div class="personalAccountslider__item">
+            <figure>
+                <img src="{{ playlist.get_last_movie_image }}" alt="">
+                <figcaption>{{ playlist.name }}</figcaption>
+            </figure>
+            <a href="#" class="allfilms__overlay">
+                <article class="allfilms__item-overlay">
+                    <div class="allfilms__overlay-start">
+                        <img src="{% static 'img/allfilms/Star 1.svg' %}" class="star" alt="">
+                        <span>5.0</span>
+                    </div>
+                    <p>2019 | 110 минут</p>
+                    <p>Жанр</p>
+                </article>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>

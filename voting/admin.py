@@ -1,14 +1,19 @@
 from django.contrib import admin
 
-from voting.models import Vote, Voting
+from import_export.admin import ImportExportActionModelAdmin
+from import_export.formats.base_formats import XLSX
+
+from .models import Vote, Voting
+from .resources import VoteResource
 
 
 # Register your models here.
 
 
 @admin.register(Vote)
-class VotingAdmin(admin.ModelAdmin):
-    pass
+class VoteAdmin(ImportExportActionModelAdmin):
+    resource_class = VoteResource
+    formats = [XLSX]
 
 
 @admin.register(Voting)

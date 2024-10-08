@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 
 from .models import CustomUser
+# from movies.models import Playlist
 
 # Register your models here.
 
@@ -100,8 +101,4 @@ class UserAdmin(BaseUserAdmin):
     get_avatar.short_description = "Аватар"
 
 
-# Now register the new UserAdmin...
 admin.site.register(CustomUser, UserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
-# admin.site.unregister(Group)

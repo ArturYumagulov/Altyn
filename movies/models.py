@@ -284,3 +284,48 @@ class Movie(models.Model):
         ordering = ["created_date"]
         verbose_name = "Фильм"
         verbose_name_plural = "Фильмы"
+
+
+class FavoriteMovie(models.Model):
+    user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE, related_name='favorite_movies')
+    movie = models.ForeignKey(Movie, verbose_name="Фильм", on_delete=models.CASCADE, related_name='favorites')
+    added_date = models.DateField(verbose_name="Дата добавления", auto_now_add=True)
+    edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.movie.name}"
+
+    class Meta:
+        unique_together = ('user', 'movie')
+        ordering = ['-added_date']
+        verbose_name = "Избранное"
+        verbose_name_plural = "Избранное"
+
+
+class Playlist(models.Model):
+    """Модель плейлиста"""
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="playlists",
+                             verbose_name="Пользователь")
+    name = models.CharField(max_length=255, verbose_name="Название плейлиста")
+    description = models.TextField(blank=True, null=True, verbose_name="Описание плейлиста")
+    movies = models.ManyToManyField(Movie, related_name="playlists", verbose_name="Фильмы в плейлисте", blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
+
+    def __str__(self):
+        return f"{self.name} ({self.user.username})"
+
+    def get_last_movie_image(self):
+        # Получаем последний добавленный фильм, сортируя по дате добавления
+        last_movie = self.movies.order_by('-id').first()
+
+        # Проверяем, если фильм существует и у него есть картинка
+        if last_movie and last_movie.image:
+            return last_movie.image.url
+        return None  # Если фильм или картинка отсутствуют
+
+    class Meta:
+        verbose_name = "Плейлист"
+        verbose_name_plural = "Плейлисты"
+        ordering = ["-created_at"]

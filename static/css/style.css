@@ -8977,3 +8977,7 @@ input[type="date"]::-webkit-input-placeholder {
 .page-item a:hover {
 	color: var(--color-yellow);
 }
+
+.add-playlist {
+	cursor: pointer;
+}

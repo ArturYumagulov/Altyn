@@ -418,4 +418,6 @@ static/fonts
 static/video
 static/js/jquery
 static/js/front
+static/admin
+static/import_export
 contract
