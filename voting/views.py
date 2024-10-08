@@ -48,5 +48,4 @@ def voting_detail(request, slug):
         'paginator': paginator,
         'movies': pages
     }
-    print(movies)
     return render(request, 'vote/voting_detail.html', context=context)

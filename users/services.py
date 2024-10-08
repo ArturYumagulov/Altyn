@@ -91,7 +91,6 @@ def confirm_code_generator(email, username):
 
 def valid_code(code, email):
     r = redis.Redis(host='localhost', decode_responses=True)
-    print(r.get(email), 'valid')
     if r.get(email) == str(code):
         return True
     return False

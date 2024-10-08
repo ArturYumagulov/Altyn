@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'css/star.css' %}">
 {% endblock %}
 {% block defer_scripts %}
-    <script src="{% static 'js/create_modal.js' %}"></script>
+    <script defer src="{% static 'js/create_modal.js' %}"></script>
     <script>
         const add_to_playlist = "{% url 'add_to_playlist' %}"
         const remove_from_playlist = "{% url 'remove_from_playlist' %}"
@@ -165,10 +165,9 @@
 
             }
         })
-
+        let modal_block = document.querySelector('.modal-block')
         let trailer = document.querySelector('.trailer-btn')
         if (trailer) {
-            let modal_block = document.querySelector('.modal-block')
             trailer.addEventListener('click', () => {
                 let iframe = trailer.getAttribute('data-iframe')
                 let slug = trailer.getAttribute('href').slice(1)

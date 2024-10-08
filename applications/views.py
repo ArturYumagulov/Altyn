@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -8,7 +9,7 @@ from regions.models import Region, Speciality
 
 # Create your views here.
 
-
+@login_required
 def altyn_app_page(requests):
 
     kinds = models.Kind.objects.filter(is_active=True)
