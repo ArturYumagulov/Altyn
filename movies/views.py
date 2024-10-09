@@ -177,7 +177,7 @@ def get_json_filters(request):
 def movie_search(request):
 
     if request.method == "POST":
-        search = str(json.loads(request.body).get("search")).lower()
+        search = str(json.loads(request.body).get("search")).lower().replace("ё", 'е')
         params = request.GET
 
         if len(params) == 0:
@@ -228,7 +228,7 @@ def movie_search(request):
                     "name": movie["name"],
                     "slug": movie["slug"],
                     "image": movie["image"],
-                    "rating": movie["rating"],
+                    "rating": queryset.get(pk=movie_id).get_avg_rating(),
                     "year": movie["year"],
                     "movie_time": movie["timing"],
                     "genres": [],

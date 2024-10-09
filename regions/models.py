@@ -95,7 +95,7 @@ class Director(models.Model):
     slug = models.SlugField(blank=True)
 
     def __str__(self):
-        return f"{self.last_name} {self.first_name} {self.pk}"
+        return f"{self.last_name} {self.first_name} {self.birthday}"
 
     class Meta:
         ordering = ["last_name"]
@@ -115,7 +115,7 @@ class Producer(models.Model):
     slug = models.SlugField()
 
     def __str__(self):
-        return f"{self.last_name} {self.first_name}"
+        return f"{self.last_name} {self.first_name} - {self.birthday}"
 
     class Meta:
         ordering = ["last_name"]

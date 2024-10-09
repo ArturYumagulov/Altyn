@@ -35,6 +35,7 @@
 						<div class="film-description">
 							<div class="section-title">
 								<h2>{{ movie.name }}</h2>
+                            {% if user.is_authenticated %}
 								<div class="film-description__add film-add">
 									<div class="tooltip-btn playlist-btn" data-playlist="{% url 'playlists' %}" data-btn="show">
 										<svg width="31" height="25" viewBox="0 0 31 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,6 +61,7 @@
 										<!-- <span class="tooltip-favorites">добавить в избранное</span> -->
 									</div>
 								</div>
+                            {% endif %}
 							</div>
 							<h4 class="film-description__title">Описание</h4>
 							<div class="film-description__text">
@@ -187,10 +189,6 @@
     </script>
 
 {% endblock %}
-
-{#{% block video_modal %}#}
-{#    {% include 'movies/movies/video-modal.html' %}#}
-{#{% endblock %}#}
 
 {% block script %}
     <script src="{% static 'js/movie/voting.js' %}"></script>

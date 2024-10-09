@@ -279,7 +279,7 @@ class Movie(models.Model):
         return rating_count[0]
 
     def save(self, *args, **kwargs):
-        self.search_name = self.name.lower()  # Приведение к нижнему регистру перед сохранением
+        self.search_name = self.name.lower().replace("ё", 'е')  # Приведение к нижнему регистру перед сохранением
         super(Movie, self).save(*args, **kwargs)
 
     def __str__(self):

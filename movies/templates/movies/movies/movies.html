@@ -81,6 +81,7 @@
 
             const a = document.createElement('a')
             a.classList.add('allfilms__overlay')
+            a.setAttribute('href', detail_url)
 
             const a_article = document.createElement('article')
             a_article.classList.add('allfilms__item-overlay')
@@ -101,7 +102,6 @@
             a_article_p.textContent = `${year} | ${timing}`
 
             const a_article_pp = document.createElement('p')
-            console.log(genres)
             if (genres.length > 0) {
                 genres.forEach(genre_item => {
                     a_article_pp.textContent += genre_item.name + ' '})}
@@ -141,7 +141,8 @@
                             item.rating,
                             item.year,
                             item.movie_time,
-                            item.genres
+                            item.genres,
+                            `/movies/detail/${item.slug}`
                         )
                     })
                 } else {
