@@ -205,3 +205,23 @@ class CostumerDesigner(models.Model):
         ordering = ["last_name"]
         verbose_name = "Художник по костюмам"
         verbose_name_plural = "Художник по костюмам"
+
+
+class ScreeningPoint(models.Model):
+    is_active = models.BooleanField(verbose_name="Активность", default=False)
+    name = models.CharField(verbose_name="Название", max_length=500)
+    email = models.EmailField(verbose_name="Электронная почта", null=True, blank=True)
+    phone = models.CharField(verbose_name="Номер телефона", max_length=30, null=True, blank=True)
+    social_net = models.CharField(verbose_name="Ссылка на соцсеть", max_length=2000, null=True, blank=True)
+    site = models.CharField(verbose_name="Сайт", max_length=2000, null=True, blank=True)
+    address = models.CharField(verbose_name="Адрес", max_length=2000, null=True, blank=True)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, verbose_name="Регион")
+    image = models.ImageField(upload_to='regions/screening_points/')
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        ordering = ['pk']
+        verbose_name = "Точка кинопоказа"
+        verbose_name_plural = "Точки кинопоказа"

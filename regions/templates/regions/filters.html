@@ -1,0 +1,11 @@
+                        <div class="select-wrapper">
+							<select name="regionselect" id="regionselect" class="regionselect">
+                                {% for region in regions %}
+                                    {% if region.slug == request.GET.region %}
+                                        <option selected value="{{ region.slug }}">{{ region.name }}</option>
+                                    {% else %}
+                                        <option value="{{ region.slug }}">{{ region.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+							</select>
+						</div>

@@ -107,3 +107,8 @@ class CostumerDesignerAdmin(admin.ModelAdmin):
         obj.slug = obj.slug + f'-{obj.pk}'
         # Снова сохраняем объект с обновленным slug
         obj.save()
+
+
+@admin.register(models.ScreeningPoint)
+class ScreeningPointAdmin(admin.ModelAdmin):
+    pass

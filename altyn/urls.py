@@ -27,6 +27,7 @@ urlpatterns = [
     path('movies/', include("movies.urls")),
     path('applications/', include("applications.urls")),
     path('voting/', include("voting.urls")),
+    path('regions/', include("regions.urls")),
     path("admin/", admin.site.urls),
 ]
 

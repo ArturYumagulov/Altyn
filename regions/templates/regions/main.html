@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Карта регионов{% endblock %}
+
+{% block content %}
+
+    <main class="main">
+			<!-- regionsmap -->
+			<section id="regionsmap" class="regionsmap">
+				<div class=" container">
+					<div class="regionsmap-block">
+						<article>
+							<h2 class="regionsmap-title "><span>Карта</span> регионов</h2>
+							<p class="regionsmap-subtitle">
+								“Карта регионов” призвана помочь всем, кто хочет снимать фильмы в разных уголках нашей страны. Раздел
+								представляет собой интерактивную картотеку, предназначенную для сбора и систематизации информации о
+								различных киноактивистах в регионах.
+							</p>
+							<a href="#" class="btn regionsmap-btn">Разместить информацию</a>
+						</article>
+						<div class="regionsmap-bg"></div>
+					</div>
+				</div>
+			</section>
+			<!-- regionsmap -->
+			<!-- ============== -->
+			<!-- regionopportunities -->
+			{% include 'regions/region_opportunity.html' %}
+
+		</main>
+
+{% endblock %}
