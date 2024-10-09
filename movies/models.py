@@ -224,6 +224,7 @@ class Movie(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Добавил")
     is_active = models.BooleanField(verbose_name="Активность", default=False)
     name = models.CharField(max_length=500, verbose_name="Название фильма")
+    search_name = models.CharField(max_length=500, verbose_name="Название для поиска", blank=True)
     image = models.ImageField(upload_to="movie_image/", verbose_name="Картинка")
     status = models.ForeignKey(MovieStatus, verbose_name="Статус", on_delete=models.CASCADE)
     regions = models.ManyToManyField(Region, related_name="movie_regions")
@@ -276,6 +277,10 @@ class Movie(models.Model):
         movie = Movie.objects.get(pk=self.pk)
         rating_count = Rating.objects.filter(movie=movie).count(),
         return rating_count[0]
+
+    def save(self, *args, **kwargs):
+        self.search_name = self.name.lower()  # Приведение к нижнему регистру перед сохранением
+        super(Movie, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name

@@ -5,7 +5,7 @@
         </a>
         <div class="header__menu menu">
             <nav class="filters__body ">
-                <form class="filter-form" action="/movies/all-movies/" method="get">
+                <form class="filter-form" action="{% url 'movies' %}" method="get">
                 <ul class="filters__list">
 
                     {% include 'movies/movies/filters/regions.html' %}

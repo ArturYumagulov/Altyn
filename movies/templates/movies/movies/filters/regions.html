@@ -15,8 +15,8 @@
                                                 {% for region in filters.regions %}
                                                     <li class="application-checkbox checkbox  genre__item-submenu">
                                                         <input type="checkbox" data-type="regions" name="regions"
-                                                               value="{{ region.regions__slug }}" id="{{ region.regions__slug }}">
-                                                        <label for="{{ region.regions__slug }}">{{ region.regions__name }}</label>
+                                                               value="{{ region.slug }}" id="{{ region.slug }}">
+                                                        <label for="{{ region.slug }}">{{ region.name }}</label>
                                                     </li>
                                                 {% endfor %}
                                             </ul>

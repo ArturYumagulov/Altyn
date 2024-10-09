@@ -44,13 +44,13 @@ def movies(request):
                 | Q(regions__slug__in=region)
                 | Q(category__slug__in=category)
                 | Q(genre__slug__in=genre)
-            ).distinct()
+            ).filter(is_active=True).distinct()
         else:
             queryset = Movie.objects.filter(
                 Q(regions__slug__in=region)
                 | Q(category__slug__in=category)
                 | Q(genre__slug__in=genre)
-            ).distinct()
+            ).filter(is_active=True).distinct()
 
     almanacs = (
         Almanac.objects.filter(laureate=False).values_list("pk", flat=True).distinct()
@@ -60,7 +60,7 @@ def movies(request):
     )
 
     filters = {
-        "regions": queryset.values("regions__name", "regions__slug").distinct(),
+        "regions": Region.objects.filter(slug__in=queryset.values("regions__slug")).values("name", "slug"),
         "categories": {
             category["category__slug"]: category
             for category in queryset.values("category__name", "category__slug")
@@ -177,11 +177,11 @@ def get_json_filters(request):
 def movie_search(request):
 
     if request.method == "POST":
-        search = json.loads(request.body).get("search")
+        search = str(json.loads(request.body).get("search")).lower()
         params = request.GET
 
         if len(params) == 0:
-            queryset = Movie.objects.filter(name__icontains=search, is_active=True)
+            queryset = Movie.objects.filter(search_name__icontains=search, is_active=True)
 
         else:
             almanac = params.getlist("almanac")
@@ -206,7 +206,7 @@ def movie_search(request):
             if genre:
                 queryset = queryset.filter(Q(genre__slug__in=genre))
 
-            queryset = queryset.filter(name__icontains=search)
+            queryset = queryset.filter(search_name__icontains=search)
 
         result = {}
 
@@ -242,12 +242,14 @@ def movie_search(request):
 
 
 def movie_detail(request, slug):
-    # movie = get_object_or_404(Movie, slug=slug)
     movie = Movie.objects.prefetch_related("genre").get(slug=slug)
     ratings = RatingStar.objects.all()
     voting_status = Voting.objects.filter(movies=movie).exists()
     vote_status = request.user.pk in Vote.objects.filter(movie=movie).values_list("user", flat=True)
-    favorite = movie.slug in FavoriteMovie.objects.filter(user=request.user).values_list("movie__slug", flat=True)
+    favorite = None
+
+    if request.user.is_authenticated:
+        favorite = movie.slug in FavoriteMovie.objects.filter(user=request.user).values_list("movie__slug", flat=True)
 
     context = {
         'movie': movie,
