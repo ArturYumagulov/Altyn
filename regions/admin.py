@@ -7,7 +7,7 @@ from . import models
 
 @admin.register(models.Region)
 class RegionAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ('name',)}
 
 
 @admin.register(models.City)

@@ -72,7 +72,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     platform_name = models.CharField(max_length=1000, verbose_name="Наименование площадки", blank=True,
                                      null=True, default=None)
     date_joined = models.DateTimeField(auto_now_add=True)
-    verify_token = models.CharField(max_length=40, blank=True, null=True, default=secrets.token_hex(40))
+    verify_token = models.CharField(max_length=40, blank=True, null=True, default=secrets.token_hex(20))
 
     is_staff = models.BooleanField(default=False, verbose_name="Сотрудник")
     is_active = models.BooleanField(default=False, verbose_name="Активирован")

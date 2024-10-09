@@ -4,10 +4,14 @@
     <h3 class="personalAccount-content__title ">Плейлисты<span class="_icon-derection-right "></span></h3>
     <div class="personalAccountslider">
         {% for playlist in playlists %}
-            {% if playlist.get_last_movie_image %}
+
                 <div class="personalAccountslider__item">
                     <figure>
-                        <img src="{{ playlist.get_last_movie_image }}" alt="">
+                        {% if playlist.get_last_movie_image %}
+                            <img src="{{ playlist.get_last_movie_image }}" alt="">
+                            {% else %}
+                             <img src="{% static 'img/empty_playlist.png' %}" alt="">
+                        {% endif %}
                         <figcaption>{{ playlist.name }}</figcaption>
                     </figure>
                     <a href="#" class="allfilms__overlay">
@@ -21,7 +25,6 @@
                         </article>
                     </a>
                 </div>
-            {% endif %}
         {% endfor %}
     </div>
 </div>
