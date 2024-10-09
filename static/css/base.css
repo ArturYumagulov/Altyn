@@ -247,7 +247,7 @@ html,
 }
 
 body {
-	background-color: var(--color-text);
+	background-color: var(--color-background);
 	color: var(--color-title);
 	font-family: "Montserrat", sans-serif;
 	font-weight: 400;
