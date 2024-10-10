@@ -25,7 +25,7 @@
 </head>
 
 <body>
-	<div class="wrapper">
+	<div class="wrapper {% if request.path == '/' %}wrapper-content{% endif %}">
     <!-- header -->
     {% include "header.html" %}
 		<!-- header -->
