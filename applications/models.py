@@ -29,8 +29,12 @@ class MoviePortfolio(models.Model):
     smi = models.TextField(verbose_name="Публикации в СМИ")
     materials = models.TextField(verbose_name="Ссылка для скачивания материалов")
 
+    def __str__(self):
+        return "Портфолио"
+
     class Meta:
         verbose_name = " Портфолио"
+        verbose_name_plural = " Портфолио"
 
 
 class CopyrightInformation(models.Model):
