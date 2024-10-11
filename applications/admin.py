@@ -19,6 +19,30 @@ class MovieAppAdmin(ImportExportActionModelAdmin):
     resource_class = MovieAppResource
     formats = [XLSX]
 
+    fields = (
+        'user',
+        'status',
+        'name',
+        'debut',
+        'kind',
+        'category',
+        'genre',
+        'timing',
+        'logline',
+        'year',
+        'rolled_certificate',
+        'age_limit',
+        'country',
+        'other_country',
+        'regions',
+        'other_region',
+        'shooting_group',
+        'other_shooting_group',
+        'portfolio',
+        'copyright_information',
+        'contract'
+    )
+
 
 @admin.register(SpecialistApp)
 class SpecialistAppAdmin(admin.ModelAdmin):

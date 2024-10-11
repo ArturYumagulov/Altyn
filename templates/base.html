@@ -24,8 +24,10 @@
     {% block defer_scripts %}{% endblock %}
 </head>
 
+
+
 <body>
-	<div class="wrapper {% if request.path == '/' %}wrapper-content{% endif %}">
+	<div class="wrapper {% if request.path == '/' or request.path == '' %}wrapper-content{% endif %}">
     <!-- header -->
     {% include "header.html" %}
 		<!-- header -->

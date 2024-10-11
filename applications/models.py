@@ -56,38 +56,6 @@ class MovieContract(models.Model):
                                        max_length=100)
 
 
-# class ShootingGroupSpecialist(models.Model):
-#     is_active = models.BooleanField(default=False, verbose_name="Активность")
-#     name = models.CharField(max_length=1000, verbose_name="Наименование специальности")
-#     slug = models.SlugField()
-#
-#     def __str__(self):
-#         return f"{self.name}"
-#
-#     class Meta:
-#         verbose_name_plural = "Специалист съемочной группы"
-#         verbose_name = "Специалист съемочной группы"
-
-
-# class MainShootingGroup(models.Model):
-#
-#     speciality = models.ForeignKey(ShootingGroupSpecialist, on_delete=models.PROTECT)
-#     is_active = models.BooleanField(verbose_name="Активность", default=False)
-#     last_name = models.CharField(max_length=150, verbose_name="Фамилия")
-#     first_name = models.CharField(max_length=150, verbose_name="Имя")
-#     birthday = models.DateField(
-#         verbose_name="Дата рождения", blank=True, null=True, default=None
-#     )
-#     biography = models.TextField(verbose_name="Биография", blank=True, null=True, default=None)
-#
-#     def __str__(self):
-#         return f"{self.last_name} {self.first_name}"
-#
-#     class Meta:
-#         verbose_name_plural = "Съемочная группа"
-#         verbose_name = "Съемочные группы"
-
-
 class MovieApp(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -106,7 +74,6 @@ class MovieApp(models.Model):
     country = models.CharField(max_length=2000, verbose_name="Страна", blank=True, null=True, default=None)
     other_country = models.CharField(max_length=2000, verbose_name="Другая страна", blank=True, null=True, default=None)
     other_region = models.CharField(max_length=2000, verbose_name="Другой регион", blank=True, null=True, default=None)
-    # movie = models.ForeignKey(Movie, on_delete=models.PROTECT, verbose_name="Фильм")
 
     # Shooting_Group
     shooting_group = models.ManyToManyField(MainShootingGroup)
