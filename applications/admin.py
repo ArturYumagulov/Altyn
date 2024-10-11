@@ -2,7 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportActionModelAdmin
 from import_export.formats.base_formats import XLSX
 
-from .models import Status, MovieApp, SpecialistApp
+from .models import Status, MovieApp, SpecialistApp, MoviePortfolio, MovieContract, CopyrightInformation
 from .resources import MovieAppResource
 
 
@@ -46,4 +46,19 @@ class MovieAppAdmin(ImportExportActionModelAdmin):
 
 @admin.register(SpecialistApp)
 class SpecialistAppAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(MoviePortfolio)
+class MoviePortfolioAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(CopyrightInformation)
+class CopyrightInformationAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(MovieContract)
+class MovieContractAdmin(admin.ModelAdmin):
     pass

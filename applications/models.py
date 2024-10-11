@@ -18,6 +18,10 @@ class Status(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Статус"
+        verbose_name_plural = "Статусы"
+
 
 class MoviePortfolio(models.Model):
     festivals = models.TextField(verbose_name="Участие в фестивалях")
@@ -25,12 +29,21 @@ class MoviePortfolio(models.Model):
     smi = models.TextField(verbose_name="Публикации в СМИ")
     materials = models.TextField(verbose_name="Ссылка для скачивания материалов")
 
+    class Meta:
+        verbose_name = " Портфолио"
+
 
 class CopyrightInformation(models.Model):
     possessor = models.TextField(verbose_name="Правообладатель")
     possessor_email = models.EmailField(verbose_name="Почта правообладателя")
     phone = models.CharField(verbose_name="Контакт для связи (телефон)", max_length=1000)
     contact_email = models.CharField(verbose_name="Контакт для связи (почта)", max_length=1000)
+
+    def __str__(self):
+        return f"{self.possessor}"
+
+    class Meta:
+        verbose_name = " Информация о правообладателе"
 
 
 class MovieContract(models.Model):
@@ -54,6 +67,13 @@ class MovieContract(models.Model):
     birthday = models.DateField(verbose_name="Дата рождения", blank=True, null=True, default=None)
     passport_number = models.CharField(verbose_name="Номер паспорта", blank=True, null=True, default=None,
                                        max_length=100)
+
+    def __str__(self):
+        return f" Договор № {self.pk}"
+
+    class Meta:
+        verbose_name = "Договор"
+        verbose_name_plural = "Договора"
 
 
 class MovieApp(models.Model):
