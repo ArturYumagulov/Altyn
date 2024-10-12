@@ -208,7 +208,6 @@ class MovieAdmin(admin.ModelAdmin):
     get_costumer_designer.short_description = 'Художник по костюмам'
     get_debut.short_description = 'Дебют'
 
-
     class Media:
         js = (
             'js/admin.js',  # Путь к вашему JS файлу внутри static
@@ -227,6 +226,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(models.Genre)
 class GenreAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_active', 'group_1', 'group_2', 'slug')
     prepopulated_fields = {"slug": ('name',)}
 
 
