@@ -115,7 +115,8 @@ class MovieApp(models.Model):
     portfolio = models.OneToOneField(MoviePortfolio, verbose_name="Ссылка на портфолио", on_delete=models.PROTECT)
     copyright_information = models.OneToOneField(CopyrightInformation, verbose_name="Информация о правообладателе",
                                                  on_delete=models.PROTECT)
-    contract = models.OneToOneField(MovieContract, on_delete=models.PROTECT, verbose_name="Договор")
+    contract = models.OneToOneField(MovieContract, on_delete=models.PROTECT, verbose_name="Договор", blank=True,
+                                    null=True, default=None)
 
     genre = models.ManyToManyField(Genre, verbose_name="Жанр", blank=True, default=None)
     regions = models.ManyToManyField(Region, verbose_name="Регионы", blank=True, default=None)

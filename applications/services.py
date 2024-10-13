@@ -214,7 +214,7 @@ def save_app(request):
     if request.get("contract_status") == "now":
         create_contract(request, new_movie_app)
     else:
-        send_word_via_email("individual")
+        send_word_via_email("", movie_name=new_movie_app.name, email=copyright_information.contact_email)
 
     #  Конец договор
 
