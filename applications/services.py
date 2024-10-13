@@ -177,6 +177,7 @@ def save_app(request):
     new_movie_app.country = request.get("country")
     new_movie_app.other_country = get_other_country(request)["other_country"]
     new_movie_app.other_shooting_group = request.get("other_shooting_group")
+    new_movie_app.locality = request.get("locality")
 
     new_movie_app.agreement_to_placement = request.get("agreement_to_placement")
     new_movie_app.agreement_to_vote = request.get("agreement_to_vote")

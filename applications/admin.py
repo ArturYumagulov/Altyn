@@ -39,6 +39,7 @@ class MovieAppAdmin(ImportExportActionModelAdmin):
         'other_country',
         'regions',
         'other_region',
+        'locality',
         'shooting_group',
         'other_shooting_group',
         'portfolio',

@@ -267,12 +267,15 @@ targetElement.forEach((elem) => {
 
 
         // Жанры
-        if (show_list_genres.includes(element.dataset.type)) {
-            genre_body.innerHTML = "";
-            createGenre(genre_body, genres_1);
-        } else {
-            genre_body.innerHTML = "";
-            createGenre(genre_body, genres_2);
+        if (element.name === 'category') {
+            if (show_list_genres.includes(element.dataset.type)) {
+                console.log(element.name, 'genre')
+                genre_body.innerHTML = "";
+                createGenre(genre_body, genres_1);
+            } else {
+                genre_body.innerHTML = "";
+                createGenre(genre_body, genres_2);
+            }
         }
     })
 })

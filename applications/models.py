@@ -98,6 +98,7 @@ class MovieApp(models.Model):
     country = models.CharField(max_length=2000, verbose_name="Страна", blank=True, null=True, default=None)
     other_country = models.CharField(max_length=2000, verbose_name="Другая страна", blank=True, null=True, default=None)
     other_region = models.CharField(max_length=2000, verbose_name="Другой регион", blank=True, null=True, default=None)
+    locality = models.CharField(max_length=2000, verbose_name="Населенный пункт", blank=True, null=True, default=None)
 
     # Shooting_Group
     shooting_group = models.ManyToManyField(MainShootingGroup)
