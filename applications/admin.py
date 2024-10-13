@@ -19,6 +19,9 @@ class MovieAppAdmin(ImportExportActionModelAdmin):
     resource_class = MovieAppResource
     formats = [XLSX]
 
+    list_filter = ('genre',)
+    search_fields = ('name',)
+
     fields = (
         'user',
         'status',
