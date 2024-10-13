@@ -24,8 +24,8 @@ def altyn_app_page(requests):
     context = {
         "kinds": kinds,
         "categories": categories,
-        "genres_group_1": genres_group_1,
-        "genres_group_2": genres_group_2,
+        "genres_group_1": list(genres_group_1.values("name", "slug", "pk")),
+        "genres_group_2": list(genres_group_2.values("name", "slug", "pk")),
         "rolled_certificates": rolled_certificates,
         "age_limits": age_limits,
         "regions": regions,

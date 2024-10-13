@@ -1,8 +1,9 @@
 let inviteCount = document.getElementById('invite_count')
-let show_list_rolled_cert = ['igrovoj-korotkometrazhnyj-film', 'igrovoj-polnometrazhnyj-film', 'animacionnyj-film']
+let show_list_genres = ['igrovoj-korotkometrazhnyj-film', 'igrovoj-polnometrazhnyj-film', 'animacionnyj-film']
 let other_region = document.getElementById('other-region')
 let group_1 = document.querySelector('.genregroup_1')
 let group_2 = document.querySelector('.genregroup_2')
+let genre_body = document.querySelector('.genre__body')
 let rolled_certificate_num = document.querySelector('.rolled_certificate_num')
 let rolled_certificate_num_input = rolled_certificate_num.querySelector('input[type=number]')
 let regionOther = document.getElementById('other')
@@ -210,6 +211,44 @@ let observer = new MutationObserver((mutations) => {
     });
 });
 
+function createGenre(block, data) {
+
+    let ul = document.createElement('ul')
+    ul.classList.add('genre-add__list')
+
+    let li = document.createElement('li')
+    li.classList.add('genre-add__item')
+
+    let checkbox_ul = document.createElement('ul')
+    checkbox_ul.classList.add('application-checkboxs', 'genre__sub-item')
+
+    data.forEach(item => {
+        let li = document.createElement('li')
+        li.classList.add('application-checkbox', 'checkbox', 'genre__item-submenu')
+        let input = document.createElement('input')
+        input.setAttribute('type', 'checkbox')
+        input.setAttribute('value', item.slug)
+        input.setAttribute('name', 'genre')
+        input.setAttribute('id', `genre_${item.pk}`)
+
+        let label = document.createElement('label')
+        label.setAttribute('for', `genre_${item.pk}`)
+        label.textContent = item.name
+
+        li.append(input, label)
+        checkbox_ul.append(li)
+    })
+
+    li.append(checkbox_ul)
+
+    ul.append(li)
+
+    // nav.append(ul)
+
+    block.append(ul)
+    console.log(block)
+}
+
 let targetElement = document.querySelectorAll('.application-checked.checkbox');
 targetElement.forEach((elem) => {
     observer.observe(elem, {attributes: true});
@@ -228,13 +267,12 @@ targetElement.forEach((elem) => {
 
 
         // Жанры
-        if (show_list_rolled_cert.includes(element.dataset.type)) {
-            group_1.style.display = 'block'
-            group_2.style.display = 'none'
+        if (show_list_genres.includes(element.dataset.type)) {
+            genre_body.innerHTML = "";
+            createGenre(genre_body, genres_1);
         } else {
-            group_2.style.display = 'block'
-            group_1.style.display = 'none'
-
+            genre_body.innerHTML = "";
+            createGenre(genre_body, genres_2);
         }
     })
 })
