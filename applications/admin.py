@@ -20,7 +20,7 @@ class MovieAppAdmin(ImportExportActionModelAdmin):
     formats = [XLSX]
 
     list_filter = ('genre',)
-    search_fields = ('name',)
+    search_fields = ('name', 'shooting_group__last_name')
 
     fields = (
         'user',
