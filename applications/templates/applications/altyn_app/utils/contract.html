@@ -25,11 +25,23 @@
 													(с пометкой "Некоммерческие показы").</span></label>
 										</li>
 									</ul>
-									<div class="concordad">
+									<div class="concordad" style="display: none">
 										<a class="btn application-btn" id="contract_now">Заполнить договор сейчас</a>
 										<a class="btn application-btn" id="contract_later">Заполнить договор позже</a>
 									</div>
 								</div>
+
+                                <script>
+                                    let agree = document.getElementById('agreement_to_no_commerce_show')
+                                    let contract = document.querySelector('.concordad')
+                                    agree.addEventListener('click', (e) => {
+                                        if (agree.checked) {
+                                            contract.style.display = 'flex'
+                                        } else {
+                                            contract.style.display = 'none'
+                                        }
+                                    })
+                                </script>
 
                                 <!--CONTRACT-->
 

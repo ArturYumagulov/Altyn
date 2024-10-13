@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
 
 from applications.services import save_app, create_region_speciality, save_invite, save_movie
 from movies import models
@@ -45,14 +46,10 @@ def create_altyn_app(request):
                 save_invite(request)
             save_movie(request)
             save_app(request)
-            return HttpResponse(
-                '<h1>OK</h1>'
-            )
+            # return HttpResponse(
+            #     f'{request.POST.get("contact_email")}'
+            # )
+            return render(request, 'applications/ready_app.html', {"email": request.POST.get("contact_email")})
         else:
             return render(request, "res_login.html")
     return render(request, "base.html")
-
-
-def send_docx(requests):
-    # send_word_via_email(requests)
-    return HttpResponse("Ok")

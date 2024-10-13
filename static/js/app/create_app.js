@@ -1,5 +1,3 @@
-console.log('create')
-
 function createInvite(count) {
 
     let specialist_region_class = document.createElement('div')
