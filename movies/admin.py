@@ -69,6 +69,8 @@ class MovieAdmin(admin.ModelAdmin):
         'other_region',
         'almanach',
         'genre',
+        'trailer',
+        'vk_iframe',
         # ------------MainShootingGroup------------
         'director',
         'get_stage_director',
