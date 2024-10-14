@@ -273,10 +273,9 @@ class Movie(models.Model):
         else:
             return 0
 
-    def get_rating_count(self):
-        movie = Movie.objects.get(pk=self.pk)
-        rating_count = Rating.objects.filter(movie=movie).count(),
-        return rating_count[0]
+    # def get_voting_count(self):
+    #     voting_count = Vote.objects.filter(movie=self).count(),
+    #     return voting_count[0]
 
     def save(self, *args, **kwargs):
         self.search_name = self.name.lower().replace("ё", 'е')  # Приведение к нижнему регистру перед сохранением

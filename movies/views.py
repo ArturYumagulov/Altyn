@@ -246,6 +246,7 @@ def movie_detail(request, slug):
     ratings = RatingStar.objects.all()
     voting_status = Voting.objects.filter(movies=movie).exists()
     vote_status = request.user.pk in Vote.objects.filter(movie=movie).values_list("user", flat=True)
+    voting_count = Vote.objects.filter(movie=movie).count()
     favorite = None
 
     if request.user.is_authenticated:
@@ -257,7 +258,8 @@ def movie_detail(request, slug):
         # 'rating_count': Rating.objects.filter(movie=movie).count(),
         'voting_status': voting_status,
         'vote_status': vote_status,
-        'favorite': favorite
+        'favorite': favorite,
+        'voting_count': voting_count
     }
 
     return render(request, "movies/movies/movie_detail.html", context=context)
