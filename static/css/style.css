@@ -5306,7 +5306,9 @@ select option {
 }
 
 .allfilms-img figure {
-	margin-top: 50px;
+	margin-top: 100px;
+	height: 421px;
+	width: 294px;
 }
 
 @media(max-width: 1283px) {
@@ -5334,7 +5336,7 @@ select option {
 
 .allfilms__item {
 	position: relative;
-	margin: 0 20px;
+	margin: 20px;
 }
 
 .allfilms__overlay {
@@ -5343,7 +5345,7 @@ select option {
 	height: 421px;
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
 	position: absolute;
-	top: 49px;
+	top: 100px;
 	left: 0;
 	opacity: 0;
 }
