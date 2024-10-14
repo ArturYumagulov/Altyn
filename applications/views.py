@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 
+from applications.models import MovieApp
 from applications.services import save_app, create_region_speciality, save_invite, save_movie
 from movies import models
 from regions.models import Region, Speciality
@@ -37,7 +38,6 @@ def altyn_app_page(requests):
 
 def create_altyn_app(request):
     if request.method == "POST":
-
         if request.user.is_authenticated:
             invite_count = int(request.POST.get('invite_count'))  # Количество приглашений
             if request.POST.get('region_map'):
@@ -46,9 +46,6 @@ def create_altyn_app(request):
                 save_invite(request)
             save_movie(request)
             save_app(request)
-            # return HttpResponse(
-            #     f'{request.POST.get("contact_email")}'
-            # )
             return render(request, 'applications/ready_app.html', {"email": request.POST.get("contact_email")})
         else:
             return render(request, "res_login.html")

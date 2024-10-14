@@ -232,7 +232,7 @@ def save_app(request):
 
     new_movie_app.save()
 
-    # save_shooting_group(request, new_movie_app)
+    save_shooting_group(request, new_movie_app)
 
 
 def save_invite(request):
