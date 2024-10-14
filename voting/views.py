@@ -38,6 +38,7 @@ def voting_detail(request, slug):
 
     for movie in movies:
         movie.vote_status = Vote.objects.filter(movie=movie, user=request.user).exists()
+        movie.vote_count = Vote.objects.filter(movie=movie, user=request.user).count()
 
     paginator = Paginator(movies, 10)
     page_number = request.GET.get('page')

@@ -108,7 +108,7 @@ async function initRatings() {
                 const result = await response.json();
                 ratingValue.innerHTML = result.result;
                 setRatingActiveWidth();
-                rating_count.textContent = Number(rating_count.innerHTML) + 1;
+                // rating_count.textContent = Number(rating_count.innerHTML) + 1;
                 rating.classList.add('rating_sending');
             }
         }
