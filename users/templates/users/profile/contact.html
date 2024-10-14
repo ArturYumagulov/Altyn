@@ -3,7 +3,11 @@
     <div class="personalAccount-block">
         <div class="personalAccount-img">
             <figure>
-                <img src="{% static 'img/allfilms/name-film.png' %}" alt="">
+                {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'img/icon_avatar.jpg' %}" alt="">
+                {% endif %}
             </figure>
         </div>
         <div class="personalAccount-information">
