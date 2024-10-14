@@ -34,7 +34,7 @@
 						</div>
 						<div class="film-description">
 							<div class="section-title">
-								<h2>{{ movie.name }}</h2>
+                                <h2>{{ movie.name }}</h2>
                             {% if user.is_authenticated %}
 								<div class="film-description__add film-add">
 									<div class="tooltip-btn playlist-btn" data-playlist="{% url 'playlists' %}" data-btn="show">

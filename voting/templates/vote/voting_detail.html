@@ -32,7 +32,7 @@
 								</figure>
 							</div>
 							<div class="film-description">
-								<h4>{{ movie.name }}</h4>
+                                <a href="{{ movie.get_absolute_url }}"><h4>{{ movie.name }}</h4></a>
 								<p class="film-vote">Голосов {{ movie.vote_count }}</p>
 								<div class="film-description__text">
 									<div class="information">
