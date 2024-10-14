@@ -42,13 +42,15 @@ class MovieAppAdmin(ImportExportActionModelAdmin):
         'other_region',
         'locality',
         'get_shooting_group',
+        'actors',
         'other_shooting_group',
         'get_portfolio_data',
-        'get_copyring_info',
-        'contract'
+        'get_copying_info',
+        'contract',
+        'shooting_group',
     )
 
-    readonly_fields = ('get_shooting_group', 'get_portfolio_data', 'get_copyring_info')
+    readonly_fields = ('get_shooting_group', 'get_portfolio_data', 'get_copying_info')
 
     def get_detail(self, spec_id):
 
@@ -89,7 +91,7 @@ class MovieAppAdmin(ImportExportActionModelAdmin):
         context += "</div>"
         return mark_safe(context)
 
-    def get_copyring_info(self, obj):
+    def get_copying_info(self, obj):
         context = '<div style="display: flex;"><div>'
 
         context += f"<strong>{obj.copyright_information._meta.get_field('possessor').verbose_name}:</strong> <p>{obj.copyright_information.possessor}</p>"
@@ -108,7 +110,7 @@ class MovieAppAdmin(ImportExportActionModelAdmin):
 
     get_shooting_group.short_description = "Съемочная группа"
     get_portfolio_data.short_description = " Портфолио"
-    get_copyring_info.short_description = " Информация о правообладателе"
+    get_copying_info.short_description = " Информация о правообладателе"
 
 
 @admin.register(SpecialistApp)
