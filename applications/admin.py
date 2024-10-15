@@ -19,7 +19,7 @@ class StatusAdmin(admin.ModelAdmin):
 class MovieAppAdmin(ImportExportActionModelAdmin):
     resource_class = MovieAppResource
     formats = [XLSX]
-
+    list_display = ('name', 'status', 'agreement_to_placement', 'agreement_to_vote', 'agreement_to_no_commerce_show')
     list_filter = ('genre',)
     search_fields = ('name', 'shooting_group__last_name')
 
