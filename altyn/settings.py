@@ -96,27 +96,27 @@ WSGI_APPLICATION = "altyn.wsgi.application"
 # }
 
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": env('DB_NAME'),
-#         'USER': env('DB_USER'),
-#         'HOST': env('DB_HOST'),
-#         'PORT': env('DB_PORT'),
-#         'PASSWORD': env('DB_PASS'),
-#         }
-# }
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "altyn",
-        'USER': "postgres",
-        'HOST': "localhost",
-        'PORT': "5432",
-        'PASSWORD': "postgres",
+        "NAME": env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
+        'PASSWORD': env('DB_PASS'),
         }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "altyn",
+#         'USER': "postgres",
+#         'HOST': "localhost",
+#         'PORT': "5432",
+#         'PASSWORD': "postgres",
+#         }
+# }
 
 
 # Password validation
@@ -179,11 +179,11 @@ RECIPIENTS_EMAIL = ['artdevi-kzn@yandex.ru ']   # замените на свою
 DEFAULT_FROM_EMAIL = 'artdevi-kzn@yandex.ru '  # замените на свою почту
 
 
-if DEBUG:
-    # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# if DEBUG:
+#     # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+#     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# else:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
