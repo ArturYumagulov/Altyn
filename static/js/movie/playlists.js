@@ -82,6 +82,7 @@ function cleanInput(){
 }
 add_playlist.addEventListener('click', () => {
     if (add_playlist_input.value.length > 0) {
+        playlists_block.innerHTML = ""
         fetch(add_playlist_url, {
             method: "POST", headers: {
                 'content-type': 'application/json',
