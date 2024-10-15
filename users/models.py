@@ -72,7 +72,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     platform_name = models.CharField(max_length=1000, verbose_name="Наименование площадки", blank=True,
                                      null=True, default=None)
     date_joined = models.DateTimeField(auto_now_add=True)
-    verify_token = models.CharField(max_length=40, blank=True, null=True, default=secrets.token_hex(20))
+    verify_token = models.CharField(max_length=40, blank=True, null=True)
 
     is_staff = models.BooleanField(default=False, verbose_name="Сотрудник")
     is_active = models.BooleanField(default=False, verbose_name="Активирован")
@@ -98,3 +98,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     # def email_user(self, subject, message, from_email=None, **kwargs):
     #     send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    def save(self, *args, **kwargs):
+        if not self.verify_token:
+            self.verify_token = secrets.token_hex(20)
+        super(CustomUser, self).save(*args, **kwargs)
