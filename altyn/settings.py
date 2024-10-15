@@ -175,8 +175,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = '/users/res-login-page/'
 
-RECIPIENTS_EMAIL = ['artdevi-kzn@yandex.ru ']   # замените на свою почту
-DEFAULT_FROM_EMAIL = 'artdevi-kzn@yandex.ru '  # замените на свою почту
+RECIPIENTS_EMAIL = env.str("YANDEX_EMAIL")   # замените на свою почту
+DEFAULT_FROM_EMAIL = env.str("YANDEX_EMAIL")  # замените на свою почту
 
 
 # if DEBUG:
