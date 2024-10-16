@@ -39,9 +39,13 @@ let specialists_id = {
         'specialist': 'operator',
         'name': 'Оператор - постановщик:',
     },
+    'compositor': {
+        'specialist': 'compositor',
+        'name': ' Композитор:',
+    }
 }
 
-const sub_spec= ['operator']
+const sub_spec= ['operator', 'compositor']
 
 function createSubSpecialistBlock(specialist, name, subname) {
 
@@ -246,7 +250,7 @@ function createGenre(block, data) {
     // nav.append(ul)
 
     block.append(ul)
-    console.log(block)
+    // console.log(block)
 }
 
 let targetElement = document.querySelectorAll('.application-checked.checkbox');
@@ -269,7 +273,7 @@ targetElement.forEach((elem) => {
         // Жанры
         if (element.name === 'category') {
             if (show_list_genres.includes(element.dataset.type)) {
-                console.log(element.name, 'genre')
+                // console.log(element.name, 'genre')
                 genre_body.innerHTML = "";
                 createGenre(genre_body, genres_1);
             } else {
@@ -423,7 +427,7 @@ questBody.addEventListener('click', (event) => {
 
     if (child_id.id === 'legal') {
         createLegalBlock()
-        console.log(individualButton)
+        // console.log(individualButton)
         individualButton.removeAttribute('required')
     } else {
         individualButton.setAttribute('required', '')
@@ -439,7 +443,7 @@ musicBlock.addEventListener('click', (event) => {
     document.getElementById('false-music').removeAttribute('required')
     document.getElementById('true-music').setAttribute('required', '')
     if (child_id.value === '1') {
-        console.log(child_id)
+        // console.log(child_id)
         compositor.style.display = 'block'
         compositor.querySelectorAll('input').forEach((compositor_input) => {
             compositor_input.setAttribute('required', '')
@@ -448,7 +452,7 @@ musicBlock.addEventListener('click', (event) => {
     } else if (child_id.value === '0') {
         document.getElementById('false-music').setAttribute('required', '')
         document.getElementById('true-music').removeAttribute('required')
-        console.log(compositor)
+        // console.log(compositor)
         compositor.style.display = 'none'
         compositor.querySelectorAll('input').forEach((compositor_input) => {
             compositor_input.removeAttribute('required')
@@ -506,7 +510,7 @@ add_specialists.forEach((add) => {
 //  Съемочная группа - след. элементы
 let shooting_group = document.querySelector('.film-grew')
 shooting_group.addEventListener('click', (e) => {
-    console.log(e.target.dataset.type)
+    // console.log(e.target.dataset.type)
     if (e.target.dataset.type === 'add') {
         let block_id = e.target.parentNode.id.split('_')[0]
         let specialist = specialists_id[block_id].specialist

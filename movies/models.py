@@ -236,7 +236,7 @@ class Movie(models.Model):
     rolled_certificate = models.CharField(verbose_name="Прокатное удостоверение", null=True, blank=True,
                                           max_length=1000)
     timing = models.CharField(verbose_name="Хронометраж", max_length=20)
-    actors = models.TextField(verbose_name="В ролях")
+    actors = models.TextField(verbose_name="В ролях", blank=True)
     age_limit = models.ForeignKey(AgeLimit, on_delete=models.CASCADE, verbose_name="Возрастное ограничение")
     descriptions = models.TextField(verbose_name="Описание")
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
