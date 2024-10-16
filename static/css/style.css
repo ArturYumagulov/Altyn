@@ -5328,7 +5328,7 @@ select option {
 .allfilms-img figcaption {
 	font-family: var(--second-family);
 	font-weight: 500;
-	font-size: 32px;
+	font-size: 22px;
 	color: var(--color-yellow);
 	padding-top: 20px;
 }
