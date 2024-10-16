@@ -71,7 +71,7 @@ look_form.addEventListener('submit', (e) => {
         hasError = true;
     }
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, 'Пароль должен содержать минимум восемь символов, одну букву и одну цифру')
+        inValid(password1Input, password1Error, 'минимум 8 символов, буквы (заглавные и строчные), цифры, символы (@, #, $')
         hasError = true;
     }
     if (password1 !== password2) {
