@@ -241,6 +241,7 @@ html {
 
 
 .tooltip {
+	padding: 5px;
 	visibility: hidden;
 	position: absolute;
 	bottom: 127%;
@@ -251,20 +252,21 @@ html {
 	display: flex;
 	align-items: center;
 	border-radius: 10px;
-	width: 184px;
-	height: 71px;
+	width: 285px;
+	height: auto;
 	z-index: 1;
+	white-space: normal;
 }
 
-.tooltip::before {
-	content: '';
-	border: 12px solid transparent;
-	border-top: 12px solid rgb(255, 255, 255);
-	position: relative;
-	left: 43%;
-	top: 43px;
-	z-index: 10;
-}
+/*.tooltip::before {*/
+/*	content: '';*/
+/*	border: 12px solid transparent;*/
+/*	border-top: 12px solid rgb(255, 255, 255);*/
+/*	position: relative;*/
+/*	left: 43%;*/
+/*	top: 43px;*/
+/*	z-index: 10;*/
+/*}*/
 
 .tooltip-btn:hover .tooltip {
 	visibility: visible;
