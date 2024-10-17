@@ -2,6 +2,12 @@
 {% load static %}
 {% block title %}{{ voting.name }}{% endblock %}
 
+{% block style %}
+    .vote-block figure {
+        height: 588px;
+    }
+{% endblock %}
+
 {% block defer_scripts %}
      <script src="{% static 'js/create_modal.js' %}"></script>
 {% endblock %}
