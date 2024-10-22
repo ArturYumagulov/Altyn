@@ -60,7 +60,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     #                                          blank=True, default=None)
     social_networks = models.CharField(max_length=2000, verbose_name="Социальные сети",
                                        blank=True, null=True, default=None)
-    male = models.CharField(choices=MALES, max_length=1, default=None, blank=True, null=True, verbose_name="Пол")
+    male = models.CharField(choices=MALES, max_length=10, default=None, blank=True, null=True, verbose_name="Пол")
     roles = models.ForeignKey(Roles, on_delete=models.CASCADE, verbose_name="Роль", null=True, default=None, blank=True)
     birthday = models.DateField(verbose_name="Дата рождения", blank=True, null=True, default=None)
     region = models.ForeignKey(Region, on_delete=models.CASCADE, verbose_name="Регион", blank=True, null=True,
