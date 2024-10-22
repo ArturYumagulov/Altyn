@@ -41,6 +41,7 @@ class MovieAppResource(resources.ModelResource):
             'created_date',
             'portfolio',
             'copyright_information__possessor',
+            'copyright_information__contact_email',
             'genres',
             'regions'
             )

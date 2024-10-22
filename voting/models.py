@@ -34,7 +34,7 @@ class Voting(models.Model):
 class Vote(models.Model):
     """Голосование"""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='votes')
     count = models.PositiveIntegerField(default=0)
 
     class Meta:

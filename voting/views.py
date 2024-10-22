@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
@@ -34,7 +35,7 @@ def vote(request):
 def voting_detail(request, slug):
     voting = Voting.objects.get(slug=slug)
 
-    movies = voting.movies.filter(is_active=True).distinct()
+    movies = voting.movies.filter(is_active=True).annotate(vote_count=Count('votes')).order_by('-vote_count').distinct()
 
     for movie in movies:
         movie.vote_status = Vote.objects.filter(movie=movie, user=request.user).exists()
