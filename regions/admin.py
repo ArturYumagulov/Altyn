@@ -112,3 +112,38 @@ class CostumerDesignerAdmin(admin.ModelAdmin):
 @admin.register(models.ScreeningPoint)
 class ScreeningPointAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(models.RegionalInternetResources)
+class RegionalInternetResourcesAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('name',)}
+
+
+@admin.register(models.Production)
+class ProductionAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('name',)}
+
+
+@admin.register(models.RegionalProfile)
+class RegionalProfileAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('name',)}
+
+
+@admin.register(models.FilmmakersChat)
+class FilmmakersChatAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('name',)}
+
+
+@admin.register(models.LocationPhoto)
+class LocationPhotoAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.RegionLocation)
+class RegionLocationAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('name',)}
+
+
+@admin.register(models.Events)
+class EventsAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('name',)}
