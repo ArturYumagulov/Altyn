@@ -345,7 +345,14 @@
 @media (max-width: 600px) {
 
 	.header-list {
+		display: block;
+	}
+
+	.header-list .header-list__social {
 		display: none;
+	}
+	.header-list .admin {
+		margin: 5px;
 	}
 
 	.icon-menu {
