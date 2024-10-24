@@ -8985,3 +8985,16 @@ input[type="date"]::-webkit-input-placeholder {
 .add-playlist {
 	cursor: pointer;
 }
+
+.vote-block figure {
+	height: 588px;
+	width: 412px;
+}
+
+@media(max-width:440px) {
+	.vote-block figure {
+		width: 100%;
+		height: 100%;
+		padding: 0 3px;
+	}
+}
