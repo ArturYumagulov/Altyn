@@ -65,7 +65,7 @@
 							</ul>
 						</div>
 						<div class="movie">
-							<h4>СМОТРЕТЬ КИНО</h4>
+							<h4><a href="{% url 'movies' %}">СМОТРЕТЬ КИНО</a></h4>
 							<ul>
 								<li>
 									<a href="/">ГЛАВНАЯ</a>
@@ -74,10 +74,12 @@
 									<a href="/">КИНОТЕКА</a>
 								</li>
 								<li>
-									<a href="#">ПОДАТЬ ЗАЯВКУ</a>
+									<a href="{% url 'altyn_app' %}">ПОДАТЬ ЗАЯВКУ</a>
 								</li>
 								<li>
-									<a href="#">ГОЛОСОВАНИЕ</a>
+                                    {% if active_voting %}
+                                        <a href="{% url 'voting_detail' slug=active_voting.slug %}">Голосовать</a>
+                                    {% endif %}
 								</li>
 								<li>
 									<a href="#">КОНТАКТЫ</a>
@@ -85,7 +87,7 @@
 							</ul>
 						</div>
 						<div class="portrait-region">
-							<h4>Подать заявку</h4>
+							<h4><a href="{% url 'altyn_app' %}">Подать заявку</a></h4>
 						</div>
 					</div>
 					<div class="footer-link">
