@@ -5605,7 +5605,7 @@ select option {
 
 @media(max-width:620px) {
 	.film-vote {
-		position: absolute;
+		/*position: absolute;*/
 		top: 62px;
 		left: 0;
 		font-size: 24px;
