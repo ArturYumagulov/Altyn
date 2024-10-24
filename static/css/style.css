@@ -343,7 +343,7 @@
 
 .section-title {
 	color: #000;
-	margin-bottom: 64px;
+	/*margin-bottom: 64px;*/
 }
 
 .news-content {
@@ -5439,6 +5439,8 @@ select option {
 .section-title {
 	display: flex;
 	align-items: center;
+	width: 100%;
+	margin: 0 20vw 64px 0
 }
 
 @media(max-width:600px) {
