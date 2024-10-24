@@ -13,6 +13,11 @@
 {#										{% include 'menu/media.html' %}#}
 
 {#										{% include 'menu/business-program.html' %}#}
+                                        {% if active_voting %}
+                                        <li class="menu__item">
+                                                <a href="{% url 'voting_detail' slug=active_voting.slug %}" class="menu__link ">Голосовать</a>
+                                        </li>
+                                        {% endif %}
 									</ul>
 								</nav>
 							</div>
