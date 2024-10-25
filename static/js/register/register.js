@@ -3,6 +3,7 @@ const phoneRegex = /^(\+7|8)?[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d
 // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])(?!.*(.)\1{2})[A-Za-z\d@$!%*?&]{8,}$/;
 // const url = window.location.search
+const passText = 'минимум 8 символов, буквы, цифры, символы @$!%*?&'
 
 
 function inValid(element, errorElement, text = null) {
@@ -71,7 +72,7 @@ look_form.addEventListener('submit', (e) => {
         hasError = true;
     }
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, 'минимум 8 символов, буквы (заглавные и строчные), цифры, символы (@, #, $')
+        inValid(password1Input, password1Error, passText)
         hasError = true;
     }
     if (password1 !== password2) {
@@ -174,7 +175,7 @@ take_form.addEventListener('submit', (e) => {
         hasError = true;
     }
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, 'Пароль должен содержать минимум восемь символов, одну букву и одну цифру')
+        inValid(password1Input, password1Error, passText)
         hasError = true;
     }
     if (password1 !== password2) {
@@ -278,7 +279,7 @@ take_form.addEventListener('submit', (e) => {
         hasError = true;
     }
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, 'Пароль должен содержать минимум восемь символов, одну букву и одну цифру')
+        inValid(password1Input, password1Error, passText)
         hasError = true;
     }
     if (password1 !== password2) {
@@ -442,7 +443,7 @@ show_form.addEventListener('submit', (e)=> {
     }
 
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, 'Пароль должен содержать минимум восемь символов, одну букву и одну цифру')
+        inValid(password1Input, password1Error, passText)
         hasError = true;
     }
     if (password1 !== password2) {
@@ -618,7 +619,7 @@ organize_form.addEventListener('submit', (e)=> {
     }
 
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, 'Пароль должен содержать минимум восемь символов, одну букву и одну цифру')
+        inValid(password1Input, password1Error, passText)
         hasError = true;
     }
     if (password1 !== password2) {
