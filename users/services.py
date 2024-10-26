@@ -24,6 +24,7 @@ def send_email_for_verify(request, email, token):
     try:
         send_mail(
             "Подтверждение email |Кинопремия «Золотая тарелка»",
+            message=message,
             from_email=settings.RECIPIENTS_EMAIL,
             recipient_list=[email],
             fail_silently=False,
