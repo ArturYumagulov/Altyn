@@ -105,13 +105,20 @@ class UserAdmin(BaseUserAdmin):
 
     @admin.action(description="Отправить письмо для подтверждения")
     def send_verify_button(self, request, queryset):
-        for user in queryset:
-            # Логика для отправки письма
-            send = send_email_for_verify(request, user.email, user.verify_token)
+        if len(queryset) == 0:
+            send = send_email_for_verify(request, queryset[0].email, queryset[0].verify_token)
             if send.get('result'):
                 self.message_user(request, send.get('message'), level='info')
             else:
                 self.message_user(request, send.get('message'), level='error')
+        else:
+            for user in queryset:
+                # Логика для отправки письма
+                send = send_email_for_verify(request, user.email, user.verify_token)
+                if send.get('result'):
+                    self.message_user(request, send.get('message'), level='info')
+                else:
+                    self.message_user(request, send.get('message'), level='error')
     actions = [send_verify_button]
 
 

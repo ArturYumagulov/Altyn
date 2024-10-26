@@ -175,27 +175,24 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = '/users/res-login-page/'
 
-RECIPIENTS_EMAIL = env.str("YANDEX_EMAIL")   # замените на свою почту
-DEFAULT_FROM_EMAIL = env.str("YANDEX_EMAIL")  # замените на свою почту
-
-
 # if DEBUG:
 #     # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 #     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # else:
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 587
+EMAIL_HOST = "smtp.beget.com"
+EMAIL_PORT = 25
 EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = env.str("YANDEX_EMAIL")
-EMAIL_HOST_PASSWORD = env.str("YANDEX_PASS")
-
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
+RECIPIENTS_EMAIL = EMAIL_HOST_USER   # замените на свою почту
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # замените на свою почту
 EMAIL_SERVER = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
