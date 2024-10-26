@@ -7,6 +7,9 @@ from django.utils.translation import gettext_lazy as _
 
 from regions.models import Region, Location
 from users.managers import CustomUserManager
+# from users.services import send_email_for_verify
+
+
 # from users.services import generate_hex_token
 
 
@@ -95,9 +98,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"
         unique_together = ('username', 'email', 'phone')
-
-    # def email_user(self, subject, message, from_email=None, **kwargs):
-    #     send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def save(self, *args, **kwargs):
         if not self.verify_token:

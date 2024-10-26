@@ -35,7 +35,7 @@ class UserAdmin(BaseUserAdmin):
         "is_organize",
     ]
     list_display_links = ["pk", "email", "username"]
-    list_filter = ["is_staff"]
+    list_filter = ["is_staff", 'is_active']
     fieldsets = (
         (None, {"fields": ("username",)}),
         (
