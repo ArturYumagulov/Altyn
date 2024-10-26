@@ -2,7 +2,7 @@
 const emailRegex = /^[\w.-]+@(yandex\.ru|ya\.ru|gmail\.com|mail\.ru|rambler\.ru|vk\.com)$/;
 const phoneRegex = /^(\+7|8)?[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/;
 // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])(?!.*(.)\1{2})[A-Za-z\d@$!%*?&]{8,}$/;
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])(?!.*(.)\1{2})[A-Za-z\d@$!%*?&_]{8,}$/;
 // const url = window.location.search
 const passText = 'минимум 8 символов, буквы, цифры, символы @$!%*?&'
 const emailText = "Неверный формат, только домены yandex.ru, ya.ru, gmail.com, mail.ru, rambler.ru, vk.com"
