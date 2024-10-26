@@ -29,15 +29,25 @@ def send_email_for_verify(request, email, token):
             [email],
             fail_silently=False,
         )
+        return {'result': True, 'message': f"Письмо с подтверждением на {email} отправлено"}
+
     except SMTPDataError as e:
         # logger.error(f"SMTPDataError: {e.smtp_code} - {e.smtp_error.decode('utf-8')}")
         print("Ошибка отправки письма, проверьте настройки SMTP и повторите попытку.")
-        # TODO дописать логику
+
+        return {
+            'result': False,
+            'message': f"Произошла ошибка при отправке письма. проверьте настройки SMTP. {e}"
+        }
 
     except Exception as e:
         # logger.error(f"Произошла ошибка: {e}")
-        print("Произошла ошибка при отправке письма.")
-        # TODO дописать логику
+        print(f"Произошла ошибка при отправке письма. {e}")
+        return {
+            'result': False,
+            'message': f"Произошла ошибка при отправке письма. {e}"
+        }
+
 
 
 def send_email_for_reset_pass(request, email, token):

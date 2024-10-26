@@ -107,8 +107,11 @@ class UserAdmin(BaseUserAdmin):
     def send_verify_button(self, request, queryset):
         for user in queryset:
             # Логика для отправки письма
-            send_email_for_verify(request, user.email, user.verify_token)
-
+            send = send_email_for_verify(request, user.email, user.verify_token)
+            if send.get('result'):
+                self.message_user(request, send.get('message'), level='info')
+            else:
+                self.message_user(request, send.get('message'), level='error')
     actions = [send_verify_button]
 
 
