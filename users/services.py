@@ -24,10 +24,10 @@ def send_email_for_verify(request, email, token):
     try:
         send_mail(
             "Подтверждение email |Кинопремия «Золотая тарелка»",
-            message,
-            settings.RECIPIENTS_EMAIL,
-            [email],
+            from_email=settings.RECIPIENTS_EMAIL,
+            recipient_list=[email],
             fail_silently=False,
+            html_message=message,
         )
         return {'result': True, 'message': f"Письмо с подтверждением на {email} отправлено"}
 
