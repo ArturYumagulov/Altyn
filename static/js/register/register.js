@@ -1,9 +1,12 @@
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const emailRegex = /^[\w.-]+@(yandex\.ru|ya\.ru|gmail\.com|mail\.ru|rambler\.ru|vk\.com)$/;
 const phoneRegex = /^(\+7|8)?[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/;
 // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])(?!.*(.)\1{2})[A-Za-z\d@$!%*?&]{8,}$/;
 // const url = window.location.search
 const passText = 'минимум 8 символов, буквы, цифры, символы @$!%*?&'
+const emailText = "Неверный формат, только домены yandex.ru, ya.ru, gmail.com, mail.ru, rambler.ru, vk.com"
+const emptyString = "Это поле не может быть пустым"
 
 
 function inValid(element, errorElement, text = null) {
@@ -63,21 +66,41 @@ look_form.addEventListener('submit', (e) => {
     let hasError = false;
 
     if (!emailRegex.test(email)) {
-        inValid(emailInput, emailError, 'Неверный формат email')
-        hasError = true;
+        if (email.length === 0) {
+            inValid(emailInput, emailError, emptyString)
+            hasError = true;
+        } else {
+            inValid(emailInput, emailError, emailText)
+            hasError = true;
+            }
     }
 
     if (!phoneRegex.test(phone)) {
-        inValid(phoneInput, phoneError, 'Неверный формат телефона')
-        hasError = true;
+        if (phone.length === 0) {
+            inValid(phoneInput, phoneError, emptyString)
+            hasError = true;
+        } else {
+            inValid(phoneInput, phoneError, 'Неверный формат телефона')
+            hasError = true;
+        }
     }
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, passText)
-        hasError = true;
+        if (password1.length === 0) {
+            inValid(password1Input, password1Error, emptyString)
+            hasError = true;
+        } else {
+            inValid(password1Input, password1Error, passText)
+            hasError = true;
+        }
     }
     if (password1 !== password2) {
-        inValid(password2Input, password2Error, 'Пароли не совпадают')
-        hasError = true;
+        if (password2.length === 0) {
+            inValid(password2Input, password2Error, emptyString)
+            hasError = true;
+        } else {
+            inValid(password2Input, password2Error, 'Пароли не совпадают')
+            hasError = true;
+        }
     }
     if (hasError) {
         return;
@@ -166,111 +189,7 @@ take_form.addEventListener('submit', (e) => {
     let hasError = false;
 
     if (!emailRegex.test(email)) {
-        inValid(emailInput, emailError, 'Неверный формат email')
-        hasError = true;
-    }
-
-    if (!phoneRegex.test(phone)) {
-        inValid(phoneInput, phoneError, 'Неверный формат телефона')
-        hasError = true;
-    }
-    if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, passText)
-        hasError = true;
-    }
-    if (password1 !== password2) {
-        inValid(password2Input, password2Error, 'Пароли не совпадают')
-        hasError = true;
-    }
-    if (hasError) {
-        return;
-    }
-
-    fetch('/users/valid-data/', {
-        method: 'POST',
-        headers: {"X-CSRFToken": csrf},
-        body: JSON.stringify(
-            {email: email, phone: phone})
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.emailExists) {
-                inValid(emailInput, emailError, 'Email уже зарегистрирован')
-            }
-            if (data.phoneExists) {
-                inValid(phoneInput, phoneError, 'Телефон уже зарегистрирован')
-            }
-            if (!data.emailExists && !data.phoneExists) {
-                fetch('/users/register/', {
-                    method: 'POST',
-                    headers: {"X-CSRFToken": csrf},
-                    body: JSON.stringify(
-                        {type: 'is_shooting', email: email, phone: phone, password: password2})
-                })
-                    .then(res => res.json())
-                    .then(result => {
-                        console.log(result)
-                        if (result.result) {
-                            thank.classList.add('open')
-                            thank_text.textContent = 'Вы успешно зарегистрировались. На ваш email отправлена ссылка на подтверждение!'
-
-                            if (url.length > 0) {
-                                let clean_url = url.slice(1).split('&')
-                                clean_url.forEach((param) => {
-                                    if (param.split('=')[0] === 'next') {
-                                        thanks_btn.innerHTML = 'Продолжить'
-                                        thanks_btn.setAttribute('href', `${param.split('=')[1]}`)
-                                    }
-                                })
-                            } else {
-                                thanks_btn.innerHTML = 'Закрыть'
-                                thanks_btn.setAttribute('href', window.location.pathname)
-                            }
-                        }
-                    })
-                    .catch(
-                        error => {
-                            console.error('Error:', error);
-                            inValid(emailInput, emailError, 'Во время проверки произошла ошибка')
-                            inValid(phoneInput, phoneError, 'Во время проверки произошла ошибка')
-                        }
-                    )
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            inValid(emailInput, emailError, 'Во время проверки произошла ошибка')
-            inValid(phoneInput, phoneError, 'Во время проверки произошла ошибка')
-        })
-})
-
-
-take_form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    console.log('take')
-
-    const emailInput = take_form.querySelector('input[name=email]')
-    const phoneInput = take_form.querySelector('input[name=phone]')
-    const password1Input = take_form.querySelector('input[name=password1]')
-    const password2Input = take_form.querySelector('input[name=password2]')
-
-    const email = emailInput.value.trim();
-    const phone = phoneInput.value.trim();
-    const password1 = password1Input.value.trim();
-    const password2 = password2Input.value.trim();
-
-    const emailError = take_form.querySelector('#emailError')
-    const phoneError = take_form.querySelector('#phoneError')
-    const password1Error = take_form.querySelector('#password1Error')
-    const password2Error = take_form.querySelector('#password2Error')
-
-    removeInvalidClass([emailInput, phoneInput, password1Input, password2Input])
-    cleanTextContent([emailError, phoneError, password1Error, password2Error, thank_text])
-
-    let hasError = false;
-
-    if (!emailRegex.test(email)) {
-        inValid(emailInput, emailError, 'Неверный формат email')
+        inValid(emailInput, emailError, emailText)
         hasError = true;
     }
 
@@ -423,7 +342,7 @@ show_form.addEventListener('submit', (e)=> {
     }
 
     if (!emailRegex.test(email)) {
-        inValid(emailInput, emailError, 'Неверный формат email')
+        inValid(emailInput, emailError, emailText)
         hasError = true;
     }
 
@@ -599,8 +518,13 @@ organize_form.addEventListener('submit', (e)=> {
     }
 
     if (!emailRegex.test(email)) {
-        inValid(emailInput, emailError, 'Неверный формат email')
-        hasError = true;
+        if (email.length === 0) {
+            inValid(emailInput, emailError, emptyString)
+            hasError = true;
+        } else {
+            inValid(emailInput, emailError, emailText)
+            hasError = true;
+            }
     }
 
     if (!phoneRegex.test(phone)) {
