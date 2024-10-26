@@ -34,7 +34,7 @@ def res_user_login(request):
                     return reverse('sign-in')
             else:
                 # messages.error(request, 'Вы не зарегистрированны')
-                return HttpResponse
+                return JsonResponse({'detail': "Not register"})
     else:
         form = LoginForm()
     return render(request, 'base.html', {'form': form})

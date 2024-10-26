@@ -7,6 +7,9 @@ from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 
 from .models import CustomUser
+from .services import send_email_for_verify
+
+
 # from movies.models import Playlist
 
 # Register your models here.
@@ -92,13 +95,21 @@ class UserAdmin(BaseUserAdmin):
     ]
     search_fields = ["email"]
     ordering = ["email"]
-    readonly_fields = ("get_avatar", "verify_token", "date_joined",)
+    readonly_fields = ("get_avatar", "verify_token", "date_joined")
 
     def get_avatar(self, obj):
         if obj.avatar:
             return mark_safe(f'<img src="{obj.avatar.url}" width=70')
 
     get_avatar.short_description = "Аватар"
+
+    @admin.action(description="Отправить письмо для подтверждения")
+    def send_verify_button(self, request, queryset):
+        for user in queryset:
+            # Логика для отправки письма
+            send_email_for_verify(request, user.email, user.verify_token)
+
+    actions = [send_verify_button]
 
 
 admin.site.register(CustomUser, UserAdmin)
