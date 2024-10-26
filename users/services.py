@@ -6,6 +6,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from smtplib import SMTPDataError
+import logging
 from django.conf import settings
 
 User = get_user_model()
@@ -19,13 +21,23 @@ def send_email_for_verify(request, email, token):
         "users/email/verify_email.html",
         context=context,
     )
-    send_mail(
-        "Подтверждение подписки",
-        message,
-        settings.RECIPIENTS_EMAIL,
-        [email],
-        fail_silently=False,
-    )
+    try:
+        send_mail(
+            "Подтверждение подписки",
+            message,
+            settings.RECIPIENTS_EMAIL,
+            [email],
+            fail_silently=False,
+        )
+    except SMTPDataError as e:
+        # logger.error(f"SMTPDataError: {e.smtp_code} - {e.smtp_error.decode('utf-8')}")
+        print("Ошибка отправки письма, проверьте настройки SMTP и повторите попытку.")
+        # TODO дописать логику
+
+    except Exception as e:
+        # logger.error(f"Произошла ошибка: {e}")
+        print("Произошла ошибка при отправке письма.")
+        # TODO дописать логику
 
 
 def send_email_for_reset_pass(request, email, token):
