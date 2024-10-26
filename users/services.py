@@ -23,7 +23,7 @@ def send_email_for_verify(request, email, token):
     )
     try:
         send_mail(
-            "Подтверждение подписки",
+            "Подтверждение email |Кинопремия «Золотая тарелка»",
             message,
             settings.RECIPIENTS_EMAIL,
             [email],
