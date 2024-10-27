@@ -74,7 +74,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
                                     null=True, default=None)
     platform_name = models.CharField(max_length=1000, verbose_name="Наименование площадки", blank=True,
                                      null=True, default=None)
-    date_joined = models.DateTimeField(auto_now_add=True)
+    date_joined = models.DateTimeField(auto_now_add=True, verbose_name="Зарегистрирован")
     verify_token = models.CharField(max_length=40, blank=True, null=True)
 
     is_staff = models.BooleanField(default=False, verbose_name="Сотрудник")
@@ -95,7 +95,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.username
 
     class Meta:
-        ordering = ['-date_joined']
+        ordering = ['date_joined']
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"
         unique_together = ('username', 'email', 'phone')
