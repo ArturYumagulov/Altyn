@@ -100,6 +100,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         unique_together = ('username', 'email', 'phone')
 
     def save(self, *args, **kwargs):
-        if not self.verify_token:
-            self.verify_token = secrets.token_hex(20)
+        # if not self.verify_token:
+        self.verify_token = secrets.token_hex(20)
         super(CustomUser, self).save(*args, **kwargs)

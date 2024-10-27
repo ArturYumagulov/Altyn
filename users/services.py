@@ -50,7 +50,6 @@ def send_email_for_verify(request, email, token):
         }
 
 
-
 def send_email_for_reset_pass(request, email, token):
 
     current_site = get_current_site(request).domain
@@ -59,13 +58,30 @@ def send_email_for_reset_pass(request, email, token):
         "users/email/reset_pass_verify_email.html",
         context=context,
     )
-    send_mail(
-        'Сброс пароля на сайте "Алтын-телинке"',
-        message,
-        settings.RECIPIENTS_EMAIL,
-        [email],
-        fail_silently=False,
-    )
+    try:
+        send_mail(
+            'Сброс пароля на сайте "Алтын-телинке"',
+            message,
+            settings.RECIPIENTS_EMAIL,
+            [email],
+            fail_silently=False,
+        )
+    except SMTPDataError as e:
+        # logger.error(f"SMTPDataError: {e.smtp_code} - {e.smtp_error.decode('utf-8')}")
+        print("Ошибка отправки письма, проверьте настройки SMTP и повторите попытку.")
+
+        return {
+            'result': False,
+            'message': f"Произошла ошибка при отправке письма. проверьте настройки SMTP. {e}"
+        }
+
+    except Exception as e:
+        # logger.error(f"Произошла ошибка: {e}")
+        print(f"Произошла ошибка при отправке письма. {e}")
+        return {
+            'result': False,
+            'message': f"Произошла ошибка при отправке письма. {e}"
+        }
 
 
 def create_look_user(request, user_data):

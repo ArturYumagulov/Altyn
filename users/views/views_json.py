@@ -107,6 +107,7 @@ def valid_data(request):
 def change_pass_email(request):
     if request.method == 'POST':
         user = User.objects.get(email=json.loads(request.body).get('email'))
+        user.save()
         send_email_for_reset_pass(request, user.email, user.verify_token)
         return JsonResponse({'result': True}, safe=False)
     return JsonResponse({'result': False}, safe=False)
