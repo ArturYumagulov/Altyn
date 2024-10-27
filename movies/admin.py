@@ -279,14 +279,14 @@ class FavoriteMovieAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(models.RatingStar)
-class RatingStarAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(models.RatingStar)
+# class RatingStarAdmin(admin.ModelAdmin):
+#     pass
 
 
-@admin.register(models.Rating)
-class RatingAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(models.Rating)
+# class RatingAdmin(admin.ModelAdmin):
+#     pass
 
 
 @admin.register(models.Playlist)

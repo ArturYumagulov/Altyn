@@ -103,9 +103,9 @@ class MovieAppAdmin(ImportExportActionModelAdmin):
         context += f"<strong>{obj.copyright_information._meta.get_field('contact_email').verbose_name}:</strong> <p>{obj.copyright_information.contact_email}</p>"
         context += "</div>"
         context += f"""<a class="related-widget-wrapper-link change-related" id="change_id_copyright_information" 
-        data-href-template="/admin/applications//movieportfolio/__fk__/change/?_to_field=id&amp;_popup=1" 
+        data-href-template="/admin/applications/copyrightinformation/__fk__/change/?_to_field=id&amp;_popup=1" 
         data-popup="yes" title="Изменить выбранный объект типа " Информация="" о="" правообладателе""="" 
-        href="/admin/applications/movieportfolio/{obj.copyright_information.pk}/change/?_to_field=id&amp;_popup=1">
+        href="/admin/applications/copyrightinformation/{obj.copyright_information.pk}/change/?_to_field=id&amp;_popup=1">
         <img src="/static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a>"""
 
         context += "</div>"

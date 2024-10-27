@@ -94,7 +94,7 @@ class UserAdmin(BaseUserAdmin):
         ),
     ]
     search_fields = ["email"]
-    ordering = ["email"]
+    ordering = ["-date_joined"]
     readonly_fields = ("get_avatar", "verify_token", "date_joined")
 
     def get_avatar(self, obj):
