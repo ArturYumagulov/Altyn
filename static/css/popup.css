@@ -229,7 +229,7 @@ html {
 	display: block;
 	margin-inline: auto;
 	font-size: 16px;
-	line-height: 20px;
+	line-height: 50px;
 	text-align: center;
 	max-width: 221px;
 }
@@ -352,10 +352,23 @@ html {
 
 .alert {
 	display: none;
+	color: red;
 }
 
 .alert.is-invalid {
 	/*display: none;*/
 	color: red;
 	text-align: center;
+}
+
+.exit-thank-btn {
+    display: block;
+    font-size: 16px;
+    line-height: 50px;
+    text-align: center;
+    max-width: 221px;
+}
+.exit-block {
+	display: flex;
+	justify-content: space-evenly;
 }

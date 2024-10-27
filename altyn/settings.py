@@ -29,7 +29,10 @@ SECRET_KEY = env.str("DJANGO_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+if DEBUG:
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = [f"{env.str('DOMAIN')}"]
 
 
 # Application definition
@@ -95,28 +98,28 @@ WSGI_APPLICATION = "altyn.wsgi.application"
 #     }
 # }
 
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
-        'PASSWORD': env('DB_PASS'),
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "postgres",
+            'USER': "postgres",
+            'HOST': "localhost",
+            'PORT': "5432",
+            'PASSWORD': "postgres",
         }
-}
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "altyn",
-#         'USER': "postgres",
-#         'HOST': "localhost",
-#         'PORT': "5432",
-#         'PASSWORD': "postgres",
-#         }
-# }
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": env('DB_NAME'),
+            'USER': env('DB_USER'),
+            'HOST': env('DB_HOST'),
+            'PORT': env('DB_PORT'),
+            'PASSWORD': env('DB_PASS'),
+        }
+    }
 
 
 # Password validation
@@ -164,6 +167,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
    os.path.join(BASE_DIR, "static"),
 ]
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -175,12 +179,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = '/users/res-login-page/'
 
-# if DEBUG:
-#     # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-#     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-# else:
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
@@ -196,4 +198,4 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # замените на свою почт�
 EMAIL_SERVER = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
-SITE_URL = "www.golden-plate.ru"
+SITE_URL = f"www.{env.str('DOMAIN')}"

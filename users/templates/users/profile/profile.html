@@ -13,6 +13,16 @@
             justify-content: space-between;
             padding-top: 10px;
         }
+        .exit-btn {
+            border: 1px solid var(--color-yellow);
+            border-radius: 10px;
+            padding: 19px 20px;
+            width: max-content;
+            height: 52px;
+            text-transform: none;
+            color: #7E7E7E;
+            margin: 15px 0;
+        }
     </style>
 {% endblock %}
 
@@ -24,6 +34,7 @@
         const edit_user_phone = "{% url 'edit_email_phone' %}"
         const email_verify = "{% url 'email-verify' %}"
         const verify_code_url = "{% url 'verify_code' %}"
+        const logout = "{% url 'logout' %}"
     </script>
 {% endblock %}
 {% block content %}
@@ -56,6 +67,9 @@
 
 						{% include 'users/profile/voting.html' %}
 					</div>
+                    <div class="exit">
+                        <button class="btn exit-btn">Выйти из учетной записи</button>
+                    </div>
 				</div>
 			</section>
 		</main>
@@ -65,4 +79,5 @@
 
 {% block script %}
     <script src="{% static 'js/user/update_profile.js' %}"></script>
+    <script src="{% static 'js/user/profile.js' %}"></script>
 {% endblock %}
