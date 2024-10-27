@@ -1,12 +1,47 @@
-// const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const emailRegex = /^[\w.-]+@(yandex\.ru|ya\.ru|gmail\.com|mail\.ru|rambler\.ru|vk\.com)$/;
 const phoneRegex = /^(\+7|8)?[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/;
 // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])(?!.*(.)\1{2})[A-Za-z\d@$!%*?&_]{8,}$/;
-// const url = window.location.search
 const passText = 'минимум 8 символов, буквы, цифры, символы @$!%*?&'
 const emailText = "Неверный формат, только домены yandex.ru, ya.ru, gmail.com, mail.ru, rambler.ru, vk.com"
 const emptyString = "Это поле не может быть пустым"
+
+
+function phoneMask(phone) {
+    phone.addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, ""); // Убираем все нецифровые символы
+
+        // Если введена 8 вместо +7, заменяем ее на 7
+        if (value.startsWith("8")) {
+            value = "7" + value.substring(1);
+        }
+
+        // Форматируем номер телефона
+        let formattedValue = "+7 ";
+        if (value.length > 1) {
+            formattedValue += "(" + value.substring(1, 4);
+        }
+        if (value.length >= 4) {
+            formattedValue += ") " + value.substring(4, 7);
+        }
+        if (value.length >= 7) {
+            formattedValue += "-" + value.substring(7, 9);
+        }
+        if (value.length >= 9) {
+            formattedValue += "-" + value.substring(9, 11);
+        }
+
+        e.target.value = formattedValue; // Обновляем поле ввода
+
+        // Корректное удаление символов при Backspace
+        e.target.addEventListener("keydown", function (ev) {
+            if (ev.key === "Backspace") {
+                ev.target.value = "+7 "; // Восстанавливаем +7, если поле пустое
+                ev.preventDefault();
+            }
+        });
+    });
+}
 
 
 function inValid(element, errorElement, text = null) {
@@ -41,6 +76,15 @@ const  take_form = document.getElementById('take-form')
 const show_form = document.getElementById('show-form')
 const organize_form = document.getElementById('organize-form')
 
+const look_form_phone = look_form.querySelector('input[name=phone]')
+const take_form_phone = take_form.querySelector('input[name=phone]')
+const show_form_phone = show_form.querySelector('input[name=phone]')
+const organize_form_phone = organize_form.querySelector('input[name=phone]')
+
+phoneMask(look_form_phone);
+phoneMask(take_form_phone);
+phoneMask(show_form_phone);
+phoneMask(organize_form_phone);
 
 look_form.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -166,7 +210,6 @@ look_form.addEventListener('submit', (e) => {
 
 take_form.addEventListener('submit', (e) => {
     e.preventDefault()
-    console.log('take')
 
     const emailInput = take_form.querySelector('input[name=email]')
     const phoneInput = take_form.querySelector('input[name=phone]')
@@ -189,21 +232,41 @@ take_form.addEventListener('submit', (e) => {
     let hasError = false;
 
     if (!emailRegex.test(email)) {
-        inValid(emailInput, emailError, emailText)
-        hasError = true;
+        if (email.length === 0) {
+            inValid(emailInput, emailError, emptyString)
+            hasError = true;
+        } else {
+            inValid(emailInput, emailError, emailText)
+            hasError = true;
+            }
     }
 
     if (!phoneRegex.test(phone)) {
-        inValid(phoneInput, phoneError, 'Неверный формат телефона')
-        hasError = true;
+        if (phone.length === 0) {
+            inValid(phoneInput, phoneError, emptyString)
+            hasError = true;
+        } else {
+            inValid(phoneInput, phoneError, 'Неверный формат телефона')
+            hasError = true;
+        }
     }
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, passText)
-        hasError = true;
+        if (password1.length === 0) {
+            inValid(password1Input, password1Error, emptyString)
+            hasError = true;
+        } else {
+            inValid(password1Input, password1Error, passText)
+            hasError = true;
+        }
     }
     if (password1 !== password2) {
-        inValid(password2Input, password2Error, 'Пароли не совпадают')
-        hasError = true;
+        if (password2.length === 0) {
+            inValid(password2Input, password2Error, emptyString)
+            hasError = true;
+        } else {
+            inValid(password2Input, password2Error, 'Пароли не совпадают')
+            hasError = true;
+        }
     }
     if (hasError) {
         return;
@@ -342,13 +405,23 @@ show_form.addEventListener('submit', (e)=> {
     }
 
     if (!emailRegex.test(email)) {
-        inValid(emailInput, emailError, emailText)
-        hasError = true;
+        if (email.length === 0) {
+            inValid(emailInput, emailError, emptyString)
+            hasError = true;
+        } else {
+            inValid(emailInput, emailError, emailText)
+            hasError = true;
+            }
     }
 
     if (!phoneRegex.test(phone)) {
-        inValid(phoneInput, phoneError, 'Неверный формат телефона')
-        hasError = true;
+        if (phone.length === 0) {
+            inValid(phoneInput, phoneError, emptyString)
+            hasError = true;
+        } else {
+            inValid(phoneInput, phoneError, 'Неверный формат телефона')
+            hasError = true;
+        }
     }
 
     if (companyName === '') {
@@ -362,12 +435,22 @@ show_form.addEventListener('submit', (e)=> {
     }
 
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, passText)
-        hasError = true;
+        if (password1.length === 0) {
+            inValid(password1Input, password1Error, emptyString)
+            hasError = true;
+        } else {
+            inValid(password1Input, password1Error, passText)
+            hasError = true;
+        }
     }
     if (password1 !== password2) {
-        inValid(password2Input, password2Error, 'Пароли не совпадают')
-        hasError = true;
+        if (password2.length === 0) {
+            inValid(password2Input, password2Error, emptyString)
+            hasError = true;
+        } else {
+            inValid(password2Input, password2Error, 'Пароли не совпадают')
+            hasError = true;
+        }
     }
     if (hasError) {
         return;
@@ -528,8 +611,13 @@ organize_form.addEventListener('submit', (e)=> {
     }
 
     if (!phoneRegex.test(phone)) {
-        inValid(phoneInput, phoneError, 'Неверный формат телефона')
-        hasError = true;
+        if (phone.length === 0) {
+            inValid(phoneInput, phoneError, emptyString)
+            hasError = true;
+        } else {
+            inValid(phoneInput, phoneError, 'Неверный формат телефона')
+            hasError = true;
+        }
     }
 
     if (platformName === '') {
@@ -543,12 +631,22 @@ organize_form.addEventListener('submit', (e)=> {
     }
 
     if (!passwordRegex.test(password1)) {
-        inValid(password1Input, password1Error, passText)
-        hasError = true;
+        if (password1.length === 0) {
+            inValid(password1Input, password1Error, emptyString)
+            hasError = true;
+        } else {
+            inValid(password1Input, password1Error, passText)
+            hasError = true;
+        }
     }
     if (password1 !== password2) {
-        inValid(password2Input, password2Error, 'Пароли не совпадают')
-        hasError = true;
+        if (password2.length === 0) {
+            inValid(password2Input, password2Error, emptyString)
+            hasError = true;
+        } else {
+            inValid(password2Input, password2Error, 'Пароли не совпадают')
+            hasError = true;
+        }
     }
     if (hasError) {
         return;

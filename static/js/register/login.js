@@ -22,7 +22,6 @@ function invalidData(item_id) {
 }
 
 function validData(item_id) {
-    console.log(item_id)
     document.getElementById(`${item_id}-feedback`).style.display = 'none'
     document.getElementById(`${item_id}-feedback`).classList.remove('is-invalid')
 }

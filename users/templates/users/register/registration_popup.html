@@ -3,7 +3,6 @@
 <div id="popup-registration" class="popup popup-registration">
     <div class="popup__body">
         <div class="popup__content">
-            {#					<form action="{% url 'register' %}" method="post" id="register_form" class="form-book " novalidate="novalidate">#}
             <a href="/static" class="popup-logo"><img src="
                         {% static '/img/logo.png' %}
                         " alt="Логотип"></a>
@@ -37,10 +36,10 @@
                             <input type="email" class="form-book__input" name="email" autocomplete="off">
                             <p class="alert" id="emailError"></p>
                         </label>
-                        <label for="tel">Номер телефона
-                            <input type="tel" class="form-book__input" name="phone" autocomplete="off">
+                        <label for="phone">Номер телефона
+                            <input id="phone" type="text" class="form-book__input" name="phone" autocomplete="off"
+                                   placeholder="+7 (___) ___-__-__">
                             <p class="alert" id="phoneError"></p>
-
                         </label>
                         <label for="password">Пароль
                             <input type="password" class="form-book__input" name="password1"
@@ -69,8 +68,9 @@
                             <input type="email" class="form-book__input" name="email" autocomplete="off">
                             <p class="alert" id="emailError"></p>
                         </label>
-                        <label for="tel">Номер телефона
-                            <input type="tel" class="form-book__input" name="phone" autocomplete="off">
+                        <label for="phone">Номер телефона
+                            <input type="phone" class="form-book__input" name="phone" autocomplete="off"
+                            placeholder="+7 (___) ___-__-__">
                             <p class="alert" id="phoneError"></p>
 
                         </label>
@@ -114,7 +114,8 @@
                             <p class="alert" id="emailError"></p>
                         </label>
                         <label for="phone">Номер телефона
-                            <input type="tel" class="form-book__input" name="phone" autocomplete="off">
+                            <input type="phone" class="form-book__input" name="phone" autocomplete="off"
+                            placeholder="+7 (___) ___-__-__">
                             <p class="alert" id="phoneError"></p>
                         </label>
                         <label for="company_name">Наименование компании
@@ -162,7 +163,8 @@
                             <p class="alert" id="emailError"></p>
                         </label>
                         <label for="phone">Номер телефона
-                            <input type="tel" class="form-book__input" name="phone" autocomplete="off">
+                            <input type="phone" class="form-book__input" name="phone" autocomplete="off"
+                            placeholder="+7 (___) ___-__-__">
                             <p class="alert" id="phoneError"></p>
                         </label>
                         <label for="platform_name">Наименование площадки
