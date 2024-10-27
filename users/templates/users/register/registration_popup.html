@@ -3,7 +3,7 @@
 <div id="popup-registration" class="popup popup-registration">
     <div class="popup__body">
         <div class="popup__content">
-            <a href="/static" class="popup-logo"><img src="
+            <a href="{% url 'main' %}" class="popup-logo"><img src="
                         {% static '/img/logo.png' %}
                         " alt="Логотип"></a>
             <a class="popup__close close-popup" title="" href="#header"></a>
@@ -123,8 +123,7 @@
                             <p class="alert" id="company_nameError"></p>
                         </label>
                         <label for="site">Сайт
-                            <input type="text" name="site" class="form-book__input"
-{#                                   pattern="^(?=[^_]+$)([\wа-яА-ЯёЁ]([\wа-яА-ЯёЁ-]*[\wа-яА-ЯёЁ])*\.)+(?=[^\d]+$)[\wа-яА-ЯёЁ]{2,63}$"#}>
+                            <input type="text" name="site" class="form-book__input">
                             <p class="alert" id="siteError"></p>
                         </label>
                         <label for="password1">Пароль
