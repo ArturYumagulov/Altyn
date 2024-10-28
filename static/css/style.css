@@ -3144,14 +3144,14 @@ select option {
 	font-family: var(--second-family);
 	font-weight: 400;
 	font-size: 32px;
-	margin-bottom: 19px;
+	margin-bottom: 5px;
 }
 
 .production__details h3::after {
 	content: "";
 	display: block;
 	border-bottom: 2px solid var(--color-yellow);
-	padding-bottom: 19px;
+	padding-bottom: 5px;
 	width: 90px;
 }
 

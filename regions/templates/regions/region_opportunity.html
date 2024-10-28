@@ -1,14 +1,15 @@
-            <section class="regionopportunities ">
+            <section class="regionopportunities">
                 {% load static %}
 				<div class="">
-					<div class="region ">
+					<div class="region">
 						<label for="blend-top">Возможности региона</label>
 						{% include 'regions/filters.html' %}
 					</div>
-					<div class="regionaresources">
 
-						<div class="regionOne region-content">
-							<div class="filmlocations">
+					<div class="regionaresources-res">
+{#                         Точки кинопоказов#}
+						<div class="region-content-res">
+                            <div class="filmlocations">
 								<h2 class="region-title">Точки кинопоказов</h2>
 								<div class="filmlocations-cards">
                                     {% for point in screening_points %}
@@ -43,38 +44,41 @@
 
 								</div>
 							</div>
-
-							<div class="internetresources-block">
-								<h2 class="region-title">Региональные интернет ресурсы</h2>
-								<div class="internetresources-cards">
-                                    {% for resourses in internet_resources %}
-									<article class="card internetresources-card">
-										<div class="internetresources__img">
-											<figure>
-												<img src="img/regionsmap/export.png" alt="точка кинопоказа">
-											</figure>
-										</div>
-										<div class="internetresources__details">
-											<h3>Сайт центра развития кинопроизводства Мурманской области</h3>
-											<p class="_icon-bi_geo-alt">Мурманская область</p>
-										</div>
-										<a href="internetresources.html"
-											class="morelink internetresources-morelink  _icon-ring-arrow">Перейти
-											на
-											сайт</a>
-									</article>
-                                    {% endfor %}
-								</div>
-							</div>
-						</div>
-						<div class="regiontwo region-content">
-							<div class="production-block">
+                        </div>
+{#                         Региональные интернет ресурсы#}
+{#                        <div class="region-content-res">#}
+{#							<div class="filmlocations-res">#}
+{#								<h2 class="region-title">Региональные интернет ресурсы</h2>#}
+{#								<div class="filmlocations-cards-res">#}
+{#                                    {% for resourses in internet_resources %}#}
+{#									<article class="card internetresources-card">#}
+{#										<div class="internetresources__img">#}
+{#											<figure>#}
+{#												<img src="{% static 'img/regionsmap/export.png' %}" alt="точка кинопоказа">#}
+{#											</figure>#}
+{#										</div>#}
+{#										<div class="internetresources__details">#}
+{#											<h3>Сайт центра развития кинопроизводства Мурманской области</h3>#}
+{#											<p class="_icon-bi_geo-alt">Мурманская область</p>#}
+{#										</div>#}
+{#										<a href="internetresources.html"#}
+{#											class="morelink internetresources-morelink  _icon-ring-arrow">Перейти#}
+{#											на#}
+{#											сайт</a>#}
+{#									</article>#}
+{#                                    {% endfor %}#}
+{#								</div>#}
+{#							</div>#}
+{#						</div>#}
+{#                         Производство#}
+						<div class="region-content-res">
+							<div class="filmlocations-res">
 								<h2 class="region-title">Производство</h2>
-								<div class="production-cards">
+								<div class="filmlocations-cards-res">
 									<article class="card production-card">
 										<div class="production__img">
 											<figure>
-												<img src="img/regionsmap/production.png" alt="точка кинопоказа">
+												<img src="{% static 'img/regionsmap/production.png'%}" alt="точка кинопоказа">
 											</figure>
 										</div>
 										<div class="production__details">
@@ -96,7 +100,7 @@
 									<article class="card production-card">
 										<div class="production__img">
 											<figure>
-												<img src="img/regionsmap/production.png" alt="точка кинопоказа">
+												<img src="{% static 'img/regionsmap/production.png'%}" alt="точка кинопоказа">
 											</figure>
 										</div>
 										<div class="production__details">
@@ -117,13 +121,16 @@
 									</article>
 								</div>
 							</div>
-							<div class="specialists-block">
+                        </div>
+{#                         Специалисты#}
+                        <div class="region-content-res">
+                            <div class="specialists-block">
 								<h2 class="region-title">Специалисты</h2>
 								<div class="personal-cards">
 									<article class="card personal-card">
 										<div class="personal__img">
 											<figure>
-												<img src="img/contactImg/albina.png" alt="Альбина Нафигова">
+												<img src="{% static 'img/contactImg/albina.png' %}" alt="Альбина Нафигова">
 											</figure>
 										</div>
 										<div class="personal__details">
@@ -142,35 +149,34 @@
 									<article class="card personal-card">
 										<div class="personal__img">
 											<figure>
-												<img src="img/contactImg/Влада.png" alt=" Влада Крылова">
+												<img src="{% static 'img/contactImg/albina.png' %}" alt="Альбина Нафигова">
 											</figure>
 										</div>
 										<div class="personal__details">
-											<h3> Влада Крылова</h3>
-											<h4>
-												Технический продюсер
-											</h4>
+											<h3>Альбина Нафигова</h3>
+											<h4>Директор</h4>
 											<div class="personal__contact">
-												<a href="tel:+79033420817">Тел.: 8 950 323 82 32
+												<a href="tel:+9534070370">Тел.: 8 953 407 03 70
 												</a>
-												<a href="E-mail: vladakrylova@ya.ru">
-													E-mail: vladakrylova@ya.ru</a>
+												<a href="mailto:albina@mail.ru">
+													E-mail: albinane@mail.ru</a>
 											</div>
 										</div>
-										<a href="specialist-personal.html"
-											class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
+										<a href="specialists.html" class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
 											больше</a>
 									</article>
+
 								</div>
 							</div>
 						</div>
-						<div class="regionthree region-content">
+{#                         Портрет региона#}
+                        <div class="region-content-res">
 							<div class="portrait-block">
 								<h2 class="region-title">Портрет региона</h2>
 								<div class="portrait-cards">
 									<article class="card portrait-card">
 										<div class="portrait__img">
-											<img src="img/regionsmap/portrait.png" alt="фото мастер класса">
+											<img src="{% static 'img/regionsmap/portrait.png' %}" alt="фото мастер класса">
 										</div>
 										<div class="portrait__block">
 											<p class="portrait__block-text
@@ -189,64 +195,69 @@
 									</article>
 								</div>
 							</div>
-							<div class="filmmakers-block">
-								<h2 class="region-title">Чаты кинематографистов</h2>
-								<div class="filmmakers-cards">
-									<article class="card filmmakers-card">
-										<p class="filmmakers-card__text">Чат, основанный на бесплатной взаимопомощи на съемках</p>
-										<div class="filmmakers-link">
-											<ul class="filmmakers-list">
-												<li class="filmmakers-list__social">
-													<a class="_icon-vk-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
-													</a>
-												</li>
-												<li class="filmmakers-list__social">
-													<a class=" _icon-telegram-white" href="filmmakers.html" target="_blank"
-														rel="nofollow noopener noreferrer">
-													</a>
-												</li>
-												<li class="filmmakers-list__social">
-													<a class=" _icon-whatsApp" href="#" target="_blank" rel="nofollow noopener noreferrer">
-													</a>
-												</li>
-											</ul>
-										</div>
-										<p class="_icon-bi_geo-alt filmmakers-list__city">Санкт - Петербург</p>
-										<a href="filmmakers.html" class="morelink internetresources-morelink  _icon-ring-arrow">Узнать
-											больше</a>
-									</article>
-									<article class="card filmmakers-card">
-										<p class="filmmakers-card__text">Чат, основанный на бесплатной взаимопомощи на съемках</p>
-										<div class="filmmakers-link">
-											<ul class="filmmakers-list">
-												<li class="filmmakers-list__social">
-													<a class="_icon-vk-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
-													</a>
-												</li>
-												<li class="filmmakers-list__social">
-													<a class=" _icon-telegram-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
-													</a>
-												</li>
-												<li class="filmmakers-list__social">
-													<a class=" _icon-whatsApp" href="#" target="_blank" rel="nofollow noopener noreferrer">
-													</a>
-												</li>
-											</ul>
-										</div>
-										<p class="_icon-bi_geo-alt filmmakers-list__city">Санкт - Петербург</p>
-										<a href="#" class="morelink internetresources-morelink  _icon-ring-arrow">Узнать больше</a>
-									</article>
-								</div>
-							</div>
-						</div>
-						<div class="regionfour region-content">
+
+                    </div>
+{#                        Чаты кинематографистов#}
+                        <div class="region-content-res">
+                            <div class="filmmakers-block">
+    								<h2 class="region-title">Чаты кинематографистов</h2>
+    								<div class="filmmakers-cards">
+    									<article class="card filmmakers-card">
+    										<p class="filmmakers-card__text">Чат, основанный на бесплатной взаимопомощи на съемках</p>
+    										<div class="filmmakers-link">
+    											<ul class="filmmakers-list">
+    												<li class="filmmakers-list__social">
+    													<a class="_icon-vk-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
+    													</a>
+    												</li>
+    												<li class="filmmakers-list__social">
+    													<a class=" _icon-telegram-white" href="filmmakers.html" target="_blank"
+    														rel="nofollow noopener noreferrer">
+    													</a>
+    												</li>
+    												<li class="filmmakers-list__social">
+    													<a class=" _icon-whatsApp" href="#" target="_blank" rel="nofollow noopener noreferrer">
+    													</a>
+    												</li>
+    											</ul>
+    										</div>
+    										<p class="_icon-bi_geo-alt filmmakers-list__city">Санкт - Петербург</p>
+    										<a href="filmmakers.html" class="morelink internetresources-morelink  _icon-ring-arrow">Узнать
+    											больше</a>
+    									</article>
+    									<article class="card filmmakers-card">
+    										<p class="filmmakers-card__text">Чат, основанный на бесплатной взаимопомощи на съемках</p>
+    										<div class="filmmakers-link">
+    											<ul class="filmmakers-list">
+    												<li class="filmmakers-list__social">
+    													<a class="_icon-vk-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
+    													</a>
+    												</li>
+    												<li class="filmmakers-list__social">
+    													<a class=" _icon-telegram-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
+    													</a>
+    												</li>
+    												<li class="filmmakers-list__social">
+    													<a class=" _icon-whatsApp" href="#" target="_blank" rel="nofollow noopener noreferrer">
+    													</a>
+    												</li>
+    											</ul>
+    										</div>
+    										<p class="_icon-bi_geo-alt filmmakers-list__city">Санкт - Петербург</p>
+    										<a href="#" class="morelink internetresources-morelink  _icon-ring-arrow">Узнать больше</a>
+    									</article>
+    								</div>
+    							</div>
+    						</div>
+{#                        Локации#}
+                        <div class="region-content-res">
 							<div class="location-block">
 								<h2 class="region-title">Локации</h2>
 								<div class="location-cards">
 									<article class="card location-card">
 										<div class="location__img">
 											<figure>
-												<img src="img/regionsmap/location.png" alt="точка кинопоказа">
+												<img src="{% static 'img/regionsmap/location.png' %}" alt="точка кинопоказа">
 											</figure>
 										</div>
 										<div class="location__details">
@@ -257,7 +268,7 @@
 									<article class="card location-card">
 										<div class="location__img">
 											<figure>
-												<img src="img/regionsmap/location_1.png" alt="точка кинопоказа">
+												<img src="{% static 'img/regionsmap/location_1.png' %}" alt="точка кинопоказа">
 											</figure>
 										</div>
 										<div class="location__details">
@@ -268,30 +279,38 @@
 
 								</div>
 							</div>
-							<div class="events-block">
-								<h2 class="region-title">Мероприятия</h2>
-								<div class="events-cards">
-									<article class="card events-card">
-										<div class="events__img">
-											<img src="img/regionsmap/events.png" alt="фото мастер класса">
-										</div>
-										<div class="events__block">
-											<h3>Трудовые права в кинопроизводстве и роль профсоюзов в защите прав и интересов трудящихся</h3>
-											<p>В рамках Межрегиональной кинопремии «Алтын тәлинкә» (Золотая тарелка),  серия мастер-классов от
-												экспертов в области кинематографии!
-												Спикером первого вебинара, который мы хотим вам презентовать, выступила эксперт нашей
-												кинопремии,
-												Доцент кафедры продюсирования Санкт-Петербургского института кино и телевидения — Ксения
-												Леонтьева.
-											</p>
-										</div>
-										<div>
-											<a href="events.html" class="morelink events-morelink  _icon-ring-arrow">Узнать больше</a>
-										</div>
-									</article>
-								</div>
-							</div>
-						</div>
-					</div>
+
+                        </div>
+
+                        <div class="region-content-res">
+                                <div class="events-block">
+                                    <h2 class="region-title">Мероприятия</h2>
+                                    <div class="events-cards">
+                                        <article class="card events-card">
+                                            <div class="events__img">
+                                                <img src="{% static 'img/regionsmap/events.png' %}" alt="фото мастер класса">
+                                            </div>
+                                            <div class="events__block">
+                                                <h3>Трудовые права в кинопроизводстве и роль профсоюзов в защите прав и интересов трудящихся</h3>
+                                                <p>В рамках Межрегиональной кинопремии «Алтын тәлинкә» (Золотая тарелка),  серия мастер-классов от
+                                                    экспертов в области кинематографии!
+                                                    Спикером первого вебинара, который мы хотим вам презентовать, выступила эксперт нашей
+                                                    кинопремии,
+                                                    Доцент кафедры продюсирования Санкт-Петербургского института кино и телевидения — Ксения
+                                                    Леонтьева.
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <a href="events.html" class="morelink events-morelink  _icon-ring-arrow">Узнать больше</a>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+
+
+
 				</div>
 			</section>

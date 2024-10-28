@@ -1,0 +1,112 @@
+.regionaresources-res {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.region-content-res {
+    display: flex;
+    width: 50%;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.filmlocations {
+    display: flex;
+    flex-direction: column;
+}
+
+.filmlocations-cards {
+    display: flex;
+    gap: 0;
+}
+
+.filmlocations-res {
+    width: 100%;
+    justify-content: center;
+}
+
+.filmlocations-cards-res {
+    display: flex;
+    justify-content: center;
+}
+.region-title {
+    width: 100%;
+    text-align: left;
+}
+.card.personal-card,
+.card.production-card,
+.card.filmlocations-card,
+.internetresources-card {
+    margin: 0 10px;
+    height: 636px;
+}
+
+.personal-cards {
+    display: flex;
+    justify-content: center;
+}
+
+.specialists-block .personal-card,
+.card.production-card,
+.internetresources-card {
+    -webkit-box-shadow: 4px 4px 23px rgba(184, 184, 184, 0.4);
+    box-shadow: 4px 4px 23px rgba(184, 184, 184, 0.4);
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+}
+
+.specialists-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.specialists-block .personal-card:hover,
+.card.production-card:hover {
+	-webkit-transform: translateY(-3px);
+	-ms-transform: translateY(-3px);
+	transform: translateY(-3px);
+	-webkit-box-shadow: 0 -20px 80px rgba(23, 58, 105, 0.07), 0 81.0185px 46.8519px rgba(23, 58, 105, 0.05), 0 48.1481px 25.4815px rgba(23, 58, 105, 0.04), 0 25px 13px rgba(23, 58, 105, 0.04), 0 10.1852px 6.51852px rgba(23, 58, 105, 0.03), 0 2.31481px 3.14815px rgba(23, 58, 105, 0.02);
+	box-shadow: 0 -20px 80px rgba(23, 58, 105, 0.07), 0 81.0185px 46.8519px rgba(23, 58, 105, 0.05), 0 48.1481px 25.4815px rgba(23, 58, 105, 0.04), 0 25px 13px rgba(23, 58, 105, 0.04), 0 10.1852px 6.51852px rgba(23, 58, 105, 0.03), 0 2.31481px 3.14815px rgba(23, 58, 105, 0.02);
+}
+.location-block,
+.portrait-cards {
+    margin-right: 10px;
+}
+
+.production__img img {
+    height: 245px;
+}
+
+._icon-mail-outline,
+.production__contact a:not(:last-child) {
+    color: black;
+}
+
+.filmlocations__contact a:not(:last-child) {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 11px;
+    display: flex;
+    align-items: center;
+    color: #000;
+}
+
+.filmlocations-res p {
+    display: flex;
+    margin-bottom: 29px;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 14px;
+    color: #000;
+}
+@media (max-width: 1200px) {
+    .region-content-res {
+        width: auto;
+    }
+
+}
