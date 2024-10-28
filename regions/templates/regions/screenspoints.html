@@ -1,0 +1,36 @@
+						<div class="region-content-res">
+                            <div class="filmlocations">
+								<h2 class="region-title">Точки кинопоказов</h2>
+								<div class="filmlocations-cards">
+                                    {% for point in screening_points %}
+									<article class="card filmlocations-card">
+										<div class="filmlocations__img">
+											<figure>
+												<img src="{{ point.image.url }}" alt="точка кинопоказа">
+											</figure>
+										</div>
+										<div class="filmlocations__details">
+											<h3>{{ point.name }}</h3>
+											<p class="_icon-bi_geo-alt">{{ point.address }}</p>
+											<div class="filmlocations__contact">
+                                                {% if point.phone %}
+												<a href="tel:+9534070370" class="_icon-mdi_phone">{{ point.phone }}</a>
+                                                {% endif %}
+                                                {% if point.social_net %}
+												<a href="#" class="_icon-youtube">{{ point.social_net }}</a>
+                                                {% endif %}
+                                                {% if point.site %}
+												<a href="http://kingofmedia.ru/" class="_icon-web-solid">{{ point.site }}</a>
+                                                {% endif %}
+                                                {% if point.email %}
+												<a href="mailto:albina@mail.ru" class="_icon-mail-outline">{{ point.email }}</a>
+                                                {% endif %}
+											</div>
+										</div>
+										<a href="{{ point.site }}" class="morelink regionaresources-morelink  _icon-ring-arrow">Перейти на
+											сайт</a>
+									</article>
+                                    {% endfor %}
+								</div>
+							</div>
+                        </div>

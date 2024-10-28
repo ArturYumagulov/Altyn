@@ -8,7 +8,7 @@
     display: flex;
     width: 50%;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: start;
 }
 
 .filmlocations {
@@ -16,37 +16,49 @@
     flex-direction: column;
 }
 
-.filmlocations-cards {
-    display: flex;
-    gap: 0;
-}
-
 .filmlocations-res {
     width: 100%;
-    justify-content: center;
+    justify-content: start;
 }
 
 .filmlocations-cards-res {
     display: flex;
-    justify-content: center;
+    justify-content: start;
 }
 .region-title {
     width: 100%;
     text-align: left;
 }
-.card.personal-card,
+
+
+.card.filmmakers-card,
+.location-card,
+.specialists-block .personal-card,
 .card.production-card,
 .card.filmlocations-card,
 .internetresources-card {
-    margin: 0 10px;
-    height: 636px;
+    margin-right: 30px;
+    height: 559px;
+    width: 397px;
 }
 
+.filmlocations-cards,
+.location-cards,
+.filmmakers-cards,
 .personal-cards {
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    margin-right: 30px;
+    gap: 0;
+}
+.personal__img img {
+    height: 245px;
 }
 
+.events-cards,
+.card.location-card,
+.card.filmmakers-card,
+.portrait-cards,
 .specialists-block .personal-card,
 .card.production-card,
 .internetresources-card {
@@ -61,9 +73,12 @@
 .specialists-block {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
 }
-
+.events-cards:hover,
+.card.location-card:hover,
+.card.filmmakers-card:hover,
+.portrait-cards:hover,
 .specialists-block .personal-card:hover,
 .card.production-card:hover {
 	-webkit-transform: translateY(-3px);
@@ -72,8 +87,7 @@
 	-webkit-box-shadow: 0 -20px 80px rgba(23, 58, 105, 0.07), 0 81.0185px 46.8519px rgba(23, 58, 105, 0.05), 0 48.1481px 25.4815px rgba(23, 58, 105, 0.04), 0 25px 13px rgba(23, 58, 105, 0.04), 0 10.1852px 6.51852px rgba(23, 58, 105, 0.03), 0 2.31481px 3.14815px rgba(23, 58, 105, 0.02);
 	box-shadow: 0 -20px 80px rgba(23, 58, 105, 0.07), 0 81.0185px 46.8519px rgba(23, 58, 105, 0.05), 0 48.1481px 25.4815px rgba(23, 58, 105, 0.04), 0 25px 13px rgba(23, 58, 105, 0.04), 0 10.1852px 6.51852px rgba(23, 58, 105, 0.03), 0 2.31481px 3.14815px rgba(23, 58, 105, 0.02);
 }
-.location-block,
-.portrait-cards {
+.location-block {
     margin-right: 10px;
 }
 
@@ -98,15 +112,139 @@
 
 .filmlocations-res p {
     display: flex;
-    margin-bottom: 29px;
+    margin-bottom: 0;
     font-family: var(--second-family);
     font-weight: 400;
     font-size: 14px;
     color: #000;
 }
+
+.portrait-card {
+    height: 559px;
+}
+.portrait__block {
+    padding: 150px 49px 79px 42px;
+}
+.portrait-cards {
+    margin: 0 10px;
+}
+.events-card {
+    height: 100%;
+}
+.events-cards {
+    height: 559px;
+}
+
+@media (max-width: 1760px) {
+
+    .region-title {
+        font-size: 40px;
+    }
+
+    .card.filmmakers-card,
+    .location-card,
+    .specialists-block .personal-card,
+    .card.production-card,
+    .card.filmlocations-card,
+    .internetresources-card {
+        margin-right: 10px;
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 1450px) {
+
+    .region-title {
+        font-size: 35px;
+    }
+
+    .card.filmmakers-card,
+    .location-card,
+    .specialists-block .personal-card,
+    .card.production-card,
+    .card.filmlocations-card,
+    .internetresources-card {
+        margin-right: 10px;
+        width: 100%;
+    }
+
+}
+
 @media (max-width: 1200px) {
     .region-content-res {
         width: auto;
+    }
+
+}
+
+@media (max-width: 1140px) {
+    .region-content-res {
+        width: auto;
+    }
+
+}
+@media (max-width: 960px) {
+    .region-content-res {
+        width: auto;
+    }
+
+}
+@media (max-width: 720px) {
+    .region-content-res {
+        width: auto;
+    }
+
+}
+
+@media (max-width: 	540px) {
+    .region-content-res {
+        width: auto;
+        justify-content: center;
+    }
+
+    .filmlocations-cards,
+    .location-cards,
+    .filmmakers-cards,
+    .personal-cards {
+        margin: auto;
+    }
+    .filmlocations-cards-res {
+        flex-wrap: wrap;
+    }
+    .card.production-card,
+    .card.personal-card {
+        margin-bottom: 25px;
+    }
+    .portrait-cards {
+        margin: auto;
+        height: 600px;
+    }
+    .portrait-card {
+        margin: auto;
+        height: 100%;
+    }
+    .portrait__img {
+        height: 380px;
+    }
+    .portrait__block {
+        padding-top: 30px;
+    }
+    .card.portrait-card {
+        display: flex;
+        flex-direction: column;
+    }
+    .filmmakers-cards {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .card.filmmakers-card {
+        margin: auto auto 25px auto;
+    }
+    .card.location-card {
+        margin: auto auto 25px auto;
+        height: 650px;
     }
 
 }

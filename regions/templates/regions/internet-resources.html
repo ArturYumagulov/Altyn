@@ -1,0 +1,25 @@
+                                {% load static %}
+                                <div class="region-content-res">
+                                    <div class="filmlocations-res">
+                                        <h2 class="region-title">Региональные интернет ресурсы</h2>
+                                        <div class="filmlocations-cards-res">
+                                            {% for resources in internet_resources %}
+                                                <article class="card internetresources-card">
+                                                    <div class="internetresources__img">
+                                                        <figure>
+                                                            <img src="{% static 'img/regionsmap/export.png' %}" alt="точка кинопоказа">
+                                                        </figure>
+                                                    </div>
+                                                    <div class="internetresources__details">
+                                                        <h3>{{ resources.name }}</h3>
+                                                        <p class="_icon-bi_geo-alt">{{ resources.region }}</p>
+                                                    </div>
+                                                    <a href="{{ resources.link }}"
+                                                       class="morelink internetresources-morelink  _icon-ring-arrow">Перейти
+                                                        на
+                                                        сайт</a>
+                                                </article>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
