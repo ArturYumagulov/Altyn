@@ -6,56 +6,48 @@
 						{% include 'regions/filters.html' %}
 					</div>
 					<div class="regionaresources">
+
 						<div class="regionOne region-content">
 							<div class="filmlocations">
 								<h2 class="region-title">Точки кинопоказов</h2>
 								<div class="filmlocations-cards">
+                                    {% for point in screening_points %}
 									<article class="card filmlocations-card">
 										<div class="filmlocations__img">
 											<figure>
-												<img src="{% static 'img/regionsmap/film.png' %}" alt="точка кинопоказа">
+												<img src="{{ point.image.url }}" alt="точка кинопоказа">
 											</figure>
 										</div>
 										<div class="filmlocations__details">
-											<h3>ДК Ленина</h3>
-											<p class="_icon-bi_geo-alt">Казань, ул. Гвардейская 33г</p>
+											<h3>{{ point.name }}</h3>
+											<p class="_icon-bi_geo-alt">{{ point.address }}</p>
 											<div class="filmlocations__contact">
-												<a href="tel:+9534070370" class="_icon-mdi_phone">8 953 407 03 70
-												</a>
-												<a href="#" class="_icon-youtube">youtube.com</a>
-												<a href="http://kingofmedia.ru/" class="_icon-web-solid">http://kingofmedia.ru/</a>
-												<a href="mailto:albina@mail.ru" class="_icon-mail-outline">albinane@mail.ru</a>
+                                                {% if point.phone %}
+												<a href="tel:+9534070370" class="_icon-mdi_phone">{{ point.phone }}</a>
+                                                {% endif %}
+                                                {% if point.social_net %}
+												<a href="#" class="_icon-youtube">{{ point.social_net }}</a>
+                                                {% endif %}
+                                                {% if point.site %}
+												<a href="http://kingofmedia.ru/" class="_icon-web-solid">{{ point.site }}</a>
+                                                {% endif %}
+                                                {% if point.email %}
+												<a href="mailto:albina@mail.ru" class="_icon-mail-outline">{{ point.email }}</a>
+                                                {% endif %}
 											</div>
 										</div>
-										<a href="film-points.html" class="morelink regionaresources-morelink  _icon-ring-arrow">Перейти на
+										<a href="{{ point.site }}" class="morelink regionaresources-morelink  _icon-ring-arrow">Перейти на
 											сайт</a>
 									</article>
-									<article class="card filmlocations-card">
-										<div class="filmlocations__img">
-											<figure>
-												<img src="img/regionsmap/film.png" alt="точка кинопоказа">
-											</figure>
-										</div>
-										<div class="filmlocations__details">
-											<h3>ДК Ленина</h3>
-											<p class="_icon-bi_geo-alt">Казань, ул. Гвардейская 33г</p>
-											<div class="filmlocations__contact">
-												<a href="tel:+9534070370" class="_icon-mdi_phone">8 953 407 03 70
-												</a>
-												<a href="#" class="_icon-youtube">youtube.com</a>
-												<a href="http://kingofmedia.ru/" class="_icon-web-solid">http://kingofmedia.ru/</a>
-												<a href="mailto:albina@mail.ru" class="_icon-mail-outline">albinane@mail.ru</a>
-											</div>
-										</div>
-										<a href="film-points.html" class="morelink regionaresources-morelink  _icon-ring-arrow">Перейти на
-											сайт</a>
-									</article>
+                                    {% endfor %}
 
 								</div>
 							</div>
+
 							<div class="internetresources-block">
 								<h2 class="region-title">Региональные интернет ресурсы</h2>
 								<div class="internetresources-cards">
+                                    {% for resourses in internet_resources %}
 									<article class="card internetresources-card">
 										<div class="internetresources__img">
 											<figure>
@@ -71,22 +63,7 @@
 											на
 											сайт</a>
 									</article>
-									<article class="card internetresources-card">
-										<div class="internetresources__img">
-											<figure>
-												<img src="img/regionsmap/export.png" alt="точка кинопоказа">
-											</figure>
-										</div>
-										<div class="internetresources__details">
-											<h3>Сайт центра развития кинопроизводства Мурманской области</h3>
-											<p class="_icon-bi_geo-alt">Мурманская область</p>
-										</div>
-										<a href="internetresources.html"
-											class="morelink internetresources-morelink  _icon-ring-arrow">Перейти
-											на
-											сайт</a>
-									</article>
-
+                                    {% endfor %}
 								</div>
 							</div>
 						</div>

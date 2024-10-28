@@ -111,7 +111,7 @@ class CostumerDesignerAdmin(admin.ModelAdmin):
 
 @admin.register(models.ScreeningPoint)
 class ScreeningPointAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ('name', 'region')}
 
 
 @admin.register(models.RegionalInternetResources)
