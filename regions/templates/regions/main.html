@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="{% static 'css/regions.css' %}">
 {% endblock %}
 
+{% block defer_scripts %}
+    <script>
+        let get_resources = "{% url 'get_resources' %}"
+    </script>
+{% endblock %}
+
 {% block content %}
 
     <main class="main">
@@ -33,4 +39,8 @@
 
 		</main>
 
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/regions/regions.js' %}"></script>
 {% endblock %}

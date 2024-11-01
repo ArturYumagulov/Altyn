@@ -1,0 +1,38 @@
+                        <div class="region-content-res">
+                            <div class="filmmakers-block">
+    								<h2 class="region-title">Чаты кинематографистов</h2>
+    								<div class="filmmakers-cards">
+                                        {% for chat in chats %}
+                                            <div class="portrait-wrap">
+    									        <article class="card filmmakers-card">
+                                                    <p class="filmmakers-card__text">{{ chat.name }}</p>
+                                                    <div class="filmmakers-link">
+                                                        <ul class="filmmakers-list">
+                                                            <li class="filmmakers-list__social">
+                                                                <a class="_icon-vk-white" href="#" target="_blank"
+                                                                   rel="nofollow noopener noreferrer">
+                                                                </a>
+                                                            </li>
+                                                            <li class="filmmakers-list__social">
+                                                                <a class=" _icon-telegram-white" href="filmmakers.html"
+                                                                   target="_blank"
+                                                                   rel="nofollow noopener noreferrer">
+                                                                </a>
+                                                            </li>
+                                                            <li class="filmmakers-list__social">
+                                                                <a class=" _icon-whatsApp" href="#" target="_blank"
+                                                                   rel="nofollow noopener noreferrer">
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <p class="_icon-bi_geo-alt filmmakers-list__city">{{ chat.region.name }}</p>
+                                                    <a href="{{ chat.link_to_chat }}"
+                                                       class="morelink internetresources-morelink  _icon-ring-arrow">Узнать
+                                                        больше</a>
+    									</article>
+                                            </div>
+                                        {% endfor %}
+    								</div>
+    							</div>
+    						</div>

@@ -1,0 +1,27 @@
+                        <div class="region-content-res">
+							<div class="location-block">
+								<h2 class="region-title">Локации</h2>
+                                <div class="portrait-wrap">
+                                    <div class="location-cards">
+                                        {% for location in locations %}
+
+                                            <article class="card location-card">
+                                                <div class="location__img">
+                                                    <figure>
+                                                        <img src="{{ location.main_photo.url }}"
+                                                             alt="{{ location.name }}">
+                                                    </figure>
+                                                </div>
+                                                <div class="location__details">
+                                                    <h3>{{ location.name }}</h3>
+                                                </div>
+                                                <a href="location.html"
+                                                   class="morelink location-morelink  _icon-ring-arrow">Узнать
+                                                    больше</a>
+                                            </article>
+
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>

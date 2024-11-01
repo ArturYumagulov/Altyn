@@ -1,0 +1,31 @@
+                        <div class="region-content-res">
+                            <div class="specialists-block">
+								<h2 class="region-title">Специалисты</h2>
+								<div class="personal-cards">
+                                    {% for specialist in  specialists %}
+									<article class="card personal-card">
+										<div class="personal__img">
+											<figure>
+												<img src="{{ specialist.photo.url }}" alt="{{ specialist.first_name }} {{ specialist.last_name }}">
+											</figure>
+										</div>
+										<div class="personal__details">
+											<h3>{{ specialist.first_name }} {{ specialist.last_name }}</h3>
+											<h4>{% for spec in specialist.speciality.all %}
+                                                    {{ spec.name }}
+                                                {% endfor %}
+                                            </h4>
+											<div class="personal__contact">
+												<a href="tel:+9534070370">Тел.: {{ specialist.phone }}
+												</a>
+												<a href="mailto:albina@mail.ru">
+													E-mail: {{ specialist.email }}</a>
+											</div>
+										</div>
+										<a href="specialists.html" class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
+											больше</a>
+									</article>
+                                    {% endfor %}
+								</div>
+							</div>
+						</div>

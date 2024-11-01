@@ -1,0 +1,26 @@
+                    <div class="region-content-res">
+                        <div class="portrait-block">
+                            <h2 class="region-title">Портрет региона</h2>
+                            <div class="portrait-wrap">
+                                <div class="portrait-cards">
+                                    <article class="card portrait-card">
+                                        <div class="portrait__img">
+                                            <img src="{{ regional_profile.photo.url }}"
+                                                 alt="{{ regional_profile.name }}">
+                                        </div>
+                                        <div class="portrait__block">
+                                            <p class="portrait__block-text">{{ regional_profile.citation }}</p>
+                                            <div class="portrait__block-athor">
+                                                <p>{{ regional_profile.author }}</p>
+                                                <p class="_icon-bi_geo-alt">{{ regional_profile.author_city.name }}</p>
+                                            </div>
+                                        </div>
+                                        <a href="portrait.html"
+                                           class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
+                                            больше</a>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>

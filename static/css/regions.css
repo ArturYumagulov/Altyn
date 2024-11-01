@@ -1,6 +1,6 @@
 .regionaresources-res {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
     width: 100%;
 }
@@ -30,9 +30,6 @@
     text-align: left;
 }
 
-
-.card.filmmakers-card,
-.location-card,
 .specialists-block .personal-card,
 .card.production-card,
 .card.filmlocations-card,
@@ -119,11 +116,20 @@
     color: #000;
 }
 
-.portrait-card {
+.events-wrap,
+.portrait-wrap {
     height: 559px;
 }
+.card.filmmakers-card,
+.portrait-card
+ {
+    /*height: 559px;*/
+}
+.card.location-card {
+    height: 554px;
+}
 .portrait__block {
-    padding: 150px 49px 79px 42px;
+    padding: 40px 49px 79px 42px;
 }
 .portrait-cards {
     margin: 0 10px;
@@ -132,7 +138,13 @@
     height: 100%;
 }
 .events-cards {
-    height: 559px;
+    height: 554px;
+}
+.filmmakers-block {
+    width: 50%;
+}
+.card.events-card {
+
 }
 
 @media (max-width: 1760px) {
@@ -175,6 +187,9 @@
     .region-content-res {
         width: auto;
     }
+    .regionaresources-res {
+        justify-content: center;
+    }
 
 }
 
@@ -202,7 +217,6 @@
         width: auto;
         justify-content: center;
     }
-
     .filmlocations-cards,
     .location-cards,
     .filmmakers-cards,

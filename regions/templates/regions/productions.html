@@ -1,30 +1,31 @@
-<div class="region-content-res">
-							<div class="filmlocations-res">
-								<h2 class="region-title">Производство</h2>
-								<div class="filmlocations-cards-res">
+                        <div class="region-content-res">
+                            <div class="filmlocations-res">
+                                <h2 class="region-title">Производство</h2>
+                                <div class="filmlocations-cards-res">
                                     {% for production in productions %}
-									    <article class="card production-card">
-										<div class="production__img">
-											<figure>
-												<img src="{{ production.logo.url }}" alt="{{ production.name }}">
-											</figure>
-										</div>
-										<div class="production__details">
-											<h3>{{ production.name }}</h3>
-											<p class="">{{ production.services_type }}</p>
-{#											<p class="">-Продакшен</p>#}
-{#											<p class="">-Постпродакшен</p>#}
-											<div class="production__contact">
-												<a href="tel:+9534070370" class="_icon-mdi_phone">{{ production.phone }}</a>
-												<a href="#" class="_icon-youtube">{{ production.social_net }}</a>
-												<a href="#" class="_icon-web-solid">{{ production.site }}</a>
-												<a href="mailto:albina@mail.ru" class="_icon-mail-outline">{{ production.email }}</a>
-											</div>
-										</div>
-										<a href="{{ production.site }}" class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
-											больше</a>
-									</article>
+                                        <article class="card production-card">
+                                            <div class="production__img">
+                                                <figure>
+                                                    <img src="{{ production.logo.url }}" alt="{{ production.name }}">
+                                                </figure>
+                                            </div>
+                                            <div class="production__details">
+                                                <h3>{{ production.name }}</h3>
+                                                <p class="">{{ production.services_type }}</p>
+                                                <div class="production__contact">
+                                                    <a href="tel:+9534070370"
+                                                       class="_icon-mdi_phone">{{ production.phone }}</a>
+                                                    <a href="#" class="_icon-youtube">{{ production.social_net }}</a>
+                                                    <a href="#" class="_icon-web-solid">{{ production.site }}</a>
+                                                    <a href="mailto:albina@mail.ru"
+                                                       class="_icon-mail-outline">{{ production.email }}</a>
+                                                </div>
+                                            </div>
+                                            <a href="{{ production.site }}"
+                                               class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
+                                                больше</a>
+                                        </article>
                                     {% endfor %}
-								</div>
-							</div>
+                                </div>
+                            </div>
                         </div>

@@ -24,190 +24,33 @@
                             {% else %}
                         {% endif %}
 {#                         Специалисты#}
-                        <div class="region-content-res">
-                            <div class="specialists-block">
-								<h2 class="region-title">Специалисты</h2>
-								<div class="personal-cards">
-									<article class="card personal-card">
-										<div class="personal__img">
-											<figure>
-												<img src="{% static 'img/contactImg/albina.png' %}" alt="Альбина Нафигова">
-											</figure>
-										</div>
-										<div class="personal__details">
-											<h3>Альбина Нафигова</h3>
-											<h4>Директор</h4>
-											<div class="personal__contact">
-												<a href="tel:+9534070370">Тел.: 8 953 407 03 70
-												</a>
-												<a href="mailto:albina@mail.ru">
-													E-mail: albinane@mail.ru</a>
-											</div>
-										</div>
-										<a href="specialists.html" class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
-											больше</a>
-									</article>
-									<article class="card personal-card">
-										<div class="personal__img">
-											<figure>
-												<img src="{% static 'img/contactImg/albina.png' %}" alt="Альбина Нафигова">
-											</figure>
-										</div>
-										<div class="personal__details">
-											<h3>Альбина Нафигова</h3>
-											<h4>Директор</h4>
-											<div class="personal__contact">
-												<a href="tel:+9534070370">Тел.: 8 953 407 03 70
-												</a>
-												<a href="mailto:albina@mail.ru">
-													E-mail: albinane@mail.ru</a>
-											</div>
-										</div>
-										<a href="specialists.html" class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
-											больше</a>
-									</article>
-
-								</div>
-							</div>
-						</div>
+                         {% if specialists %}
+                             {% include 'regions/specialists.html' %}
+                             {% else %}
+                         {% endif %}
 {#                         Портрет региона#}
-                        <div class="region-content-res">
-							<div class="portrait-block">
-								<h2 class="region-title">Портрет региона</h2>
-								<div class="portrait-cards">
-									<article class="card portrait-card">
-										<div class="portrait__img">
-											<img src="{% static 'img/regionsmap/portrait.png' %}" alt="фото мастер класса">
-										</div>
-										<div class="portrait__block">
-											<p class="portrait__block-text
-										 ">Это проблема всех начинающих авторов, когда хочется
-												снять такое, чтобы
-												все ахнули, а получается просто ужас. Тем не менее мне было бы очень интересно в этом
-												поучаствовать
-											</p>
-											<div class="portrait__block-athor">
-												<p>Иван Кульнев</p>
-												<p class="_icon-bi_geo-alt">Санкт - Петербург</p>
-											</div>
-										</div>
-										<a href="portrait.html" class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
-											больше</a>
-									</article>
-								</div>
-							</div>
+                         {% if regional_profile %}
+                             {% include 'regions/regional_profile.html' %}
+                             {% else %}
+                         {% endif %}
 
-                    </div>
 {#                        Чаты кинематографистов#}
-                        <div class="region-content-res">
-                            <div class="filmmakers-block">
-    								<h2 class="region-title">Чаты кинематографистов</h2>
-    								<div class="filmmakers-cards">
-    									<article class="card filmmakers-card">
-    										<p class="filmmakers-card__text">Чат, основанный на бесплатной взаимопомощи на съемках</p>
-    										<div class="filmmakers-link">
-    											<ul class="filmmakers-list">
-    												<li class="filmmakers-list__social">
-    													<a class="_icon-vk-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
-    													</a>
-    												</li>
-    												<li class="filmmakers-list__social">
-    													<a class=" _icon-telegram-white" href="filmmakers.html" target="_blank"
-    														rel="nofollow noopener noreferrer">
-    													</a>
-    												</li>
-    												<li class="filmmakers-list__social">
-    													<a class=" _icon-whatsApp" href="#" target="_blank" rel="nofollow noopener noreferrer">
-    													</a>
-    												</li>
-    											</ul>
-    										</div>
-    										<p class="_icon-bi_geo-alt filmmakers-list__city">Санкт - Петербург</p>
-    										<a href="filmmakers.html" class="morelink internetresources-morelink  _icon-ring-arrow">Узнать
-    											больше</a>
-    									</article>
-    									<article class="card filmmakers-card">
-    										<p class="filmmakers-card__text">Чат, основанный на бесплатной взаимопомощи на съемках</p>
-    										<div class="filmmakers-link">
-    											<ul class="filmmakers-list">
-    												<li class="filmmakers-list__social">
-    													<a class="_icon-vk-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
-    													</a>
-    												</li>
-    												<li class="filmmakers-list__social">
-    													<a class=" _icon-telegram-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
-    													</a>
-    												</li>
-    												<li class="filmmakers-list__social">
-    													<a class=" _icon-whatsApp" href="#" target="_blank" rel="nofollow noopener noreferrer">
-    													</a>
-    												</li>
-    											</ul>
-    										</div>
-    										<p class="_icon-bi_geo-alt filmmakers-list__city">Санкт - Петербург</p>
-    										<a href="#" class="morelink internetresources-morelink  _icon-ring-arrow">Узнать больше</a>
-    									</article>
-    								</div>
-    							</div>
-    						</div>
+                        {% if chats %}
+                            {% include 'regions/chats.html' %}
+                        {% else %}
+                        {% endif %}
+
 {#                        Локации#}
-                        <div class="region-content-res">
-							<div class="location-block">
-								<h2 class="region-title">Локации</h2>
-								<div class="location-cards">
-									<article class="card location-card">
-										<div class="location__img">
-											<figure>
-												<img src="{% static 'img/regionsmap/location.png' %}" alt="точка кинопоказа">
-											</figure>
-										</div>
-										<div class="location__details">
-											<h3>Казанская ратуша</h3>
-										</div>
-										<a href="location.html" class="morelink location-morelink  _icon-ring-arrow">Узнать больше</a>
-									</article>
-									<article class="card location-card">
-										<div class="location__img">
-											<figure>
-												<img src="{% static 'img/regionsmap/location_1.png' %}" alt="точка кинопоказа">
-											</figure>
-										</div>
-										<div class="location__details">
-											<h3>Санкт - Петербургский федеральный университет</h3>
-										</div>
-										<a href="location.html" class="morelink location-morelink  _icon-ring-arrow">Узнать больше</a>
-									</article>
+                        {% if locations %}
+                            {% include 'regions/locations.html' %}
+                        {% else %}
+                        {% endif %}
 
-								</div>
-							</div>
+                        {% if event %}
+                            {% include 'regions/events.html' %}
+                        {% else %}
+                        {% endif %}
 
-                        </div>
-
-                        <div class="region-content-res">
-                                <div class="events-block">
-                                    <h2 class="region-title">Мероприятия</h2>
-                                    <div class="events-cards">
-                                        <article class="card events-card">
-                                            <div class="events__img">
-                                                <img src="{% static 'img/regionsmap/events.png' %}" alt="фото мастер класса">
-                                            </div>
-                                            <div class="events__block">
-                                                <h3>Трудовые права в кинопроизводстве и роль профсоюзов в защите прав и интересов трудящихся</h3>
-                                                <p>В рамках Межрегиональной кинопремии «Алтын тәлинкә» (Золотая тарелка),  серия мастер-классов от
-                                                    экспертов в области кинематографии!
-                                                    Спикером первого вебинара, который мы хотим вам презентовать, выступила эксперт нашей
-                                                    кинопремии,
-                                                    Доцент кафедры продюсирования Санкт-Петербургского института кино и телевидения — Ксения
-                                                    Леонтьева.
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <a href="events.html" class="morelink events-morelink  _icon-ring-arrow">Узнать больше</a>
-                                            </div>
-                                        </article>
-                                    </div>
-                                </div>
-                        </div>
                     </div>
 				</div>
 			</section>

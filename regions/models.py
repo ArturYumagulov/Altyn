@@ -63,24 +63,24 @@ class City(models.Model):
 class Specialist(models.Model):
 
     is_active = models.BooleanField(default=False, verbose_name="Активность")
-    photo = models.ImageField(verbose_name="Фотография", upload_to='regions/specialists/')
+    photo = models.ImageField(verbose_name="Фотография", upload_to='regions/specialists/', help_text="469x351")
     first_name = models.CharField(verbose_name="Имя", max_length=100, blank=True, null=True)
     last_name = models.CharField(verbose_name="Фамилия", max_length=100, blank=True, null=True)
     speciality = models.ManyToManyField(Speciality, related_name="specialities")
     region = models.ForeignKey(Region, on_delete=models.PROTECT, verbose_name="Регион")
-    city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name="Населенный пункт")
+    city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name="Населенный пункт", blank=True)
     phone = models.CharField(verbose_name="Телефон", max_length=20)
     email = models.EmailField(max_length=225, verbose_name="Электронный адрес")
-    portfolio_link = models.URLField(verbose_name="Ссылка на портфолио")
-    social_link = models.URLField(verbose_name="Ссылка на социальные сети")
-    descriptions = models.TextField(verbose_name="Дополнительно")
+    portfolio_link = models.URLField(verbose_name="Ссылка на портфолио", blank=True)
+    social_link = models.URLField(verbose_name="Ссылка на социальные сети", blank=True)
+    descriptions = models.TextField(verbose_name="Дополнительно", blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
     class Meta:
         verbose_name = "Специалист"
-        verbose_name_plural = "Специалист"
+        verbose_name_plural = "Специалисты"
 
 
 class Director(models.Model):
@@ -287,6 +287,10 @@ class RegionalProfile(models.Model):
     name = models.CharField(verbose_name="Название", max_length=2000)
     photo = models.ImageField(verbose_name="Фотография", upload_to='regions/regional_profile/', blank=True)
     descriptions = models.TextField(verbose_name="Краткая информация", blank=True)
+    citation = models.TextField(verbose_name="Цитата", blank=True)
+    author = models.CharField(max_length=1000, verbose_name="Автор цитаты", blank=True)
+    author_city = models.ForeignKey(City, verbose_name="Локация автора", on_delete=models.SET_NULL, null=True,
+                                    blank=True)
     link_to_video = models.URLField(verbose_name="Ссылка на видео", blank=True)
     link_to_presentation = models.URLField(verbose_name="Ссылка на презентацию", blank=True)
     slug = models.SlugField()
@@ -324,7 +328,7 @@ class LocationPhoto(models.Model):
     """Фотографии локаций"""
 
     is_active = models.BooleanField(default=False, verbose_name="Активность")
-    photo = models.ImageField(verbose_name="Фотография", upload_to='regions/locations/', blank=True)
+    photo = models.ImageField(verbose_name="Фотография", upload_to='regions/locations/locations_albums/', blank=True, help_text="793x531")
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
 
@@ -345,8 +349,11 @@ class RegionLocation(models.Model):
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
     name = models.CharField(verbose_name="Название", max_length=2000)
+    main_photo = models.ImageField(upload_to='regions/locations/', blank=True, help_text="397x379")
     photo = models.ManyToManyField(LocationPhoto, verbose_name="Фотография", blank=True, related_name="photos")
-    descriptions = models.TextField(verbose_name="Краткая информация", blank=True)
+    descriptions = models.TextField(verbose_name="Описание", blank=True)
+    circumstances = models.TextField(verbose_name="Условия", blank=True)
+    subclass = models.TextField(verbose_name="Дополнительно", blank=True)
     address = models.CharField(verbose_name="Адрес", max_length=5000, blank=True)
     coordinates = models.CharField(max_length=500, verbose_name="Координаты", blank=True)
     email = models.EmailField(verbose_name="Электронная почта", null=True, blank=True)
@@ -372,7 +379,7 @@ class Events(models.Model):
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
     name = models.CharField(verbose_name="Название", max_length=2000)
-    photo = models.ImageField(verbose_name="Фотография", blank=True, upload_to='regions/events/')
+    photo = models.ImageField(verbose_name="Фотография", blank=True, upload_to='regions/events/', help_text="1844x2176")
     descriptions = models.TextField(verbose_name="Краткая информация", blank=True)
     site = models.CharField(verbose_name="Сайт", max_length=2000, null=True, blank=True)
     slug = models.SlugField()

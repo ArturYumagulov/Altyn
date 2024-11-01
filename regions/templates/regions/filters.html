@@ -1,7 +1,7 @@
                         <div class="select-wrapper">
 							<select name="regionselect" id="regionselect" class="regionselect">
                                 {% for region in regions %}
-                                    {% if region.slug == request.GET.region %}
+                                    {% if region.name == "Республика Татарстан" %}
                                         <option selected value="{{ region.slug }}">{{ region.name }}</option>
                                     {% else %}
                                         <option value="{{ region.slug }}">{{ region.name }}</option>
