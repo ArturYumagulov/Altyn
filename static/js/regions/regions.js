@@ -1,7 +1,8 @@
 let region_select = document.getElementById('regionselect')
 let regions_resources = document.querySelector('.regionaresources-res')
+const region_slug = new URLSearchParams(document.location.search).get('region');
 
-function createScreeningPoints(main, data) {
+function createScreeningPoints(main, data, region_slug) {
     function createArticle(block, item) {
         let article = document.createElement('article')
         article.classList.add('card', 'filmlocations-card')
@@ -69,7 +70,7 @@ function createScreeningPoints(main, data) {
 
         let a = document.createElement('a')
         a.classList.add('morelink', 'regionaresources-morelink', '_icon-ring-arrow')
-        a.setAttribute('href', item.slug)
+        a.setAttribute('href', 'screen-points/' + region_slug)
         a.textContent = "Перейти на сайт"
 
         article.append(filmlocations_img, filmlocations_details, a)
@@ -101,7 +102,7 @@ function createScreeningPoints(main, data) {
 
 }
 
-function createInternetResources(main, data) {
+function createInternetResources(main, data, region_slug) {
 
     function createArticle(block, item) {
         let article = document.createElement('article')
@@ -128,7 +129,7 @@ function createInternetResources(main, data) {
 
         let a = document.createElement('a')
         a.classList.add('morelink','internetresources-morelink',  '_icon-ring-arrow')
-        a.setAttribute('href', item.slug) // link
+        a.setAttribute('href', 'internet-resources/' + region_slug) // link
         a.textContent = "Перейти на сайт"
 
         figure.append(figure_img)
@@ -625,10 +626,10 @@ region_select.addEventListener('change', (e) => {
             regions_resources.innerHTML = ""
             let result = data.result
             if (result.screening_points.length > 0) {
-                createScreeningPoints(regions_resources, result.screening_points)
+                createScreeningPoints(regions_resources, result.screening_points, e.target.value)
             }
             if (result.internet_resources.length > 0) {
-                createInternetResources(regions_resources, result.internet_resources)
+                createInternetResources(regions_resources, result.internet_resources, e.target.value)
             }
 
             if (result.productions.length > 0) {

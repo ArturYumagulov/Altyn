@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="main">
+            {% include 'regions/breadcrumb.html' %}
+			<div class="info info-specialists container">
+				<a href="#" class="btn regionsmap-btn">Разместить информацию</a>
+			</div>
+			<section id="production" class="production  container">
+				<div class="production-content">
+					<div class="internetresources-cards">
+                        {% for resource in internet_resources %}
+						<article class="card internetresources-card">
+							<div class="internetresources__img">
+								<figure>
+									<img src="img/regionsmap/export.png" alt="точка кинопоказа">
+								</figure>
+							</div>
+							<div class="internetresources__details">
+								<h3>Сайт центра развития кинопроизводства Мурманской области</h3>
+								<p class="_icon-bi_geo-alt">Мурманская область</p>
+							</div>
+							<a href="internetresources.html" class="morelink internetresources-morelink  _icon-ring-arrow">Перейти
+								на
+								сайт</a>
+						</article>
+                        {% endfor %}
+					</div>
+				</div>
+			</section>
+		</main>
+        {% include 'paginator.html' %}
+{% endblock %}

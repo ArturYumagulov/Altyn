@@ -121,6 +121,17 @@
 	<script src="{% static 'js/new_script.js' %}"></script>
     <script src="{% static 'js/register/login.js' %}"></script>
     <script src="{% static 'js/register/register.js' %}"></script>
+    <script>
+
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('lastVisitedPage', window.location.href);
+        });
+
+        // Получаем последнюю посещённую страницу
+        const lastVisited = localStorage.getItem('lastVisitedPage');
+        console.log(`Последняя посещённая страница: ${lastVisited}`);
+
+    </script>
     {% block script %}{% endblock %}
 </body>
 

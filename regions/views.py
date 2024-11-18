@@ -1,6 +1,7 @@
 import json
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.db.models import Q
@@ -21,7 +22,8 @@ def main(requests):
         Q(regionalprofile__isnull=False) |
         Q(filmmakerschat__isnull=False) |
         Q(specialist__isnull=False) |
-        Q(events__isnull=False)
+        Q(events__isnull=False) |
+        Q(regionlocation__isnull=False)
     ).distinct()
 
     context = {
@@ -104,7 +106,26 @@ def get_region_resources(request):
 
 
 def screenpoint_detail(request, slug):
+    """Точки кинопоказов"""
 
     screening_points = ScreeningPoint.objects.filter(is_active=True, region__slug=slug)
+
+    paginator = Paginator(screening_points, 10)
+    page_number = request.GET.get('page')
+    pages = paginator.get_page(page_number)
+
     return render(request, 'regions/details/screening_points.html',
-                  context={'screening_points': screening_points})
+                  context={'screening_points': pages, 'slug': slug, 'paginator': paginator})
+
+
+def internet_resources_detail(request, slug):
+    """Интернет ресурсы"""
+
+    internet_resources = RegionalInternetResources.objects.filter(is_active=True, region__slug=slug)
+
+    paginator = Paginator(internet_resources, 10)
+    page_number = request.GET.get('page')
+    pages = paginator.get_page(page_number)
+
+    return render(request, 'regions/details/internet-resources.html',
+                  context={'internet_resources': pages, 'slug': slug, 'paginator': paginator})
