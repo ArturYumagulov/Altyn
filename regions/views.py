@@ -101,3 +101,10 @@ def get_region_resources(request):
             return JsonResponse({'detail': False, 'error': 'Region not found'}, status=404)
 
     return JsonResponse({'detail': False, 'error': 'Invalid request method'}, status=400)
+
+
+def screenpoint_detail(request, slug):
+
+    screening_points = ScreeningPoint.objects.filter(is_active=True, region__slug=slug)
+    return render(request, 'regions/details/screening_points.html',
+                  context={'screening_points': screening_points})
