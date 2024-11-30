@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
     <main class="main">
             {% include 'regions/breadcrumb.html' %}
@@ -13,16 +13,16 @@
 						<article class="card internetresources-card">
 							<div class="internetresources__img">
 								<figure>
-									<img src="img/regionsmap/export.png" alt="точка кинопоказа">
+									<img src="{% static 'img/regionsmap/export.png' %}" alt="{{ resource.name }}">
 								</figure>
 							</div>
 							<div class="internetresources__details">
-								<h3>Сайт центра развития кинопроизводства Мурманской области</h3>
-								<p class="_icon-bi_geo-alt">Мурманская область</p>
+								<h3>{{ resource.name }}</h3>
+								<p class="_icon-bi_geo-alt">{{ resource.region.name }}</p>
 							</div>
-							<a href="internetresources.html" class="morelink internetresources-morelink  _icon-ring-arrow">Перейти
-								на
-								сайт</a>
+							<a href="{{ resource.link }}"
+                               class="morelink internetresources-morelink
+                               _icon-ring-arrow">Перейти на сайт</a>
 						</article>
                         {% endfor %}
 					</div>
