@@ -68,7 +68,8 @@ class Specialist(models.Model):
     last_name = models.CharField(verbose_name="Фамилия", max_length=100, blank=True, null=True)
     speciality = models.ManyToManyField(Speciality, related_name="specialities")
     region = models.ForeignKey(Region, on_delete=models.PROTECT, verbose_name="Регион")
-    city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name="Населенный пункт", blank=True)
+    city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name="Населенный пункт", blank=True, null=True,
+                             default=None)
     phone = models.CharField(verbose_name="Телефон", max_length=20)
     email = models.EmailField(max_length=225, verbose_name="Электронный адрес")
     portfolio_link = models.URLField(verbose_name="Ссылка на портфолио", blank=True)

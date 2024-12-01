@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    		<main class="main">
+                {% include 'regions/breadcrumb.html' %}
+
+                <div class="info info-specialists container">
+                    <a href="#" class="btn regionsmap-btn">Разместить информацию</a>
+                    <div class="region">
+                        <div class="select-wrapper">
+                            <select name="regionselect" id="regionselect" class="regionselect">
+                                <option selected>Режиссер</option>
+                                <option value="1">Директор</option>
+                                <option value="2">Директор по кинопоказам и мероприятиям</option>
+                                <option value="3">Киновед</option>
+                                <option value="4">Контент - менеджер сайта</option>
+                                <option value="5">Пресс - секретарь</option>
+                                <option value="6">Куратор кинологистики</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+			<section id="specialists" class="specialists  container">
+				<div class="specialists-content">
+					<div class="personal-cards">
+                        {% for specialist in specialists %}
+                            <article class="card personal-card">
+                                <a href="#">
+                                    <div class="personal__img">
+                                        <figure>
+                                            <img src="{{ specialist.photo.url }}" alt=" Влада Крылова">
+                                        </figure>
+                                    </div>
+                                    <div class="personal__details">
+                                        <h3>{{ specialist.first_name }} {{ specialist.last_name }}</h3>
+                                        <h4>{% for spec in specialist.speciality.all %}
+                                                {{ spec.name }}
+                                            {% endfor %}
+                                            </h4>
+                                        <div class="personal__contact">
+                                            <a href="tel:+79033420817">Тел.: {{ specialist.phone }}
+                                            </a>
+                                            <a href="E-mail: vladakrylova@ya.ru">
+                                                E-mail: {{ specialist.email }}</a>
+                                        </div>
+                                    </div>
+                                </a>
+                            </article>
+                        {% endfor %}
+					</div>
+				</div>
+			</section>
+
+		</main>
+{% endblock %}

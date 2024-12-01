@@ -70,8 +70,8 @@ function createScreeningPoints(main, data, region_slug) {
 
         let a = document.createElement('a')
         a.classList.add('morelink', 'regionaresources-morelink', '_icon-ring-arrow')
-        a.setAttribute('href', 'screen-points/' + region_slug)
-        a.textContent = "Перейти на сайт"
+        a.setAttribute('href', 'detail/screening-points/' + region_slug)
+        a.textContent = "Подробнее"
 
         article.append(filmlocations_img, filmlocations_details, a)
         block.append(article)
@@ -129,7 +129,7 @@ function createInternetResources(main, data, region_slug) {
 
         let a = document.createElement('a')
         a.classList.add('morelink','internetresources-morelink',  '_icon-ring-arrow')
-        a.setAttribute('href', 'internet-resources/' + region_slug) // link
+        a.setAttribute('href', 'detail/internet-resources/' + region_slug) // link
         a.textContent = "Перейти на сайт"
 
         figure.append(figure_img)
@@ -164,7 +164,7 @@ function createInternetResources(main, data, region_slug) {
     main.append(region_content_res)
 }
 
-function createProduction(main, data) {
+function createProduction(main, data, region_slug) {
 
     function createArticle(block, item) {
         let article = document.createElement('article')
@@ -229,7 +229,7 @@ function createProduction(main, data) {
 
         let a = document.createElement('a')
         a.classList.add('morelink', 'regionaresources-morelink', '_icon-ring-arrow')
-        a.setAttribute('href', item.slug)
+        a.setAttribute('href', 'detail/productions/' + region_slug)
         a.textContent = "Перейти на сайт"
 
         production__details.append(h3, p, production__contact)
@@ -264,7 +264,7 @@ function createProduction(main, data) {
     main.append(region_content_res)
 }
 
-function createSpecialists(main, data) {
+function createSpecialists(main, data, region_slug) {
     function createArticle(block, item) {
         let article = document.createElement('article')
         article.classList.add('card', 'personal-card')
@@ -306,7 +306,7 @@ function createSpecialists(main, data) {
 
         let a = document.createElement('a')
         a.classList.add('morelink', 'regionaresources-morelink', '_icon-ring-arrow')
-        a.setAttribute('href', item.slug)
+        a.setAttribute('href', 'detail/specialists/' + region_slug)
         a.textContent = "Перейти на сайт"
 
         personal_details.append(h3, h4, personal_contact)
@@ -341,7 +341,7 @@ function createSpecialists(main, data) {
     main.append(region_content_res)
 }
 
-function createRegionalProfile(main, data) {
+function createRegionalProfile(main, data, region_slug) {
     function createArticle(block, item) {
         let article = document.createElement('article')
         article.classList.add('card', 'portrait-card')
@@ -413,7 +413,7 @@ function createRegionalProfile(main, data) {
     main.append(region_content_res)
 }
 
-function createChats(main, data) {
+function createChats(main, data, region_slug) {
     function createArticle(block, item) {
         let wrap = document.createElement('div')
         wrap.classList.add('portrait-wrap')
@@ -483,7 +483,7 @@ function createChats(main, data) {
     main.append(region_content_res)
 }
 
-function createLocation(main, data) {
+function createLocation(main, data, region_slug) {
     function createArticle(block, item){
 
         let article = document.createElement('article')
@@ -547,7 +547,7 @@ function createLocation(main, data) {
     main.append(region_content_res)
 }
 
-function createEvent(main, data) {
+function createEvent(main, data, region_slug) {
 
     function createArticle(block, item){
 
@@ -633,22 +633,22 @@ region_select.addEventListener('change', (e) => {
             }
 
             if (result.productions.length > 0) {
-                createProduction(regions_resources, result.productions)
+                createProduction(regions_resources, result.productions, e.target.value)
             }
             if (result.specialists.length > 0) {
-                createSpecialists(regions_resources, result.specialists)
+                createSpecialists(regions_resources, result.specialists, e.target.value)
             }
             if (result.regional_profile.length > 0) {
-                createRegionalProfile(regions_resources, result.regional_profile)
+                createRegionalProfile(regions_resources, result.regional_profile, e.target.value)
             }
             if (result.chats.length > 0) {
-                createChats(regions_resources, result.chats)
+                createChats(regions_resources, result.chats, e.target.value)
             }
             if (result.locations.length > 0) {
-                createLocation(regions_resources, result.locations)
+                createLocation(regions_resources, result.locations, e.target.value)
             }
             if (result.event.length > 0) {
-                createEvent(regions_resources, result.event)
+                createEvent(regions_resources, result.event, e.target.value)
             }
 
         }

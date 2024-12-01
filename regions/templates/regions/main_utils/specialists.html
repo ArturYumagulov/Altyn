@@ -22,8 +22,8 @@
 													E-mail: {{ specialist.email }}</a>
 											</div>
 										</div>
-										<a href="specialists.html" class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
-											больше</a>
+										<a href="{% url 'resource_detail' resource_type='specialists' slug=region_slug %}"
+                                           class="morelink regionaresources-morelink  _icon-ring-arrow">Подробнее</a>
 									</article>
                                     {% endfor %}
 								</div>

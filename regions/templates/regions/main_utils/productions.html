@@ -21,9 +21,8 @@
                                                        class="_icon-mail-outline">{{ production.email }}</a>
                                                 </div>
                                             </div>
-                                            <a href="{{ production.site }}"
-                                               class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
-                                                больше</a>
+                                            <a href="{% url 'resource_detail' resource_type='productions' slug=region_slug %}"
+                                               class="morelink regionaresources-morelink  _icon-ring-arrow">Подробнее</a>
                                         </article>
                                     {% endfor %}
                                 </div>

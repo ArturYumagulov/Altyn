@@ -15,46 +15,44 @@ from regions.models import (Region, ScreeningPoint, RegionalInternetResources, P
 
 def main(request):
 
-    if len(request.GET) > 0:
+    try:
+        if len(request.GET) > 0:
+            region_slug = request.GET.get('region')
+            regions = Region.objects.filter(
+                Q(screeningpoint__isnull=False) |
+                Q(regionalinternetresources__isnull=False) |
+                Q(production__isnull=False) |
+                Q(regionalprofile__isnull=False) |
+                Q(filmmakerschat__isnull=False) |
+                Q(specialist__isnull=False) |
+                Q(events__isnull=False) |
+                Q(regionlocation__isnull=False)
+            ).distinct()
+            context = {
+                'regions': regions,
+            }
+            region = Region.objects.get(slug=region_slug)
+            screening_points = ScreeningPoint.objects.filter(is_active=True, region=region)[:2]
+            internet_resources = RegionalInternetResources.objects.filter(is_active=True, region=region)[:2]
+            productions = Production.objects.filter(is_active=True, region=region)[:2]
+            specialists = Specialist.objects.filter(is_active=True, region=region)[:2]
+            regional_profile = RegionalProfile.objects.filter(is_active=True, region=region).last()
+            chats = FilmmakersChat.objects.filter(is_active=True, region=region)[:2]
+            locations = RegionLocation.objects.filter(is_active=True, region=region)[:2]
+            event = Events.objects.filter(is_active=True, region=region).last()
 
-        region_slug = request.GET.get('region')
-
-        regions = Region.objects.filter(
-            Q(screeningpoint__isnull=False) |
-            Q(regionalinternetresources__isnull=False) |
-            Q(production__isnull=False) |
-            Q(regionalprofile__isnull=False) |
-            Q(filmmakerschat__isnull=False) |
-            Q(specialist__isnull=False) |
-            Q(events__isnull=False) |
-            Q(regionlocation__isnull=False)
-        ).distinct()
-
-        context = {
-            'regions': regions,
-        }
-
-        region = Region.objects.get(slug=region_slug)
-        screening_points = ScreeningPoint.objects.filter(is_active=True, region=region)[:2]
-        internet_resources = RegionalInternetResources.objects.filter(is_active=True, region=region)[:2]
-        productions = Production.objects.filter(is_active=True, region=region)[:2]
-        specialists = Specialist.objects.filter(is_active=True, region=region)[:2]
-        regional_profile = RegionalProfile.objects.filter(is_active=True, region=region).last()
-        chats = FilmmakersChat.objects.filter(is_active=True, region=region)[:2]
-        locations = RegionLocation.objects.filter(is_active=True, region=region)[:2]
-        event = Events.objects.filter(is_active=True, region=region).last()
-
-        context['screening_points'] = screening_points
-        context['internet_resources'] = internet_resources
-        context['productions'] = productions
-        context['specialists'] = specialists
-        context['regional_profile'] = regional_profile
-        context['chats'] = chats
-        context['locations'] = locations
-        context['event'] = event
-
-        return render(request, 'regions/main.html', context=context)
-    return render(request, 'base.html')
+            context['screening_points'] = screening_points
+            context['internet_resources'] = internet_resources
+            context['productions'] = productions
+            context['specialists'] = specialists
+            context['regional_profile'] = regional_profile
+            context['chats'] = chats
+            context['locations'] = locations
+            context['event'] = event
+            context['region_slug'] = region_slug
+            return render(request, 'regions/main_utils/main.html', context=context)
+    except ObjectDoesNotExist:
+        return render(request, 'base.html')
 
 
 def get_region_resources(request):
@@ -136,7 +134,9 @@ def internet_resources_detail(request, slug):
                   context={
                             'internet_resources': pages, 'slug': slug, 'paginator': paginator})
 
+
 def resources_detail(request, resource_type, slug):
+
     region_slug = slug
     context = {}
 
@@ -150,7 +150,62 @@ def resources_detail(request, resource_type, slug):
         context['screening_points'] = paginator.get_page(page_number)
         context['paginator'] = paginator
         context['region_slug'] = region_slug
-        print(context)
+
         return render(request, 'regions/details/screening_points.html', context=context)
+
+    elif resource_type == 'internet-resources':
+
+        internet_resources = RegionalInternetResources.objects.filter(is_active=True, region__slug=slug)
+
+        paginator = Paginator(internet_resources, 10)
+        page_number = request.GET.get('page')
+        pages = paginator.get_page(page_number)
+
+        context['internet_resources'] = pages
+        context['paginator']: paginator
+        context['region_slug'] = region_slug
+
+        return render(request, 'regions/details/internet-resources.html', context=context)
+
+    elif resource_type == 'productions':
+
+        productions = Production.objects.filter(is_active=True, region__slug=slug)
+
+        paginator = Paginator(productions, 10)
+        page_number = request.GET.get('page')
+        pages = paginator.get_page(page_number)
+
+        context['productions'] = pages
+        context['paginator']: paginator
+        context['region_slug'] = region_slug
+
+        return render(request, 'regions/details/productions.html', context=context)
+
+    elif resource_type == 'specialists':
+
+        specialists = Specialist.objects.filter(is_active=True, region__slug=slug)
+        paginator = Paginator(specialists, 10)
+        page_number = request.GET.get('page')
+        pages = paginator.get_page(page_number)
+
+        context['specialists'] = pages
+        context['paginator']: paginator
+        context['region_slug'] = region_slug
+
+        return render(request, 'regions/details/specialists.html', context=context)
+
+    elif resource_type == 'portrait':
+
+        portraits = RegionalProfile.objects.filter(is_active=True, region__slug=slug)
+
+        paginator = Paginator(portraits, 10)
+        page_number = request.GET.get('page')
+        pages = paginator.get_page(page_number)
+
+        context['portrait'] = pages
+        context['paginator']: paginator
+        context['region_slug'] = region_slug
+
+        return render(request, 'regions/details/portraits.html', context=context)
 
     return HttpResponse(f"{resource_type} - {slug}")

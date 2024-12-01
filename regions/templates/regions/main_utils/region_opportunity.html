@@ -3,51 +3,51 @@
 				<div class="">
 					<div class="region">
 						<label for="blend-top">Возможности региона</label>
-						{% include 'regions/filters.html' %}
+						{% include 'regions/main_utils/filters.html' %}
 					</div>
 
 					<div class="regionaresources-res">
 
 {#                         Точки кинопоказов#}
                         {% if screening_points %}
-                            {% include 'regions/screenspoints.html' %}
+                            {% include 'regions/main_utils/screenspoints.html' %}
                             {% else %}
                         {% endif %}
 {#                         Региональные интернет ресурсы#}
                         {% if internet_resources %}
-                            {% include 'regions/internet-resources.html' %}
+                            {% include 'regions/main_utils/internet-resources.html' %}
                             {% else %}
                         {% endif %}
 {#                         Производство#}
                         {% if productions %}
-                            {% include 'regions/productions.html' %}
+                            {% include 'regions/main_utils/productions.html' %}
                             {% else %}
                         {% endif %}
 {#                         Специалисты#}
                          {% if specialists %}
-                             {% include 'regions/specialists.html' %}
+                             {% include 'regions/main_utils/specialists.html' %}
                              {% else %}
                          {% endif %}
 {#                         Портрет региона#}
                          {% if regional_profile %}
-                             {% include 'regions/regional_profile.html' %}
+                             {% include 'regions/main_utils/regional_profile.html' %}
                              {% else %}
                          {% endif %}
 
 {#                        Чаты кинематографистов#}
                         {% if chats %}
-                            {% include 'regions/chats.html' %}
+                            {% include 'regions/main_utils/chats.html' %}
                         {% else %}
                         {% endif %}
 
 {#                        Локации#}
                         {% if locations %}
-                            {% include 'regions/locations.html' %}
+                            {% include 'regions/main_utils/locations.html' %}
                         {% else %}
                         {% endif %}
 
                         {% if event %}
-                            {% include 'regions/events.html' %}
+                            {% include 'regions/main_utils/events.html' %}
                         {% else %}
                         {% endif %}
 

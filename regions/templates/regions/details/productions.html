@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="main">
+
+			{% include 'regions/breadcrumb.html' %}
+
+			<div class="info info-specialists container">
+				<a href="#" class="btn regionsmap-btn">Разместить информацию</a>
+			</div>
+
+			<section id="production" class="production  container">
+				<div class="production-content">
+					<div class="production-cards">
+                        {% for production in productions %}
+						    <article class="card production-card">
+							<div class="production__img">
+								<figure>
+									<img src="{{ production.logo.url }}" alt="точка кинопоказа">
+								</figure>
+							</div>
+                                <div class="production__details">
+                                    <h3>{{ production.name }}</h3>
+                                    <p class="">{{ production.services_type }}</p>
+                                    <div class="production__contact">
+                                        <a href="tel:+9534070370"
+                                           class="_icon-mdi_phone">{{ production.phone }}</a>
+                                        <a href="#" class="_icon-youtube">{{ production.social_net }}</a>
+                                        <a href="#" class="_icon-web-solid">{{ production.site }}</a>
+                                        <a href="mailto:albina@mail.ru"
+                                           class="_icon-mail-outline">{{ production.email }}</a>
+                                    </div>
+                                </div>
+						</article>
+                        {% endfor %}
+					</div>
+				</div>
+			</section>
+		</main>
+{% endblock %}

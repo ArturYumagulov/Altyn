@@ -15,7 +15,7 @@
                                                 <p class="_icon-bi_geo-alt">{{ regional_profile.author_city.name }}</p>
                                             </div>
                                         </div>
-                                        <a href="portrait.html"
+                                        <a href="{% url 'resource_detail' resource_type='portrait' slug=region_slug %}"
                                            class="morelink regionaresources-morelink  _icon-ring-arrow">Узнать
                                             больше</a>
                                     </article>
