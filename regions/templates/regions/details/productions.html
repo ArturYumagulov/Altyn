@@ -3,7 +3,7 @@
 {% block content %}
 <main class="main">
 
-			{% include 'regions/breadcrumb.html' %}
+			{% include 'regions/breadcrumb.html' with bread_name='Производства' %}
 
 			<div class="info info-specialists container">
 				<a href="#" class="btn regionsmap-btn">Разместить информацию</a>
@@ -12,7 +12,7 @@
 			<section id="production" class="production  container">
 				<div class="production-content">
 					<div class="production-cards">
-                        {% for production in productions %}
+                        {% for production in contents %}
 						    <article class="card production-card">
 							<div class="production__img">
 								<figure>
@@ -37,4 +37,5 @@
 				</div>
 			</section>
 		</main>
+     {% include 'paginator.html' %}
 {% endblock %}

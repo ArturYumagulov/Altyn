@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    		<main class="main">
+
+            {% include 'regions/breadcrumb.html' with bread_name="Локации" %}
+
+			<div class="info container">
+				<a href="#" class="btn regionsmap-btn">Разместить информацию</a>
+			</div>
+
+			<section id="location" class="location  container">
+				<div class="location-cards">
+                    {% for location in contents %}
+					<article class="card location-card">
+						<div class="location__img">
+							<figure>
+								<img src="{{ location.main_photo.url }}" alt="{{ location.name }}">
+							</figure>
+						</div>
+						<div class="location__details">
+							<h3>{{ location.name }}</h3>
+						</div>
+						<a href="{% url 'location_detail' pk=location.pk %}" class="morelink location-morelink  _icon-ring-arrow">Узнать больше</a>
+					</article>
+                    {% endfor %}
+				</div>
+			</section>
+		</main>
+{% endblock %}

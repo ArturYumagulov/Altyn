@@ -2,7 +2,7 @@
 
 {% block content %}
     		<main class="main">
-                {% include 'regions/breadcrumb.html' %}
+                {% include 'regions/breadcrumb.html' with bread_name='Специалисты'%}
 
                 <div class="info info-specialists container">
                     <a href="#" class="btn regionsmap-btn">Разместить информацию</a>
@@ -24,7 +24,7 @@
 			<section id="specialists" class="specialists  container">
 				<div class="specialists-content">
 					<div class="personal-cards">
-                        {% for specialist in specialists %}
+                        {% for specialist in contents %}
                             <article class="card personal-card">
                                 <a href="#">
                                     <div class="personal__img">
@@ -51,6 +51,6 @@
 					</div>
 				</div>
 			</section>
-
 		</main>
+     {% include 'paginator.html' %}
 {% endblock %}

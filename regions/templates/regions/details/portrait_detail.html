@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    		<main class="main">
+            {% include 'regions/breadcrumb.html' with bread_name=portrait.name region_slug=portrait.region.slug %}
+			<section id="portraitpersonal" class="portraitpersonal container">
+				<div class="portrait-content">
+					<div class="portrait-content__cards">
+						<article class="card portrait-card">
+							<div class="portrait__img">
+								<img src="{{ portrait.photo.url }}" alt="фото мастер класса">
+							</div>
+							<div class="portrait__block">
+								<p class="portrait__block-text">{{ portrait.citation }}</p>
+								<div class="portrait__block-athor">
+									<p>{{ portrait.author }}</p>
+									<p>{{ portrait.region }}</p>
+								</div>
+							</div>
+						</article>
+						<article class="information-Kulnev card">
+							<h4 class="information-Kulnev__tetle ">{{ portrait.name }}</h4>
+							<p class="information-Kulnev__text ">{{ portrait.descriptions }}</p>
+						</article>
+					</div>
+					<div class="portrait-content__cards">
+                        {% if portrait.link_to_video %}
+						<div class="portraitpersonal-video">
+							<div class="sliderProject-video__bg sliderProject-video__bg--dark-blue">
+                                {{ portrait.link_to_video | safe }}
+{#								<img src="{% static 'img/video-img.png' %}" alt="">#}
+							</div>
+							<div class="sliderProject-video__content">
+								<div class="sliderProject-video__play">
+									<img src="{% static 'img/video-play.png' %}" alt="">
+								</div>
+							</div>
+							<a class="sliderProject-video__link" href="#video2" aria-label="Смотреть видео"></a>
+						</div>
+                        {% endif %}
+                        {% if portrait.link_to_presentation %}
+						<article class="portraitpersonal-information card ">
+							<h2 class="portraitpersonal-information__title">
+                                <a href="{{ portrait.link_to_presentation.url }}" style="color: #d49e3d">Презентация</a>
+                            </h2>
+						</article>
+                        {% endif %}
+					</div>
+				</div>
+			</section>
+		</main>
+
+        {% block popup_locations %}
+            		<!-- Модальный блок видео О проекте-->
+		<div class="overlay" id="video2"></div>
+		<div class="modal">
+                {{ portrait.link_to_video | safe }}
+			<a href="{% url 'portrait_detail' pk=portrait.pk %}" id="stop" class="close-sliderProject"></a>
+		</div>
+		<!-- конец блока видео-->
+        {% endblock %}
+{% endblock %}

@@ -27,7 +27,7 @@
                                                         </ul>
                                                     </div>
                                                     <p class="_icon-bi_geo-alt filmmakers-list__city">{{ chat.region.name }}</p>
-                                                    <a href="{{ chat.link_to_chat }}"
+                                                    <a href="{% url 'resource_detail' resource_type='chats' slug=region_slug %}"
                                                        class="morelink internetresources-morelink  _icon-ring-arrow">Узнать
                                                         больше</a>
     									</article>

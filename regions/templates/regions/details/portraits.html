@@ -7,81 +7,25 @@
 			<section id="portrait" class="portrait container">
 				<div class="portrait-content">
 					<div class="portrait-cards">
+                        {% for portrait in contents %}
 						<article class="card portrait-card">
 							<div class="portrait__img">
-								<img src="img/regionsmap/portrait.png" alt="фото мастер класса">
+								<img src="{{ portrait.photo.url }}" alt="{{ portrait.name }}">
 							</div>
 							<div class="portrait__block">
-								<p class="portrait__block-text
-								 ">Это проблема всех начинающих авторов, когда хочется
-									снять такое, чтобы
-									все ахнули, а получается просто ужас. Тем не менее мне было бы очень интересно в этом
-									поучаствовать
-								</p>
+								<p class="portrait__block-text">{{ portrait.citation }}</p>
 								<div class="portrait__block-athor">
-									<p>Иван Кульнев</p>
-									<p>Санкт - Петербург</p>
+									<p>{{ portrait.author }}</p>
+									<p>{{ portrait.author_city }}</p>
 								</div>
-							</div><a href="portrait-personal.html"
-								class="morelink regionaresources-morelink  _icon-ring-arrow">Подробнее</a>
-						</article>
-						<article class="card portrait-card">
-							<div class="portrait__img">
-								<img src="img/regionsmap/portrait.png" alt="фото мастер класса">
 							</div>
-							<div class="portrait__block">
-								<p class="portrait__block-text
-								 ">Это проблема всех начинающих авторов, когда хочется
-									снять такое, чтобы
-									все ахнули, а получается просто ужас. Тем не менее мне было бы очень интересно в этом
-									поучаствовать
-								</p>
-								<div class="portrait__block-athor">
-									<p>Иван Кульнев</p>
-									<p>Санкт - Петербург</p>
-								</div>
-							</div><a href="portrait-personal.html"
+                            <a href="{% url 'portrait_detail' pk=portrait.pk %}"
 								class="morelink regionaresources-morelink  _icon-ring-arrow">Подробнее</a>
 						</article>
-						<article class="card portrait-card">
-							<div class="portrait__img">
-								<img src="img/regionsmap/portrait.png" alt="фото мастер класса">
-							</div>
-							<div class="portrait__block">
-								<p class="portrait__block-text
-								 ">Это проблема всех начинающих авторов, когда хочется
-									снять такое, чтобы
-									все ахнули, а получается просто ужас. Тем не менее мне было бы очень интересно в этом
-									поучаствовать
-								</p>
-								<div class="portrait__block-athor">
-									<p>Иван Кульнев</p>
-									<p>Санкт - Петербург</p>
-								</div>
-							</div><a href="portrait-personal.html"
-								class="morelink regionaresources-morelink  _icon-ring-arrow">Подробнее</a>
-						</article>
-						<article class="card portrait-card">
-							<div class="portrait__img">
-								<img src="img/regionsmap/portrait.png" alt="фото мастер класса">
-							</div>
-							<div class="portrait__block">
-								<p class="portrait__block-text
-								 ">Это проблема всех начинающих авторов, когда хочется
-									снять такое, чтобы
-									все ахнули, а получается просто ужас. Тем не менее мне было бы очень интересно в этом
-									поучаствовать
-								</p>
-								<div class="portrait__block-athor">
-									<p>Иван Кульнев</p>
-									<p>Санкт - Петербург</p>
-								</div>
-							</div><a href="portrait-personal.html"
-								class="morelink regionaresources-morelink  _icon-ring-arrow">Подробнее</a>
-						</article>
-
+                        {% endfor %}
 					</div>
 				</div>
 			</section>
 		</main>
+        {% include 'paginator.html' %}
 {% endblock %}

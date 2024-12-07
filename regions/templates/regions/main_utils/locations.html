@@ -15,7 +15,7 @@
                                                 <div class="location__details">
                                                     <h3>{{ location.name }}</h3>
                                                 </div>
-                                                <a href="location.html"
+                                                <a href="{% url 'resource_detail' resource_type='locations' slug=region_slug %}"
                                                    class="morelink location-morelink  _icon-ring-arrow">Узнать
                                                     больше</a>
                                             </article>

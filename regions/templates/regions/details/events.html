@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    		<main class="main">
+            {% include 'regions/breadcrumb.html' with bread_name='Мероприятия' %}
+
+			<section id="events" class="events container">
+				<div class="events-cards">
+                    {% for event in contents %}
+					<article class="card events-card">
+						<div class="events__img">
+							<img src="{{ event.photo.url }}" alt="фото мастер класса">
+						</div>
+						<div class="events__block">
+							<h3>{{ event.name }}</h3>
+							<p>{{ event.descriptions }}</p>
+						</div>
+						<div>
+							<a href="#" class="morelink events-morelink  _icon-ring-arrow">Узнать больше</a>
+						</div>
+					</article>
+                    {% endfor %}
+				</div>
+			</section>
+		</main>
+{% endblock %}

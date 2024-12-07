@@ -2,14 +2,14 @@
 {% load static %}
 {% block content %}
     <main class="main">
-            {% include 'regions/breadcrumb.html' %}
+            {% include 'regions/breadcrumb.html' with bread_name='Региональные интернет ресурсы'%}
 			<div class="info info-specialists container">
 				<a href="#" class="btn regionsmap-btn">Разместить информацию</a>
 			</div>
 			<section id="production" class="production  container">
 				<div class="production-content">
 					<div class="internetresources-cards">
-                        {% for resource in internet_resources %}
+                        {% for resource in contents %}
 						<article class="card internetresources-card">
 							<div class="internetresources__img">
 								<figure>

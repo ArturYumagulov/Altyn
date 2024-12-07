@@ -12,7 +12,7 @@
                                                         <p>{{ event.description }}</p>
                                                     </div>
                                                     <div>
-                                                        <a href="events.html" class="morelink events-morelink  _icon-ring-arrow">Узнать больше</a>
+                                                        <a href="{% url 'resource_detail' resource_type='events' slug=region_slug %}" class="morelink events-morelink  _icon-ring-arrow">Узнать больше</a>
                                                     </div>
                                                 </article>
                                             </div>

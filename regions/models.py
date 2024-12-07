@@ -80,6 +80,7 @@ class Specialist(models.Model):
         return f"{self.first_name} {self.last_name}"
 
     class Meta:
+        ordering = ['last_name']
         verbose_name = "Специалист"
         verbose_name_plural = "Специалисты"
 
@@ -292,8 +293,8 @@ class RegionalProfile(models.Model):
     author = models.CharField(max_length=1000, verbose_name="Автор цитаты", blank=True)
     author_city = models.ForeignKey(City, verbose_name="Локация автора", on_delete=models.SET_NULL, null=True,
                                     blank=True)
-    link_to_video = models.URLField(verbose_name="Ссылка на видео", blank=True)
-    link_to_presentation = models.URLField(verbose_name="Ссылка на презентацию", blank=True)
+    link_to_video = models.CharField(verbose_name="Ссылка на видео", blank=True, max_length=2000)
+    link_to_presentation = models.FileField(verbose_name="Презентация", blank=True, upload_to='presentations/')
     slug = models.SlugField()
 
     def __str__(self):

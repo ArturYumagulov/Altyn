@@ -147,3 +147,4 @@ class RegionLocationAdmin(admin.ModelAdmin):
 @admin.register(models.Events)
 class EventsAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
+

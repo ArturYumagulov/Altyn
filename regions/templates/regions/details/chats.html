@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    		<main class="main">
+                {% include 'regions/breadcrumb.html' with bread_name='Чаты кинематографистов' %}
+			<section id="filmmakers" class="filmmakers container">
+				<div class="filmmakers-content">
+					<div class="filmmakers-cards">
+                        {% for chat in contents %}
+						<article class="card filmmakers-card">
+							<p class="filmmakers-card__text">{{ chat.name }}</p>
+							<div class="filmmakers-link">
+								<ul class="filmmakers-list">
+									<li class="filmmakers-list__social">
+										<a class="_icon-vk-white" href="#" target="_blank" rel="nofollow noopener noreferrer">
+										</a>
+									</li>
+									<li class="filmmakers-list__social">
+										<a class=" _icon-telegram-white" href="filmmakers.html" target="_blank"
+											rel="nofollow noopener noreferrer">
+										</a>
+									</li>
+									<li class="filmmakers-list__social">
+										<a class=" _icon-whatsApp" href="#" target="_blank" rel="nofollow noopener noreferrer">
+										</a>
+									</li>
+								</ul>
+							</div>
+							<p class="_icon-bi_geo-alt filmmakers-list__city">{{ chat.region.name }}</p>
+							<a href="{{ chat.link_to_chat }}" class="morelink internetresources-morelink  _icon-ring-arrow">Узнать
+								больше</a>
+						</article>
+                        {% endfor %}
+					</div>
+				</div>
+			</section>
+		</main>
+{% endblock %}

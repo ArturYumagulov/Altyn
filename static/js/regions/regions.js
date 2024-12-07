@@ -448,7 +448,7 @@ function createChats(main, data, region_slug) {
 
         let a = document.createElement('a')
         a.classList.add('morelink', 'regionaresources-morelink', '_icon-ring-arrow')
-        a.setAttribute('href', item.slug)
+        a.setAttribute('href', 'detail/chats/' + region_slug)
         a.textContent = "Узнать больше"
 
         article.append(filmmakers_card_text, filmmakers_link, filmmakers_list__city, a)

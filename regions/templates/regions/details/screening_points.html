@@ -2,13 +2,7 @@
 
 {% block content %}
     <main class="main">
-			<div class="breadcrumb-block container">
-				<ol class="breadcrumb contact-breadcrumb">
-					<li class="breadcrumb-link "><a href="{% url 'regions' %}?region={{ region_slug }}">Карта регионов </a></li>
-					<li class="breadcrumb-link _icon-derection-right active" aria-current="page">Точки кинопоказов
-					</li>
-				</ol>
-			</div>
+            {% include 'regions/breadcrumb.html' with bread_name='Точки кинопоказов' %}
 			<div class="info info-specialists container">
 				<a href="#" class="btn regionsmap-btn">Разместить информацию</a>
 			</div>
@@ -16,7 +10,7 @@
 				<div class="filmlocations">
 					<div class="production-content">
 						<div class="filmlocations-cards">
-                            {% for card in screening_points %}
+                            {% for card in contents %}
 							<article class="card filmlocations-card">
 								<div class="filmlocations__img">
 									<figure>

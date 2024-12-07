@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ location.name }}{% endblock %}
+
+{% block content %}
+    <main class="main">
+        <div class="breadcrumb-block container">
+            <ol class="breadcrumb contact-breadcrumb">
+                <li class="breadcrumb-link breadcrumb-main"><a href="{% url 'regions' %}?region={{ location.region.slug }}">Карта
+                    регионов </a></li>
+
+                <li class="breadcrumb-link _icon-derection-right " aria-current="page">
+                    <a href="{% url 'resource_detail' resource_type='locations' slug=location.region.slug %}">Локация</a>
+                </li>
+                <li class="breadcrumb-link _icon-derection-right active" aria-current="page">{{ location.name }}</li>
+            </ol>
+        </div>
+        <section id="locationname" class="locationname  container">
+            <div class="locationname-content">
+                <h2>{{ location.name }}</h2>
+{#                <p class="regioninterior">Регион | Интерьер</p>#}
+                <div class="locationname-block">
+                    <div class="locationname-img">
+                        <div class="locationname-img__content">
+                            <div class="locationnameslider">
+                                 {% for image in location.photo.all %}
+                                    <div class="locationnameslider_item">
+                                        <img src="{{ image.photo.url }}" alt="">
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                            <div class="locationnamesliderMin">
+                                {% for image in location.photo.all %}
+                                <div class="locationnamesliderMin_item">
+                                    <a href="#popup-location" class="popup-location popup-link">
+                                        <img src="{{ image.photo.url }}" alt="">
+                                    </a>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="locationname-descriptioncondition">
+                        <h4>Описание</h4>
+                        <p>{{ location.descriptions }}</p>
+                        <h4>Условия</h4>
+                        <p>{{ location.circumstances }}</p>
+                        <h4>Дополнительно</h4>
+                        <p>{{ location.subclass }}</p>
+                    </div>
+                    <div class="locationname__details">
+                        <h4>Контакты</h4>
+                        <p class="_icon-bi_geo-alt">{{ location.address }}</p>
+                        <div class="locationname__contact">
+                            <a href="tel:+9534070370" class="_icon-mdi_phone">{{ location.phone }}</a>
+                            <a href="#" class="_icon-youtube">{{ location.social_net }}</a>
+                            <a href="http://kingofmedia.ru/" class="_icon-web-solid">{{ location.site }}</a>
+                            <a href="mailto:albina@mail.ru" class="_icon-mail-outline">{{ location.email }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block popup_locations %}
+    		<!-- popup-location -->
+		<div id="popup-location" class="popup popup-location">
+			<div class="popup__body">
+				<div class="media__content">
+					<div class="popuplocation">
+                        {% for image in location.photo.all %}
+						<div class="popuplocation_item">
+							<img src="{{ image.photo.url }}" alt="">
+						</div>
+                        {% endfor %}
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- wrapper -->
+{% endblock %}
