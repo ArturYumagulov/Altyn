@@ -351,7 +351,7 @@ class RegionLocation(models.Model):
     created_date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     edit_date = models.DateField(verbose_name="Дата изменения", auto_now=True)
     name = models.CharField(verbose_name="Название", max_length=2000)
-    main_photo = models.ImageField(upload_to='regions/locations/', blank=True, help_text="397x379")
+    main_photo = models.ImageField(upload_to='regions/locations/', help_text="397x379")
     photo = models.ManyToManyField(LocationPhoto, verbose_name="Фотография", blank=True, related_name="photos")
     descriptions = models.TextField(verbose_name="Описание", blank=True)
     circumstances = models.TextField(verbose_name="Условия", blank=True)

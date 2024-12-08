@@ -15,7 +15,7 @@
 					<article class="card location-card">
 						<div class="location__img">
 							<figure>
-                                    <img src="{{ location.main_photo.url }}" alt="{{ location.name }}">
+                                <img src="{{ location.main_photo.url }}" alt="{{ location.name }}">
 							</figure>
 						</div>
 						<div class="location__details">
@@ -27,5 +27,5 @@
 				</div>
 			</section>
 		</main>
-    {% include 'paginator.html' %}
+    {% include 'regions/paginator.html' %}
 {% endblock %}
