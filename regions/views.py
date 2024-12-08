@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.db.models import Q
+from django.views.decorators.csrf import csrf_exempt
 
 from regions.models import (Region, ScreeningPoint, RegionalInternetResources, Production, Specialist,
                             RegionalProfile, FilmmakersChat, RegionLocation, Events, Speciality, Location)
@@ -56,6 +57,7 @@ def main(request):
         return render(request, 'base.html')
 
 
+@csrf_exempt
 def get_region_resources(request):
     if request.method == "POST":
         try:

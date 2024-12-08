@@ -378,7 +378,7 @@ function createRegionalProfile(main, data, region_slug) {
 
         let a = document.createElement('a')
         a.classList.add('morelink', 'regionaresources-morelink', '_icon-ring-arrow')
-        a.setAttribute('href', item.slug)
+        a.setAttribute('href', 'detail/portrait/' + region_slug)
         a.textContent = "Узнать больше"
 
         article.append(portrait__img, portrait_block, a)
@@ -509,7 +509,7 @@ function createLocation(main, data, region_slug) {
 
         let a = document.createElement('a')
         a.classList.add('morelink', 'regionaresources-morelink', '_icon-ring-arrow')
-        a.setAttribute('href', item.slug)
+        a.setAttribute('href', 'detail/locations/' + region_slug)
         a.textContent = "Узнать больше"
 
         article.append(location__img, location_details, a)
@@ -576,7 +576,7 @@ function createEvent(main, data, region_slug) {
 
         let a = document.createElement('a')
         a.classList.add('morelink', 'regionaresources-morelink', '_icon-ring-arrow')
-        a.setAttribute('href', item.slug)
+        a.setAttribute('href', 'detail/events/' + region_slug)
         a.textContent = "Узнать больше"
 
         article.append(events__img, events__block, a)
