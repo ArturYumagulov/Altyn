@@ -119,6 +119,7 @@
 .events-wrap,
 .portrait-wrap {
     height: 559px;
+    margin-right: 10px;
 }
 .card.filmmakers-card,
 .portrait-card
@@ -127,6 +128,7 @@
 }
 .card.location-card {
     height: 554px;
+    margin-right: 10px;
 }
 .portrait__block {
     padding: 40px 49px 79px 42px;
