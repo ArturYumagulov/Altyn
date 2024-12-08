@@ -15,12 +15,7 @@
 					<article class="card location-card">
 						<div class="location__img">
 							<figure>
-                                {% if object.main_photo %}
                                     <img src="{{ location.main_photo.url }}" alt="{{ location.name }}">
-                                {% else %}
-                                    <img src="#" alt="{{ location.name }}">
-                                {% endif %}
-
 							</figure>
 						</div>
 						<div class="location__details">
@@ -32,4 +27,5 @@
 				</div>
 			</section>
 		</main>
+    {% include 'paginator.html' %}
 {% endblock %}
