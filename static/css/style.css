@@ -3596,6 +3596,7 @@ select option {
 	display: flex;
 	justify-content: center;
 	gap: 25px;
+	flex-wrap: wrap;
 }
 
 @media(max-width:602px) {
@@ -8987,8 +8988,10 @@ input[type="date"]::-webkit-input-placeholder {
 }
 
 .vote-block figure {
-	height: 588px;
-	width: 412px;
+	/*height: 588px;*/
+	/*width: 412px;*/
+	height: 500px;
+	width: 100%;
 }
 
 @media(max-width:440px) {
